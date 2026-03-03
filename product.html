@@ -1,0 +1,238 @@
+﻿/*product.html*/
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AffilixS | Curated Discoveries</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f2ed;
+    color: #1f1f1f;
+}
+
+/* HEADER */
+header {
+    background: #111;
+    color: white;
+    padding: 15px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+header nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+    cursor: pointer;
+}
+header nav a:hover { text-decoration: underline; }
+
+.logo img {
+    height: 20px;
+    object-fit: contain;
+}
+
+/* HERO */
+.top-section {
+    display: flex;
+    height: 230px;
+    width: 100%;
+}
+
+.identity-panel {
+    flex: 1;
+    background: url("images/hero8888.jpg") center/cover no-repeat;
+    border-right: 3px solid #111;
+    position: relative;
+}
+
+.identity-text {
+    position: absolute;
+    bottom: -30px;
+    left: 56px;
+    background: rgba(255, 0, 0, 0.55);
+    padding: 0px 55px;
+    border-radius: 6px;
+    font-size: 24px;
+    font-weight: 300;
+    backdrop-filter: blur(3px);
+    max-width: 500px;
+    color: #fff;
+}
+
+/* FLOATING PREVIEW */
+#floatingPreview {
+    position: fixed;
+    top: 90px;
+    right: 40px;
+    width: 360px;
+    height: 420px;
+    background: #111;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(10px);
+    z-index: 1000;
+}
+#floatingPreview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+#floatingPreview.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* PRODUCT SECTIONS */
+.product-section {
+    padding: 20px 60px 40px 60px;
+}
+
+.section-title {
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+.section-title::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 2px;
+    margin-top: 12px;
+    background: #c6a96b;
+}
+
+.product-row {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+.product-row::-webkit-scrollbar { display: none; }
+.product-row { scrollbar-width: none; }
+
+.product-row a img {
+    width: 180px;
+    min-width: 180px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.product-row a img:hover {
+    transform: translateY(-6px) scale(1.04);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.22);
+}
+
+/* CATEGORIES */
+.categories {
+    background: #fff;
+    padding: 40px 60px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+}
+.category { text-align: center; }
+.category img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+.category p { margin-top: 10px; font-weight: bold; }
+
+/* FOOTER */
+footer {
+    background: #111;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+footer span {
+    margin: 0 10px;
+    cursor: pointer;
+    text-decoration: underline;
+}
+</style>
+</head>
+
+<body>
+
+<div id="floatingPreview">
+    <img id="previewImage" src="">
+</div>
+
+<header>
+    <div class="logo">
+        <img src="images/logo.jpg" alt="AffilixS">
+    </div>
+    <nav>
+        <a href="#">Vision</a>
+        <a href="#">Products</a>
+        <a href="#">Insights</a>
+        <a href="#">Contact</a>
+    </nav>
+</header>
+
+<div class="top-section">
+    <div class="identity-panel">
+        <div class="identity-text">
+            A refined selection for modern living.
+        </div>
+    </div>
+</div>
+
+<section class="product-section">
+    <h2 class="section-title">Curated Discoveries</h2>
+    <div class="product-row" id="row1"></div>
+</section>
+
+<section class="product-section">
+    <div class="product-row" id="row2"></div>
+</section>
+
+<div class="categories">
+    <div class="category">
+        <img src="images/cat-tech.jpg">
+        <p>Technology</p>
+    </div>
+    <div class="category">
+        <img src="images/Home.jpg">
+        <p>Home & Living</p>
+    </div>
+    <div class="category">
+        <img src="images/Fittness.jpg">
+        <p>Fitness</p>
+    </div>
+    <div class="category">
+        <img src="images/Style.jpg">
+        <p>Style</p>
+    </div>
+    <div class="category">
+        <img src="images/BeautyPersonnalCare.jpg">
+        <p>Beauty</p>
+    </div>
+</div>
+
+<footer>
+    <span>Disclaimer</span>
+    <span>Contact</span>
+</footer>
+
+<script src="js/main.js"></script>
+
+</body>
+</html>
