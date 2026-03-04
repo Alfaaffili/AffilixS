@@ -95,13 +95,17 @@ header nav a:hover {
 #floatingPreview {
     position: fixed;
 
-    width: 350px;        /* slightly reduced for better fit */
-    max-width: 92vw;     /* NEVER exceed viewport width */
+    display: none;              /* hidden by default */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease;
 
-    height: 400px;       /* slightly reduced height */
+    width: 350px;
+    max-width: 92vw;
+    height: 400px;
 
     top: 60px;
-    right: 10px;         /* keeps small margin from right edge */
+    right: 10px;
 
     background: #fff;
     border-radius: 8px;
@@ -110,18 +114,12 @@ header nav a:hover {
     overflow: hidden;
     z-index: 1000;
 }
-#floatingPreview img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
 
 #floatingPreview.active {
+    display: block;
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
 }
-
 /* ===================================================== */
 /* ================= PRODUCT SECTIONS ================== */
 /* ===================================================== */
@@ -230,8 +228,8 @@ header nav a:hover {
     z-index: 5;
 }
 
-.arrow.left { left: -24px; }
-.arrow.right { right: -24px; }
+.arrow.left { left: 0px; }
+.arrow.right { right: 0px; }
 
 .arrow:hover {
     background: rgba(0, 0, 0, 0.85);
@@ -360,19 +358,11 @@ footer {
 
 #floatingPreview {
     width: 94vw;
+    height: 320px;
     right: 3vw;
+    top: 70px
 }
-    .floating-preview {
-        width: 280px;
-        height: 300px;
-        top: 50px;
-        right: 10px;
-    }
-
-    .floating-preview img {
-        transform: scale(0.9);
-    }
-
+   
 }
 </style>
 </head>

@@ -53,6 +53,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (floatingPreview && previewImage) {
 
+        /* ================= FLOATING PREVIEW =============== */
+
+const floatingPreview = document.getElementById("floatingPreview");
+const previewImage = document.getElementById("previewImage");
+
+if (floatingPreview && previewImage) {
+
+    const isTouchDevice = window.matchMedia("(hover: none)").matches;
+
+    // DESKTOP HOVER BEHAVIOR
+    if (!isTouchDevice) {
+
         document.addEventListener("mouseover", function (e) {
             const img = e.target.closest(".product-row img");
             if (img) {
@@ -67,6 +79,29 @@ document.addEventListener("DOMContentLoaded", function () {
                 floatingPreview.classList.remove("active");
             }
         });
+
+    }
+
+    // TOUCH DEVICES (Mobile / Tablet)
+    if (isTouchDevice) {
+
+        document.addEventListener("click", function (e) {
+            const img = e.target.closest(".product-row img");
+
+            if (img) {
+                e.preventDefault();
+                previewImage.src = img.src;
+                floatingPreview.classList.add("active");
+            } else {
+                floatingPreview.classList.remove("active");
+            }
+        });
+
+        window.addEventListener("scroll", function () {
+            floatingPreview.classList.remove("active");
+        });
+    }
+}
     }
 
 
