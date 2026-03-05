@@ -51,6 +51,7 @@ header nav a {
     margin: 0 10px;
     text-decoration: none;
     cursor: pointer;
+    white-space: nowrap; /* this keeps words from splitting in header */
 }
 
 header nav a:hover {
@@ -63,8 +64,9 @@ header nav a:hover {
 
 .top-section {
     display: flex;
-    height: 230px;
+    height: 200px; /* slightly reduced */
     width: 100%;
+    margin-top: -5px; /* pulls hero closer to header */
 }
 
 .identity-panel {
@@ -111,8 +113,18 @@ header nav a:hover {
     border-radius: 8px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 
-    overflow: hidden;
+    overflow:idden;
     z-index: 1000;
+
+#floatingPreview img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: contain;
+
+}
 }
 
 #floatingPreview.active {
@@ -242,10 +254,11 @@ header nav a:hover {
 
 .categories {
     background: #fff;
-    padding: 70px 60px 70px 60px;   /* balanced spacing above categories */
+    padding: 50px 20px;
+    /* padding: 70px 60px 70px 60px;   /* balanced spacing above categories */
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 30px;
+    gap: 25px;
 }
 
 .category {
@@ -336,7 +349,20 @@ footer {
 
 /* Mobile (general) */
 @media (max-width: 768px) {
-
+    .identity-text {
+    left: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    max-width: 80%;
+}
+    .footer-links {
+        text-align: center;
+        margin-top: 10px;
+}
+    .footer-copy {
+        text-align: center;
+        margin-top: 10px; /* bothe footer lines align together on mobiles */
+}
     .product-section {
         padding: 40px 30px 60px 30px;
     }
@@ -349,6 +375,8 @@ footer {
 
     .categories {
         grid-template-columns: repeat(2, 1fr);
+        padding: 40px 15px;
+        justify-items: center;
     }
 
 }

@@ -74,6 +74,14 @@ if (floatingPreview && previewImage) {
         });
 
         document.addEventListener("mouseout", function (e) {
+        document.addEventListener("click", function (e) {
+           const insideProduct = e.target.closest(".product-row img");
+           const insidePreview = e.target.closest("#floatingPreview");
+
+    if (!insideProduct && !insidePreview) {
+        floatingPreview.classList.remove("active");
+    }
+});
             const img = e.target.closest(".product-row img");
             if (img) {
                 floatingPreview.classList.remove("active");
@@ -89,7 +97,10 @@ if (floatingPreview && previewImage) {
             const img = e.target.closest(".product-row img");
 
             if (img) {
+            if (img.parentElement.tagName === "A") {
                 e.preventDefault();
+            } /* this line code: e.preventDefault(); was replaced by the preceeding code */
+            
                 previewImage.src = img.src;
                 floatingPreview.classList.add("active");
             } else {
