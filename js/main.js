@@ -127,7 +127,7 @@ if (floatingPreview && previewImage) {
         if (row && row.children.length === 0) {
             for (let i = 1; i <= 10; i++) {
                 const link = document.createElement("a");
-                link.href = "#";
+                link.href = "javascript:void(0";
 
                 const img = document.createElement("img");
                 img.src = "images/p" + i + ".jpg";

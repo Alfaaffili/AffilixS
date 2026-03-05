@@ -122,7 +122,7 @@ header nav a:hover {
 
     height: 100%;
 
-    object-fit: contain;
+    object-fit: cover;
 
 }
 }
@@ -240,8 +240,8 @@ header nav a:hover {
     z-index: 5;
 }
 
-.arrow.left { left: 0px; }
-.arrow.right { right: 0px; }
+.arrow.left { left: -40px; } /*it was { left: 0px; }*/
+.arrow.right { right: -40px; } /*it was { left: 0px; }*/
 
 .arrow:hover {
     background: rgba(0, 0, 0, 0.85);
@@ -266,8 +266,8 @@ header nav a:hover {
 }
 
 .category img {
-    width: 130px;
-    height: 130px;
+    width: 110px; /*this ensures two category buttons fit cleanly on smaller phones*/
+    height: 110px; /*this ensures two category buttons fit cleanly on smaller phones*/
     object-fit: cover;
     border-radius: 12px;
 }
@@ -355,6 +355,10 @@ footer {
     font-size: 18px;
     max-width: 80%;
 }
+
+.arrow-left { lef: -20px;}
+.arrow-right { lef: -20px;}
+
     .footer-links {
         text-align: center;
         margin-top: 10px;
@@ -368,14 +372,15 @@ footer {
     }
 
     .product-row img {
-        width: 160px;
-        min-width: 160px;
-        height: 120px;
+        width: 140px; /*current mobile rule was 160px for narrower screens*/
+        min-width: 140px; /*current mobile rule was 160px for narrower screens*/
+        height: 110px; /*current mobile rule was 120px for narrower screens*/
     }
 
     .categories {
         grid-template-columns: repeat(2, 1fr);
-        padding: 40px 15px;
+        padding: 60px 30px; /* it was 40px 15px; this keep buttons centered, remove uneven left spacing, keep 2 buttons per row*/
+        gap: 20px; /* newly added code line; this keep buttons centered, remove uneven left spacing, keep 2 buttons per row*/
         justify-items: center;
     }
 
