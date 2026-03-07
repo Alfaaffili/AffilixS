@@ -137,25 +137,24 @@ fetch("Data/products.json")
         const end = start + 10;
         const rowProducts = products.slice(start, end);
 
-        if (rowProducts.length === 0) {
+ if (rowProducts.length === 0) {
 
-            if (row.parentElement) {
-                row.parentElement.style.display = "none";
-            }
+    // hide the row itself
+    row.style.display = "none";
+    
+    // hide arrows
+    const leftArrow = document.getElementById("left" + (rowIndex + 1));
+    const rightArrow = document.getElementById("right" + (rowIndex + 1));
 
-            const leftArrow = document.getElementById("left" + (rowIndex + 1));
-            const rightArrow = document.getElementById("right" + (rowIndex + 1));
+    if (leftArrow) leftArrow.style.display = "none";
+    if (rightArrow) rightArrow.style.display = "none";
 
-            if (leftArrow) leftArrow.style.display = "none";
-            if (rightArrow) rightArrow.style.display = "none";
-
-            return;
-        }
-
+    return;
+}
         rowProducts.forEach(product => {
 
             const link = document.createElement("a");
-            link.href = "product.html?id=" + product.id;
+            link.href = "#"; /* changed so as not go to old page product.html?id=" + product.id; */
 
             const img = document.createElement("img");
             img.src = product.image;
