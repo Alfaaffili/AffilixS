@@ -161,8 +161,6 @@ fetch("Data/products.json")
 
         img.addEventListener("mouseenter", () => {
 
-            const cursorInfo = document.getElementById("cursor-info");
-
             cursorInfo.innerHTML =
                 product.shortName + "<br>" +
                 product.currency + product.price;
@@ -173,7 +171,6 @@ fetch("Data/products.json")
 
 img.addEventListener("mouseleave", () => {
 
-    const cursorInfo = document.getElementById("cursor-info");
     cursorInfo.style.display = "none";
 
 });
@@ -214,8 +211,5 @@ document.addEventListener("mousemove", function(e) {
     const cursorInfo = document.getElementById("cursor-info");
 
     if (!cursorInfo) return;
-
-    cursorInfo.style.left = (e.clientX + 15) + "px";
-    cursorInfo.style.top = (e.clientY + 15) + "px";
 
 });
