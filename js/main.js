@@ -56,9 +56,6 @@ const cursorInfo = document.getElementById("cursor-info");
 
 /* ================= FLOATING PREVIEW =============== */
 
-const floatingPreview = document.getElementById("floatingPreview");
-const previewImage = document.getElementById("previewImage");
-
 if (floatingPreview && previewImage) {
 
     const isTouchDevice = window.matchMedia("(hover: none)").matches;
@@ -132,9 +129,28 @@ fetch("Data/products.json")
         document.getElementById("row3")
     ];
 
-    rows.forEach((row, rowIndex) => {
+rows.forEach((row, rowIndex) => {
 
-        const start = rowIndex * 10;
+    if (!row) return;
+
+    const start = rowIndex * 10;
+    const end = start + 10;
+    const rowProducts = products.slice(start, end);
+
+    if (rowProducts.length === 0) {
+
+        if (row.parentElement) {
+            row.parentElement.style.display = "none";
+        }
+
+        const leftArrow = document.getElementById("left" + (rowIndex + 1));
+        const rightArrow = document.getElementById("right" + (rowIndex + 1));
+
+        if (leftArrow) leftArrow.style.display = "none";
+        if (rightArrow) rightArrow.style.display = "none";
+
+        return;
+    }
         const end = start + 10;
         const rowProducts = products.slice(start, end);
 
@@ -184,8 +200,6 @@ img.addEventListener("mouseleave", () => {
 
 });
 
-const cursorInfo = document.getElementById("cursor-info");
-
 /* ===================================================== */
 /* ================= CURSOR TOOLTIP ==================== */
 /* ===================================================== */
@@ -203,13 +217,5 @@ document.addEventListener("mousemove", e => {
     if (yearElement) {
         yearElement.textContent = new Date().getFullYear();
     }
-
-});
-
-document.addEventListener("mousemove", function(e) {
-
-    const cursorInfo = document.getElementById("cursor-info");
-
-    if (!cursorInfo) return;
 
 });
