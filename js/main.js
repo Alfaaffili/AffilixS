@@ -129,33 +129,19 @@ fetch("Data/products.json")
         document.getElementById("row3")
     ];
 
-rows.forEach((row, rowIndex) => {
+    rows.forEach((row, rowIndex) => {
 
-    if (!row) return;
+        if (!row) return;
 
-    const start = rowIndex * 10;
-    const end = start + 10;
-    const rowProducts = products.slice(start, end);
-
-    if (rowProducts.length === 0) {
-
-        if (row.parentElement) {
-            row.parentElement.style.display = "none";
-        }
-
-        const leftArrow = document.getElementById("left" + (rowIndex + 1));
-        const rightArrow = document.getElementById("right" + (rowIndex + 1));
-
-        if (leftArrow) leftArrow.style.display = "none";
-        if (rightArrow) rightArrow.style.display = "none";
-
-        return;
-    }
+        const start = rowIndex * 10;
         const end = start + 10;
         const rowProducts = products.slice(start, end);
 
         if (rowProducts.length === 0) {
-            row.parentElement.style.display = "none";
+
+            if (row.parentElement) {
+                row.parentElement.style.display = "none";
+            }
 
             const leftArrow = document.getElementById("left" + (rowIndex + 1));
             const rightArrow = document.getElementById("right" + (rowIndex + 1));
@@ -175,21 +161,21 @@ rows.forEach((row, rowIndex) => {
             img.src = product.image;
             img.alt = product.name;
 
-        img.addEventListener("mouseenter", () => {
+            img.addEventListener("mouseenter", () => {
 
-            cursorInfo.innerHTML =
-                product.shortName + "<br>" +
-                product.currency + product.price;
+                cursorInfo.innerHTML =
+                    product.shortName + "<br>" +
+                    product.currency + product.price;
 
-            cursorInfo.style.display = "block";
+                cursorInfo.style.display = "block";
 
-});
+            });
 
-img.addEventListener("mouseleave", () => {
+            img.addEventListener("mouseleave", () => {
 
-    cursorInfo.style.display = "none";
+                cursorInfo.style.display = "none";
 
-});
+            });
 
             link.appendChild(img);
             row.appendChild(link);
@@ -199,7 +185,6 @@ img.addEventListener("mouseleave", () => {
     });
 
 });
-
 /* ===================================================== */
 /* ================= CURSOR TOOLTIP ==================== */
 /* ===================================================== */
