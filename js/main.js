@@ -45,15 +45,16 @@ function closeModal(event) {
 /* ===================================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
+const cursorInfo = document.getElementById("cursor-info");
 
-    /* ================= FLOATING PREVIEW =============== */
+/* ================= FLOATING PREVIEW =============== */
 
     const floatingPreview = document.getElementById("floatingPreview");
     const previewImage = document.getElementById("previewImage");
 
     if (floatingPreview && previewImage) {
 
-        /* ================= FLOATING PREVIEW =============== */
+/* ================= FLOATING PREVIEW =============== */
 
 const floatingPreview = document.getElementById("floatingPreview");
 const previewImage = document.getElementById("previewImage");
@@ -116,7 +117,7 @@ if (floatingPreview && previewImage) {
     }
 
 
-    /* =========== AUTO DISTRIBUTE DEMO PRODUCTS ======== */
+/* =========== AUTO DISTRIBUTE DEMO PRODUCTS ======== */
 /* ================= LOAD PRODUCTS ================= */
 
 fetch("Data/products.json")
@@ -138,7 +139,6 @@ fetch("Data/products.json")
         const rowProducts = products.slice(start, end);
 
         if (rowProducts.length === 0) {
-
             row.parentElement.style.display = "none";
 
             const leftArrow = document.getElementById("left" + (rowIndex + 1));
@@ -159,6 +159,25 @@ fetch("Data/products.json")
             img.src = product.image;
             img.alt = product.name;
 
+        img.addEventListener("mouseenter", () => {
+
+            const cursorInfo = document.getElementById("cursor-info");
+
+            cursorInfo.innerHTML =
+                product.shortName + "<br>" +
+                product.currency + product.price;
+
+            cursorInfo.style.display = "block";
+
+});
+
+img.addEventListener("mouseleave", () => {
+
+    const cursorInfo = document.getElementById("cursor-info");
+    cursorInfo.style.display = "none";
+
+});
+
             link.appendChild(img);
             row.appendChild(link);
 
@@ -170,44 +189,33 @@ fetch("Data/products.json")
 
 const cursorInfo = document.getElementById("cursor-info");
 
+/* ===================================================== */
+/* ================= CURSOR TOOLTIP ==================== */
+/* ===================================================== */
+
 document.addEventListener("mousemove", e => {
+    if (!cursorInfo) return;
+
     cursorInfo.style.left = (e.clientX + 15) + "px";
     cursorInfo.style.top = (e.clientY + 15) + "px";
 });
 
-document.querySelectorAll(".product-row img").forEach(img => {
-
-    img.addEventListener("mouseenter", () => {
-
-        const productId = img.parentElement.href.split("id=")[1];
-
-        fetch("Data/products.json")
-        .then(res => res.json())
-        .then(data => {
-
-            const product = data.products.find(p => p.id === productId);
-
-            cursorInfo.innerHTML =
-                product.shortName + "<br>" +
-                product.currency + product.price;
-
-            cursorInfo.style.display = "block";
-
-        });
-
-    });
-
-    img.addEventListener("mouseleave", () => {
-        cursorInfo.style.display = "none";
-    });
-
-});
-
-    /* ================= AUTO YEAR UPDATE =============== */
+/* ================= AUTO YEAR UPDATE =============== */
 
     const yearElement = document.getElementById("year");
     if (yearElement) {
         yearElement.textContent = new Date().getFullYear();
     }
+
+});
+
+document.addEventListener("mousemove", function(e) {
+
+    const cursorInfo = document.getElementById("cursor-info");
+
+    if (!cursorInfo) return;
+
+    cursorInfo.style.left = (e.clientX + 15) + "px";
+    cursorInfo.style.top = (e.clientY + 15) + "px";
 
 });
