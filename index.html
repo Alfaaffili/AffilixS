@@ -132,6 +132,18 @@ header nav a:hover {
     opacity: 1;
     visibility: visible;
 }
+
+#cursor-info {
+  position: fixed;
+  pointer-events: none;
+  font-size: 12px;
+  color: white;
+  background: rgba(0,0,0,0.75);
+  padding: 6px 10px;
+  border-radius: 6px;
+  display: none;
+  z-index: 9999;
+}
 /* ===================================================== */
 /* ================= PRODUCT SECTIONS ================== */
 /* ===================================================== */
@@ -517,5 +529,6 @@ footer {
 
 <script src="js/main.js"></script>
 
+<div id="cursor-info"></div>
 </body>
 </html>

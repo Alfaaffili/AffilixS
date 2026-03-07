@@ -2,44 +2,68 @@
   "products": [
     {
       "id": "p1",
-      "name": "Premium Headphones",
+      "shortName": "Premium Headphones",
+      "name": "Sony Premium Wireless Noise Cancelling Headphones",
+      "brand": "Sony",
       "image": "images/p1.jpg",
       "category": "tech",
+      "price": 89,
+      "currency": "USD",
       "affiliateLink": "https://example.com"
     },
     {
       "id": "p2",
-      "name": "Smart Watch",
+      "shortName": "Smart Watch",
+      "name": "Apple Series Smart Watch",
+      "brand": "Apple",
       "image": "images/p2.jpg",
       "category": "tech",
+      "price": 149,
+      "currency": "USD",
       "affiliateLink": "https://example.com"
     },
     {
       "id": "p3",
-      "name": "Wireless Speaker",
+      "shortName": "Wireless Speaker",
+      "name": "Bose Portable Wireless Speaker",
+      "brand": "Bose",
       "image": "images/p3.jpg",
       "category": "tech",
+      "price": 79,
+      "currency": "USD",
       "affiliateLink": "https://example.com"
     },
     {
       "id": "p4",
-      "name": "Minimalist Lamp",
+      "shortName": "Minimal Lamp",
+      "name": "Nordic Minimalist LED Lamp",
+      "brand": "NordicLight",
       "image": "images/p4.jpg",
       "category": "home",
+      "price": 45,
+      "currency": "USD",
       "affiliateLink": "https://example.com"
     },
     {
       "id": "p5",
-      "name": "Travel Backpack",
+      "shortName": "Travel Backpack",
+      "name": "Adventure Pro Travel Backpack",
+      "brand": "NomadGear",
       "image": "images/p5.jpg",
       "category": "travel",
+      "price": 69,
+      "currency": "USD",
       "affiliateLink": "https://example.com"
     },
     {
       "id": "p6",
-      "name": "Desk Organizer",
+      "shortName": "Desk Organizer",
+      "name": "Modern Wooden Desk Organizer",
+      "brand": "DeskCraft",
       "image": "images/p6.jpg",
       "category": "office",
+      "price": 29,
+      "currency": "USD",
       "affiliateLink": "https://example.com"
     }
   ]

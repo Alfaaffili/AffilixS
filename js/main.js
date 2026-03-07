@@ -131,26 +131,77 @@ fetch("Data/products.json")
         document.getElementById("row3")
     ];
 
-    products.forEach((product, index) => {
+    rows.forEach((row, rowIndex) => {
 
-        const row = rows[Math.floor(index / 20)];
+        const start = rowIndex * 10;
+        const end = start + 10;
+        const rowProducts = products.slice(start, end);
 
-        if (!row) return;
+        if (rowProducts.length === 0) {
 
-        const link = document.createElement("a");
-        link.href = "product.html?id=" + product.id;
+            row.parentElement.style.display = "none";
 
-        const img = document.createElement("img");
-        img.src = product.image;
-        img.alt = product.name;
+            const leftArrow = document.getElementById("left" + (rowIndex + 1));
+            const rightArrow = document.getElementById("right" + (rowIndex + 1));
 
-        link.appendChild(img);
-        row.appendChild(link);
+            if (leftArrow) leftArrow.style.display = "none";
+            if (rightArrow) rightArrow.style.display = "none";
+
+            return;
+        }
+
+        rowProducts.forEach(product => {
+
+            const link = document.createElement("a");
+            link.href = "product.html?id=" + product.id;
+
+            const img = document.createElement("img");
+            img.src = product.image;
+            img.alt = product.name;
+
+            link.appendChild(img);
+            row.appendChild(link);
+
+        });
 
     });
 
-});  
+});
 
+const cursorInfo = document.getElementById("cursor-info");
+
+document.addEventListener("mousemove", e => {
+    cursorInfo.style.left = (e.clientX + 15) + "px";
+    cursorInfo.style.top = (e.clientY + 15) + "px";
+});
+
+document.querySelectorAll(".product-row img").forEach(img => {
+
+    img.addEventListener("mouseenter", () => {
+
+        const productId = img.parentElement.href.split("id=")[1];
+
+        fetch("Data/products.json")
+        .then(res => res.json())
+        .then(data => {
+
+            const product = data.products.find(p => p.id === productId);
+
+            cursorInfo.innerHTML =
+                product.shortName + "<br>" +
+                product.currency + product.price;
+
+            cursorInfo.style.display = "block";
+
+        });
+
+    });
+
+    img.addEventListener("mouseleave", () => {
+        cursorInfo.style.display = "none";
+    });
+
+});
 
     /* ================= AUTO YEAR UPDATE =============== */
 
