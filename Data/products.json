@@ -1,4 +1,5 @@
 ﻿[
+"products": [
   {
     "id": "p1",
     "name": "Premium Headphones",
@@ -41,4 +42,5 @@
     "category": "office",
     "affiliateLink": "https://example.com"
   }
+]
 ]

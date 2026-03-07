@@ -113,7 +113,7 @@ header nav a:hover {
     border-radius: 8px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 
-    overflow:idden;
+    overflow:hidden;
     z-index: 1000;
 
 #floatingPreview img {
@@ -186,6 +186,8 @@ header nav a:hover {
     overflow-x: auto;
     scroll-behavior: smooth;
     width: 100%;
+
+    scroll-snap-type: x mandatory;
 }
 
 .product-row::-webkit-scrollbar {
@@ -200,6 +202,7 @@ header nav a:hover {
     display: inline-block;
     text-decoration: none;
     cursor: pointer;
+    scroll-snap-align: start; /*This creates the premium “Netflix-style” slider feel*/
 }
 
 .product-row img {
@@ -216,11 +219,23 @@ header nav a:hover {
     transform: translateY(6px);
 }
 
-.product-row img:hover {
-    transform: translateY(-6px) scale(1.04);
-    box-shadow: 0 12px 28px rgba(0,0,0,0.22);
+.product-row img {
+    transition:
+        transform 0.35s cubic-bezier(.25,.8,.25,1),
+        box-shadow 0.35s ease,
+        filter 0.35s ease;
 }
 
+.product-row img:hover {
+
+    transform: translateY(-8px) scale(1.05);
+
+    box-shadow:
+        0 14px 30px rgba(0,0,0,0.25),
+        0 4px 10px rgba(0,0,0,0.12);
+
+    filter: brightness(1.04) contrast(1.02);
+}
 /* ===================================================== */
 /* ======================= ARROWS ====================== */
 /* ===================================================== */

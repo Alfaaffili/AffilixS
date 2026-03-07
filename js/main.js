@@ -117,27 +117,39 @@ if (floatingPreview && previewImage) {
 
 
     /* =========== AUTO DISTRIBUTE DEMO PRODUCTS ======== */
-    /* ======= (Temporary – replace with real data) ===== */
+/* ================= LOAD PRODUCTS ================= */
 
-    const rows = ["row1", "row2", "row3"];
+fetch("Data/products.json")
+.then(response => response.json())
+.then(data => {
 
-    rows.forEach(rowId => {
-        const row = document.getElementById(rowId);
+    const products = data.products;
 
-        if (row && row.children.length === 0) {
-            for (let i = 1; i <= 10; i++) {
-                const link = document.createElement("a");
-                link.href = "javascript:void(0";
+    const rows = [
+        document.getElementById("row1"),
+        document.getElementById("row2"),
+        document.getElementById("row3")
+    ];
 
-                const img = document.createElement("img");
-                img.src = "images/p" + i + ".jpg";
-                img.alt = "Product " + i;
+    products.forEach((product, index) => {
 
-                link.appendChild(img);
-                row.appendChild(link);
-            }
-        }
+        const row = rows[Math.floor(index / 20)];
+
+        if (!row) return;
+
+        const link = document.createElement("a");
+        link.href = "product.html?id=" + product.id;
+
+        const img = document.createElement("img");
+        img.src = product.image;
+        img.alt = product.name;
+
+        link.appendChild(img);
+        row.appendChild(link);
+
     });
+
+});  
 
 
     /* ================= AUTO YEAR UPDATE =============== */
