@@ -1,13 +1,15 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
+
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Luxury Store</title>
+<title>Semi-Dynamic Luxury Store</title>
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="CSS/styles.css">
 
 </head>
 
@@ -15,38 +17,41 @@
 
 <header class="site-header">
 
-<div class="logo">LOGO</div>
+<div class="header-inner">
 
-</header>
-
-
-<main>
-
-<section class="products-section">
-
-<h2>Featured Products</h2>
-
-<div class="row-wrapper">
-
-<button class="row-arrow left" data-row="row1">&#10094;</button>
-
-<div class="product-row" id="row1"></div>
-
-<button class="row-arrow right" data-row="row1">&#10095;</button>
+<img src="Images/logo.png" class="logo">
 
 </div>
 
+</header>
+
+<section class="hero">
+
+<img src="Images/hero888.jpg" class="hero-img">
+
 </section>
+
+<main class="homepage">
+
+<h2 class="section-title">Featured Products</h2>
+
+<div class="row-wrapper">
+
+<button class="row-arrow left" data-row="row1">❮</button>
+
+<div class="product-row" id="row1"></div>
+
+<button class="row-arrow right" data-row="row1">❯</button>
+
+</div>
 
 </main>
 
+<footer class="site-footer">
 
-<footer>
-
-<p>� 2026 Luxury Store</p>
+<p>© 2026 Luxury Store</p>
 
 </footer>
-
 
 <!-- PRODUCT MODAL -->
 
@@ -54,9 +59,9 @@
 
 <div class="modal-content">
 
-<span class="close-modal">&times;</span>
+<span class="close-modal">×</span>
 
-<img id="modalImage" src="" alt="">
+<img id="modalImage">
 
 <h3 id="modalTitle"></h3>
 
@@ -66,7 +71,7 @@
 
 </div>
 
-<script src="main.js"></script>
+<script src="JS/main.js"></script>
 
 </body>
 </html>
