@@ -166,13 +166,13 @@ fetch("Data/products.json")
                     product.shortName + "<br>" +
                     product.currency + product.price;
 
-                cursorInfo.style.display = "block";
+                cursorInfo.style.opacity = "1";
 
             });
 
             img.addEventListener("mouseleave", () => {
 
-                cursorInfo.style.display = "none";
+                cursorInfo.style.opacity = "0";
 
             });
 
