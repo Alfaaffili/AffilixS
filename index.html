@@ -1,444 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AffilixS</title>
+<title>Luxury Store</title>
 
-<link rel="icon" href="images/favicon.ico">
-
-<style>
-
-/* GLOBAL */
-
-*{
-box-sizing:border-box;
-}
-
-html,body{
-margin:0;
-font-family:Arial, sans-serif;
-background:#f5f2ed;
-color:#1f1f1f;
-overflow-x:hidden;
-}
-
-/* HEADER */
-
-header{
-background:#111;
-color:white;
-padding:15px 20px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-}
-
-.logo img{
-height:20px;
-object-fit:contain;
-}
-
-header nav a{
-color:white;
-margin:0 10px;
-text-decoration:none;
-cursor:pointer;
-white-space:nowrap;
-}
-
-header nav a:hover{
-text-decoration:underline;
-}
-
-/* HERO */
-
-.top-section{
-display:flex;
-height:200px;
-width:100%;
-}
-
-.identity-panel{
-flex:1;
-background:url("images/hero8888.jpg") center/cover no-repeat;
-border-right:3px solid #111;
-position:relative;
-}
-
-.identity-text{
-position:absolute;
-bottom:-30px;
-left:50px;
-background:rgba(255,0,0,0.55);
-padding:10px 40px;
-border-radius:6px;
-font-size:22px;
-backdrop-filter:blur(3px);
-color:white;
-}
-
-/* FLOATING PREVIEW */
-
-#floatingPreview{
-position:fixed;
-display:none;
-opacity:0;
-visibility:hidden;
-transition:opacity .25s ease;
-width:350px;
-max-width:92vw;
-height:400px;
-top:60px;
-right:10px;
-background:#fff;
-border-radius:8px;
-box-shadow:0 10px 25px rgba(0,0,0,.15);
-overflow:hidden;
-z-index:1000;
-}
-
-#floatingPreview img{
-width:100%;
-height:100%;
-object-fit:contain;
-}
-
-/* TOOLTIP */
-
-#cursor-info{
-position:fixed;
-pointer-events:none;
-font-size:12px;
-color:white;
-background:rgba(0,0,0,.75);
-padding:6px 10px;
-border-radius:6px;
-opacity:0;
-transition:opacity .2s ease;
-z-index:9999;
-}
-
-/* PRODUCT SECTION */
-
-.product-section{
-padding:40px 80px;
-}
-
-.section-title{
-font-size:22px;
-letter-spacing:1px;
-margin-bottom:20px;
-text-transform:uppercase;
-}
-
-.section-title::after{
-content:"";
-display:block;
-width:60px;
-height:2px;
-margin-top:10px;
-background:#c6a96b;
-}
-
-.curation-intro{
-max-width:600px;
-line-height:1.6;
-color:#555;
-margin-bottom:30px;
-}
-
-/* SLIDER */
-
-.slider-wrapper{
-position:relative;
-display:flex;
-align-items:center;
-margin-bottom:30px;
-}
-
-.product-row{
-display:flex;
-gap:25px;
-overflow-x:auto;
-scroll-behavior:smooth;
-width:100%;
-scroll-snap-type:x mandatory;
-}
-
-.product-row::-webkit-scrollbar{
-display:none;
-}
-
-.product-row img{
-width:200px;
-min-width:200px;
-height:150px;
-object-fit:cover;
-border-radius:12px;
-box-shadow:0 4px 12px rgba(0,0,0,.15);
-transition:transform .35s, box-shadow .35s;
-scroll-snap-align:start;
-}
-
-.product-row img:hover{
-transform:translateY(-8px) scale(1.05);
-box-shadow:0 14px 30px rgba(0,0,0,.25);
-}
-
-/* ARROWS */
-
-.arrow{
-position:absolute;
-top:50%;
-transform:translateY(-50%);
-background:rgba(0,0,0,.6);
-color:#fff;
-border:none;
-width:48px;
-height:48px;
-border-radius:50%;
-cursor:pointer;
-z-index:5;
-}
-
-.arrow.left{
-left:-40px;
-}
-
-.arrow.right{
-right:-40px;
-}
-
-/* CATEGORIES */
-
-.categories{
-background:#fff;
-padding:50px 20px;
-display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:25px;
-}
-
-.category{
-text-align:center;
-}
-
-.category img{
-width:110px;
-height:110px;
-border-radius:12px;
-object-fit:cover;
-}
-
-.category p{
-margin-top:12px;
-font-weight:bold;
-}
-
-/* FOOTER */
-
-footer{
-background:#111;
-color:white;
-padding:20px 40px;
-margin-top:80px;
-}
-
-.footer-links{
-text-align:center;
-margin-bottom:6px;
-}
-
-.footer-links span{
-margin:0 40px;
-cursor:pointer;
-}
-
-.footer-copy{
-font-size:14px;
-opacity:.8;
-}
-
-/* MODALS */
-
-.modal{
-display:none;
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.6);
-}
-
-.modal-content{
-background:white;
-width:60%;
-margin:10% auto;
-padding:25px;
-border-radius:8px;
-}
-
-.close{
-float:right;
-cursor:pointer;
-font-size:20px;
-}
-
-/* MOBILE */
-
-@media(max-width:768px){
-
-.product-section{
-padding:40px 30px;
-}
-
-.product-row img{
-width:140px;
-min-width:140px;
-height:110px;
-}
-
-.categories{
-grid-template-columns:repeat(2,1fr);
-padding:60px 30px;
-gap:20px;
-}
-
-.identity-text{
-left:20px;
-font-size:18px;
-padding:10px 20px;
-}
-
-}
-
-</style>
+<link rel="stylesheet" href="styles.css">
 
 </head>
 
 <body>
 
-<div id="floatingPreview">
-<img id="previewImage" src="">
-</div>
+<header class="site-header">
 
-<header>
-
-<div class="logo">
-<img src="images/logo.png" alt="AffilixS">
-</div>
-
-<nav>
-<a onclick="openModal('vision')">Vision & Mission</a>
-<a onclick="openModal('productsModal')">Products</a>
-<a onclick="openModal('guestModal')">Guest Insights</a>
-<a onclick="openModal('contact')">Contact</a>
-</nav>
+<div class="logo">LOGO</div>
 
 </header>
 
-<div class="top-section">
-<div class="identity-panel">
-<div class="identity-text">
-A refined selection for modern living.
-</div>
-</div>
-</div>
 
-<section class="product-section">
+<main>
 
-<h2 class="section-title">Curated Discoveries</h2>
+<section class="products-section">
 
-<p class="curation-intro">
-Carefully selected pieces defined by refinement, performance, and design integrity.
-</p>
+<h2>Featured Products</h2>
 
-<div class="slider-wrapper">
-<button id="left1" class="arrow left" onclick="slideLeft('row1')">&#10094;</button>
+<div class="row-wrapper">
+
+<button class="row-arrow left" data-row="row1">&#10094;</button>
+
 <div class="product-row" id="row1"></div>
-<button id="right1" class="arrow right" onclick="slideRight('row1')">&#10095;</button>
-</div>
 
-<div class="slider-wrapper">
-<button id="left2" class="arrow left" onclick="slideLeft('row2')">&#10094;</button>
-<div class="product-row" id="row2"></div>
-<button id="right2" class="arrow right" onclick="slideRight('row2')">&#10095;</button>
-</div>
+<button class="row-arrow right" data-row="row1">&#10095;</button>
 
-<div class="slider-wrapper">
-<button id="left3" class="arrow left" onclick="slideLeft('row3')">&#10094;</button>
-<div class="product-row" id="row3"></div>
-<button id="right3" class="arrow right" onclick="slideRight('row3')">&#10095;</button>
 </div>
 
 </section>
 
-<div class="categories">
+</main>
 
-<div class="category"><img src="images/cat-tech.jpg"><p>Technology</p></div>
-<div class="category"><img src="images/BeautyPersonnalCare.jpg"><p>Beauty & Personal Care</p></div>
-<div class="category"><img src="images/Home.jpg"><p>Home & Living</p></div>
-<div class="category"><img src="images/Fittness.jpg"><p>Fitness & Sports</p></div>
-<div class="category"><img src="images/Style.jpg"><p>Style</p></div>
-
-</div>
 
 <footer>
 
-<div class="footer-links">
-<span onclick="openModal('disclaimer')">Disclaimer</span>
-<span onclick="openModal('contact')">Contact</span>
-</div>
-
-<div class="footer-copy">
-© <span id="year"></span> AffilixS. All rights reserved.
-</div>
+<p>© 2026 Luxury Store</p>
 
 </footer>
 
-<div id="vision" class="modal" onclick="closeModal(event)">
+
+<!-- PRODUCT MODAL -->
+
+<div id="productModal" class="modal">
+
 <div class="modal-content">
-<span class="close" onclick="closeAll()">×</span>
-<h2>Vision & Mission</h2>
-<p>Your vision text here.</p>
-</div>
+
+<span class="close-modal">&times;</span>
+
+<img id="modalImage" src="" alt="">
+
+<h3 id="modalTitle"></h3>
+
+<p id="modalPrice"></p>
+
 </div>
 
-<div id="contact" class="modal" onclick="closeModal(event)">
-<div class="modal-content">
-<span class="close" onclick="closeAll()">×</span>
-<h2>Contact</h2>
-<p>Email: you@example.com</p>
-</div>
 </div>
 
-<div id="disclaimer" class="modal" onclick="closeModal(event)">
-<div class="modal-content">
-<span class="close" onclick="closeAll()">×</span>
-<h2>Disclaimer</h2>
-<p>Affiliate disclosure text.</p>
-</div>
-</div>
-
-<div id="productsModal" class="modal" onclick="closeModal(event)">
-<div class="modal-content">
-<span class="close" onclick="closeAll()">×</span>
-<h2>Products</h2>
-</div>
-</div>
-
-<div id="guestModal" class="modal" onclick="closeModal(event)">
-<div class="modal-content">
-<span class="close" onclick="closeAll()">×</span>
-<h2>Guest Insights</h2>
-</div>
-</div>
-
-<div id="cursor-info"></div>
-
-<script src="js/main.js"></script>
+<script src="main.js"></script>
 
 </body>
 </html>
