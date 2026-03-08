@@ -1,564 +1,444 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- ===================================================== -->
-<!-- ======================= HEAD ======================== -->
-<!-- ===================================================== -->
-
 <head>
-<link rel="icon" href="images/favicon.ico">
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>AffilixS</title>
+
+<link rel="icon" href="images/favicon.ico">
 
 <style>
 
-/* ===================================================== */
-/* ===================== GLOBAL ======================== */
-/* ===================================================== */
+/* GLOBAL */
 
-* {
-    box-sizing: border-box;
+*{
+box-sizing:border-box;
 }
 
-html, body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f5f2ed;
-    color: #1f1f1f;
-    overflow-x: hidden;
-    max-width: 100%
-}
-/* ===================================================== */
-/* ===================== HEADER ======================== */
-/* ===================================================== */
-
-header {
-    background: #111;
-    color: white;
-    padding: 15px 5px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+html,body{
+margin:0;
+font-family:Arial, sans-serif;
+background:#f5f2ed;
+color:#1f1f1f;
+overflow-x:hidden;
 }
 
-.logo img {
-    height: 20px;
-    object-fit: contain;
+/* HEADER */
+
+header{
+background:#111;
+color:white;
+padding:15px 20px;
+display:flex;
+align-items:center;
+justify-content:space-between;
 }
 
-header nav a {
-    color: white;
-    margin: 0 10px;
-    text-decoration: none;
-    cursor: pointer;
-    white-space: nowrap; /* this keeps words from splitting in header */
+.logo img{
+height:20px;
+object-fit:contain;
 }
 
-header nav a:hover {
-    text-decoration: underline;
+header nav a{
+color:white;
+margin:0 10px;
+text-decoration:none;
+cursor:pointer;
+white-space:nowrap;
 }
 
-/* ===================================================== */
-/* ===================== HERO ========================== */
-/* ===================================================== */
-
-.top-section {
-    display: flex;
-    height: 200px; /* slightly reduced */
-    width: 100%;
-    margin-top: -5px; /* pulls hero closer to header */
+header nav a:hover{
+text-decoration:underline;
 }
 
-.identity-panel {
-    flex: 1;
-    background: url("images/hero8888.jpg") left center / cover no-repeat;
-    border-right: 3px solid #111;
-    position: relative;
+/* HERO */
+
+.top-section{
+display:flex;
+height:200px;
+width:100%;
 }
 
-.identity-text {
-    position: absolute;
-    bottom: -30px;
-    left: 56px;
-    background: rgba(255, 0, 0, 0.55);
-    padding: 0px 55px;
-    border-radius: 6px;
-    font-size: 24px;
-    font-weight: 300;
-    backdrop-filter: blur(3px);
-    max-width: 500px;
-    color: #ffffff;
+.identity-panel{
+flex:1;
+background:url("images/hero8888.jpg") center/cover no-repeat;
+border-right:3px solid #111;
+position:relative;
 }
 
-/* ===================================================== */
-/* ================= FLOATING PREVIEW ================== */
-/* ===================================================== */
-
-#floatingPreview {
-    position: fixed;
-
-    display: none;              /* hidden by default */
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.25s ease;
-
-    width: 350px;
-    max-width: 92vw;
-    height: 400px;
-
-    top: 60px;
-    right: 10px;
-
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-
-    overflow:hidden;
-    z-index: 1000;
-
-#floatingPreview img {
-
-    width: 100%;
-
-    height: 100%;
-
-    object-fit: contain;
-
-}
+.identity-text{
+position:absolute;
+bottom:-30px;
+left:50px;
+background:rgba(255,0,0,0.55);
+padding:10px 40px;
+border-radius:6px;
+font-size:22px;
+backdrop-filter:blur(3px);
+color:white;
 }
 
-#floatingPreview.active {
-    display: block;
-    opacity: 1;
-    visibility: visible;
+/* FLOATING PREVIEW */
+
+#floatingPreview{
+position:fixed;
+display:none;
+opacity:0;
+visibility:hidden;
+transition:opacity .25s ease;
+width:350px;
+max-width:92vw;
+height:400px;
+top:60px;
+right:10px;
+background:#fff;
+border-radius:8px;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+overflow:hidden;
+z-index:1000;
 }
 
-#cursor-info {
-  position: fixed;
-  pointer-events: none;
-  font-size: 12px;
-  color: white;
-  background: rgba(0,0,0,0.75);
-  padding: 6px 10px;
-  border-radius: 6px;
-  
-  opacity: 0;
-
-  transition: opacity 0.2s ease;
-  /* display: none; */
-
-  z-index: 9999;
-}
-/* ===================================================== */
-/* ================= PRODUCT SECTIONS ================== */
-/* ===================================================== */
-
-.product-section {
-    padding: 40px 80px 30px 80px;   /* tightened vertical spacing */
+#floatingPreview img{
+width:100%;
+height:100%;
+object-fit:contain;
 }
 
-.product-section + .product-section {
-    margin-top: -10px;              /* reduced gap between rows */
+/* TOOLTIP */
+
+#cursor-info{
+position:fixed;
+pointer-events:none;
+font-size:12px;
+color:white;
+background:rgba(0,0,0,.75);
+padding:6px 10px;
+border-radius:6px;
+opacity:0;
+transition:opacity .2s ease;
+z-index:9999;
 }
 
-.section-title {
-    font-size: 22px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    margin-bottom: 30px;
-    color: #222;
-    text-transform: uppercase;
+/* PRODUCT SECTION */
+
+.product-section{
+padding:40px 80px;
 }
 
-.section-title::after {
-    content: "";
-    display: block;
-    width: 60px;
-    height: 2px;
-    margin-top: 12px;
-    background: #c6a96b;
+.section-title{
+font-size:22px;
+letter-spacing:1px;
+margin-bottom:20px;
+text-transform:uppercase;
 }
 
-.curation-intro {
-    max-width: 600px;
-    font-size: 16px;
-    line-height: 1.7;
-    color: #555;
-    margin-bottom: 40px;
+.section-title::after{
+content:"";
+display:block;
+width:60px;
+height:2px;
+margin-top:10px;
+background:#c6a96b;
 }
 
-/* ===================================================== */
-/* ====================== SLIDER ======================= */
-/* ===================================================== */
-
-.slider-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
+.curation-intro{
+max-width:600px;
+line-height:1.6;
+color:#555;
+margin-bottom:30px;
 }
 
-.product-row {
-    display: flex;
-    gap: 25px;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    width: 100%;
+/* SLIDER */
 
-    scroll-snap-type: x mandatory;
+.slider-wrapper{
+position:relative;
+display:flex;
+align-items:center;
+margin-bottom:30px;
 }
 
-.product-row::-webkit-scrollbar {
-    display: none;
+.product-row{
+display:flex;
+gap:25px;
+overflow-x:auto;
+scroll-behavior:smooth;
+width:100%;
+scroll-snap-type:x mandatory;
 }
 
-.product-row {
-    scrollbar-width: none;
+.product-row::-webkit-scrollbar{
+display:none;
 }
 
-.product-row a {
-    display: inline-block;
-    text-decoration: none;
-    cursor: pointer;
-    scroll-snap-align: start; /*This creates the premium “Netflix-style” slider feel*/
+.product-row img{
+width:200px;
+min-width:200px;
+height:150px;
+object-fit:cover;
+border-radius:12px;
+box-shadow:0 4px 12px rgba(0,0,0,.15);
+transition:transform .35s, box-shadow .35s;
+scroll-snap-align:start;
 }
 
-.product-row img {
-    width: 200px;
-    min-width: 200px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.product-row img:hover{
+transform:translateY(-8px) scale(1.05);
+box-shadow:0 14px 30px rgba(0,0,0,.25);
 }
 
-.product-row img:nth-child(even) {
-    transform: translateY(6px);
+/* ARROWS */
+
+.arrow{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+background:rgba(0,0,0,.6);
+color:#fff;
+border:none;
+width:48px;
+height:48px;
+border-radius:50%;
+cursor:pointer;
+z-index:5;
 }
 
-.product-row img {
-    transition:
-        transform 0.35s cubic-bezier(.25,.8,.25,1),
-        box-shadow 0.35s ease,
-        filter 0.35s ease;
+.arrow.left{
+left:-40px;
 }
 
-.product-row img:hover {
-
-    transform: translateY(-8px) scale(1.05);
-
-    box-shadow:
-        0 14px 30px rgba(0,0,0,0.25),
-        0 4px 10px rgba(0,0,0,0.12);
-
-    filter: brightness(1.04) contrast(1.02);
-}
-/* ===================================================== */
-/* ======================= ARROWS ====================== */
-/* ===================================================== */
-
-.arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.6);
-    color: #fff;
-    border: none;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 5;
+.arrow.right{
+right:-40px;
 }
 
-.arrow.left { left: -40px; } /*it was { left: 0px; }*/
-.arrow.right { right: -40px; } /*it was { left: 0px; }*/
+/* CATEGORIES */
 
-.arrow:hover {
-    background: rgba(0, 0, 0, 0.85);
-    transform: translateY(-50%) scale(1.1);
+.categories{
+background:#fff;
+padding:50px 20px;
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:25px;
 }
 
-/* ===================================================== */
-/* ===================== CATEGORIES ==================== */
-/* ===================================================== */
-
-.categories {
-    background: #fff;
-    padding: 50px 20px;
-    /* padding: 70px 60px 70px 60px;   /* balanced spacing above categories */
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 25px;
+.category{
+text-align:center;
 }
 
-.category {
-    text-align: center;
+.category img{
+width:110px;
+height:110px;
+border-radius:12px;
+object-fit:cover;
 }
 
-.category img {
-    width: 110px; /*this ensures two category buttons fit cleanly on smaller phones*/
-    height: 110px; /*this ensures two category buttons fit cleanly on smaller phones*/
-    object-fit: cover;
-    border-radius: 12px;
+.category p{
+margin-top:12px;
+font-weight:bold;
 }
 
-.category p {
-    margin-top: 12px;
-    font-weight: bold;
+/* FOOTER */
+
+footer{
+background:#111;
+color:white;
+padding:20px 40px;
+margin-top:80px;
 }
 
-/* ===================================================== */
-/* ======================= FOOTER ====================== */
-/* ===================================================== */
-
-footer {
-    background: #111;
-    color: white;
-    padding: 20px 40px;
-    margin-top: 80px;
+.footer-links{
+text-align:center;
+margin-bottom:6px;
 }
 
-/* First Line: centered links */
-.footer-links {
-    text-align: center;
-    margin-bottom: 6px;
+.footer-links span{
+margin:0 40px;
+cursor:pointer;
 }
 
-  /*  display: flex; */
-  /*  justify-content: space-between; */
-  /*  align-items: center; */
-  /*  flex-wrap: wrap; */
+.footer-copy{
+font-size:14px;
+opacity:.8;
 }
 
-.footer-links span {
-    margin: 0 50px;
-    cursor: pointer;
-    text-decoration: none;  /* removed underline */
+/* MODALS */
+
+.modal{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.6);
 }
 
-/* Second Line: copyright left */
-.footer-copy {
-    font-size: 14px;
-    opacity: 0.8;
-    text-align: left;
+.modal-content{
+background:white;
+width:60%;
+margin:10% auto;
+padding:25px;
+border-radius:8px;
 }
 
-/* ===================================================== */
-/* ======================= MODALS ====================== */
-/* ===================================================== */
-
-.modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
+.close{
+float:right;
+cursor:pointer;
+font-size:20px;
 }
 
-.modal-content {
-    background: white;
-    width: 60%;
-    margin: 10% auto;
-    padding: 25px;
-    border-radius: 8px;
+/* MOBILE */
+
+@media(max-width:768px){
+
+.product-section{
+padding:40px 30px;
 }
 
-.close {
-    float: right;
-    cursor: pointer;
-    font-size: 20px;
+.product-row img{
+width:140px;
+min-width:140px;
+height:110px;
 }
 
-/* ===================================================== */
-/* ===================== RESPONSIVE ==================== */
-/* ===================================================== */
-
-/* Tablet */
-@media (max-width: 1024px) {
-    /* (we will add tablet adjustments later) */
+.categories{
+grid-template-columns:repeat(2,1fr);
+padding:60px 30px;
+gap:20px;
 }
 
-/* Mobile (general) */
-@media (max-width: 768px) {
-    .identity-text {
-    left: 20px;
-    padding: 10px 20px;
-    font-size: 18px;
-    max-width: 80%;
+.identity-text{
+left:20px;
+font-size:18px;
+padding:10px 20px;
 }
-
-.arrow-left { lef: -20px;}
-.arrow-right { lef: -20px;}
-
-    .footer-links {
-        text-align: center;
-        margin-top: 10px;
-}
-    .footer-copy {
-        text-align: center;
-        margin-top: 10px; /* bothe footer lines align together on mobiles */
-}
-    .product-section {
-        padding: 40px 30px 60px 30px;
-    }
-
-    .product-row img {
-        width: 140px; /*current mobile rule was 160px for narrower screens*/
-        min-width: 140px; /*current mobile rule was 160px for narrower screens*/
-        height: 110px; /*current mobile rule was 120px for narrower screens*/
-    }
-
-    .categories {
-        grid-template-columns: repeat(2, 1fr);
-        padding: 60px 30px; /* it was 40px 15px; this keep buttons centered, remove uneven left spacing, keep 2 buttons per row*/
-        gap: 20px; /* newly added code line; this keep buttons centered, remove uneven left spacing, keep 2 buttons per row*/
-        justify-items: center;
-    }
 
 }
 
-/* Small Mobile (phones only) */
-@media (max-width: 600px) {
-
-#floatingPreview {
-    width: 94vw;
-    height: 320px;
-    right: 3vw;
-    top: 70px
-}
-   
-}
 </style>
-</head>
 
-<!-- ===================================================== -->
-<!-- ======================= BODY ======================== -->
-<!-- ===================================================== -->
+</head>
 
 <body>
 
 <div id="floatingPreview">
-    <img id="previewImage" src="">
+<img id="previewImage" src="">
 </div>
 
 <header>
+
 <div class="logo">
-    <img src="images/logo.jpg" alt="AffilixS">
+<img src="images/logo.png" alt="AffilixS">
 </div>
+
 <nav>
-    <a onclick="openModal('vision')">Vision & Mission</a>
-    <a onclick="openModal('productsModal')">Products</a>
-    <a onclick="openModal('guestModal')">Guest Insights</a>
-    <a onclick="openModal('contact')">Contact</a>
+<a onclick="openModal('vision')">Vision & Mission</a>
+<a onclick="openModal('productsModal')">Products</a>
+<a onclick="openModal('guestModal')">Guest Insights</a>
+<a onclick="openModal('contact')">Contact</a>
 </nav>
+
 </header>
 
 <div class="top-section">
-    <div class="identity-panel">
-        <div class="identity-text">
-            A refined selection for modern living.
-        </div>
-    </div>
+<div class="identity-panel">
+<div class="identity-text">
+A refined selection for modern living.
+</div>
+</div>
 </div>
 
-<!-- PRODUCT ROWS -->
 <section class="product-section">
-    <h2 class="section-title">Curated Discoveries</h2>
-    <p class="curation-intro">
-        Carefully selected pieces defined by refinement, performance, and design integrity.
-    </p>
-    <div class="slider-wrapper">
-        <button class="arrow left" onclick="slideLeft('row1')">&#10094;</button>
-        <div class="product-row" id="row1"></div>
-        <button class="arrow right" onclick="slideRight('row1')">&#10095;</button>
-    </div>
-<div class="product-section">
-<button id="left1" onclick="slideLeft('row1')" class="arrow">‹</button>
+
+<h2 class="section-title">Curated Discoveries</h2>
+
+<p class="curation-intro">
+Carefully selected pieces defined by refinement, performance, and design integrity.
+</p>
+
+<div class="slider-wrapper">
+<button id="left1" class="arrow left" onclick="slideLeft('row1')">&#10094;</button>
 <div class="product-row" id="row1"></div>
-<button id="right1" onclick="slideRight('row1')" class="arrow">›</button>
-
+<button id="right1" class="arrow right" onclick="slideRight('row1')">&#10095;</button>
 </div>
 
-<div class="product-section">
-
-<button id="left2" onclick="slideLeft('row2')" class="arrow">‹</button>
+<div class="slider-wrapper">
+<button id="left2" class="arrow left" onclick="slideLeft('row2')">&#10094;</button>
 <div class="product-row" id="row2"></div>
-<button id="right2" onclick="slideRight('row2')" class="arrow">›</button>
-
+<button id="right2" class="arrow right" onclick="slideRight('row2')">&#10095;</button>
 </div>
 
-<div class="product-section">
-
-<button id="left3" onclick="slideLeft('row3')" class="arrow">‹</button>
+<div class="slider-wrapper">
+<button id="left3" class="arrow left" onclick="slideLeft('row3')">&#10094;</button>
 <div class="product-row" id="row3"></div>
-<button id="right3" onclick="slideRight('row3')" class="arrow">›</button>
-
+<button id="right3" class="arrow right" onclick="slideRight('row3')">&#10095;</button>
 </div>
+
 </section>
 
-<section class="product-section">
-    <div class="slider-wrapper">
-        <button class="arrow left" onclick="slideLeft('row2')">&#10094;</button>
-        <div class="product-row" id="row2"></div>
-        <div class="product-row" id="row3"></div>
-        <button class="arrow right" onclick="slideRight('row2')">&#10095;</button>
-    </div>
-</section>
-
-<section class="product-section">
-    <div class="slider-wrapper">
-        <button class="arrow left" onclick="slideLeft('row3')">&#10094;</button>
-        <div class="product-row" id="row3"></div>
-        <button class="arrow right" onclick="slideRight('row3')">&#10095;</button>
-    </div>
-</section>
-
-<!-- CATEGORIES -->
 <div class="categories">
-    <div class="category"><img src="images/cat-tech.jpg"><p>Technology</p></div>
-    <div class="category"><img src="images/BeautyPersonnalCare.jpg"><p>Beauty & Personal Care</p></div>
-    <div class="category"><img src="images/Home.jpg"><p>Home & Living</p></div>
-    <div class="category"><img src="images/Fittness.jpg"><p>Fitness & Sports</p></div>
-    <div class="category"><img src="images/Style.jpg"><p>Style</p></div>
+
+<div class="category"><img src="images/cat-tech.jpg"><p>Technology</p></div>
+<div class="category"><img src="images/BeautyPersonnalCare.jpg"><p>Beauty & Personal Care</p></div>
+<div class="category"><img src="images/Home.jpg"><p>Home & Living</p></div>
+<div class="category"><img src="images/Fittness.jpg"><p>Fitness & Sports</p></div>
+<div class="category"><img src="images/Style.jpg"><p>Style</p></div>
+
 </div>
 
-<!-- FOOTER -->
 <footer>
-    <div class="footer-links">
-        <span onclick="openModal('disclaimer')">Disclaimer</span>
-        <span onclick="openModal('contact')">Contact</span>
-    </div>
-    <div class="footer-copy">
-        © <span id="year"></span> AffilixS. All rights reserved.
-    </div>
+
+<div class="footer-links">
+<span onclick="openModal('disclaimer')">Disclaimer</span>
+<span onclick="openModal('contact')">Contact</span>
+</div>
+
+<div class="footer-copy">
+© <span id="year"></span> AffilixS. All rights reserved.
+</div>
+
 </footer>
 
-<!-- MODALS (unchanged) -->
 <div id="vision" class="modal" onclick="closeModal(event)">
-<div class="modal-content"><span class="close" onclick="closeAll()">×</span><h2>Vision & Mission</h2><p>Your vision text here.</p></div>
+<div class="modal-content">
+<span class="close" onclick="closeAll()">×</span>
+<h2>Vision & Mission</h2>
+<p>Your vision text here.</p>
+</div>
 </div>
 
 <div id="contact" class="modal" onclick="closeModal(event)">
-<div class="modal-content"><span class="close" onclick="closeAll()">×</span><h2>Contact</h2><p>Email: you@example.com</p></div>
+<div class="modal-content">
+<span class="close" onclick="closeAll()">×</span>
+<h2>Contact</h2>
+<p>Email: you@example.com</p>
+</div>
 </div>
 
 <div id="disclaimer" class="modal" onclick="closeModal(event)">
-<div class="modal-content"><span class="close" onclick="closeAll()">×</span><h2>Disclaimer</h2><p>Affiliate disclosure text.</p></div>
+<div class="modal-content">
+<span class="close" onclick="closeAll()">×</span>
+<h2>Disclaimer</h2>
+<p>Affiliate disclosure text.</p>
+</div>
 </div>
 
 <div id="productsModal" class="modal" onclick="closeModal(event)">
-<div class="modal-content"><span class="close" onclick="closeAll()">×</span><h2>Products</h2></div>
+<div class="modal-content">
+<span class="close" onclick="closeAll()">×</span>
+<h2>Products</h2>
+</div>
 </div>
 
 <div id="guestModal" class="modal" onclick="closeModal(event)">
-<div class="modal-content"><span class="close" onclick="closeAll()">×</span><h2>Guest Insights</h2></div>
+<div class="modal-content">
+<span class="close" onclick="closeAll()">×</span>
+<h2>Guest Insights</h2>
+</div>
 </div>
 
+<div id="cursor-info"></div>
+
 <script src="js/main.js"></script>
 
-<div id="cursor-info"></div>
-<script src="js/main.js"></script>
 </body>
 </html>

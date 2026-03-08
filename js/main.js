@@ -23,18 +23,16 @@ function slideLeft(rowId) {
 
 function openModal(id) {
     const modal = document.getElementById(id);
-    if (modal) {
-        modal.style.display = "block";
-    }
+    if (modal) modal.style.display = "block";
 }
 
 function closeAll() {
-    document.querySelectorAll('.modal')
+    document.querySelectorAll(".modal")
         .forEach(modal => modal.style.display = "none");
 }
 
 function closeModal(event) {
-    if (event.target.classList.contains('modal')) {
+    if (event.target.classList.contains("modal")) {
         closeAll();
     }
 }
@@ -45,161 +43,207 @@ function closeModal(event) {
 /* ===================================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
+
 const cursorInfo = document.getElementById("cursor-info");
+const floatingPreview = document.getElementById("floatingPreview");
+const previewImage = document.getElementById("previewImage");
 
-/* ================= FLOATING PREVIEW =============== */
 
-    const floatingPreview = document.getElementById("floatingPreview");
-    const previewImage = document.getElementById("previewImage");
-
-    if (floatingPreview && previewImage) {
-
-/* ================= FLOATING PREVIEW =============== */
+/* ===================================================== */
+/* ================= FLOATING PREVIEW ================== */
+/* ===================================================== */
 
 if (floatingPreview && previewImage) {
 
     const isTouchDevice = window.matchMedia("(hover: none)").matches;
 
-    // DESKTOP HOVER BEHAVIOR
+    /* DESKTOP HOVER */
+
     if (!isTouchDevice) {
 
         document.addEventListener("mouseover", function (e) {
+
             const img = e.target.closest(".product-row img");
-            if (img) {
-                previewImage.src = img.src;
-                floatingPreview.classList.add("active");
-            }
+
+            if (!img) return;
+
+            previewImage.src = img.src;
+            floatingPreview.classList.add("active");
+
         });
 
         document.addEventListener("mouseout", function (e) {
-        document.addEventListener("click", function (e) {
-           const insideProduct = e.target.closest(".product-row img");
-           const insidePreview = e.target.closest("#floatingPreview");
 
-    if (!insideProduct && !insidePreview) {
-        floatingPreview.classList.remove("active");
-    }
-});
             const img = e.target.closest(".product-row img");
-            if (img) {
+
+            if (!img) return;
+
+            floatingPreview.classList.remove("active");
+
+        });
+
+        document.addEventListener("click", function (e) {
+
+            const insideProduct = e.target.closest(".product-row img");
+            const insidePreview = e.target.closest("#floatingPreview");
+
+            if (!insideProduct && !insidePreview) {
                 floatingPreview.classList.remove("active");
             }
+
         });
 
     }
 
-    // TOUCH DEVICES (Mobile / Tablet)
+    /* MOBILE / TOUCH DEVICES */
+
     if (isTouchDevice) {
 
         document.addEventListener("click", function (e) {
+
             const img = e.target.closest(".product-row img");
 
             if (img) {
-            if (img.parentElement.tagName === "A") {
-                e.preventDefault();
-            } /* this line code: e.preventDefault(); was replaced by the preceeding code */
-            
+
+                if (img.parentElement.tagName === "A") {
+                    e.preventDefault();
+                }
+
                 previewImage.src = img.src;
                 floatingPreview.classList.add("active");
+
             } else {
+
                 floatingPreview.classList.remove("active");
+
             }
+
         });
 
         window.addEventListener("scroll", function () {
             floatingPreview.classList.remove("active");
         });
+
     }
 }
-    }
 
 
-/* =========== AUTO DISTRIBUTE DEMO PRODUCTS ======== */
-/* ================= LOAD PRODUCTS ================= */
+/* ===================================================== */
+/* =================== LOAD PRODUCTS =================== */
+/* ===================================================== */
 
 fetch("Data/products.json")
+
 .then(response => response.json())
+
 .then(data => {
 
-    const products = data.products;
+const products = data.products || [];
 
-    const rows = [
-        document.getElementById("row1"),
-        document.getElementById("row2"),
-        document.getElementById("row3")
-    ];
+const rows = [
+document.getElementById("row1"),
+document.getElementById("row2"),
+document.getElementById("row3")
+];
 
-    rows.forEach((row, rowIndex) => {
 
-        if (!row) return;
+rows.forEach((row, rowIndex) => {
 
-        const start = rowIndex * 10;
-        const end = start + 10;
-        const rowProducts = products.slice(start, end);
+if (!row) return;
 
- if (rowProducts.length === 0) {
+const start = rowIndex * 10;
+const end = start + 10;
 
-    // hide the row itself
-    row.style.display = "none";
-    
-    // hide arrows
-    const leftArrow = document.getElementById("left" + (rowIndex + 1));
-    const rightArrow = document.getElementById("right" + (rowIndex + 1));
+const rowProducts = products.slice(start, end);
 
-    if (leftArrow) leftArrow.style.display = "none";
-    if (rightArrow) rightArrow.style.display = "none";
 
-    return;
+/* Hide empty rows */
+
+if (rowProducts.length === 0) {
+
+row.style.display = "none";
+
+const leftArrow = document.getElementById("left" + (rowIndex + 1));
+const rightArrow = document.getElementById("right" + (rowIndex + 1));
+
+if (leftArrow) leftArrow.style.display = "none";
+if (rightArrow) rightArrow.style.display = "none";
+
+return;
 }
-        rowProducts.forEach(product => {
 
-            const link = document.createElement("a");
-            link.href = "#"; /* changed so as not go to old page product.html?id=" + product.id; */
 
-            const img = document.createElement("img");
-            img.src = product.image;
-            img.alt = product.name;
+/* Render products */
 
-            img.addEventListener("mouseenter", () => {
+rowProducts.forEach(product => {
 
-                cursorInfo.innerHTML =
-                    product.shortName + "<br>" +
-                    product.currency + product.price;
+const link = document.createElement("a");
+link.href = "#";
 
-                cursorInfo.style.opacity = "1";
+const img = document.createElement("img");
+img.src = product.image;
+img.alt = product.name;
 
-            });
 
-            img.addEventListener("mouseleave", () => {
+/* Tooltip */
 
-                cursorInfo.style.opacity = "0";
+img.addEventListener("mouseenter", () => {
 
-            });
+if (!cursorInfo) return;
 
-            link.appendChild(img);
-            row.appendChild(link);
+cursorInfo.innerHTML =
+product.shortName + "<br>" +
+product.currency + product.price;
 
-        });
-
-    });
+cursorInfo.style.opacity = "1";
 
 });
+
+img.addEventListener("mouseleave", () => {
+
+if (!cursorInfo) return;
+
+cursorInfo.style.opacity = "0";
+
+});
+
+
+link.appendChild(img);
+row.appendChild(link);
+
+});
+
+});
+
+})
+
+.catch(error => {
+console.error("Product loading error:", error);
+});
+
+
 /* ===================================================== */
 /* ================= CURSOR TOOLTIP ==================== */
 /* ===================================================== */
 
-document.addEventListener("mousemove", e => {
-    if (!cursorInfo) return;
+document.addEventListener("mousemove", function (e) {
 
-    cursorInfo.style.left = (e.clientX + 15) + "px";
-    cursorInfo.style.top = (e.clientY + 15) + "px";
+if (!cursorInfo) return;
+
+cursorInfo.style.left = (e.clientX + 15) + "px";
+cursorInfo.style.top = (e.clientY + 15) + "px";
+
 });
 
-/* ================= AUTO YEAR UPDATE =============== */
 
-    const yearElement = document.getElementById("year");
-    if (yearElement) {
-        yearElement.textContent = new Date().getFullYear();
-    }
+/* ===================================================== */
+/* ================= AUTO YEAR UPDATE ================== */
+/* ===================================================== */
+
+const yearElement = document.getElementById("year");
+
+if (yearElement) {
+yearElement.textContent = new Date().getFullYear();
+}
 
 });
