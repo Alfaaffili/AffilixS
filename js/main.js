@@ -5,89 +5,84 @@
 });
 
 
-
 /* =========================
    PRODUCT LOADER
 ========================= */
 
-function loadProducts() {
+function loadProducts(){
 
-    fetch("Data/products.json")
-    .then(response => {
-        if (!response.ok) {
-            throw new Error("products.json not found");
-        }
-        return response.json();
-    })
+fetch("Data/products.json")
+.then(res => res.json())
+.then(data => {
 
-    .then(data => {
+let products = null;
 
-        // Support both JSON structures
-        let products = Array.isArray(data) ? data : data.products;
+/* Detect correct structure */
 
-        if (!Array.isArray(products)) {
-            throw new Error("products.json format invalid");
-        }
+if(Array.isArray(data)) products = data;
+else if(Array.isArray(data.products)) products = data.products;
+else if(Array.isArray(data.data)) products = data.data;
+else if(Array.isArray(data.items)) products = data.items;
 
-        const row = document.getElementById("row1");
-        if (!row) return;
+if(!products){
+throw new Error("No product array found in JSON");
+}
 
-        row.innerHTML = "";
+const row = document.getElementById("row1");
+if(!row) return;
 
-        products.forEach(product => {
+row.innerHTML = "";
 
-            const card = document.createElement("div");
-            card.className = "product-card";
+products.forEach(product => {
 
-            card.innerHTML = `
-                <img src="${product.image}" alt="${product.name}">
-                <h4>${product.name}</h4>
-                <p>${product.price} ${product.currency}</p>
-            `;
+const card = document.createElement("div");
+card.className = "product-card";
 
-            card.addEventListener("click", () => openModal(product));
+card.innerHTML = `
+<img src="${product.image}" alt="${product.name}">
+<h4>${product.name}</h4>
+<p>${product.price} ${product.currency}</p>
+`;
 
-            row.appendChild(card);
+card.addEventListener("click", () => openModal(product));
 
-        });
+row.appendChild(card);
 
-    })
+});
 
-    .catch(error => {
-        console.error("Product loading error:", error);
-    });
+})
+.catch(err => console.error("Product loading error:", err));
 
 }
 
 
 
 /* =========================
-   SCROLL ARROWS
+   ROW ARROWS
 ========================= */
 
 function initArrows(){
 
-    const arrows = document.querySelectorAll(".row-arrow");
-    if(!arrows.length) return;
+const arrows = document.querySelectorAll(".row-arrow");
 
-    arrows.forEach(arrow => {
+arrows.forEach(arrow => {
 
-        arrow.addEventListener("click", () => {
+arrow.addEventListener("click", () => {
 
-            const rowId = arrow.dataset.row;
-            const row = document.getElementById(rowId);
-            if(!row) return;
+const rowId = arrow.dataset.row;
+const row = document.getElementById(rowId);
+if(!row) return;
 
-            const direction = arrow.classList.contains("right") ? 1 : -1;
+const dir = arrow.classList.contains("right") ? 1 : -1;
 
-            row.scrollBy({
-                left: direction * 400,
-                behavior: "smooth"
-            });
+row.scrollBy({
+left: dir * 400,
+behavior: "smooth"
+});
 
-        });
+});
 
-    });
+});
 
 }
 
@@ -99,40 +94,33 @@ function initArrows(){
 
 function initModals(){
 
-    const modal = document.getElementById("productModal");
-    const close = document.querySelector(".close-modal");
+const modal = document.getElementById("productModal");
+const close = document.querySelector(".close-modal");
 
-    if(!modal || !close) return;
+if(!modal || !close) return;
 
-    close.addEventListener("click", () => {
-        modal.style.display = "none";
-    });
+close.addEventListener("click", () => modal.style.display="none");
 
-    window.addEventListener("click", e => {
-
-        if(e.target === modal){
-            modal.style.display = "none";
-        }
-
-    });
+window.addEventListener("click", e => {
+if(e.target === modal) modal.style.display="none";
+});
 
 }
 
 
-
 function openModal(product){
 
-    const modal = document.getElementById("productModal");
-    const img = document.getElementById("modalImage");
-    const title = document.getElementById("modalTitle");
-    const price = document.getElementById("modalPrice");
+const modal = document.getElementById("productModal");
+const img = document.getElementById("modalImage");
+const title = document.getElementById("modalTitle");
+const price = document.getElementById("modalPrice");
 
-    if(!modal || !img || !title || !price) return;
+if(!modal) return;
 
-    img.src = product.image;
-    title.textContent = product.name;
-    price.textContent = product.price + " " + product.currency;
+img.src = product.image;
+title.textContent = product.name;
+price.textContent = product.price + " " + product.currency;
 
-    modal.style.display = "flex";
+modal.style.display = "flex";
 
 }
