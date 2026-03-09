@@ -1,69 +1,66 @@
 ﻿<!DOCTYPE html>
-
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Semi-Dynamic Luxury Store</title>
+<title>Affilixs</title>
 
-<link rel="stylesheet" href="CSS/styles.css">
-
+<link rel="stylesheet" href="styles.css">
 </head>
+
 
 <body>
 
+
+<!-- ================= HEADER ================= -->
+
 <header class="site-header">
 
-<div class="header-inner">
-
-<img src="Images/logo.png" class="logo">
-
+<div class="logo">
+<img src="images/logo.jpg" alt="Affilixs Logo">
 </div>
+
+<h1>Affilixs</h1>
 
 </header>
 
-<section class="hero">
 
-<img src="Images/hero888.jpg" class="hero-img">
 
-</section>
+<!-- ================= PRODUCT SECTION ================= -->
 
-<main class="homepage">
+<section class="products-section">
 
-<h2 class="section-title">Featured Products</h2>
+<h2>Featured Products</h2>
 
-<div class="row-wrapper">
+<div class="product-row-wrapper">
 
-<button class="row-arrow left" data-row="row1">❮</button>
+<button class="row-arrow left" data-row="row1">&#10094;</button>
 
-<div class="product-row" id="row1"></div>
+<div class="product-row" id="row1">
+<!-- products inserted here dynamically -->
+</div>
 
-<button class="row-arrow right" data-row="row1">❯</button>
+<button class="row-arrow right" data-row="row1">&#10095;</button>
 
 </div>
 
-</main>
+</section>
 
-<footer class="site-footer">
 
-<p>© 2026 Luxury Store</p>
 
-</footer>
-
-<!-- PRODUCT MODAL -->
+<!-- ================= PRODUCT MODAL ================= -->
 
 <div id="productModal" class="modal">
 
-<div class="modal-content">
+<div class="modal-box">
 
-<span class="close-modal">×</span>
+<span class="close-modal">&times;</span>
 
-<img id="modalImage">
+<img id="modalImage" src="" alt="Product">
 
-<h3 id="modalTitle"></h3>
+<h2 id="modalTitle"></h2>
 
 <p id="modalPrice"></p>
 
@@ -71,7 +68,12 @@
 
 </div>
 
-<script src="JS/main.js"></script>
+
+
+<!-- ================= SCRIPTS ================= -->
+
+<script src="main.js"></script>
 
 </body>
+
 </html>
