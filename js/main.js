@@ -5,19 +5,13 @@
 document.addEventListener("DOMContentLoaded", startApp);
 
 function startApp(){
-
 loadProducts();
-
-initArrows();
-
-initModals();
-
 }
 
 
 
 /* ===================================================== */
-/* =================== LOAD PRODUCTS =================== */
+/* ==================== LOAD PRODUCTS ================== */
 /* ===================================================== */
 
 function loadProducts(){
@@ -40,18 +34,12 @@ const card = document.createElement("div");
 card.className = "product-card";
 
 card.innerHTML = `
-
 <img src="${product.image}" alt="${product.name}">
-
 <h4>${product.name}</h4>
-
 <p>${product.price} ${product.currency}</p>
-
 `;
 
-card.addEventListener("click", function(){
-openModal(product);
-});
+card.dataset.product = JSON.stringify(product);
 
 row.appendChild(card);
 
@@ -66,93 +54,92 @@ row.appendChild(card);
 
 
 /* ===================================================== */
-/* ====================== ARROWS ======================= */
+/* ==================== GLOBAL CLICK =================== */
 /* ===================================================== */
 
-function initArrows(){
+document.addEventListener("click", function(e){
 
-const arrows = document.querySelectorAll(".row-arrow");
+/* ================= ARROW CONTROLS ================= */
 
-if(arrows.length === 0) return;
+if(e.target.classList.contains("row-arrow")){
 
-arrows.forEach(arrow => {
-
-arrow.addEventListener("click", function(){
-
-const rowId = this.dataset.row;
-
+const rowId = e.target.dataset.row;
 const row = document.getElementById(rowId);
 
 if(!row) return;
 
-const direction = this.classList.contains("right") ? 1 : -1;
+const direction = e.target.classList.contains("right") ? 1 : -1;
 
 row.scrollBy({
-
 left: direction * 400,
-
 behavior: "smooth"
-
-});
-
-});
-
 });
 
 }
 
 
 
-/* ===================================================== */
-/* ======================= MODAL ======================= */
-/* ===================================================== */
+/* ================= PRODUCT MODAL ================= */
 
-function initModals(){
+const card = e.target.closest(".product-card");
 
-const modal = document.getElementById("productModal");
+if(card){
 
-const close = document.querySelector(".close-modal");
+const product = JSON.parse(card.dataset.product);
 
-if(!modal || !close) return;
-
-close.addEventListener("click", function(){
-modal.style.display = "none";
-});
-
-window.addEventListener("click", function(e){
-
-if(e.target === modal){
-modal.style.display = "none";
-}
-
-});
+openModal(product);
 
 }
 
 
 
+/* ================= CLOSE MODAL ================= */
+
+if(e.target.classList.contains("close-modal")){
+closeModal();
+}
+
+if(e.target.id === "productModal"){
+closeModal();
+}
+
+});
+
+
+
 /* ===================================================== */
-/* ==================== OPEN MODAL ===================== */
+/* ===================== OPEN MODAL ==================== */
 /* ===================================================== */
 
 function openModal(product){
 
 const modal = document.getElementById("productModal");
-
 const img = document.getElementById("modalImage");
-
 const title = document.getElementById("modalTitle");
-
 const price = document.getElementById("modalPrice");
 
 if(!modal || !img || !title || !price) return;
 
 img.src = product.image;
-
 title.textContent = product.name;
-
 price.textContent = product.price + " " + product.currency;
 
 modal.style.display = "flex";
+
+}
+
+
+
+/* ===================================================== */
+/* ==================== CLOSE MODAL ==================== */
+/* ===================================================== */
+
+function closeModal(){
+
+const modal = document.getElementById("productModal");
+
+if(modal){
+modal.style.display = "none";
+}
 
 }
