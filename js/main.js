@@ -1,83 +1,98 @@
-﻿document.addEventListener("DOMContentLoaded", () => {
-    loadProducts();
-    initArrows();
-    initModals();
-});
+﻿/* ===================================================== */
+/* ======================= START ======================= */
+/* ===================================================== */
+
+document.addEventListener("DOMContentLoaded", startApp);
+
+function startApp(){
+
+loadProducts();
+
+initArrows();
+
+initModals();
+
+}
 
 
-/* =========================
-   PRODUCT LOADER
-========================= */
+
+/* ===================================================== */
+/* =================== LOAD PRODUCTS =================== */
+/* ===================================================== */
 
 function loadProducts(){
 
 fetch("Data/products.json")
-.then(res => res.json())
+
+.then(response => response.json())
+
 .then(data => {
 
-let products = null;
-
-/* Detect correct structure */
-
-if(Array.isArray(data)) products = data;
-else if(Array.isArray(data.products)) products = data.products;
-else if(Array.isArray(data.data)) products = data.data;
-else if(Array.isArray(data.items)) products = data.items;
-
-if(!products){
-throw new Error("No product array found in JSON");
-}
+const products = data.products || data;
 
 const row = document.getElementById("row1");
+
 if(!row) return;
 
-row.innerHTML = "";
-
-products.forEach(product => {
+products.slice(0,20).forEach(product => {
 
 const card = document.createElement("div");
 card.className = "product-card";
 
 card.innerHTML = `
+
 <img src="${product.image}" alt="${product.name}">
+
 <h4>${product.name}</h4>
+
 <p>${product.price} ${product.currency}</p>
+
 `;
 
-card.addEventListener("click", () => openModal(product));
+card.addEventListener("click", function(){
+openModal(product);
+});
 
 row.appendChild(card);
 
 });
 
 })
-.catch(err => console.error("Product loading error:", err));
+
+.catch(error => console.log("Product loading error:", error));
 
 }
 
 
 
-/* =========================
-   ROW ARROWS
-========================= */
+/* ===================================================== */
+/* ====================== ARROWS ======================= */
+/* ===================================================== */
 
 function initArrows(){
 
 const arrows = document.querySelectorAll(".row-arrow");
 
+if(arrows.length === 0) return;
+
 arrows.forEach(arrow => {
 
-arrow.addEventListener("click", () => {
+arrow.addEventListener("click", function(){
 
-const rowId = arrow.dataset.row;
+const rowId = this.dataset.row;
+
 const row = document.getElementById(rowId);
+
 if(!row) return;
 
-const dir = arrow.classList.contains("right") ? 1 : -1;
+const direction = this.classList.contains("right") ? 1 : -1;
 
 row.scrollBy({
-left: dir * 400,
+
+left: direction * 400,
+
 behavior: "smooth"
+
 });
 
 });
@@ -88,37 +103,54 @@ behavior: "smooth"
 
 
 
-/* =========================
-   MODAL SYSTEM
-========================= */
+/* ===================================================== */
+/* ======================= MODAL ======================= */
+/* ===================================================== */
 
 function initModals(){
 
 const modal = document.getElementById("productModal");
+
 const close = document.querySelector(".close-modal");
 
 if(!modal || !close) return;
 
-close.addEventListener("click", () => modal.style.display="none");
+close.addEventListener("click", function(){
+modal.style.display = "none";
+});
 
-window.addEventListener("click", e => {
-if(e.target === modal) modal.style.display="none";
+window.addEventListener("click", function(e){
+
+if(e.target === modal){
+modal.style.display = "none";
+}
+
 });
 
 }
 
 
+
+/* ===================================================== */
+/* ==================== OPEN MODAL ===================== */
+/* ===================================================== */
+
 function openModal(product){
 
 const modal = document.getElementById("productModal");
+
 const img = document.getElementById("modalImage");
+
 const title = document.getElementById("modalTitle");
+
 const price = document.getElementById("modalPrice");
 
-if(!modal) return;
+if(!modal || !img || !title || !price) return;
 
 img.src = product.image;
+
 title.textContent = product.name;
+
 price.textContent = product.price + " " + product.currency;
 
 modal.style.display = "flex";
