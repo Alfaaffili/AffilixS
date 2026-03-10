@@ -1,7 +1,7 @@
 ﻿```css
-/* ===================================================== */
-/* ===================== GLOBAL RESET ================== */
-/* ===================================================== */
+/* ========================= */
+/* GLOBAL                    */
+/* ========================= */
 
 *{
 margin:0;
@@ -16,22 +16,21 @@ color:#333;
 }
 
 
-
-/* ===================================================== */
-/* ======================== HEADER ===================== */
-/* ===================================================== */
+/* ========================= */
+/* HEADER                    */
+/* ========================= */
 
 .site-header{
 display:flex;
 align-items:center;
 gap:15px;
 padding:15px 25px;
-background:#ffffff;
-box-shadow:0 2px 6px rgba(0,0,0,0.1);
+background:white;
+border-bottom:1px solid #ddd;
 }
 
 .logo img{
-height:45px;
+height:40px;
 }
 
 .site-header h1{
@@ -40,10 +39,21 @@ font-weight:600;
 }
 
 
+/* ========================= */
+/* HERO                      */
+/* ========================= */
 
-/* ===================================================== */
-/* ===================== PRODUCT AREA ================== */
-/* ===================================================== */
+.hero img{
+width:100%;
+height:260px;
+object-fit:cover;
+display:block;
+}
+
+
+/* ========================= */
+/* PRODUCTS                  */
+/* ========================= */
 
 .products-section{
 max-width:1200px;
@@ -56,23 +66,18 @@ margin-bottom:20px;
 }
 
 
-
-/* ===================================================== */
-/* ==================== ROW WRAPPER ==================== */
-/* ===================================================== */
+/* ========================= */
+/* ROW WRAPPER               */
+/* ========================= */
 
 .product-row-wrapper{
 position:relative;
-width:100%;
-display:flex;
-align-items:center;
 }
 
 
-
-/* ===================================================== */
-/* ===================== PRODUCT ROW =================== */
-/* ===================================================== */
+/* ========================= */
+/* PRODUCT ROW               */
+/* ========================= */
 
 .product-row{
 display:flex;
@@ -87,24 +92,18 @@ display:none;
 }
 
 
-
-/* ===================================================== */
-/* ===================== PRODUCT CARD ================== */
-/* ===================================================== */
+/* ========================= */
+/* PRODUCT CARD              */
+/* ========================= */
 
 .product-card{
 min-width:200px;
-background:#ffffff;
+background:white;
 border-radius:10px;
 padding:12px;
 text-align:center;
 cursor:pointer;
 box-shadow:0 2px 8px rgba(0,0,0,0.1);
-transition:transform 0.2s ease;
-}
-
-.product-card:hover{
-transform:translateY(-4px);
 }
 
 .product-card img{
@@ -122,57 +121,40 @@ margin-top:10px;
 .product-card p{
 font-size:14px;
 color:#555;
-margin-top:4px;
 }
 
 
-
-/* ===================================================== */
-/* ======================= ARROWS ====================== */
-/* ===================================================== */
+/* ========================= */
+/* ARROWS                    */
+/* ========================= */
 
 .row-arrow{
-
 position:absolute;
 top:50%;
 transform:translateY(-50%);
-
 width:40px;
 height:40px;
-
 border:none;
 border-radius:50%;
-
-background:#ffffff;
-font-size:22px;
+background:black;
+color:white;
+font-size:20px;
 cursor:pointer;
-
-box-shadow:0 2px 6px rgba(0,0,0,0.2);
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-z-index:1000;
+z-index:10;
 }
 
 .row-arrow.left{
-left:-20px;
+left:0;
 }
 
 .row-arrow.right{
-right:-20px;
-}
-
-.row-arrow:hover{
-background:#f0f0f0;
+right:0;
 }
 
 
-
-/* ===================================================== */
-/* ======================== MODAL ====================== */
-/* ===================================================== */
+/* ========================= */
+/* MODAL                     */
+/* ========================= */
 
 .modal{
 display:none;
@@ -184,17 +166,15 @@ height:100%;
 background:rgba(0,0,0,0.7);
 justify-content:center;
 align-items:center;
-z-index:2000;
 }
 
 .modal-box{
-background:#ffffff;
+background:white;
 padding:20px;
 border-radius:10px;
 max-width:400px;
 width:90%;
 text-align:center;
-position:relative;
 }
 
 .modal-box img{
@@ -212,69 +192,34 @@ cursor:pointer;
 }
 
 
+/* ========================= */
+/* CATEGORIES                */
+/* ========================= */
 
-/* ===================================================== */
-/* ======================== FOOTER ===================== */
-/* ===================================================== */
+.categories{
+display:flex;
+justify-content:center;
+gap:30px;
+margin:60px 0;
+}
+
+.category{
+background:white;
+padding:20px;
+border-radius:8px;
+box-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+
+
+/* ========================= */
+/* FOOTER                    */
+/* ========================= */
 
 footer{
 text-align:center;
-padding:20px;
+padding:25px;
+background:white;
+border-top:1px solid #ddd;
 margin-top:40px;
-background:#ffffff;
-box-shadow:0 -2px 6px rgba(0,0,0,0.05);
-}
-
-
-
-/* ===================================================== */
-/* ================== MOBILE OPTIMIZATION ============== */
-/* ===================================================== */
-
-@media (max-width:768px){
-
-.product-card{
-min-width:160px;
-}
-
-.product-card img{
-height:140px;
-}
-
-.row-arrow{
-font-size:20px;
-width:34px;
-height:34px;
-}
-
 }
 ```
-/* ===================================================== */
-/* ============= INTERACTION PRIORITY FIX ============== */
-/* ===================================================== */
-
-.row-arrow{
-z-index:5000;
-pointer-events:auto;
-}
-
-.product-card{
-z-index:10;
-position:relative;
-}
-
-.modal{
-z-index:9000;
-}
-
-.modal-box{
-z-index:9001;
-}
-
-/* ===================================================== */
-/* =============== TEMPORARY ARROW TEST ================= */
-/* ===================================================== */
-
-.row-arrow{
-background:red !important;
-}
