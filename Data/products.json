@@ -33,12 +33,12 @@
 "price": 39,
 "currency": "USD",
 "affiliateLink": "https://example.com"
-}
+},
 
 {
 "id": "p4",
 "shortName": "Fiminin Purse",
-"name": "lady's leather ellegant Bag, 3 colors "Black, Whit7Golden, Grey"",
+"name": "lady's leather ellegant Bag, 3 colors Black, White & Golden, and Grey",
 "brand": "GVC",
 "category": "Style",
 "image": "images/p4.jpg",
@@ -278,6 +278,6 @@
 "currency": "USD",
 "affiliateLink": "https://example.com"
 
-},
+}
 
 ]
