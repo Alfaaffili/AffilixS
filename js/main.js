@@ -1,34 +1,63 @@
-﻿/* ===================================================== */
-/* ======================= START ======================= */
-/* ===================================================== */
+/* =====================================================
+   AFFILIXS MAIN ENGINE
+   Handles product loading, preview, modal and scrolling
+===================================================== */
 
-document.addEventListener("DOMContentLoaded", startApp);
 
-function startApp(){
-loadProducts();
+/* =====================================================
+   SAFETY WRAPPER (CRASH PROTECTION)
+===================================================== */
+
+try{
+
+
+/* =====================================================
+   LOAD PRODUCTS FROM JSON
+===================================================== */
+
+async function loadProducts(){
+
+const row = document.getElementById("row1");
+
+if(!row){
+console.error("Product row container not found");
+return;
+}
+
+let products = [];
+
+try{
+
+const response = await fetch("Data/products.json");
+
+if(!response.ok){
+throw new Error("Products.json failed to load");
+}
+
+products = await response.json();
+
+if(!Array.isArray(products)){
+throw new Error("Products data is not an array");
+}
+
+}catch(error){
+
+console.error("Product loading error:", error);
+return;
+
 }
 
 
 
-/* ===================================================== */
-/* ==================== LOAD PRODUCTS ================== */
-/* ===================================================== */
+/* =====================================================
+   GENERATE PRODUCT CARDS
+===================================================== */
 
-function loadProducts(){
+products.forEach(product => {
 
-fetch("Data/products.json")
-
-.then(response => response.json())
-
-.then(data => {
-
-const products = data.products || data;
-
-const row = document.getElementById("row1");
-
-if(!row) return;
-
-products.slice(0,20).forEach(product => {
+if(!product.image || !product.name){
+return;
+}
 
 const card = document.createElement("div");
 card.className = "product-card";
@@ -36,110 +65,127 @@ card.className = "product-card";
 card.innerHTML = `
 <img src="${product.image}" alt="${product.name}">
 <h4>${product.name}</h4>
-<p>${product.price} ${product.currency}</p>
+<p>${product.price || ""}</p>
 `;
-
-card.dataset.product = JSON.stringify(product);
 
 row.appendChild(card);
 
+
+
+/* =====================================================
+   FLOATING HOVER PREVIEW
+===================================================== */
+
+const preview = document.getElementById("floatingPreview");
+const previewImg = document.getElementById("previewImage");
+
+if(preview && previewImg){
+
+card.addEventListener("mouseenter", () => {
+
+previewImg.src = product.image;
+preview.classList.add("active");
+
 });
 
-})
+card.addEventListener("mouseleave", () => {
 
-.catch(error => console.log("Product loading error:", error));
+preview.classList.remove("active");
 
-}
-
-
-
-/* ===================================================== */
-/* ==================== GLOBAL CLICK =================== */
-/* ===================================================== */
-
-document.addEventListener("click", function(e){
-
-/* ================= ARROW CONTROLS ================= */
-
-if(e.target.classList.contains("row-arrow")){
-
-const rowId = e.target.dataset.row;
-const row = document.getElementById(rowId);
-
-if(!row) return;
-
-const direction = e.target.classList.contains("right") ? 1 : -1;
-
-row.scrollBy({
-left: direction * 400,
-behavior: "smooth"
 });
 
 }
 
 
 
-/* ================= PRODUCT MODAL ================= */
-
-const card = e.target.closest(".product-card");
-
-if(card){
-
-const product = JSON.parse(card.dataset.product);
-
-openModal(product);
-
-}
-
-
-
-/* ================= CLOSE MODAL ================= */
-
-if(e.target.classList.contains("close-modal")){
-closeModal();
-}
-
-if(e.target.id === "productModal"){
-closeModal();
-}
-
-});
-
-
-
-/* ===================================================== */
-/* ===================== OPEN MODAL ==================== */
-/* ===================================================== */
-
-function openModal(product){
+/* =====================================================
+   PRODUCT MODAL (CLICK)
+===================================================== */
 
 const modal = document.getElementById("productModal");
-const img = document.getElementById("modalImage");
-const title = document.getElementById("modalTitle");
-const price = document.getElementById("modalPrice");
+const modalImg = document.getElementById("modalImage");
+const modalTitle = document.getElementById("modalTitle");
+const modalPrice = document.getElementById("modalPrice");
 
-if(!modal || !img || !title || !price) return;
+if(modal && modalImg){
 
-img.src = product.image;
-title.textContent = product.name;
-price.textContent = product.price + " " + product.currency;
+card.addEventListener("click", () => {
 
 modal.style.display = "flex";
 
+modalImg.src = product.image;
+modalTitle.innerText = product.name;
+modalPrice.innerText = product.price || "";
+
+});
+
+}
+
+});
+
+
 }
 
 
 
-/* ===================================================== */
-/* ==================== CLOSE MODAL ==================== */
-/* ===================================================== */
+/* =====================================================
+   MODAL CLOSE SYSTEM
+===================================================== */
 
-function closeModal(){
+const closeBtn = document.querySelector(".close-modal");
+
+if(closeBtn){
+
+closeBtn.addEventListener("click", () => {
 
 const modal = document.getElementById("productModal");
 
 if(modal){
 modal.style.display = "none";
 }
+
+});
+
+}
+
+
+
+/* =====================================================
+   PRODUCT ROW ARROWS
+===================================================== */
+
+document.querySelectorAll(".row-arrow").forEach(btn => {
+
+btn.addEventListener("click", () => {
+
+const row = document.getElementById(btn.dataset.row);
+
+if(!row){
+console.warn("Row not found:", btn.dataset.row);
+return;
+}
+
+row.scrollBy({
+left: btn.classList.contains("left") ? -320 : 320,
+behavior: "smooth"
+});
+
+});
+
+});
+
+
+
+/* =====================================================
+   INITIALIZE PAGE
+===================================================== */
+
+loadProducts();
+
+
+
+}catch(error){
+
+console.error("AffilixS runtime crash prevented:", error);
 
 }

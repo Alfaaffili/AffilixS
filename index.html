@@ -1,32 +1,22 @@
-﻿```html
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
-<!-- ===================================================== -->
-<!-- ======================= HEAD ======================== -->
-<!-- ===================================================== -->
-
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>AffilixS | Curated Discoveries</title>
 
-<link rel="stylesheet" href="CSS/styles.css?v=3">
+<link rel="stylesheet" href="CSS/styles.css?v=10">
 
 </head>
 
 
-<!-- ===================================================== -->
-<!-- ======================= BODY ======================== -->
-<!-- ===================================================== -->
-
 <body>
 
 
-<!-- ===================================================== -->
-<!-- ======================= HEADER ====================== -->
-<!-- ===================================================== -->
+<!-- HEADER -->
 
 <header class="site-header">
 
@@ -40,21 +30,23 @@
 
 
 
-<!-- ===================================================== -->
-<!-- ===================== HERO PANEL ==================== -->
-<!-- ===================================================== -->
+<!-- HERO -->
 
-<section class="hero">
+<section class="top-section">
 
-<img src="images/hero888.jpg" alt="Hero Image">
+<div class="identity-panel">
+
+<div class="identity-text">
+A refined selection for modern living.
+</div>
+
+</div>
 
 </section>
 
 
 
-<!-- ===================================================== -->
-<!-- =================== PRODUCTS AREA =================== -->
-<!-- ===================================================== -->
+<!-- PRODUCTS -->
 
 <section class="products-section">
 
@@ -74,37 +66,17 @@
 
 
 
-<!-- ===================================================== -->
-<!-- ==================== CATEGORIES ===================== -->
-<!-- ===================================================== -->
+<!-- FLOATING PREVIEW -->
 
-<section class="categories">
+<div id="floatingPreview">
 
-<div class="category">Technology</div>
-<div class="category">Home</div>
-<div class="category">Fitness</div>
-<div class="category">Style</div>
-<div class="category">Beauty</div>
+<img id="previewImage">
 
-</section>
+</div>
 
 
 
-<!-- ===================================================== -->
-<!-- ======================= FOOTER ====================== -->
-<!-- ===================================================== -->
-
-<footer>
-
-<p>© 2026 AffilixS</p>
-
-</footer>
-
-
-
-<!-- ===================================================== -->
-<!-- ====================== MODAL ======================== -->
-<!-- ===================================================== -->
+<!-- PRODUCT MODAL -->
 
 <div id="productModal" class="modal">
 
@@ -124,13 +96,66 @@
 
 
 
-<!-- ===================================================== -->
-<!-- ===================== JAVASCRIPT ==================== -->
-<!-- ===================================================== -->
+<!-- CATEGORIES -->
 
-<script src="js/main.js"></script>
+<section class="categories">
+
+<div class="category">
+<img src="images/cat-tech.jpg">
+<p>Technology</p>
+</div>
+
+<div class="category">
+<img src="images/Home.jpg">
+<p>Home & Living</p>
+</div>
+
+<div class="category">
+<img src="images/Fittness.jpg">
+<p>Fitness</p>
+</div>
+
+<div class="category">
+<img src="images/Style.jpg">
+<p>Style</p>
+</div>
+
+<div class="category">
+<img src="images/BeautyPersonnalCare.jpg">
+<p>Beauty</p>
+</div>
+
+</section>
+
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<p>© 2026 AffilixS</p>
+
+</footer>
+
+
+
+<!-- CACHE PROTECTION -->
+
+<script>
+
+if ('serviceWorker' in navigator) {
+navigator.serviceWorker.getRegistrations().then(function(registrations) {
+for (let registration of registrations) {
+registration.unregister();
+}
+});
+}
+
+</script>
+
+
+<script src="js/main.js?v=10"></script>
 
 
 </body>
 </html>
-```
