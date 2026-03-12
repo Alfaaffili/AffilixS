@@ -8,7 +8,7 @@
 
 <title>AffilixS | Curated Discoveries</title>
 
-<link rel="stylesheet" href="CSS/styles.css?v=10">
+<link rel="stylesheet" href="CSS/styles.css?v=11">
 
 </head>
 
@@ -16,7 +16,9 @@
 <body>
 
 
-<!-- HEADER -->
+<!-- =================================================
+HEADER
+================================================= -->
 
 <header class="site-header">
 
@@ -26,11 +28,19 @@
 
 <h1>AffilixS</h1>
 
+<nav class="header-nav">
+<span data-modal="visionModal">Vision</span>
+<span data-modal="insightsModal">Insights</span>
+<span data-modal="contactModal">Contact</span>
+</nav>
+
 </header>
 
 
 
-<!-- HERO -->
+<!-- =================================================
+HERO
+================================================= -->
 
 <section class="top-section">
 
@@ -46,37 +56,32 @@ A refined selection for modern living.
 
 
 
-<!-- PRODUCTS -->
+<!-- =================================================
+PRODUCTS
+(dynamic rows inserted by main.js)
+================================================= -->
 
 <section class="products-section">
 
 <h2>Featured Products</h2>
 
-<div class="product-row-wrapper">
-
-<button class="row-arrow left" data-row="row1">❮</button>
-
-<div class="product-row" id="row1"></div>
-
-<button class="row-arrow right" data-row="row1">❯</button>
-
-</div>
-
 </section>
 
 
 
-<!-- FLOATING PREVIEW -->
+<!-- =================================================
+FLOATING PREVIEW
+================================================= -->
 
 <div id="floatingPreview">
-
 <img id="previewImage">
-
 </div>
 
 
 
-<!-- PRODUCT MODAL -->
+<!-- =================================================
+PRODUCT MODAL
+================================================= -->
 
 <div id="productModal" class="modal">
 
@@ -96,7 +101,9 @@ A refined selection for modern living.
 
 
 
-<!-- CATEGORIES -->
+<!-- =================================================
+CATEGORIES
+================================================= -->
 
 <section class="categories">
 
@@ -129,9 +136,19 @@ A refined selection for modern living.
 
 
 
-<!-- FOOTER -->
+<!-- =================================================
+FOOTER
+================================================= -->
 
 <footer>
+
+<div class="footer-links">
+
+<span data-modal="privacyModal">Privacy</span>
+<span data-modal="disclaimerModal">Disclaimer</span>
+<span data-modal="contactModal">Contact</span>
+
+</div>
 
 <p>© 2026 AffilixS</p>
 
@@ -139,7 +156,87 @@ A refined selection for modern living.
 
 
 
-<!-- CACHE PROTECTION -->
+<!-- =================================================
+HEADER MODALS
+================================================= -->
+
+<div id="visionModal" class="text-modal">
+
+<div class="modal-box">
+
+<h2>Our Vision</h2>
+
+<p>AffilixS curates refined products for modern living.</p>
+
+</div>
+
+</div>
+
+
+
+<div id="insightsModal" class="text-modal">
+
+<div class="modal-box">
+
+<h2>Insights</h2>
+
+<p>Insights and trends about modern lifestyle and technology.</p>
+
+</div>
+
+</div>
+
+
+
+<div id="contactModal" class="text-modal">
+
+<div class="modal-box">
+
+<h2>Contact</h2>
+
+<p>For partnerships and inquiries please contact AffilixS.</p>
+
+</div>
+
+</div>
+
+
+
+<!-- =================================================
+FOOTER MODALS
+================================================= -->
+
+<div id="privacyModal" class="text-modal">
+
+<div class="modal-box">
+
+<h2>Privacy Policy</h2>
+
+<p>Your privacy is important to us.</p>
+
+</div>
+
+</div>
+
+
+
+<div id="disclaimerModal" class="text-modal">
+
+<div class="modal-box">
+
+<h2>Affiliate Disclaimer</h2>
+
+<p>Some links on this site are affiliate links that may earn commission.</p>
+
+</div>
+
+</div>
+
+
+
+<!-- =================================================
+CACHE PROTECTION
+================================================= -->
 
 <script>
 
@@ -154,11 +251,13 @@ registration.unregister();
 </script>
 
 
-<script src="js/main.js?v=10"></script>
 
-<div id="floatingPreview">
-<img id="previewImage">
-</div>
+<!-- =================================================
+MAIN ENGINE
+================================================= -->
+
+<script src="js/main.js?v=11"></script>
+
 
 </body>
 </html>
