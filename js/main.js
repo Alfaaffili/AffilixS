@@ -1,96 +1,200 @@
-/* =====================================================
-   AFFILIXS MAIN ENGINE
-   Handles product loading, preview, modal and scrolling
+﻿/* =====================================================
+AFFILIXS CORE ENGINE
+main.js
+Production Stable Version
 ===================================================== */
 
 
 /* =====================================================
-   SAFETY WRAPPER (CRASH PROTECTION)
+SAFETY SYSTEM
+Prevents crashes if elements are missing
 ===================================================== */
 
-try{
+function safeQuery(selector){
+return document.querySelector(selector);
+}
+
+function safeQueryAll(selector){
+return document.querySelectorAll(selector);
+}
+
 
 
 /* =====================================================
-   LOAD PRODUCTS FROM JSON
+GLOBAL ELEMENT REFERENCES
+===================================================== */
+
+const productSection = safeQuery(".products-section");
+const previewPanel = safeQuery("#floatingPreview");
+const previewImage = safeQuery("#previewImage");
+
+const modal = safeQuery("#productModal");
+const modalImage = safeQuery("#modalImage");
+const modalTitle = safeQuery("#modalTitle");
+const modalPrice = safeQuery("#modalPrice");
+const closeModal = safeQuery(".close-modal");
+
+
+
+/* =====================================================
+CONFIGURATION
+===================================================== */
+
+const PRODUCTS_PER_ROW = 20;
+const MAX_ROWS = 5;
+
+
+
+/* =====================================================
+LOAD PRODUCTS
 ===================================================== */
 
 async function loadProducts(){
 
-const row = document.getElementById("row1");
-
-if(!row){
-console.error("Product row container not found");
-return;
-}
-
-let products = [];
-
 try{
 
-const response = await fetch("Data/products.json");
+const response = await fetch("Data/products.json?v=1");
+const products = await response.json();
 
-if(!response.ok){
-throw new Error("Products.json failed to load");
-}
-
-products = await response.json();
-
-if(!Array.isArray(products)){
-throw new Error("Products data is not an array");
-}
+renderProducts(products);
 
 }catch(error){
 
 console.error("Product loading error:", error);
-return;
+
+}
 
 }
 
 
 
 /* =====================================================
-   GENERATE PRODUCT CARDS
+RENDER PRODUCTS
+Dynamic Row Engine
 ===================================================== */
 
-products.forEach(product => {
+function renderProducts(products){
 
-if(!product.image || !product.name){
-return;
+if(!productSection) return;
+
+productSection.innerHTML = "<h2>Featured Products</h2>";
+
+let rows = {};
+
+products.forEach((product,index)=>{
+
+const rowIndex = Math.floor(index/PRODUCTS_PER_ROW)+1;
+
+if(rowIndex>MAX_ROWS) return;
+
+if(!rows[rowIndex]){
+
+rows[rowIndex] = createRow(rowIndex);
+
+productSection.appendChild(rows[rowIndex].wrapper);
+
 }
+
+const card = createProductCard(product);
+
+rows[rowIndex].row.appendChild(card);
+
+});
+
+}
+
+
+
+/* =====================================================
+CREATE ROW
+===================================================== */
+
+function createRow(rowNumber){
+
+const wrapper = document.createElement("div");
+wrapper.className = "product-row-wrapper";
+
+const leftArrow = document.createElement("button");
+leftArrow.className = "row-arrow left";
+leftArrow.innerHTML = "❮";
+
+const rightArrow = document.createElement("button");
+rightArrow.className = "row-arrow right";
+rightArrow.innerHTML = "❯";
+
+const row = document.createElement("div");
+row.className = "product-row";
+row.id = "row"+rowNumber;
+
+
+
+/* Arrow Scroll */
+
+leftArrow.addEventListener("click",()=>{
+
+row.scrollBy({left:-400,behavior:"smooth"});
+
+});
+
+rightArrow.addEventListener("click",()=>{
+
+row.scrollBy({left:400,behavior:"smooth"});
+
+});
+
+
+wrapper.appendChild(leftArrow);
+wrapper.appendChild(row);
+wrapper.appendChild(rightArrow);
+
+return {wrapper,row};
+
+}
+
+
+
+/* =====================================================
+CREATE PRODUCT CARD
+===================================================== */
+
+function createProductCard(product){
 
 const card = document.createElement("div");
 card.className = "product-card";
 
-card.innerHTML = `
-<img src="${product.image}" alt="${product.name}">
-<h4>${product.name}</h4>
-<p>${product.price || ""}</p>
-`;
+const img = document.createElement("img");
+img.src = product.image;
+img.onerror = ()=>{img.src="images/placeholder.jpg"};
 
-row.appendChild(card);
+const title = document.createElement("h4");
+title.textContent = product.shortName || "Product";
+
+const price = document.createElement("p");
+price.textContent = product.price+" "+product.currency;
+
+card.appendChild(img);
+card.appendChild(title);
+card.appendChild(price);
 
 
 
 /* =====================================================
-   FLOATING HOVER PREVIEW
+TOOLTIP PREVIEW
 ===================================================== */
 
-const preview = document.getElementById("floatingPreview");
-const previewImg = document.getElementById("previewImage");
+if(previewPanel){
 
-if(preview && previewImg){
+card.addEventListener("mouseenter",()=>{
 
-card.addEventListener("mouseenter", () => {
+previewImage.src = product.image;
 
-previewImg.src = product.image;
-preview.classList.add("active");
+previewPanel.classList.add("active");
 
 });
 
-card.addEventListener("mouseleave", () => {
+card.addEventListener("mouseleave",()=>{
 
-preview.classList.remove("active");
+previewPanel.classList.remove("active");
 
 });
 
@@ -99,93 +203,63 @@ preview.classList.remove("active");
 
 
 /* =====================================================
-   PRODUCT MODAL (CLICK)
+MODAL SYSTEM
 ===================================================== */
 
-const modal = document.getElementById("productModal");
-const modalImg = document.getElementById("modalImage");
-const modalTitle = document.getElementById("modalTitle");
-const modalPrice = document.getElementById("modalPrice");
+if(modal){
 
-if(modal && modalImg){
-
-card.addEventListener("click", () => {
+card.addEventListener("click",()=>{
 
 modal.style.display = "flex";
 
-modalImg.src = product.image;
-modalTitle.innerText = product.name;
-modalPrice.innerText = product.price || "";
+modalImage.src = product.image;
+modalTitle.textContent = product.name;
+modalPrice.textContent = product.price+" "+product.currency;
 
 });
 
 }
 
-});
 
 
-}
-
-
-
-/* =====================================================
-   MODAL CLOSE SYSTEM
-===================================================== */
-
-const closeBtn = document.querySelector(".close-modal");
-
-if(closeBtn){
-
-closeBtn.addEventListener("click", () => {
-
-const modal = document.getElementById("productModal");
-
-if(modal){
-modal.style.display = "none";
-}
-
-});
+return card;
 
 }
 
 
 
 /* =====================================================
-   PRODUCT ROW ARROWS
+MODAL CLOSE
 ===================================================== */
 
-document.querySelectorAll(".row-arrow").forEach(btn => {
+if(closeModal){
 
-btn.addEventListener("click", () => {
+closeModal.addEventListener("click",()=>{
 
-const row = document.getElementById(btn.dataset.row);
+modal.style.display="none";
 
-if(!row){
-console.warn("Row not found:", btn.dataset.row);
-return;
+});
+
+window.addEventListener("click",(e)=>{
+
+if(e.target===modal){
+
+modal.style.display="none";
+
 }
 
-row.scrollBy({
-left: btn.classList.contains("left") ? -320 : 320,
-behavior: "smooth"
 });
 
-});
-
-});
+}
 
 
 
 /* =====================================================
-   INITIALIZE PAGE
+INITIALIZE ENGINE
 ===================================================== */
+
+document.addEventListener("DOMContentLoaded",()=>{
 
 loadProducts();
 
-
-
-}catch(error){
-
-console.error("AffilixS runtime crash prevented:", error);
-
-}
+});
