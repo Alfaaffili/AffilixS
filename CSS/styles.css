@@ -270,3 +270,74 @@ text-align:center;
 padding:20px;
 margin-top:40px;
 }
+
+/* ================================
+TEXT MODAL SYSTEM
+================================ */
+
+.text-modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.75);
+z-index:2000;
+align-items:center;
+justify-content:center;
+}
+
+.text-modal .modal-box{
+background:#111;
+color:#fff;
+padding:30px;
+border-radius:8px;
+max-width:600px;
+width:90%;
+text-align:center;
+}
+
+/* ================================
+HEADER NAV
+================================ */
+
+.header-nav{
+margin-left:auto;
+display:flex;
+gap:25px;
+align-items:center;
+}
+
+.header-nav span{
+cursor:pointer;
+color:#fff;
+font-size:15px;
+}
+
+.header-nav span:hover{
+color:#ff2d2d;
+}
+
+/* ================================
+FOOTER LINKS
+================================ */
+
+.footer-links{
+display:flex;
+justify-content:center;
+gap:25px;
+margin-bottom:10px;
+}
+
+.footer-links span{
+cursor:pointer;
+}
+
+/* ================================
+OVERFLOW PROTECTION
+================================ */
+
+html,body{
+overflow-x:hidden;
+}
