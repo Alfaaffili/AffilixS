@@ -6,38 +6,58 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AffilixS | Curated Discoveries</title>
+<title>AffilixS</title>
 
-<link rel="stylesheet" href="CSS/styles.css?v=10">
+<link rel="stylesheet" href="css/styles.css?v=10">
 
 </head>
+
 
 
 <body>
 
 
-<!-- HEADER -->
+<!-- =========================================
+HEADER
+========================================= -->
 
 <header class="site-header">
 
-<div class="logo">
+<div class="logo-box">
+
 <img src="images/logo.jpg" alt="AffilixS Logo">
+
+<span class="logo-text">AffilixS</span>
+
 </div>
 
-<h1>AffilixS</h1>
+
+<nav class="main-nav">
+
+<span data-modal="visionModal">Vision</span>
+
+<span data-modal="insightsModal">Insights</span>
+
+<span data-modal="contactModal">Contact</span>
+
+</nav>
 
 </header>
 
 
 
-<!-- HERO -->
+<!-- =========================================
+HERO SECTION
+========================================= -->
 
 <section class="top-section">
 
 <div class="identity-panel">
 
 <div class="identity-text">
+
 A refined selection for modern living.
+
 </div>
 
 </div>
@@ -46,19 +66,36 @@ A refined selection for modern living.
 
 
 
-<!-- PRODUCTS -->
+<!-- =========================================
+PRODUCTS
+Dynamic rows inserted by JS
+========================================= -->
 
 <section class="products-section">
 
 <h2>Featured Products</h2>
 
-<div class="product-row-wrapper">
+</section>
 
-<button class="row-arrow left" data-row="row1">❮</button>
 
-<div class="product-row" id="row1"></div>
 
-<button class="row-arrow right" data-row="row1">❯</button>
+<!-- =========================================
+CATEGORIES
+========================================= -->
+
+<section class="categories-section">
+
+<h2>Categories</h2>
+
+<div class="categories-grid">
+
+<div class="category-card">Tech</div>
+
+<div class="category-card">Home</div>
+
+<div class="category-card">Lifestyle</div>
+
+<div class="category-card">Fitness</div>
 
 </div>
 
@@ -66,7 +103,31 @@ A refined selection for modern living.
 
 
 
-<!-- FLOATING PREVIEW -->
+<!-- =========================================
+FOOTER
+========================================= -->
+
+<footer class="site-footer">
+
+<div class="footer-links">
+
+<span data-modal="privacyModal">Privacy</span>
+
+<span data-modal="disclaimerModal">Disclaimer</span>
+
+<span data-modal="contactModal">Contact</span>
+
+</div>
+
+<p>© AffilixS</p>
+
+</footer>
+
+
+
+<!-- =========================================
+FLOATING PREVIEW
+========================================= -->
 
 <div id="floatingPreview">
 
@@ -76,11 +137,13 @@ A refined selection for modern living.
 
 
 
-<!-- PRODUCT MODAL -->
+<!-- =========================================
+PRODUCT MODAL
+========================================= -->
 
 <div id="productModal" class="modal">
 
-<div class="modal-box">
+<div class="modal-content">
 
 <span class="close-modal">×</span>
 
@@ -96,69 +159,91 @@ A refined selection for modern living.
 
 
 
-<!-- CATEGORIES -->
+<!-- =========================================
+HEADER MODALS
+========================================= -->
 
-<section class="categories">
+<div id="visionModal" class="text-modal">
 
-<div class="category">
-<img src="images/cat-tech.jpg">
-<p>Technology</p>
+<div class="modal-box">
+
+<h2>Our Vision</h2>
+
+<p>AffilixS curates refined products for modern living.</p>
+
 </div>
 
-<div class="category">
-<img src="images/Home.jpg">
-<p>Home & Living</p>
 </div>
 
-<div class="category">
-<img src="images/Fittness.jpg">
-<p>Fitness</p>
+
+
+<div id="insightsModal" class="text-modal">
+
+<div class="modal-box">
+
+<h2>Insights</h2>
+
+<p>Insights and trends for modern lifestyle and technology.</p>
+
 </div>
 
-<div class="category">
-<img src="images/Style.jpg">
-<p>Style</p>
 </div>
 
-<div class="category">
-<img src="images/BeautyPersonnalCare.jpg">
-<p>Beauty</p>
+
+
+<div id="contactModal" class="text-modal">
+
+<div class="modal-box">
+
+<h2>Contact</h2>
+
+<p>For partnerships or inquiries contact AffilixS.</p>
+
 </div>
 
-</section>
-
-
-
-<!-- FOOTER -->
-
-<footer>
-
-<p>© 2026 AffilixS</p>
-
-</footer>
-
-
-
-<!-- CACHE PROTECTION -->
-
-<script>
-
-if ('serviceWorker' in navigator) {
-navigator.serviceWorker.getRegistrations().then(function(registrations) {
-for (let registration of registrations) {
-registration.unregister();
-}
-});
-}
-
-</script>
-
-
-<script src="js/main.js?v=10"></script>
-
-<div id="floatingPreview">
-<img id="previewImage">
 </div>
+
+
+
+<!-- =========================================
+FOOTER MODALS
+========================================= -->
+
+<div id="privacyModal" class="text-modal">
+
+<div class="modal-box">
+
+<h2>Privacy Policy</h2>
+
+<p>Your privacy is important to us.</p>
+
+</div>
+
+</div>
+
+
+
+<div id="disclaimerModal" class="text-modal">
+
+<div class="modal-box">
+
+<h2>Affiliate Disclaimer</h2>
+
+<p>Some links on this site are affiliate links that may earn commission.</p>
+
+</div>
+
+</div>
+
+
+
+<!-- =========================================
+SCRIPTS
+========================================= -->
+
+<script src="js/main.js?v=12"></script>
+
 
 </body>
+
 </html>

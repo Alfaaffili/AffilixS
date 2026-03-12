@@ -1,39 +1,40 @@
 ﻿/* =====================================================
 AFFILIXS CORE ENGINE
-main.js
 Production Stable Version
 ===================================================== */
 
 
 /* =====================================================
-SAFETY SYSTEM
-Prevents crashes if elements are missing
+SAFETY HELPERS
 ===================================================== */
 
-function safeQuery(selector){
-return document.querySelector(selector);
-}
-
-function safeQueryAll(selector){
-return document.querySelectorAll(selector);
-}
-
+function qs(sel){ return document.querySelector(sel); }
+function qsa(sel){ return document.querySelectorAll(sel); }
 
 
 /* =====================================================
-GLOBAL ELEMENT REFERENCES
+DEVICE DETECTION
 ===================================================== */
 
-const productSection = safeQuery(".products-section");
-const previewPanel = safeQuery("#floatingPreview");
-const previewImage = safeQuery("#previewImage");
+const isTouchDevice =
+'ontouchstart' in window ||
+navigator.maxTouchPoints > 0;
 
-const modal = safeQuery("#productModal");
-const modalImage = safeQuery("#modalImage");
-const modalTitle = safeQuery("#modalTitle");
-const modalPrice = safeQuery("#modalPrice");
-const closeModal = safeQuery(".close-modal");
 
+/* =====================================================
+ELEMENT REFERENCES
+===================================================== */
+
+const productSection = qs(".products-section");
+
+const previewPanel = qs("#floatingPreview");
+const previewImage = qs("#previewImage");
+
+const modal = qs("#productModal");
+const modalImage = qs("#modalImage");
+const modalTitle = qs("#modalTitle");
+const modalPrice = qs("#modalPrice");
+const closeModal = qs(".close-modal");
 
 
 /* =====================================================
@@ -44,7 +45,6 @@ const PRODUCTS_PER_ROW = 20;
 const MAX_ROWS = 5;
 
 
-
 /* =====================================================
 LOAD PRODUCTS
 ===================================================== */
@@ -53,24 +53,22 @@ async function loadProducts(){
 
 try{
 
-const response = await fetch("Data/products.json?v=1");
-const products = await response.json();
+const res = await fetch("Data/products.json?v=1");
+const products = await res.json();
 
 renderProducts(products);
 
-}catch(error){
+}catch(err){
 
-console.error("Product loading error:", error);
-
-}
+console.error("Product loading error:",err);
 
 }
 
+}
 
 
 /* =====================================================
 RENDER PRODUCTS
-Dynamic Row Engine
 ===================================================== */
 
 function renderProducts(products){
@@ -90,7 +88,6 @@ if(rowIndex>MAX_ROWS) return;
 if(!rows[rowIndex]){
 
 rows[rowIndex] = createRow(rowIndex);
-
 productSection.appendChild(rows[rowIndex].wrapper);
 
 }
@@ -104,7 +101,6 @@ rows[rowIndex].row.appendChild(card);
 }
 
 
-
 /* =====================================================
 CREATE ROW
 ===================================================== */
@@ -112,45 +108,29 @@ CREATE ROW
 function createRow(rowNumber){
 
 const wrapper = document.createElement("div");
-wrapper.className = "product-row-wrapper";
+wrapper.className="product-row-wrapper";
 
-const leftArrow = document.createElement("button");
-leftArrow.className = "row-arrow left";
-leftArrow.innerHTML = "❮";
+const left=document.createElement("button");
+left.className="row-arrow left";
+left.innerHTML="❮";
 
-const rightArrow = document.createElement("button");
-rightArrow.className = "row-arrow right";
-rightArrow.innerHTML = "❯";
+const right=document.createElement("button");
+right.className="row-arrow right";
+right.innerHTML="❯";
 
-const row = document.createElement("div");
-row.className = "product-row";
-row.id = "row"+rowNumber;
+const row=document.createElement("div");
+row.className="product-row";
 
+left.onclick=()=>row.scrollBy({left:-400,behavior:"smooth"});
+right.onclick=()=>row.scrollBy({left:400,behavior:"smooth"});
 
-
-/* Arrow Scroll */
-
-leftArrow.addEventListener("click",()=>{
-
-row.scrollBy({left:-400,behavior:"smooth"});
-
-});
-
-rightArrow.addEventListener("click",()=>{
-
-row.scrollBy({left:400,behavior:"smooth"});
-
-});
-
-
-wrapper.appendChild(leftArrow);
+wrapper.appendChild(left);
 wrapper.appendChild(row);
-wrapper.appendChild(rightArrow);
+wrapper.appendChild(right);
 
 return {wrapper,row};
 
 }
-
 
 
 /* =====================================================
@@ -159,35 +139,33 @@ CREATE PRODUCT CARD
 
 function createProductCard(product){
 
-const card = document.createElement("div");
-card.className = "product-card";
+const card=document.createElement("div");
+card.className="product-card";
 
-const img = document.createElement("img");
-img.src = product.image;
-img.onerror = ()=>{img.src="images/placeholder.jpg"};
+const img=document.createElement("img");
+img.src=product.image;
+img.onerror=()=>img.src="images/placeholder.jpg";
 
-const title = document.createElement("h4");
-title.textContent = product.shortName || "Product";
+const title=document.createElement("h4");
+title.textContent=product.shortName;
 
-const price = document.createElement("p");
-price.textContent = product.price+" "+product.currency;
+const price=document.createElement("p");
+price.textContent=product.price+" "+product.currency;
 
 card.appendChild(img);
 card.appendChild(title);
 card.appendChild(price);
 
 
-
 /* =====================================================
-TOOLTIP PREVIEW
+DESKTOP TOOLTIP PREVIEW
 ===================================================== */
 
-if(previewPanel){
+if(previewPanel && !isTouchDevice){
 
 card.addEventListener("mouseenter",()=>{
 
-previewImage.src = product.image;
-
+previewImage.src=product.image;
 previewPanel.classList.add("active");
 
 });
@@ -201,57 +179,88 @@ previewPanel.classList.remove("active");
 }
 
 
-
 /* =====================================================
-MODAL SYSTEM
+PRODUCT MODAL
 ===================================================== */
 
 if(modal){
 
 card.addEventListener("click",()=>{
 
-modal.style.display = "flex";
+if(previewPanel){
+previewPanel.classList.remove("active");
+}
 
-modalImage.src = product.image;
-modalTitle.textContent = product.name;
-modalPrice.textContent = product.price+" "+product.currency;
+modal.style.display="flex";
+
+modalImage.src=product.image;
+modalTitle.textContent=product.name;
+modalPrice.textContent=product.price+" "+product.currency;
 
 });
 
 }
-
-
 
 return card;
 
 }
 
 
-
 /* =====================================================
-MODAL CLOSE
+CLOSE PRODUCT MODAL
 ===================================================== */
 
 if(closeModal){
 
-closeModal.addEventListener("click",()=>{
+closeModal.onclick=()=>modal.style.display="none";
 
-modal.style.display="none";
-
-});
-
-window.addEventListener("click",(e)=>{
+window.onclick=(e)=>{
 
 if(e.target===modal){
-
 modal.style.display="none";
+}
 
+};
+
+}
+
+
+/* =====================================================
+TEXT MODAL SYSTEM
+(Header + Footer)
+===================================================== */
+
+const modalTriggers=qsa("[data-modal]");
+
+modalTriggers.forEach(btn=>{
+
+btn.addEventListener("click",()=>{
+
+const id=btn.getAttribute("data-modal");
+const box=document.getElementById(id);
+
+if(box){
+box.style.display="flex";
 }
 
 });
 
+});
+
+
+const textModals=qsa(".text-modal");
+
+textModals.forEach(modal=>{
+
+modal.addEventListener("click",(e)=>{
+
+if(e.target===modal){
+modal.style.display="none";
 }
 
+});
+
+});
 
 
 /* =====================================================
