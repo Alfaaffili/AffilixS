@@ -341,3 +341,45 @@ OVERFLOW PROTECTION
 html,body{
 overflow-x:hidden;
 }
+
+/* ===============================
+MOBILE OPTIMIZATION
+=============================== */
+
+@media (max-width:768px){
+
+/* Prevent horizontal overflow */
+html,body{
+overflow-x:hidden;
+}
+
+/* Header spacing */
+.header-nav{
+gap:12px;
+font-size:14px;
+}
+
+/* Product row */
+.product-row{
+gap:12px;
+padding:10px 30px;
+}
+
+/* Product cards */
+.product-card{
+min-width:160px;
+max-width:160px;
+}
+
+.product-card img{
+height:130px;
+}
+
+/* Row arrows */
+.row-arrow{
+font-size:20px;
+padding:6px 8px;
+}
+
+}
+
