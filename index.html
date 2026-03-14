@@ -1,10 +1,11 @@
 ﻿<!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <title>AffilixS | Curated Discoveries</title>
 
@@ -12,9 +13,7 @@
 
 </head>
 
-
 <body>
-
 
 <!-- =================================================
 HEADER
@@ -36,8 +35,6 @@ HEADER
 
 </header>
 
-
-
 <!-- =================================================
 HERO
 ================================================= -->
@@ -54,8 +51,6 @@ A refined selection for modern living.
 
 </section>
 
-
-
 <!-- =================================================
 PRODUCTS
 (dynamic rows inserted by main.js)
@@ -67,17 +62,13 @@ PRODUCTS
 
 </section>
 
-
-
 <!-- =================================================
 FLOATING PREVIEW
 ================================================= -->
 
-<div id="floatingPreview">
-<img id="previewImage">
+<div id="floatingPreview" aria-hidden="true">
+<img id="previewImage" alt="Product preview">
 </div>
-
-
 
 <!-- =================================================
 PRODUCT MODAL
@@ -89,7 +80,7 @@ PRODUCT MODAL
 
 <span class="close-modal">×</span>
 
-<img id="modalImage">
+<img id="modalImage" alt="Product Image">
 
 <h2 id="modalTitle"></h2>
 
@@ -99,8 +90,6 @@ PRODUCT MODAL
 
 </div>
 
-
-
 <!-- =================================================
 CATEGORIES
 ================================================= -->
@@ -108,33 +97,31 @@ CATEGORIES
 <section class="categories">
 
 <div class="category">
-<img src="images/cat-tech.jpg">
+<img src="images/cat-tech.jpg" alt="Technology">
 <p>Technology</p>
 </div>
 
 <div class="category">
-<img src="images/Home.jpg">
+<img src="images/Home.jpg" alt="Home and Living">
 <p>Home & Living</p>
 </div>
 
 <div class="category">
-<img src="images/Fittness.jpg">
+<img src="images/Fittness.jpg" alt="Fitness">
 <p>Fitness</p>
 </div>
 
 <div class="category">
-<img src="images/Style.jpg">
+<img src="images/Style.jpg" alt="Style">
 <p>Style</p>
 </div>
 
 <div class="category">
-<img src="images/BeautyPersonnalCare.jpg">
+<img src="images/BeautyPersonnalCare.jpg" alt="Beauty">
 <p>Beauty</p>
 </div>
 
 </section>
-
-
 
 <!-- =================================================
 FOOTER
@@ -144,17 +131,13 @@ FOOTER
 
 <div class="footer-links">
 
-<span data-modal="privacyModal">Privacy</span>
-<span data-modal="disclaimerModal">Disclaimer</span>
-<span data-modal="contactModal">Contact</span>
+<span data-modal="privacyModal">Privacy</span> <span data-modal="disclaimerModal">Disclaimer</span> <span data-modal="contactModal">Contact</span>
 
 </div>
 
 <p>© 2026 AffilixS</p>
 
 </footer>
-
-
 
 <!-- =================================================
 HEADER MODALS
@@ -172,8 +155,6 @@ HEADER MODALS
 
 </div>
 
-
-
 <div id="insightsModal" class="text-modal">
 
 <div class="modal-box">
@@ -186,8 +167,6 @@ HEADER MODALS
 
 </div>
 
-
-
 <div id="contactModal" class="text-modal">
 
 <div class="modal-box">
@@ -199,8 +178,6 @@ HEADER MODALS
 </div>
 
 </div>
-
-
 
 <!-- =================================================
 FOOTER MODALS
@@ -218,8 +195,6 @@ FOOTER MODALS
 
 </div>
 
-
-
 <div id="disclaimerModal" class="text-modal">
 
 <div class="modal-box">
@@ -231,8 +206,6 @@ FOOTER MODALS
 </div>
 
 </div>
-
-
 
 <!-- =================================================
 CACHE PROTECTION
@@ -250,14 +223,11 @@ registration.unregister();
 
 </script>
 
-
-
 <!-- =================================================
 MAIN ENGINE
 ================================================= -->
 
 <script src="js/main.js?v=11"></script>
-
 
 </body>
 </html>
