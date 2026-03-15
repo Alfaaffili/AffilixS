@@ -1,7 +1,8 @@
 ﻿/* =====================================================
 AFFILIXS CORE ENGINE
-Stable Modular Version
+Production Stable Version
 ===================================================== */
+
 
 /* =====================================================
 SAFETY HELPERS
@@ -10,14 +11,15 @@ SAFETY HELPERS
 function qs(sel){ return document.querySelector(sel); }
 function qsa(sel){ return document.querySelectorAll(sel); }
 
+
 /* =====================================================
 DEVICE DETECTION
 ===================================================== */
 
 const isTouchDevice =
 'ontouchstart' in window ||
-navigator.maxTouchPoints > 0 ||
-window.matchMedia("(pointer: coarse)").matches;
+navigator.maxTouchPoints > 0;
+
 
 /* =====================================================
 ELEMENT REFERENCES
@@ -35,12 +37,14 @@ const modalPrice = qs("#modalPrice");
 const buyButton = qs("#buyButton");
 const closeModal = qs(".close-modal");
 
+
 /* =====================================================
 CONFIGURATION
 ===================================================== */
 
-const PRODUCTS_PER_ROW = 12;   // matches homepage algorithm
-const MAX_ROWS = 5;            // homepage max rows
+const PRODUCTS_PER_ROW = 20;
+const MAX_ROWS = 5;
+
 
 /* =====================================================
 LOAD PRODUCTS
@@ -50,7 +54,7 @@ async function loadProducts(){
 
 try{
 
-const res = await fetch("Data/products.json?v=1");
+const res = await fetch("Data/products.json?v=2");
 const products = await res.json();
 
 renderProducts(products);
@@ -62,6 +66,7 @@ console.error("Product loading error:",err);
 }
 
 }
+
 
 /* =====================================================
 RENDER PRODUCTS
@@ -77,32 +82,38 @@ let rows = {};
 
 products.forEach((product,index)=>{
 
-const rowIndex = Math.floor(index / PRODUCTS_PER_ROW) + 1;
+const rowIndex = Math.floor(index/PRODUCTS_PER_ROW)+1;
 
-if(rowIndex > MAX_ROWS) return;
+if(rowIndex>MAX_ROWS) return;
 
 if(!rows[rowIndex]){
 
-rows[rowIndex] = createRow();
+rows[rowIndex] = createRow(product.category);
 productSection.appendChild(rows[rowIndex].wrapper);
 
 }
 
 const card = createProductCard(product);
+
 rows[rowIndex].row.appendChild(card);
 
 });
 
 }
 
+
 /* =====================================================
-CREATE PRODUCT ROW
+CREATE ROW
 ===================================================== */
 
-function createRow(){
+function createRow(category){
 
 const wrapper = document.createElement("div");
 wrapper.className="product-row-wrapper";
+
+const title = document.createElement("h3");
+title.className="row-title";
+title.textContent = category;
 
 const left=document.createElement("button");
 left.className="row-arrow left";
@@ -118,6 +129,7 @@ row.className="product-row";
 left.onclick=()=>row.scrollBy({left:-400,behavior:"smooth"});
 right.onclick=()=>row.scrollBy({left:400,behavior:"smooth"});
 
+wrapper.appendChild(title);
 wrapper.appendChild(left);
 wrapper.appendChild(row);
 wrapper.appendChild(right);
@@ -125,6 +137,7 @@ wrapper.appendChild(right);
 return {wrapper,row};
 
 }
+
 
 /* =====================================================
 CREATE PRODUCT CARD
@@ -149,8 +162,9 @@ card.appendChild(img);
 card.appendChild(title);
 card.appendChild(price);
 
+
 /* =====================================================
-DESKTOP PREVIEW ENGINE
+DESKTOP TOOLTIP PREVIEW
 ===================================================== */
 
 if(previewPanel && !isTouchDevice){
@@ -160,18 +174,23 @@ card.addEventListener("mouseenter",()=>{
 previewImage.src=product.image;
 previewPanel.classList.add("active");
 
+document.body.classList.add("preview-active");
+
 });
 
 card.addEventListener("mouseleave",()=>{
 
 previewPanel.classList.remove("active");
 
+document.body.classList.remove("preview-active");
+
 });
 
 }
 
+
 /* =====================================================
-PRODUCT MODAL ENGINE
+PRODUCT MODAL
 ===================================================== */
 
 if(modal){
@@ -180,6 +199,7 @@ card.addEventListener("click",()=>{
 
 if(previewPanel){
 previewPanel.classList.remove("active");
+document.body.classList.remove("preview-active");
 }
 
 modal.style.display="flex";
@@ -188,7 +208,9 @@ modalImage.src=product.image;
 modalTitle.textContent=product.name;
 modalPrice.textContent=product.price+" "+product.currency;
 
+if(buyButton){
 buyButton.href = product.affiliateLink;
+}
 
 });
 
@@ -198,25 +220,41 @@ return card;
 
 }
 
+
 /* =====================================================
 CLOSE PRODUCT MODAL
 ===================================================== */
 
 if(closeModal){
 
-closeModal.addEventListener("click",()=>{
-modal.style.display="none";
-});
+closeModal.onclick=()=>modal.style.display="none";
 
-}
-
-window.addEventListener("click",(e)=>{
+window.onclick=(e)=>{
 
 if(e.target===modal){
 modal.style.display="none";
 }
 
-});
+};
+
+}
+
+
+/* =====================================================
+CATEGORY SCROLL ENGINE
+===================================================== */
+
+const catRow = qs(".categories");
+const catLeft = qs(".cat-arrow.left");
+const catRight = qs(".cat-arrow.right");
+
+if(catRow && catLeft && catRight){
+
+catLeft.onclick=()=>catRow.scrollBy({left:-200,behavior:"smooth"});
+catRight.onclick=()=>catRow.scrollBy({left:200,behavior:"smooth"});
+
+}
+
 
 /* =====================================================
 TEXT MODAL SYSTEM
@@ -240,19 +278,21 @@ box.style.display="flex";
 
 });
 
+
 const textModals=qsa(".text-modal");
 
-textModals.forEach(m=>{
+textModals.forEach(modal=>{
 
-m.addEventListener("click",(e)=>{
+modal.addEventListener("click",(e)=>{
 
-if(e.target===m){
-m.style.display="none";
+if(e.target===modal){
+modal.style.display="none";
 }
 
 });
 
 });
+
 
 /* =====================================================
 INITIALIZE ENGINE
@@ -263,18 +303,3 @@ document.addEventListener("DOMContentLoaded",()=>{
 loadProducts();
 
 });
-
-/* =====================================================
-CATEGORY SCROLL ENGINE
-===================================================== */
-
-const catRow = document.querySelector(".categories");
-const catLeft = document.querySelector(".cat-arrow.left");
-const catRight = document.querySelector(".cat-arrow.right");
-
-if(catRow && catLeft && catRight){
-
-catLeft.onclick=()=>catRow.scrollBy({left:-200,behavior:"smooth"});
-catRight.onclick=()=>catRow.scrollBy({left:200,behavior:"smooth"});
-
-}
