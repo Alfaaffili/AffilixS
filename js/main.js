@@ -1,8 +1,7 @@
 ﻿/* =====================================================
 AFFILIXS CORE ENGINE
-Production Stable Version
+Stable Modular Version
 ===================================================== */
-
 
 /* =====================================================
 SAFETY HELPERS
@@ -11,15 +10,14 @@ SAFETY HELPERS
 function qs(sel){ return document.querySelector(sel); }
 function qsa(sel){ return document.querySelectorAll(sel); }
 
-
 /* =====================================================
 DEVICE DETECTION
 ===================================================== */
 
 const isTouchDevice =
 'ontouchstart' in window ||
-navigator.maxTouchPoints > 0;
-
+navigator.maxTouchPoints > 0 ||
+window.matchMedia("(pointer: coarse)").matches;
 
 /* =====================================================
 ELEMENT REFERENCES
@@ -34,16 +32,15 @@ const modal = qs("#productModal");
 const modalImage = qs("#modalImage");
 const modalTitle = qs("#modalTitle");
 const modalPrice = qs("#modalPrice");
+const buyButton = qs("#buyButton");
 const closeModal = qs(".close-modal");
-
 
 /* =====================================================
 CONFIGURATION
 ===================================================== */
 
-const PRODUCTS_PER_ROW = 20;
-const MAX_ROWS = 5;
-
+const PRODUCTS_PER_ROW = 12;   // matches homepage algorithm
+const MAX_ROWS = 5;            // homepage max rows
 
 /* =====================================================
 LOAD PRODUCTS
@@ -66,7 +63,6 @@ console.error("Product loading error:",err);
 
 }
 
-
 /* =====================================================
 RENDER PRODUCTS
 ===================================================== */
@@ -81,31 +77,29 @@ let rows = {};
 
 products.forEach((product,index)=>{
 
-const rowIndex = Math.floor(index/PRODUCTS_PER_ROW)+1;
+const rowIndex = Math.floor(index / PRODUCTS_PER_ROW) + 1;
 
-if(rowIndex>MAX_ROWS) return;
+if(rowIndex > MAX_ROWS) return;
 
 if(!rows[rowIndex]){
 
-rows[rowIndex] = createRow(rowIndex);
+rows[rowIndex] = createRow();
 productSection.appendChild(rows[rowIndex].wrapper);
 
 }
 
 const card = createProductCard(product);
-
 rows[rowIndex].row.appendChild(card);
 
 });
 
 }
 
-
 /* =====================================================
-CREATE ROW
+CREATE PRODUCT ROW
 ===================================================== */
 
-function createRow(rowNumber){
+function createRow(){
 
 const wrapper = document.createElement("div");
 wrapper.className="product-row-wrapper";
@@ -132,7 +126,6 @@ return {wrapper,row};
 
 }
 
-
 /* =====================================================
 CREATE PRODUCT CARD
 ===================================================== */
@@ -156,9 +149,8 @@ card.appendChild(img);
 card.appendChild(title);
 card.appendChild(price);
 
-
 /* =====================================================
-DESKTOP TOOLTIP PREVIEW
+DESKTOP PREVIEW ENGINE
 ===================================================== */
 
 if(previewPanel && !isTouchDevice){
@@ -178,9 +170,8 @@ previewPanel.classList.remove("active");
 
 }
 
-
 /* =====================================================
-PRODUCT MODAL
+PRODUCT MODAL ENGINE
 ===================================================== */
 
 if(modal){
@@ -197,6 +188,8 @@ modalImage.src=product.image;
 modalTitle.textContent=product.name;
 modalPrice.textContent=product.price+" "+product.currency;
 
+buyButton.href = product.affiliateLink;
+
 });
 
 }
@@ -205,25 +198,25 @@ return card;
 
 }
 
-
 /* =====================================================
 CLOSE PRODUCT MODAL
 ===================================================== */
 
 if(closeModal){
 
-closeModal.onclick=()=>modal.style.display="none";
+closeModal.addEventListener("click",()=>{
+modal.style.display="none";
+});
 
-window.onclick=(e)=>{
+}
+
+window.addEventListener("click",(e)=>{
 
 if(e.target===modal){
 modal.style.display="none";
 }
 
-};
-
-}
-
+});
 
 /* =====================================================
 TEXT MODAL SYSTEM
@@ -247,21 +240,19 @@ box.style.display="flex";
 
 });
 
-
 const textModals=qsa(".text-modal");
 
-textModals.forEach(modal=>{
+textModals.forEach(m=>{
 
-modal.addEventListener("click",(e)=>{
+m.addEventListener("click",(e)=>{
 
-if(e.target===modal){
-modal.style.display="none";
+if(e.target===m){
+m.style.display="none";
 }
 
 });
 
 });
-
 
 /* =====================================================
 INITIALIZE ENGINE
@@ -272,3 +263,18 @@ document.addEventListener("DOMContentLoaded",()=>{
 loadProducts();
 
 });
+
+/* =====================================================
+CATEGORY SCROLL ENGINE
+===================================================== */
+
+const catRow = document.querySelector(".categories");
+const catLeft = document.querySelector(".cat-arrow.left");
+const catRight = document.querySelector(".cat-arrow.right");
+
+if(catRow && catLeft && catRight){
+
+catLeft.onclick=()=>catRow.scrollBy({left:-200,behavior:"smooth"});
+catRight.onclick=()=>catRow.scrollBy({left:200,behavior:"smooth"});
+
+}
