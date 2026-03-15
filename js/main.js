@@ -111,10 +111,6 @@ function createRow(category){
 const wrapper = document.createElement("div");
 wrapper.className="product-row-wrapper";
 
-const title = document.createElement("h3");
-title.className="row-title";
-title.textContent = category;
-
 const left=document.createElement("button");
 left.className="row-arrow left";
 left.innerHTML="❮";
@@ -129,7 +125,6 @@ row.className="product-row";
 left.onclick=()=>row.scrollBy({left:-400,behavior:"smooth"});
 right.onclick=()=>row.scrollBy({left:400,behavior:"smooth"});
 
-wrapper.appendChild(title);
 wrapper.appendChild(left);
 wrapper.appendChild(row);
 wrapper.appendChild(right);
@@ -174,20 +169,15 @@ card.addEventListener("mouseenter",()=>{
 previewImage.src=product.image;
 previewPanel.classList.add("active");
 
-document.body.classList.add("preview-active");
-
 });
 
 card.addEventListener("mouseleave",()=>{
 
 previewPanel.classList.remove("active");
 
-document.body.classList.remove("preview-active");
-
 });
 
 }
-
 
 /* =====================================================
 PRODUCT MODAL
@@ -203,7 +193,7 @@ document.body.classList.remove("preview-active");
 }
 
 modal.style.display="flex";
-
+qsa(".row-arrow").forEach(a=>a.style.display="none");
 modalImage.src=product.image;
 modalTitle.textContent=product.name;
 modalPrice.textContent=product.price+" "+product.currency;
@@ -227,12 +217,17 @@ CLOSE PRODUCT MODAL
 
 if(closeModal){
 
-closeModal.onclick=()=>modal.style.display="none";
+closeModal.onclick=()=>{
+modal.style.display="none";
+
+qsa(".row-arrow").forEach(a=>a.style.display="flex");
+};
 
 window.onclick=(e)=>{
 
 if(e.target===modal){
 modal.style.display="none";
+qsa(".row-arrow").forEach(a=>a.style.display="flex");
 }
 
 };
