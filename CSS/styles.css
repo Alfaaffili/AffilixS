@@ -62,13 +62,17 @@ HERO
 display:flex;
 height:280px;
 position:relative;
+width:100%;
+
+overflow:hidden;
 }
 
 .identity-panel{
 flex:1;
-background:url("../images/hero8888.jpg") center/cover no-repeat;
+background:url("../images/hero8888.jpg") center center/cover no-repeat;
 border-right:3px solid #111;
 position:relative;
+width:100%;
 }
 
 .identity-text{
@@ -536,7 +540,7 @@ padding:6px 18px;
 }
 
 .top-section{
-margin-top:-8px;
+margin-top:-12px;
 }
 
 /* Product rows */
@@ -577,5 +581,31 @@ scroll-behavior:smooth;
 min-width:120px;
 flex-shrink:0;
 }
+
+}
+
+/* ===============================
+CURSOR TOOLTIP
+=============================== */
+
+#cursorTooltip{
+
+position:fixed;
+pointer-events:none;
+
+background:#111;
+color:#fff;
+
+padding:6px 10px;
+
+font-size:13px;
+border-radius:4px;
+
+opacity:0;
+transition:opacity .15s;
+
+z-index:2000;
+
+white-space:nowrap;
 
 }

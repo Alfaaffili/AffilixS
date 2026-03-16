@@ -3,7 +3,6 @@ AFFILIXS CORE ENGINE
 Production Stable Version
 ===================================================== */
 
-
 /* =====================================================
 SAFETY HELPERS
 ===================================================== */
@@ -54,7 +53,7 @@ async function loadProducts(){
 
 try{
 
-const res = await fetch("Data/products.json?v=2");
+const res = await fetch("Data/products.json?v=3");
 const products = await res.json();
 
 renderProducts(products);
@@ -145,7 +144,7 @@ card.className="product-card";
 
 const img=document.createElement("img");
 img.src=product.image;
-img.onerror=()=>img.src="images/placeholder.jpg";
+img.onerror=()=>img.src="images/hero8888.jpg";
 
 const title=document.createElement("h4");
 title.textContent=product.shortName;
@@ -162,23 +161,37 @@ card.appendChild(price);
 DESKTOP TOOLTIP PREVIEW
 ===================================================== */
 
-if(previewPanel && !isTouchDevice){
+/* CURSOR TOOLTIP */
+
+const tooltip = document.getElementById("cursorTooltip");
+
+if(tooltip && !isTouchDevice){
 
 card.addEventListener("mouseenter",()=>{
 
-previewImage.src=product.image;
-previewPanel.classList.add("active");
+tooltip.innerText =
+product.shortName + " • " +
+product.price + " " +
+product.currency;
+
+tooltip.style.opacity="1";
+
+});
+
+card.addEventListener("mousemove",(e)=>{
+
+tooltip.style.left=(e.clientX+15)+"px";
+tooltip.style.top=(e.clientY+15)+"px";
 
 });
 
 card.addEventListener("mouseleave",()=>{
 
-previewPanel.classList.remove("active");
+tooltip.style.opacity="0";
 
 });
 
 }
-
 /* =====================================================
 PRODUCT MODAL
 ===================================================== */
