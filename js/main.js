@@ -153,9 +153,6 @@ const price=document.createElement("p");
 price.textContent=product.price+" "+product.currency;
 
 card.appendChild(img);
-card.appendChild(title);
-card.appendChild(price);
-
 
 /* =====================================================
 DESKTOP TOOLTIP PREVIEW
@@ -180,8 +177,8 @@ tooltip.style.opacity="1";
 
 card.addEventListener("mousemove",(e)=>{
 
-tooltip.style.left=(e.clientX+15)+"px";
-tooltip.style.top=(e.clientY+15)+"px";
+tooltip.style.left=e.clientX+"px";
+tooltip.style.top=(e.clientY-10)+"px";
 
 });
 
