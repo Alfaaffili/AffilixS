@@ -107,11 +107,32 @@ return {wrapper,row};
 
 function createProductCard(product){
 
+const card = document.createElement("div");
+card.className = "product-card";
+
+/* IMAGE */
+const img = document.createElement("img");
+img.src = product.image;
+img.onerror = () => img.src = "images/placeholder.jpg";
+
+/* BOTTOM META (ONLY RATING) */
+const meta = document.createElement("div");
+meta.className = "card-meta";
+meta.innerHTML = `⭐ ${product.rating || "4.5"}`;
+
+card.appendChild(img);
+card.appendChild(meta);
+
+
+/* ==============================
+HOVER PREVIEW (DESKTOP ONLY)
+============================== */
+
 if(previewPanel && !isTouchDevice){
 
 card.addEventListener("mouseenter",()=>{
 
-previewImage.src=product.image;
+previewImage.src = product.image;
 previewPanel.classList.add("active");
 
 });
@@ -124,72 +145,57 @@ previewPanel.classList.remove("active");
 
 }
 
-const card=document.createElement("div");
-card.className="product-card";
 
-const img=document.createElement("img");
-img.src=product.image;
+/* ==============================
+TOOLTIP (FOLLOW CURSOR)
+============================== */
 
-const meta=document.createElement("div");
-meta.className="card-meta";
-
-meta.innerHTML=`⭐ ${product.rating}`;
-
-card.append(img,meta);
-
-
-/* TOOLTIP */
-
-if(!isTouchDevice){
-
-card.addEventListener("mouseenter",()=>{
-
-tooltip.innerText=
-product.shortName+" • "+product.price+" "+product.currency;
-
-tooltip.style.opacity=1;
-
-previewImage.src=product.image;
-previewPanel.classList.add("active");
-
-});
+if(tooltip && !isTouchDevice){
 
 card.addEventListener("mousemove",(e)=>{
 
-tooltip.style.left=e.clientX+"px";
-tooltip.style.top=(e.clientY-10)+"px";
+tooltip.style.left = (e.clientX + 10) + "px";
+tooltip.style.top = (e.clientY - 10) + "px";
+
+tooltip.innerText =
+product.shortName + " • " + product.price + " " + product.currency;
+
+tooltip.style.opacity = 1;
 
 });
 
 card.addEventListener("mouseleave",()=>{
-
-tooltip.style.opacity=0;
-previewPanel.classList.remove("active");
-
+tooltip.style.opacity = 0;
 });
 
 }
 
 
-/* MODAL */
+/* ==============================
+MODAL CLICK
+============================== */
+
+if(modal){
 
 card.addEventListener("click",()=>{
 
-modal.style.display="flex";
+modal.style.display = "flex";
 
-modalImage.src=product.image;
-modalTitle.textContent=product.name;
-modalPrice.textContent=
-product.price+" "+product.currency;
+modalImage.src = product.image;
+modalTitle.textContent = product.name;
+modalPrice.textContent =
+product.price + " " + product.currency;
 
-buyButton.href=product.affiliateLink;
+if(buyButton){
+buyButton.href = product.affiliateLink;
+}
 
 });
 
-return card;
-
 }
 
+return card;
+}
 
 /* CLOSE MODAL */
 
