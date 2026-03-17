@@ -22,6 +22,7 @@ const buyButton = qs("#buyButton");
 const closeModal = qs(".close-modal");
 
 const tooltip = qs("#cursorTooltip");
+console.log("Tooltip element:", tooltip);
 
 const PRODUCTS_PER_ROW = 20;
 const MAX_ROWS = 5;
@@ -149,26 +150,15 @@ previewPanel.classList.remove("active");
 /* ==============================
 TOOLTIP (FOLLOW CURSOR)
 ============================== */
-
-if(tooltip && !isTouchDevice){
-
 card.addEventListener("mousemove",(e)=>{
 
-tooltip.style.left = (e.clientX + 10) + "px";
-tooltip.style.top = (e.clientY - 10) + "px";
+tooltip.style.left = e.clientX + "px";
+tooltip.style.top = e.clientY + "px";
 
-tooltip.innerText =
-product.shortName + " • " + product.price + " " + product.currency;
-
+tooltip.innerText = "TEST TOOLTIP";
 tooltip.style.opacity = 1;
 
 });
-
-card.addEventListener("mouseleave",()=>{
-tooltip.style.opacity = 0;
-});
-
-}
 
 
 /* ==============================
