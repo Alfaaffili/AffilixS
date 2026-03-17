@@ -107,6 +107,23 @@ return {wrapper,row};
 
 function createProductCard(product){
 
+if(previewPanel && !isTouchDevice){
+
+card.addEventListener("mouseenter",()=>{
+
+previewImage.src=product.image;
+previewPanel.classList.add("active");
+
+});
+
+card.addEventListener("mouseleave",()=>{
+
+previewPanel.classList.remove("active");
+
+});
+
+}
+
 const card=document.createElement("div");
 card.className="product-card";
 
@@ -116,8 +133,7 @@ img.src=product.image;
 const meta=document.createElement("div");
 meta.className="card-meta";
 
-meta.innerHTML=
-`Rank ${product.rank} | ⭐ ${product.rating} | BS ${product.brandScore}`;
+meta.innerHTML=`⭐ ${product.rating}`;
 
 card.append(img,meta);
 
