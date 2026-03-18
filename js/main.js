@@ -1,5 +1,5 @@
 ﻿/* =====================================================
-AFFILIXS CORE ENGINE
+AFFILIXS CORE ENGINE (STABLE BASELINE)
 ===================================================== */
 
 function qs(sel){ return document.querySelector(sel); }
@@ -8,6 +8,8 @@ function qsa(sel){ return document.querySelectorAll(sel); }
 const isTouchDevice =
 'ontouchstart' in window ||
 navigator.maxTouchPoints > 0;
+
+/* ELEMENTS */
 
 const productSection = qs(".products-section");
 
@@ -21,12 +23,10 @@ const modalPrice = qs("#modalPrice");
 const buyButton = qs("#buyButton");
 const closeModal = qs(".close-modal");
 
-const tooltip = qs("#cursorTooltip");
-console.log("Tooltip element:", tooltip);
+/* CONFIG */
 
 const PRODUCTS_PER_ROW = 20;
 const MAX_ROWS = 5;
-
 
 /* LOAD PRODUCTS */
 
@@ -34,23 +34,29 @@ async function loadProducts(){
 
 try{
 
-const res = await fetch("Data/products.json?v=5");
+const res = await fetch("./Data/products.json");
+
+if(!res.ok){
+throw new Error("HTTP error " + res.status);
+}
+
 const products = await res.json();
 
 renderProducts(products);
 
 }catch(err){
 
-console.error("Product loading error:",err);
+console.error("Product loading error:", err);
 
 }
 
 }
-
 
 /* RENDER PRODUCTS */
 
 function renderProducts(products){
+
+if(!productSection) return;
 
 productSection.innerHTML = "<h2>Featured Products</h2>";
 
@@ -58,9 +64,9 @@ let rows = {};
 
 products.forEach((product,index)=>{
 
-const rowIndex = Math.floor(index/PRODUCTS_PER_ROW)+1;
+const rowIndex = Math.floor(index / PRODUCTS_PER_ROW) + 1;
 
-if(rowIndex>MAX_ROWS) return;
+if(rowIndex > MAX_ROWS) return;
 
 if(!rows[rowIndex]){
 
@@ -69,75 +75,63 @@ productSection.appendChild(rows[rowIndex].wrapper);
 
 }
 
-rows[rowIndex].row.appendChild(createProductCard(product));
+const card = createProductCard(product);
+rows[rowIndex].row.appendChild(card);
 
 });
 
 }
-
 
 /* CREATE ROW */
 
 function createRow(){
 
-const wrapper=document.createElement("div");
-wrapper.className="product-row-wrapper";
+const wrapper = document.createElement("div");
+wrapper.className = "product-row-wrapper";
 
-const left=document.createElement("button");
-left.className="row-arrow left";
-left.innerHTML="❮";
+const left = document.createElement("button");
+left.className = "row-arrow left";
+left.innerHTML = "❮";
 
-const right=document.createElement("button");
-right.className="row-arrow right";
-right.innerHTML="❯";
+const right = document.createElement("button");
+right.className = "row-arrow right";
+right.innerHTML = "❯";
 
-const row=document.createElement("div");
-row.className="product-row";
+const row = document.createElement("div");
+row.className = "product-row";
 
-left.onclick=()=>row.scrollBy({left:-400,behavior:"smooth"});
-right.onclick=()=>row.scrollBy({left:400,behavior:"smooth"});
+left.onclick = () => row.scrollBy({left:-400, behavior:"smooth"});
+right.onclick = () => row.scrollBy({left:400, behavior:"smooth"});
 
-wrapper.append(left,row,right);
+wrapper.append(left, row, right);
 
-return {wrapper,row};
+return {wrapper, row};
 
 }
 
-
-/* CREATE PRODUCT CARD */
+/* CREATE PRODUCT CARD (SAFE + CLEAN) */
 
 function createProductCard(product){
 
-/* FORCE TOOLTIP */
+const card = document.createElement("div");
+card.className = "product-card";
 
-card.addEventListener("mouseenter", () => {
-if(tooltip){
-tooltip.style.opacity = 1;
-}
-});
+/* IMAGE */
 
-card.addEventListener("mousemove", (e) => {
-if(!tooltip) return;
+const img = document.createElement("img");
+img.src = product.image;
+img.onerror = () => img.src = "images/placeholder.jpg";
 
-tooltip.style.left = (e.clientX + 15) + "px";
-tooltip.style.top = (e.clientY + 15) + "px";
+/* META (RATING ONLY) */
 
-tooltip.innerText =
-(product.shortName || "Product") + " • " +
-(product.price || "") + " " +
-(product.currency || "");
-});
+const meta = document.createElement("div");
+meta.className = "card-meta";
+meta.innerText = "⭐ " + (product.rating || "4.5");
 
-card.addEventListener("mouseleave", () => {
-if(tooltip){
-tooltip.style.opacity = 0;
-}
-});
+card.appendChild(img);
+card.appendChild(meta);
 
-
-/* ==============================
-HOVER PREVIEW (DESKTOP ONLY)
-============================== */
+/* PREVIEW PANEL (DESKTOP ONLY) */
 
 if(previewPanel && !isTouchDevice){
 
@@ -156,24 +150,7 @@ previewPanel.classList.remove("active");
 
 }
 
-
-/* ==============================
-TOOLTIP (FOLLOW CURSOR)
-============================== */
-card.addEventListener("mousemove",(e)=>{
-
-tooltip.style.left = e.clientX + "px";
-tooltip.style.top = e.clientY + "px";
-
-tooltip.innerText = "TEST TOOLTIP";
-tooltip.style.opacity = 1;
-
-});
-
-
-/* ==============================
-MODAL CLICK
-============================== */
+/* MODAL */
 
 if(modal){
 
@@ -195,18 +172,22 @@ buyButton.href = product.affiliateLink;
 }
 
 return card;
+
 }
 
 /* CLOSE MODAL */
 
-closeModal.onclick=()=>modal.style.display="none";
+if(closeModal){
 
-window.onclick=(e)=>{
-if(e.target===modal){
-modal.style.display="none";
+closeModal.onclick = ()=> modal.style.display = "none";
+
+window.onclick = (e)=>{
+if(e.target === modal){
+modal.style.display = "none";
 }
 };
 
+}
 
 /* INIT */
 
