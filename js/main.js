@@ -108,21 +108,31 @@ return {wrapper,row};
 
 function createProductCard(product){
 
-const card = document.createElement("div");
-card.className = "product-card";
+/* FORCE TOOLTIP */
 
-/* IMAGE */
-const img = document.createElement("img");
-img.src = product.image;
-img.onerror = () => img.src = "images/placeholder.jpg";
+card.addEventListener("mouseenter", () => {
+if(tooltip){
+tooltip.style.opacity = 1;
+}
+});
 
-/* BOTTOM META (ONLY RATING) */
-const meta = document.createElement("div");
-meta.className = "card-meta";
-meta.innerHTML = `⭐ ${product.rating || "4.5"}`;
+card.addEventListener("mousemove", (e) => {
+if(!tooltip) return;
 
-card.appendChild(img);
-card.appendChild(meta);
+tooltip.style.left = (e.clientX + 15) + "px";
+tooltip.style.top = (e.clientY + 15) + "px";
+
+tooltip.innerText =
+(product.shortName || "Product") + " • " +
+(product.price || "") + " " +
+(product.currency || "");
+});
+
+card.addEventListener("mouseleave", () => {
+if(tooltip){
+tooltip.style.opacity = 0;
+}
+});
 
 
 /* ==============================
