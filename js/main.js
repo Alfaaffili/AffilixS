@@ -152,24 +152,30 @@ previewPanel.classList.remove("active");
 
 /* MODAL */
 
-if(modal){
+/* MODAL (FIXED CLICK) */
 
-card.addEventListener("click",()=>{
+card.onclick = function(){
+
+console.log("CLICK WORKS");
+
+if(!modal){
+console.log("Modal NOT found");
+return;
+}
 
 modal.style.display = "flex";
+modal.style.background = "red";
 
-modalImage.src = product.image;
-modalTitle.textContent = product.name;
-modalPrice.textContent =
+if(modalImage) modalImage.src = product.image;
+if(modalTitle) modalTitle.textContent = product.name;
+if(modalPrice) modalPrice.textContent =
 product.price + " " + product.currency;
 
 if(buyButton){
 buyButton.href = product.affiliateLink;
 }
 
-});
-
-}
+};
 
 return card;
 
@@ -177,7 +183,7 @@ return card;
 
 /* CLOSE MODAL */
 
-if(closeModal){
+if(closeModal && modal){
 
 closeModal.onclick = ()=> modal.style.display = "none";
 
