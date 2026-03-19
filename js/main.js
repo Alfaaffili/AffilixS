@@ -1,15 +1,13 @@
 ﻿/* =====================================================
-AFFILIXS CORE ENGINE (STABLE BASELINE)
+HELPERS
 ===================================================== */
 
-function qs(sel){ return document.querySelector(sel); }
-function qsa(sel){ return document.querySelectorAll(sel); }
+function qs(s){ return document.querySelector(s); }
+function qsa(s){ return document.querySelectorAll(s); }
 
-const isTouchDevice =
-'ontouchstart' in window ||
-navigator.maxTouchPoints > 0;
-
-/* ELEMENTS */
+/* =====================================================
+ELEMENTS
+===================================================== */
 
 const productSection = qs(".products-section");
 
@@ -21,68 +19,58 @@ const modalImage = qs("#modalImage");
 const modalTitle = qs("#modalTitle");
 const modalPrice = qs("#modalPrice");
 const buyButton = qs("#buyButton");
+
 const closeModal = qs(".close-modal");
 
-/* CONFIG */
+/* =====================================================
+CONFIG
+===================================================== */
 
 const PRODUCTS_PER_ROW = 20;
 const MAX_ROWS = 5;
 
-/* LOAD PRODUCTS */
+/* =====================================================
+LOAD PRODUCTS
+===================================================== */
 
 async function loadProducts(){
 
-try{
-
-const res = await fetch("./Data/products.json");
-
-if(!res.ok){
-throw new Error("HTTP error " + res.status);
-}
-
+const res = await fetch("Data/products.json?v=3");
 const products = await res.json();
 
 renderProducts(products);
 
-}catch(err){
-
-console.error("Product loading error:", err);
-
 }
 
-}
-
-/* RENDER PRODUCTS */
+/* =====================================================
+RENDER
+===================================================== */
 
 function renderProducts(products){
-
-if(!productSection) return;
 
 productSection.innerHTML = "<h2>Featured Products</h2>";
 
 let rows = {};
 
-products.forEach((product,index)=>{
+products.forEach((p,i)=>{
 
-const rowIndex = Math.floor(index / PRODUCTS_PER_ROW) + 1;
-
-if(rowIndex > MAX_ROWS) return;
+const rowIndex = Math.floor(i/PRODUCTS_PER_ROW)+1;
+if(rowIndex>MAX_ROWS) return;
 
 if(!rows[rowIndex]){
-
 rows[rowIndex] = createRow();
 productSection.appendChild(rows[rowIndex].wrapper);
-
 }
 
-const card = createProductCard(product);
-rows[rowIndex].row.appendChild(card);
+rows[rowIndex].row.appendChild(createCard(p));
 
 });
 
 }
 
-/* CREATE ROW */
+/* =====================================================
+ROW
+===================================================== */
 
 function createRow(){
 
@@ -100,79 +88,57 @@ right.innerHTML = "❯";
 const row = document.createElement("div");
 row.className = "product-row";
 
-left.onclick = () => row.scrollBy({left:-400, behavior:"smooth"});
-right.onclick = () => row.scrollBy({left:400, behavior:"smooth"});
+left.onclick = ()=>row.scrollBy({left:-400,behavior:"smooth"});
+right.onclick = ()=>row.scrollBy({left:400,behavior:"smooth"});
 
-wrapper.append(left, row, right);
+wrapper.append(left,row,right);
 
-return {wrapper, row};
+return {wrapper,row};
 
 }
 
-/* CREATE PRODUCT CARD (SAFE + CLEAN) */
+/* =====================================================
+CARD
+===================================================== */
 
-function createProductCard(product){
+function createCard(p){
 
 const card = document.createElement("div");
 card.className = "product-card";
 
-/* IMAGE */
-
+/* image */
 const img = document.createElement("img");
-img.src = product.image;
-img.onerror = () => img.src = "images/placeholder.jpg";
-
-/* META (RATING ONLY) */
-
-const meta = document.createElement("div");
-meta.className = "card-meta";
-meta.innerText = "⭐ " + (product.rating || "4.5");
+img.src = p.image;
 
 card.appendChild(img);
-card.appendChild(meta);
 
-/* PREVIEW PANEL (DESKTOP ONLY) */
-
-if(previewPanel && !isTouchDevice){
-
-card.addEventListener("mouseenter",()=>{
-
-previewImage.src = product.image;
+/* hover preview */
+card.onmouseenter = ()=>{
+if(previewPanel){
+previewImage.src = p.image;
 previewPanel.classList.add("active");
+}
+};
 
-});
-
-card.addEventListener("mouseleave",()=>{
-
+card.onmouseleave = ()=>{
+if(previewPanel){
 previewPanel.classList.remove("active");
-
-});
-
 }
+};
 
-/* MODAL */
+/* click modal */
+card.onclick = ()=>{
 
-/* MODAL (FIXED CLICK) */
+if(!modal) return;
 
-card.onclick = function(){
+modal.classList.add("active");
 
-console.log("CLICK WORKS");
-
-if(!modal){
-console.log("Modal NOT found");
-return;
-}
-
-modal.style.display = "flex";
-modal.style.background = "red";
-
-if(modalImage) modalImage.src = product.image;
-if(modalTitle) modalTitle.textContent = product.name;
-if(modalPrice) modalPrice.textContent =
-product.price + " " + product.currency;
+modalImage.src = p.image;
+modalTitle.textContent = p.name;
+modalPrice.textContent = p.price + " " + p.currency;
 
 if(buyButton){
-buyButton.href = product.affiliateLink;
+buyButton.href = p.affiliateLink;
 }
 
 };
@@ -181,47 +147,46 @@ return card;
 
 }
 
-/* CLOSE MODAL */
+/* =====================================================
+MODAL CLOSE
+===================================================== */
 
-if(closeModal && modal){
+if(closeModal){
 
-closeModal.onclick = ()=> modal.style.display = "none";
+closeModal.onclick = ()=> modal.classList.remove("active");
 
 window.onclick = (e)=>{
 if(e.target === modal){
-modal.style.display = "none";
+modal.classList.remove("active");
 }
 };
 
 }
 
-/* TEXT MODAL SYSTEM */
+/* =====================================================
+TEXT MODALS
+===================================================== */
 
-const modalTriggers = document.querySelectorAll("[data-modal]");
+const modalTriggers = qsa("[data-modal]");
 
 modalTriggers.forEach(btn=>{
-btn.addEventListener("click",()=>{
+btn.onclick = ()=>{
 const id = btn.getAttribute("data-modal");
 const box = document.getElementById(id);
-if(box){
-box.style.display = "flex";
-}
-});
+if(box) box.classList.add("active");
+};
 });
 
-const textModals = document.querySelectorAll(".text-modal");
-
-textModals.forEach(m=>{
-m.addEventListener("click",(e)=>{
+qsa(".text-modal").forEach(m=>{
+m.onclick = (e)=>{
 if(e.target === m){
-m.style.display = "none";
+m.classList.remove("active");
 }
-});
+};
 });
 
-/* INIT */
+/* =====================================================
+INIT
+===================================================== */
 
-document.addEventListener("DOMContentLoaded",()=>{
-loadProducts();
-
-});
+document.addEventListener("DOMContentLoaded",loadProducts);
