@@ -25,13 +25,19 @@ HEADER
 ===================================================== */
 
 .site-header{
+position:relative;
+z-index:20;
 display:flex;
 align-items:center;
 justify-content:space-between;
+gap:15px;
 padding:14px 20px;
 background:#111;
 color:#fff;
 flex-wrap:nowrap;
+
+position:relative;
+z-index:20;
 }
 
 .logo img{
@@ -40,6 +46,7 @@ display:block;
 }
 
 .header-nav{
+margin-left:auto;
 display:flex;
 gap:14px;
 white-space:nowrap;
@@ -73,7 +80,7 @@ background:url("../images/hero8888.jpg") center/cover no-repeat;
 
 .identity-text{
 position:absolute;
-bottom:25px; /* FIXED */
+bottom:60px; /* FIXED */
 left:25px;
 
 background:rgba(255,0,0,0.55);
@@ -100,6 +107,7 @@ padding:0 20px;
 
 .products-section h2{
 margin-bottom:25px;
+padding-left:20px;
 }
 
 
@@ -247,7 +255,9 @@ display:grid;
 grid-template-columns:repeat(5,1fr);
 gap:20px;
 }
-
+.categories-section h2{
+margin:20px 0 20px;
+}
 .category{
 text-align:center;
 }
@@ -278,7 +288,7 @@ height:100vh;
 
 display:none;
 
-background:rgba(0,0,0,0.6);
+background:rgba(0,0,0,0.75);
 
 justify-content:center;
 align-items:center;
@@ -350,6 +360,8 @@ MOBILE
 .site-header{
 flex-direction:column;
 gap:6px;
+position:relative;
+z-index:20;
 }
 
 .top-section{
@@ -381,3 +393,4 @@ min-width:120px;
 }
 
 }
+

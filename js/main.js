@@ -195,10 +195,33 @@ modal.style.display = "none";
 
 }
 
+/* TEXT MODAL SYSTEM */
+
+const modalTriggers = document.querySelectorAll("[data-modal]");
+
+modalTriggers.forEach(btn=>{
+btn.addEventListener("click",()=>{
+const id = btn.getAttribute("data-modal");
+const box = document.getElementById(id);
+if(box){
+box.style.display = "flex";
+}
+});
+});
+
+const textModals = document.querySelectorAll(".text-modal");
+
+textModals.forEach(m=>{
+m.addEventListener("click",(e)=>{
+if(e.target === m){
+m.style.display = "none";
+}
+});
+});
+
 /* INIT */
 
 document.addEventListener("DOMContentLoaded",()=>{
-
 loadProducts();
 
 });
