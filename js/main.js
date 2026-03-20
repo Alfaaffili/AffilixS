@@ -131,12 +131,6 @@ card.onclick = ()=>{
 
 if(!modal) return;
 
-/* hide preview */
-if(previewPanel){
-previewPanel.classList.remove("active");
-}
-
-/* open modal */
 modal.classList.add("active");
 
 modalImage.src = p.image;
@@ -148,6 +142,10 @@ buyButton.href = p.affiliateLink;
 }
 
 };
+
+return card;
+
+}
 
 /* =====================================================
 MODAL CLOSE

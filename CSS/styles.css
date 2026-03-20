@@ -26,21 +26,23 @@ HEADER
 .site-header{
 display:flex;
 align-items:center;
-justify-content:space-between;
 padding:14px 24px;
 background:#111;
 color:#fff;
 }
 
-/* force layout grouping */
-.site-header h1{
-margin-left:10px;
-}
-
+/* left side */
 .logo{
 display:flex;
 align-items:center;
 gap:10px;
+}
+
+/* push nav to right */
+.header-nav{
+margin-left:auto;
+display:flex;
+gap:25px; /* spacing between items */
 }
 
 /* =====================================================
@@ -65,7 +67,7 @@ background:url("../images/hero8888.jpg") center/cover no-repeat;
 
 .identity-text{
 position:absolute;
-bottom:60px;
+bottom:50px;
 left:40px;
 background:rgba(255,0,0,0.55);
 padding:6px 30px;
@@ -155,30 +157,30 @@ PREVIEW PANEL
 
 #floatingPreview{
 position:fixed;
-top:100px;
+top:90px;
 right:40px;
-
 width:320px;
 height:380px;
-
 background:#111;
 border-radius:8px;
 overflow:hidden;
-
 opacity:0;
 visibility:hidden;
-
 transition:0.3s;
+z-index:9999;
+}
 
-/* 🔥 FIX */
-z-index:99999;
-pointer-events:none;
+#floatingPreview img{
+width:100%;
+height:100%;
+object-fit:cover;
 }
 
 #floatingPreview.active{
 opacity:1;
 visibility:visible;
 }
+
 /* =====================================================
 MODAL (FINAL CLEAN)
 ===================================================== */
@@ -238,24 +240,33 @@ border-radius:6px;
 CATEGORIES
 ===================================================== */
 
+.categories-section{
+max-width:1200px;
+margin:40px auto;
+padding:0 20px;
+position:relative;
+}
+
+.categories-section h2{
+margin-bottom:20px;
+}
+
 .categories{
 display:flex;
 gap:20px;
 overflow-x:auto;
-padding:10px 0;
 }
 
 .category{
-min-width:160px;
+min-width:120px;
 text-align:center;
-flex-shrink:0;
 }
 
 .category img{
-width:100%;
+width:120px;
 height:120px;
-object-fit:cover;
 border-radius:10px;
+object-fit:cover;
 }
 
 /* =====================================================
