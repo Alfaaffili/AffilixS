@@ -250,9 +250,15 @@ margin-bottom:20px;
 }
 
 .categories{
-display:flex;
+background:white;
+padding:40px 60px;
+
+display:grid;
+grid-template-columns:repeat(5,1fr);
 gap:20px;
-overflow-x:auto;
+
+max-width:1200px;
+margin:0 auto;
 }
 
 .category{

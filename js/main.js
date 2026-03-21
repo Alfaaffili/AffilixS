@@ -131,8 +131,15 @@ card.onclick = ()=>{
 
 if(!modal) return;
 
-modal.classList.add("active");
+/* hide preview */
+if(previewPanel){
+previewPanel.classList.remove("active");
+}
 
+/* show modal correctly */
+modal.style.display = "flex";
+
+/* fill content */
 modalImage.src = p.image;
 modalTitle.textContent = p.name;
 modalPrice.textContent = p.price + " " + p.currency;
@@ -143,21 +150,19 @@ buyButton.href = p.affiliateLink;
 
 };
 
-return card;
-
-}
-
 /* =====================================================
 MODAL CLOSE
 ===================================================== */
 
 if(closeModal){
 
-closeModal.onclick = ()=> modal.classList.remove("active");
+closeModal.onclick = ()=>{
+modal.style.display = "none");
+};
 
 window.onclick = (e)=>{
 if(e.target === modal){
-modal.classList.remove("active");
+modal.style.display = "none";
 }
 };
 
