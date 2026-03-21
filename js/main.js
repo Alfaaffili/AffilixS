@@ -1,14 +1,12 @@
 ﻿/* =====================================================
-HELPERS
+AFFILIXS CORE ENGINE (STABLE VERSION)
 ===================================================== */
 
+/* HELPERS */
 function qs(s){ return document.querySelector(s); }
 function qsa(s){ return document.querySelectorAll(s); }
 
-/* =====================================================
-ELEMENTS
-===================================================== */
-
+/* ELEMENTS */
 const productSection = qs(".products-section");
 
 const previewPanel = qs("#floatingPreview");
@@ -22,31 +20,25 @@ const buyButton = qs("#buyButton");
 
 const closeModal = qs(".close-modal");
 
-/* =====================================================
-CONFIG
-===================================================== */
-
+/* CONFIG */
 const PRODUCTS_PER_ROW = 20;
 const MAX_ROWS = 5;
 
-/* =====================================================
-LOAD PRODUCTS
-===================================================== */
-
+/* LOAD PRODUCTS */
 async function loadProducts(){
-
+try{
 const res = await fetch("Data/products.json?v=3");
 const products = await res.json();
-
 renderProducts(products);
-
+}catch(e){
+console.error("Product loading error:", e);
+}
 }
 
-/* =====================================================
-RENDER
-===================================================== */
-
+/* RENDER */
 function renderProducts(products){
+
+if(!productSection) return;
 
 productSection.innerHTML = "<h2>Featured Products</h2>";
 
@@ -54,24 +46,21 @@ let rows = {};
 
 products.forEach((p,i)=>{
 
-const rowIndex = Math.floor(i/PRODUCTS_PER_ROW)+1;
-if(rowIndex>MAX_ROWS) return;
+const rowIndex = Math.floor(i / PRODUCTS_PER_ROW) + 1;
+if(rowIndex > MAX_ROWS) return;
 
 if(!rows[rowIndex]){
 rows[rowIndex] = createRow();
 productSection.appendChild(rows[rowIndex].wrapper);
 }
 
-rows[rowIndex].row.appendChild(createCard(p));
+const card = createProductCard(p);
+rows[rowIndex].row.appendChild(card);
 
 });
-
 }
 
-/* =====================================================
-ROW
-===================================================== */
-
+/* ROW */
 function createRow(){
 
 const wrapper = document.createElement("div");
@@ -88,31 +77,36 @@ right.innerHTML = "❯";
 const row = document.createElement("div");
 row.className = "product-row";
 
-left.onclick = ()=>row.scrollBy({left:-400,behavior:"smooth"});
-right.onclick = ()=>row.scrollBy({left:400,behavior:"smooth"});
+left.onclick = ()=> row.scrollBy({left:-400, behavior:"smooth"});
+right.onclick = ()=> row.scrollBy({left:400, behavior:"smooth"});
 
-wrapper.append(left,row,right);
+wrapper.appendChild(left);
+wrapper.appendChild(row);
+wrapper.appendChild(right);
 
 return {wrapper,row};
-
 }
 
-/* =====================================================
-CARD
-===================================================== */
-
-function createCard(p){
+/* PRODUCT CARD */
+function createProductCard(p){
 
 const card = document.createElement("div");
 card.className = "product-card";
 
-/* image */
+/* IMAGE */
 const img = document.createElement("img");
 img.src = p.image;
+img.onerror = ()=> img.src = "images/placeholder.jpg";
+
+/* META (rating only) */
+const meta = document.createElement("div");
+meta.className = "card-meta";
+meta.innerText = "⭐ " + (p.rating || "4.5");
 
 card.appendChild(img);
+card.appendChild(meta);
 
-/* hover preview */
+/* HOVER PREVIEW (DESKTOP) */
 card.onmouseenter = ()=>{
 if(previewPanel){
 previewImage.src = p.image;
@@ -126,7 +120,7 @@ previewPanel.classList.remove("active");
 }
 };
 
-/* click modal */
+/* CLICK MODAL */
 card.onclick = ()=>{
 
 if(!modal) return;
@@ -136,7 +130,7 @@ if(previewPanel){
 previewPanel.classList.remove("active");
 }
 
-/* show modal correctly */
+/* show modal */
 modal.style.display = "flex";
 
 /* fill content */
@@ -150,14 +144,14 @@ buyButton.href = p.affiliateLink;
 
 };
 
-/* =====================================================
-MODAL CLOSE
-===================================================== */
+return card;
+}
 
+/* CLOSE MODAL */
 if(closeModal){
 
 closeModal.onclick = ()=>{
-modal.style.display = "none");
+modal.style.display = "none";
 };
 
 window.onclick = (e)=>{
@@ -168,30 +162,26 @@ modal.style.display = "none";
 
 }
 
-/* =====================================================
-TEXT MODALS
-===================================================== */
+/* TEXT MODALS */
+const triggers = qsa("[data-modal]");
 
-const modalTriggers = qsa("[data-modal]");
-
-modalTriggers.forEach(btn=>{
+triggers.forEach(btn=>{
 btn.onclick = ()=>{
 const id = btn.getAttribute("data-modal");
 const box = document.getElementById(id);
-if(box) box.classList.add("active");
+if(box){
+box.style.display = "flex";
+}
 };
 });
 
 qsa(".text-modal").forEach(m=>{
 m.onclick = (e)=>{
 if(e.target === m){
-m.classList.remove("active");
+m.style.display = "none";
 }
 };
 });
 
-/* =====================================================
-INIT
-===================================================== */
-
-document.addEventListener("DOMContentLoaded",loadProducts);
+/* INIT */
+document.addEventListener("DOMContentLoaded", loadProducts);
