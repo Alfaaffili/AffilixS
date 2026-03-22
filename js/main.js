@@ -1,14 +1,9 @@
-﻿/* =====================================================
-AFFILIXS CORE ENGINE (STABLE VERSION)
-===================================================== */
-
-/* HELPERS */
-function qs(s){ return document.querySelector(s); }
-function qsa(s){ return document.querySelectorAll(s); }
+﻿/* HELPERS */
+const qs = s => document.querySelector(s);
+const qsa = s => document.querySelectorAll(s);
 
 /* ELEMENTS */
 const productSection = qs(".products-section");
-
 const previewPanel = qs("#floatingPreview");
 const previewImage = qs("#previewImage");
 
@@ -17,28 +12,25 @@ const modalImage = qs("#modalImage");
 const modalTitle = qs("#modalTitle");
 const modalPrice = qs("#modalPrice");
 const buyButton = qs("#buyButton");
-
 const closeModal = qs(".close-modal");
 
 /* CONFIG */
 const PRODUCTS_PER_ROW = 20;
 const MAX_ROWS = 5;
 
-/* LOAD PRODUCTS */
+/* LOAD */
 async function loadProducts(){
 try{
-const res = await fetch("Data/products.json?v=3");
-const products = await res.json();
-renderProducts(products);
+const res = await fetch("Data/products.json?v=5");
+const data = await res.json();
+renderProducts(data);
 }catch(e){
-console.error("Product loading error:", e);
+console.error(e);
 }
 }
 
 /* RENDER */
 function renderProducts(products){
-
-if(!productSection) return;
 
 productSection.innerHTML = "<h2>Featured Products</h2>";
 
@@ -46,16 +38,15 @@ let rows = {};
 
 products.forEach((p,i)=>{
 
-const rowIndex = Math.floor(i / PRODUCTS_PER_ROW) + 1;
-if(rowIndex > MAX_ROWS) return;
+let rowIndex = Math.floor(i/PRODUCTS_PER_ROW)+1;
+if(rowIndex>MAX_ROWS) return;
 
 if(!rows[rowIndex]){
 rows[rowIndex] = createRow();
 productSection.appendChild(rows[rowIndex].wrapper);
 }
 
-const card = createProductCard(p);
-rows[rowIndex].row.appendChild(card);
+rows[rowIndex].row.appendChild(createCard(p));
 
 });
 }
@@ -77,102 +68,78 @@ right.innerHTML = "❯";
 const row = document.createElement("div");
 row.className = "product-row";
 
-left.onclick = ()=> row.scrollBy({left:-400, behavior:"smooth"});
-right.onclick = ()=> row.scrollBy({left:400, behavior:"smooth"});
+left.onclick = ()=>row.scrollBy({left:-400,behavior:"smooth"});
+right.onclick = ()=>row.scrollBy({left:400,behavior:"smooth"});
 
-wrapper.appendChild(left);
-wrapper.appendChild(row);
-wrapper.appendChild(right);
+wrapper.append(left,row,right);
 
 return {wrapper,row};
 }
 
-/* PRODUCT CARD */
-function createProductCard(p){
+/* CARD */
+function createCard(p){
 
 const card = document.createElement("div");
 card.className = "product-card";
 
-/* IMAGE */
 const img = document.createElement("img");
 img.src = p.image;
-img.onerror = ()=> img.src = "images/placeholder.jpg";
-
-/* META (rating only) */
-const meta = document.createElement("div");
-meta.className = "card-meta";
-meta.innerText = "⭐ " + (p.rating || "4.5");
 
 card.appendChild(img);
-card.appendChild(meta);
 
-/* HOVER PREVIEW (DESKTOP) */
-card.addEventListener("mouseenter", ()=>{
+/* HOVER */
+card.addEventListener("mouseenter",()=>{
 if(previewPanel){
 previewImage.src = p.image;
 previewPanel.classList.add("active");
 }
 });
 
-card.addEventListener("mouseleave", ()=>{
+card.addEventListener("mouseleave",()=>{
 if(previewPanel){
 previewPanel.classList.remove("active");
 }
 });
 
-/* CLICK MODAL */
-card.onclick = ()=>{
+/* CLICK */
+card.addEventListener("click",()=>{
 
-if(!modal) return;
-
-/* hide preview */
-if(previewPanel){
-previewPanel.classList.remove("active");
-}
-
-/* show modal */
 modal.style.display = "flex";
 
-/* fill content */
 modalImage.src = p.image;
 modalTitle.textContent = p.name;
-modalPrice.textContent = p.price + " " + p.currency;
+modalPrice.textContent = p.price+" "+p.currency;
 
 if(buyButton){
 buyButton.href = p.affiliateLink;
 }
 
-};
+});
 
 return card;
 }
 
 /* CLOSE MODAL */
-if(closeModal){
+closeModal.onclick = ()=> modal.style.display="none";
 
-closeModal.onclick = ()=>{
-modal.style.display = "none";
-};
-
-window.onclick = (e)=>{
+window.onclick = e=>{
 if(e.target === modal){
-modal.style.display = "none";
+modal.style.display="none";
 }
 };
-
-}
 
 /* TEXT MODALS */
-qsa(".text-modal").forEach(m=>{
-
-m.addEventListener("click", (e)=>{
-
-if(e.target === m){
-m.style.display = "none";
-}
-
+qsa("[data-modal]").forEach(btn=>{
+btn.onclick = ()=>{
+const m = document.getElementById(btn.dataset.modal);
+if(m) m.style.display="flex";
+};
 });
 
+qsa(".text-modal").forEach(m=>{
+m.onclick = e=>{
+if(e.target===m) m.style.display="none";
+};
 });
 
 /* INIT */
