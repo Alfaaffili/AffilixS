@@ -42,13 +42,11 @@ HERO
 ================================================= -->
 
 <section class="top-section">
+    <div class="identity-panel"></div>
 
-<div class="identity-panel">
-
-<div class="identity-text">
-A refined selection for modern living.
-</div>
-
+    <div class="identity-text">
+        A refined selection for modern living.
+    </div>
 </div>
 
 </section>
@@ -239,7 +237,7 @@ MAIN ENGINE
 <div id="cursorTooltip"></div>
 
     <script>
-      // Place the "Close Modal" logic here
+      // This handles closing ANY modal (Product or Text)
       document.addEventListener('click', function(e) {
         if (e.target.classList.contains('close-modal')) {
           const modal = e.target.closest('#productModal, .text-modal');
@@ -247,11 +245,6 @@ MAIN ENGINE
         }
       });
     </script>
-
-// Simple script to close the modal
-document.querySelector('.close-modal').addEventListener('click', function() {
-    document.getElementById('productModal').style.display = 'none';
-});
 
 </body>
 </html>
