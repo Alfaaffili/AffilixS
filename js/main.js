@@ -107,18 +107,18 @@ card.appendChild(img);
 card.appendChild(meta);
 
 /* HOVER PREVIEW (DESKTOP) */
-card.onmouseenter = ()=>{
+card.addEventListener("mouseenter", ()=>{
 if(previewPanel){
 previewImage.src = p.image;
 previewPanel.classList.add("active");
 }
-};
+});
 
-card.onmouseleave = ()=>{
+card.addEventListener("mouseleave", ()=>{
 if(previewPanel){
 previewPanel.classList.remove("active");
 }
-};
+});
 
 /* CLICK MODAL */
 card.onclick = ()=>{
@@ -163,24 +163,16 @@ modal.style.display = "none";
 }
 
 /* TEXT MODALS */
-const triggers = qsa("[data-modal]");
-
-triggers.forEach(btn=>{
-btn.onclick = ()=>{
-const id = btn.getAttribute("data-modal");
-const box = document.getElementById(id);
-if(box){
-box.style.display = "flex";
-}
-};
-});
-
 qsa(".text-modal").forEach(m=>{
-m.onclick = (e)=>{
+
+m.addEventListener("click", (e)=>{
+
 if(e.target === m){
 m.style.display = "none";
 }
-};
+
+});
+
 });
 
 /* INIT */

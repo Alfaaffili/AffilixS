@@ -26,9 +26,14 @@ HEADER
 .site-header{
 display:flex;
 align-items:center;
-padding:14px 24px;
+justify-content:space-between;
+
+padding:12px 20px;
+
 background:#111;
 color:#fff;
+
+height:60px /*lock height*/
 }
 
 /* left side */
@@ -36,6 +41,13 @@ color:#fff;
 display:flex;
 align-items:center;
 gap:10px;
+}
+
+.logo img{
+height:28px;
+width:auto;
+display:block;
+object-fit:contain;
 }
 
 /* push nav to right */
@@ -67,7 +79,7 @@ background:url("../images/hero8888.jpg") center/cover no-repeat;
 
 .identity-text{
 position:absolute;
-bottom:40px;
+bottom:80px;
 left:40px;
 background:rgba(255,0,0,0.55);
 padding:6px 30px;
@@ -179,39 +191,6 @@ pointer-events:none;
 transition:opacity .3s;
 }
 
-/* =====================================================
-MODAL (FINAL CLEAN)
-===================================================== */
-
-.modal,
-.text-modal{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100vw;
-height:100vh;
-background:rgba(0,0,0,0.7);
-justify-content:center;
-align-items:center;
-z-index:9999;
-}
-
-.modal.active,
-.text-modal.active{
-display:flex;
-}
-
-.modal-box{
-background:#fff;
-padding:25px;
-border-radius:10px;
-max-width:420px;
-width:90%;
-text-align:center;
-position:relative;
-}
-
 .close-modal{
 position:absolute;
 top:10px;
@@ -311,4 +290,34 @@ min-width:160px;
 display:none;
 }
 
+}
+
+/* ===== FINAL MODAL LAYER FIX ===== */
+
+#productModal{
+position:fixed;
+top:0;
+left:0;
+
+width:100vw;
+height:100vh;
+
+display:none;
+
+background:rgba(0,0,0,0.65);
+
+z-index:999999;
+
+justify-content:center;
+align-items:center;
+}
+
+#productModal .modal-box{
+background:#fff;
+padding:25px;
+border-radius:10px;
+max-width:420px;
+width:90%;
+text-align:center;
+position:relative;
 }
