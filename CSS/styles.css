@@ -22,10 +22,12 @@ HEADER
 display:flex;
 align-items:center;
 justify-content:space-between;
+justfy-content:flex-start; / *left align */
 padding:12px 20px;
 background:#111;
 color:#fff;
 height:60px;
+gap:20px;
 }
 
 .logo img{
@@ -34,11 +36,13 @@ width:auto;
 }
 
 .header-nav{
+margin-left:auto; /* pushes nav to right */
 display:flex;
-gap:20px;
+gap:25px;
 }
 
-.header-nav span{
+.header-nav span,
+.footer-links span{
 cursor:pointer;
 }
 
@@ -63,7 +67,7 @@ background:url("../images/hero8888.jpg") center/cover no-repeat;
 
 .identity-text{
 position:absolute;
-bottom:80px;
+bottom:20px;
 left:40px;
 background:rgba(255,0,0,0.55);
 padding:8px 30px;
@@ -198,8 +202,8 @@ max-width:400px;
 position:absolute;
 top:10px;
 right:15px;
-cursor:pointer;
 font-size:22px;
+cursor:pointer;
 }
 
 /* ===============================
@@ -240,6 +244,11 @@ object-fit:cover;
 border-radius:10px;
 }
 
+.categories h2{
+margin-left:20px; /* 🔥 aligns with Featured Products */
+margin-bottom:15px;
+}
+
 /* ===============================
 FOOTER
 =============================== */
@@ -249,6 +258,13 @@ background:#111;
 color:#fff;
 text-align:center;
 padding:15px;
+}
+
+.footer-links{
+display:flex;
+justify-content:center;
+gap:40px; /* 🔥 more spacing */
+margin-bottom:10px;
 }
 
 /* ===============================
