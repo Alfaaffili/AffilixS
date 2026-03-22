@@ -238,5 +238,11 @@ MAIN ENGINE
 <script src="js/main.js?v=11"></script>
 <div id="cursorTooltip"></div>
 
+<!-- === to activate X close button === -->
+// Simple script to close the modal
+document.querySelector('.close-modal').addEventListener('click', function() {
+    document.getElementById('productModal').style.display = 'none';
+});
+
 </body>
 </html>

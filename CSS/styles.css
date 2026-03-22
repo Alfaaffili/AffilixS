@@ -21,8 +21,8 @@ HEADER
 .site-header{
 display:flex;
 align-items:center;
-      /* === justify-content:space-between; === */
-justfy-content:flex-start; / *left align */
+justify-content:space-between;
+       /* === justfy-content:flex-start; / *left align */ === */
 padding:12px 20px;
 background:#111;
 color:#fff;
@@ -84,7 +84,7 @@ PRODUCTS
 .products-section{
 max-width:1200px;
 margin:40px auto;
-padding:0 20px;
+padding:5 20px;
 }
 
 .product-row-wrapper{
@@ -197,6 +197,7 @@ border-radius:10px;
 text-align:center;
 width:90%;
 max-width:400px;
+position: relative; /* this keeps X close button inside view card */
 }
 
 /* === close button style === */
