@@ -21,7 +21,7 @@ HEADER
 .site-header{
 display:flex;
 align-items:center;
-justify-content:space-between;
+      /* === justify-content:space-between; === */
 justfy-content:flex-start; / *left align */
 padding:12px 20px;
 background:#111;
@@ -35,12 +35,13 @@ height:28px;
 width:auto;
 }
 
-.header-nav{
-margin-left:auto; /* pushes nav to right */
-display:flex;
-gap:25px;
-}
+/* === .header-nav{ === */
+/* ===  margin-left:auto; /* pushes nav to right === */
+/* ===  display:flex; === */
+/* ===  gap:25px; === */
+/* ===  } === */
 
+/* === index finger effect "ensures proper clickable UX everywhere" === */
 .header-nav span,
 .footer-links span{
 cursor:pointer;
@@ -67,7 +68,7 @@ background:url("../images/hero8888.jpg") center/cover no-repeat;
 
 .identity-text{
 position:absolute;
-bottom:20px;
+bottom:-20px;
 left:40px;
 background:rgba(255,0,0,0.55);
 padding:8px 30px;
@@ -198,6 +199,7 @@ width:90%;
 max-width:400px;
 }
 
+/* === close button style === */
 .close-modal{
 position:absolute;
 top:10px;
