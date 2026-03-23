@@ -126,7 +126,29 @@ CATEGORIES
 
 </div>
 
+/* DEFAULT (Desktop / Large Screens) */
+.categories-section h2, 
+.products-section h2 {
+    margin-left: 7ch; 
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
 
+/* SMART ADJUSTMENT (Tablets: iPad, Huawei MatePad, etc.) */
+@media (max-width: 1024px) {
+    .categories-section h2, 
+    .products-section h2 {
+        margin-left: 4ch; /* Reduces space slightly for tablets */
+    }
+}
+
+/* SMART ADJUSTMENT (Mobiles: iPhone, Samsung, etc.) */
+@media (max-width: 768px) {
+    .categories-section h2, 
+    .products-section h2 {
+        margin-left: 20px; /* Uses standard pixels for small screens */
+    }
+}
 
 </section>
 <!-- =================================================
@@ -245,6 +267,25 @@ MAIN ENGINE
         }
       });
     </script>
+
+const tooltip = document.getElementById('cursorTooltip');
+
+document.addEventListener('mousemove', (e) => {
+    // Check if the mouse is hovering over a product card
+    const card = e.target.closest('.product-card');
+    
+    if (card) {
+        const name = card.getAttribute('data-name') || "Product";
+        const price = card.getAttribute('data-price') || "View Details";
+        
+        tooltip.innerHTML = `<strong>${name}</strong> <br> ${price}`;
+        tooltip.style.display = 'block';
+        tooltip.style.left = (e.clientX + 15) + 'px'; // Offset from cursor
+        tooltip.style.top = (e.clientY - 40) + 'px';
+    } else {
+        tooltip.style.display = 'none';
+    }
+});
 
 </body>
 </html>

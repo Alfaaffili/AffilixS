@@ -22,7 +22,7 @@ HEADER
 display:flex;
 align-items:center;
 justify-content:space-between; /* This is the key to the left/right split */
-padding:0 20px; /* Removed fixed height to allow for container padding */
+padding:0 5%; /* Adds consistent breathing room on edges */
 background:#111;
 color:#fff;
 height:60px;
@@ -57,13 +57,6 @@ height:28px;
 width:auto;
 }
 
-/* === .header-nav{ === */
-/* ===  margin-left:auto; /* pushes nav to right === */
-/* ===  display:flex; === */
-/* ===  gap:25px; === */
-/* ===  } === */
-
-/* === index finger effect "ensures proper clickable UX everywhere" === */
 .header-nav span,
 .footer-links span{
 cursor:pointer;
@@ -263,6 +256,24 @@ border-radius:6px;
 }
 
 /* ===============================
+Cursor Tool Tip " fox-tail or flurting cursorTip"
+=============================== */
+#cursorTooltip {
+    position: fixed;
+    pointer-events: none; /* Prevents the tooltip from blocking clicks */
+    background: #ff2d2d; /* Matching your theme red */
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px 20px 20px 0; /* Creates a "fox tail" or "speech bubble" shape */
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 10000;
+    display: none; /* Hidden by default */
+    white-space: nowrap;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+}
+
+/* ===============================
 CATEGORIES
 =============================== */
 
@@ -286,9 +297,28 @@ object-fit:cover;
 border-radius:10px;
 }
 
-.categories h2{
-margin-left:20px; /* 🔥 aligns with Featured Products */
-margin-bottom:15px;
+/* DEFAULT (Desktop / Large Screens) */
+.categories-section h2, 
+.products-section h2 {
+    margin-left: 7ch; 
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+/* SMART ADJUSTMENT (Tablets: iPad, Huawei MatePad, etc.) */
+@media (max-width: 1024px) {
+    .categories-section h2, 
+    .products-section h2 {
+        margin-left: 4ch; /* Reduces space slightly for tablets */
+    }
+}
+
+/* SMART ADJUSTMENT (Mobiles: iPhone, Samsung, etc.) */
+@media (max-width: 768px) {
+    .categories-section h2, 
+    .products-section h2 {
+        margin-left: 20px; /* Uses standard pixels for small screens */
+    }
 }
 
 /* ===============================
@@ -338,10 +368,18 @@ MOBILE
 
 @media(max-width:768px){
 
-.site-header{
-flex-direction:column;
-height:auto;
-gap:5px;
+.site-header {
+    height: auto; /* Allow header to grow if items wrap */
+    padding: 10px 15px;
+}
+
+.logo-group h1 {
+    font-size: 18px; /* Shrink title text slightly on mobile */
+}
+
+.header-nav {
+    font-size: 13px; /* Shrink links slightly */
+    gap: 1.5ch;
 }
 
 .product-card{
