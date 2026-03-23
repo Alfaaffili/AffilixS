@@ -90,6 +90,8 @@ HERO
 
     background: url("../images/hero8888.jpg") center/cover no-repeat;
 
+    background-size: cover; /* 👈 Ensures image fits the screen width */
+    background-position: center;
     margin: 0; /* Ensures no margin is pushing the header away */
 }
 
@@ -99,6 +101,7 @@ HERO
 
     margin-left: 40px;
 
+    display: inline-block; /* 👈 This stops the red box from stretching to the edge */
     background: rgba(255,0,0,0.85);
 
     padding: 8px 30px;
@@ -303,11 +306,12 @@ border-radius:10px;
 }
 
 /* DEFAULT (Desktop / Large Screens) */
-.categories-section h2, 
-.products-section h2 {
-    margin-left: 7ch; 
+.products-section h2,
+.categories-section h2 { 
+    margin-left: 7ch !important; 
     margin-top: 40px;
     margin-bottom: 20px;
+    text-align: left;
 }
 
 /* SMART ADJUSTMENT (Tablets: iPad, Huawei MatePad, etc.) */
@@ -315,15 +319,20 @@ border-radius:10px;
     .categories-section h2, 
     .products-section h2 {
         margin-left: 4ch; /* Reduces space slightly for tablets */
+        text-align: left;
     }
 }
 
 /* SMART ADJUSTMENT (Mobiles: iPhone, Samsung, etc.) */
 @media (max-width: 768px) {
+    .top-section {
     .categories-section h2, 
     .products-section h2 {
+        margin-top: -10px; /* /* 👈 This sucks the hero up to close the white gap */ */
         margin-left: 20px; /* Uses standard pixels for small screens */
-    }
+        text-align: left;
+     }
+ }
 }
 
 /* ===============================
