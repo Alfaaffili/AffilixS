@@ -243,12 +243,6 @@ MAIN ENGINE
       });
     </script>
 
-const tooltip = document.getElementById('cursorTooltip');
-
-document.addEventListener('mousemove', function(e) {
-    // Check if the mouse is hovering over a closest product card under the mouse
-    const card = e.target.closest('.product-card');
-    
     if (card) {
         // Try to find the name inside the cad's <p> tag
         const productName = card.querySelector('p').innerText;
