@@ -15,19 +15,20 @@ color:#1f1f1f;
 }
 
 /* ===============================
-HEADER
+HEADER (BASE)
 =============================== */
 
 .site-header{
-display:flex;
-align-items:center;
-justify-content:space-between; /* This is the key to the left/right split */
-padding:0 5%; /* Adds consistent breathing room on edges */
-background:#111;
-color:#fff;
-height:60px;
-width: 100%; /* Ensures it spans the whole screen */
- /* Added edge protection */
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between; /* This is the key to the left/right split */
+    padding: 0 5%; /* Adds consistent breathing room on edges */
+    background: #111;
+    color: #fff;
+    height: 60px;
+    width: 100%; /* Ensures it spans the whole screen */
+    position: relative;
+    z-index: 1000;
 }
 
 /* Group the logo and title so they stay on the left */
@@ -68,24 +69,28 @@ HERO
 
 .top-section {
 
-    display: flex;
+    display: block; /* Change from flex to block to stop 'ghost' spacing */ 
 
     flex-direction: column; /* Stacks image and then text */
 
     align-items: flex-start; /* Aligns text to the left like your original design */
 
     width: 100%;
-
+    margin-top: 0;
+    padding-top: 0;
+ 
 }
 
 .identity-panel {
 
+    display: block;
     width: 100%;
 
     height: 300px; /* Adjust height as needed */
 
     background: url("../images/hero8888.jpg") center/cover no-repeat;
 
+    margin: 0; /* Ensures no margin is pushing the header away */
 }
 
 .identity-text {
@@ -363,40 +368,47 @@ padding:25px;
 }
 
 /* ===============================
-MOBILE
+MOBILE (OVERRIDES)
 =============================== */
 
 @media(max-width:768px){
+    .site-header {
+       height: auto; /* Allow header to grow if items wrap */
+       padding: 10px 15px;
+    }
 
-.site-header {
-    height: auto; /* Allow header to grow if items wrap */
-    padding: 10px 15px;
-}
+    .logo-group h1 {
+        font-size: 18px; /* Shrink title text slightly on mobile */
+    }
 
-.logo-group h1 {
-    font-size: 18px; /* Shrink title text slightly on mobile */
-}
+    .header-nav {
+        font-size: 13px; /* Shrink links slightly */
+        gap: 1.5ch;
+    }
 
-.header-nav {
-    font-size: 13px; /* Shrink links slightly */
-    gap: 1.5ch;
-}
+/* Fix for the Huawei White Space issue */
+
+    .top-section {
+
+        display: block !important;
+
+    }
 
 .product-card{
-min-width:160px;
+min-width:160px; /* This makes cards smaller so they fit better on a phone screen. */
 }
 
 #floatingPreview{
-display:none;
+display:none; /* critical. You cannot "hover" on a phone, so you must hide that preview box, or it might get stuck on the screen */
 }
 
 .categories{
 display:flex;
-overflow-x:auto;
+overflow-x:auto; /* This allows users to swipe through categories sideways on their phones. */
 }
 
 .category{
-min-width:120px;
+min-width:120px; /* This allows users to swipe through categories sideways on their phones. */
 }
 
 }

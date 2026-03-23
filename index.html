@@ -22,19 +22,18 @@ HEADER
 ================================================= -->
 
 <header class="site-header">
-
-<div class="header-container"> <div class="logo-group"> <div class="logo">
-      <img src="images/logo.jpg" alt="AffilixS Logo">
+    <div class="logo-group">
+        <div class="logo">
+             <img src="images/logo.jpg" alt="AffilixS Logo">
+        </div>
+        <h1>AffilixS</h1>
     </div>
-    <h1>AffilixS</h1>
-   </div>
 
-   <nav class="header-nav">
+    <nav class="header-nav">
      <span data-modal="visionModal">Vision</span>
      <span data-modal="insightsModal">Insights</span>
      <span data-modal="contactModal">Contact</span>
    </nav>
-  </div>
 </header>
 
 <!-- =================================================
@@ -270,20 +269,25 @@ MAIN ENGINE
 
 const tooltip = document.getElementById('cursorTooltip');
 
-document.addEventListener('mousemove', (e) => {
-    // Check if the mouse is hovering over a product card
+document.addEventListener('mousemove', function(e) {
+    // Check if the mouse is hovering over a closest product card under the mouse
     const card = e.target.closest('.product-card');
     
     if (card) {
-        const name = card.getAttribute('data-name') || "Product";
-        const price = card.getAttribute('data-price') || "View Details";
+        // Try to find the name inside the cad's <p> tag
+        const productName = card.querySelector('p').innerText;
+        const productPrice = card.querySelector('data-price').innerText;
         
-        tooltip.innerHTML = `<strong>${name}</strong> <br> ${price}`;
+        tooltip.innerHTML = `🦊 ${productName}`; // Added a fox emoji for fun!
         tooltip.style.display = 'block';
         tooltip.style.left = (e.clientX + 15) + 'px'; // Offset from cursor
-        tooltip.style.top = (e.clientY - 40) + 'px';
+        tooltip.style.top = (e.clientY - 30) + 'px';
+        tooltip.style.opacity = '1';
+
+        tooltip.style.visibility = 'visible';
     } else {
         tooltip.style.display = 'none';
+        tooltip.style.opacity = '0';
     }
 });
 

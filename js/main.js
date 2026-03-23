@@ -78,14 +78,24 @@ return {wrapper,row};
 
 /* CARD */
 function createCard(p){
+    const card = document.createElement("div");
+    card.className = "product-card";
 
-const card = document.createElement("div");
-card.className = "product-card";
+    // 🔥 ADD THESE TWO LINES HERE:
 
-const img = document.createElement("img");
-img.src = p.image;
+    card.setAttribute('data-name', p.name);
 
-card.appendChild(img);
+    card.setAttribute('data-price', p.price + " " + p.currency);
+
+    const img = document.createElement("img");
+    img.src = p.image;
+    card.appendChild(img);
+
+    // ... rest of your hover/click code ...
+
+    return card;
+
+}
 
 /* HOVER */
 card.addEventListener("mouseenter",()=>{
@@ -144,3 +154,21 @@ if(e.target===m) m.style.display="none";
 
 /* INIT */
 document.addEventListener("DOMContentLoaded", loadProducts);
+
+/* FOX-TAIL TOOLTIP ENGINE */
+const tooltip = qs("#cursorTooltip");
+
+document.addEventListener("mousemove", (e) => {
+    const card = e.target.closest(".product-card");
+    if (card && window.innerWidth > 1024) { // Only show on Desktop
+        const name = card.getAttribute("data-name");
+        const price = card.getAttribute("data-price");
+        
+        tooltip.innerHTML = `<strong>${name}</strong><br>${price}`;
+        tooltip.style.display = "block";
+        tooltip.style.left = (e.clientX + 15) + "px";
+        tooltip.style.top = (e.clientY - 40) + "px";
+    } else {
+        tooltip.style.display = "none";
+    }
+});
