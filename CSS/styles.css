@@ -314,7 +314,7 @@ border-radius:10px;
 /* DEFAULT (Desktop / Large Screens) */
 .products-section h2,
 .categories-section h2 { 
-    margin-left: 7ch !important; 
+    margin-left: 3ch !important; 
     margin-top: 40px;
     margin-bottom: 20px;
     text-align: left;
@@ -335,18 +335,28 @@ border-radius:10px;
     .categories-section h2, 
     .products-section h2 {
         margin-top: -10px; /* /* 👈 This sucks the hero up to close the white gap */ */
-        margin-left: 20px; /* Uses standard pixels for small screens */
+        margin-left: 20px !important; /* Uses standard pixels for small screens */
         white-space: nowrap; /* Prevents the title from splitting into 2 lines */
         font-size: 1.2rem;
-        text-align: left;
+        text-align: left !important;
      }
+
+@media (max-width: 768px) {
+    .categories-section .row-arrow {
+        display: block !important; /* Ensures they show up on mobile */
+        background: rgba(255, 0, 0, 0.8);
+    }
+}
+
     .identity-text {
 
-        margin-left: 20px;
+        width: 85%;
+        margin-top: -60px; /* Pulls it up by roughly 2 lines */
+           /* margin-left: 20px; */
 
         font-size: 16px;
 
-        width: auto;
+        
 
         max-width: 85%; /* Prevents red box from hitting screen edge */
         display: inline-block;
@@ -419,9 +429,16 @@ MOBILE (OVERRIDES)
 
     .top-section {
 
+        margin-top: -1px; /* Close the microscopic gap */
+        padding-top: 0;
         display: block !important;
 
     }
+.identity-panel {
+	width: 100%;
+	background-size: 100% 100%; /* Forces image to fit width/height exactly */
+	background-origin: content-box;
+}
 
 .product-card{
 min-width:160px; /* This makes cards smaller so they fit better on a phone screen. */

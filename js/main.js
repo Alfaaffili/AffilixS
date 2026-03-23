@@ -151,23 +151,24 @@ if(e.target===m) m.style.display="none";
 });
 
 /* INIT */
-document.addEventListener("DOMContentLoaded", loadProducts);
+document.addEventListener("DOMContentLoaded", () => {
+    loadProducts();
 
-/* FOX-TAIL TOOLTIP ENGINE */
-const tooltip = qs("#cursorTooltip");
-
-document.addEventListener("mousemove", (e) => {
-    const card = e.target.closest(".product-card");
-    // Check if card exists before trying to get attributes
-    if (card && window.innerWidth > 1024) { 
-        const name = card.getAttribute("data-name") || "Product";
-        const price = card.getAttribute("data-price") || "";
-        
-        tooltip.innerHTML = `<strong>${name}</strong><br>${price}`;
-        tooltip.style.display = "block";
-        tooltip.style.left = (e.clientX + 15) + "px";
-        tooltip.style.top = (e.clientY - 40) + "px";
-    } else {
-        if(tooltip) tooltip.style.display = "none";
+    // Move tooltip logic INSIDE here to prevent 'null' errors
+    const tooltip = document.getElementById('cursorTooltip');
+    if (tooltip) {
+        document.addEventListener("mousemove", (e) => {
+            const card = e.target.closest(".product-card");
+            if (card && window.innerWidth > 1024) {
+                const name = card.getAttribute("data-name") || "";
+                const price = card.getAttribute("data-price") || "";
+                tooltip.innerHTML = `<strong>${name}</strong><br>${price}`;
+                tooltip.style.display = "block";
+                tooltip.style.left = (e.clientX + 15) + "px";
+                tooltip.style.top = (e.clientY - 40) + "px";
+            } else {
+                tooltip.style.display = "none";
+            }
+        });
     }
-}); // Ensure there is no 'return' sitting alone below this line!
+});

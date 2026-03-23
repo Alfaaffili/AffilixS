@@ -242,21 +242,5 @@ MAIN ENGINE
         }
       });
     </script>
-
-<script>
-  // ONLY code inside these tags will work and stay invisible!
-  const tooltip = document.getElementById('cursorTooltip');
-  document.addEventListener("mousemove", (e) => {
-      const card = e.target.closest(".product-card");
-      if (card && tooltip) {
-          tooltip.style.display = "block";
-          tooltip.style.left = (e.clientX + 15) + "px";
-          tooltip.style.top = (e.clientY - 40) + "px";
-      } else if (tooltip) {
-          tooltip.style.display = "none";
-      }
-  });
-</script>
-
 </body>
 </html>
