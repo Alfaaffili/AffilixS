@@ -2,10 +2,15 @@
 GLOBAL
 =============================== */
 
-*{
+html, body {
+width: 100%;
 margin:0;
 padding:0;
-box-sizing:border-box;
+overflow-x: hidden; /* This stops the horizontal "wiggle" on mobile */
+}
+
+*{
+   box-sizing: border-box; /* This ensures padding doesn't push widths over 100% */
 }
 
 body{
@@ -76,7 +81,8 @@ HERO
     align-items: flex-start; /* Aligns text to the left like your original design */
 
     width: 100%;
-    margin-top: 0;
+    overflow: hidden;
+    margin-top: 0 !important;
     padding-top: 0;
  
 }
@@ -330,8 +336,22 @@ border-radius:10px;
     .products-section h2 {
         margin-top: -10px; /* /* 👈 This sucks the hero up to close the white gap */ */
         margin-left: 20px; /* Uses standard pixels for small screens */
+        white-space: nowrap; /* Prevents the title from splitting into 2 lines */
+        font-size: 1.2rem;
         text-align: left;
      }
+    .identity-text {
+
+        margin-left: 20px;
+
+        font-size: 16px;
+
+        width: auto;
+
+        max-width: 85%; /* Prevents red box from hitting screen edge */
+        display: inline-block;
+
+    }
  }
 }
 

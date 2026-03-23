@@ -93,9 +93,7 @@ function createCard(p){
 
     // ... rest of your hover/click code ...
 
-    return card;
-
-}
+    
 
 /* HOVER */
 card.addEventListener("mouseenter",()=>{

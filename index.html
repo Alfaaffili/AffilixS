@@ -243,23 +243,20 @@ MAIN ENGINE
       });
     </script>
 
-    if (card) {
-        // Try to find the name inside the cad's <p> tag
-        const productName = card.querySelector('p').innerText;
-        const productPrice = card.querySelector('data-price').innerText;
-        
-        tooltip.innerHTML = `🦊 ${productName}`; // Added a fox emoji for fun!
-        tooltip.style.display = 'block';
-        tooltip.style.left = (e.clientX + 15) + 'px'; // Offset from cursor
-        tooltip.style.top = (e.clientY - 30) + 'px';
-        tooltip.style.opacity = '1';
-
-        tooltip.style.visibility = 'visible';
-    } else {
-        tooltip.style.display = 'none';
-        tooltip.style.opacity = '0';
-    }
-});
+<script>
+  // ONLY code inside these tags will work and stay invisible!
+  const tooltip = document.getElementById('cursorTooltip');
+  document.addEventListener("mousemove", (e) => {
+      const card = e.target.closest(".product-card");
+      if (card && tooltip) {
+          tooltip.style.display = "block";
+          tooltip.style.left = (e.clientX + 15) + "px";
+          tooltip.style.top = (e.clientY - 40) + "px";
+      } else if (tooltip) {
+          tooltip.style.display = "none";
+      }
+  });
+</script>
 
 </body>
 </html>
