@@ -324,7 +324,7 @@ border-radius:10px;
 @media (max-width: 1024px) {
     .categories-section h2, 
     .products-section h2 {
-        margin-left: 4ch; /* Reduces space slightly for tablets */
+        margin-left: 2ch; /* Reduces space slightly for tablets */
         text-align: left;
     }
 }
