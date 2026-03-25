@@ -59,13 +59,13 @@ HEADER (BASE)
 }
 
 .logo img{
-height:28px;
-width:auto;
+    height:28px;
+    width:auto;
 }
 
 .header-nav span,
-.footer-links span{
-cursor:pointer;
+  .footer-links span{
+    cursor:pointer;
 }
 
 /* ===============================
@@ -134,19 +134,20 @@ PRODUCTS
  }
 
 .product-row-wrapper{
-position:relative;
+    position:relative;
 }
 
 .product-row{
-display:flex;
-gap:18px;
-overflow-x:auto;
-padding:20px;
-scroll-behavior:smooth;
+    display:flex;
+    gap:18px;
+    max-width: 100%; /* Prevent row from exceeding viewport */
+    overflow-x:auto;
+    padding:20px;
+    scroll-behavior:smooth;
 }
 
 .product-row::-webkit-scrollbar{
-display:none;
+    display:none;
 }
 
 /* ===============================
@@ -154,18 +155,18 @@ CARD
 =============================== */
 
 .product-card{
-min-width:200px;
-background:#fff;
-border-radius:10px;
-overflow:hidden;
-cursor:pointer;
-box-shadow:0 4px 12px rgba(0,0,0,0.12);
+    min-width:200px;
+    background:#fff;
+    border-radius:10px;
+    overflow:hidden;
+    cursor:pointer;
+    box-shadow:0 4px 12px rgba(0,0,0,0.12);
 }
 
 .product-card img{
-width:100%;
-height:160px;
-object-fit:cover;
+    width:100%;
+    height:160px;
+    object-fit:cover;
 }
 
 /* ===============================
@@ -173,17 +174,17 @@ ARROWS
 =============================== */
 
 .row-arrow{
-position:absolute;
-top:50%;
-transform:translateY(-50%);
-width:40px;
-height:40px;
-border:none;
-border-radius:50%;
-background:rgba(255,0,0,0.6);
-color:#fff;
-cursor:pointer;
-z-index:10;
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:40px;
+    height:40px;
+    border:none;
+    border-radius:50%;
+    background:rgba(255,0,0,0.6);
+    color:#fff;
+    cursor:pointer;
+    z-index:10;
 }
 
 .row-arrow.left{left:0;}
@@ -194,29 +195,29 @@ PREVIEW PANEL
 =============================== */
 
 #floatingPreview{
-position:fixed;
-top:100px;
-right:40px;
-width:360px;
-height:420px;
-background:#111;
-border-radius:8px;
-overflow:hidden;
-opacity:0;
-visibility:hidden;
-transition:.3s;
-z-index:9999;
+    position:fixed;
+    top:100px;
+    right:40px;
+    width:360px;
+    height:420px;
+    background:#111;
+    border-radius:8px;
+    overflow:hidden;
+    opacity:0;
+    visibility:hidden;
+    transition:.3s;
+    z-index:9999;
 }
 
 #floatingPreview img{
-width:100%;
-height:100%;
-object-fit:cover;
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
 #floatingPreview.active{
-opacity:1;
-visibility:visible;
+    opacity:1;
+    visibility:visible;
 }
 
 /* ===============================
@@ -224,35 +225,35 @@ MODAL
 =============================== */
 
 #productModal{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.6);
-display:none;
-justify-content:center;
-align-items:center;
-z-index:999999;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:999999;
 }
 
 .modal-box{
-background:#fff;
-padding:20px;
-border-radius:10px;
-text-align:center;
-width:90%;
-max-width:400px;
-position: relative; /* this keeps X close button inside view card */
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    text-align:center;
+    width:90%;
+    max-width:400px;
+    position: relative; /* this keeps X close button inside view card */
 }
 
 /* === close button style === */
 .close-modal{
-position:absolute;
-top:10px;
-right:15px;
-font-size:22px;
-cursor:pointer;
+    position:absolute;
+    top:10px;
+    right:15px;
+    font-size:22px;
+    cursor:pointer;
 }
 
 /* ===============================
@@ -260,13 +261,13 @@ BUY BUTTON
 =============================== */
 
 .buy-btn{
-display:inline-block;
-margin-top:15px;
-padding:10px 20px;
-background:#ff2d2d;
-color:#fff;
-text-decoration:none;
-border-radius:6px;
+    display:inline-block;
+    margin-top:15px;
+    padding:10px 20px;
+    background:#ff2d2d;
+    color:#fff;
+    text-decoration:none;
+    border-radius:6px;
 }
 
 /* ===============================
@@ -292,26 +293,27 @@ CATEGORIES
 =============================== */
 
 .categories{
-max-width:1200px;
-margin:40px auto;
-padding:20px;
-display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:20px;
+    max-width:1200px;
+    margin:40px auto;
+    padding:20px;
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:20px;
 }
 
 .category{
-text-align:center;
+    text-align:center;
 }
 
 .category img{
-width:100%;
-height:120px;
-object-fit:cover;
-border-radius:10px;
+    width:100%;
+    height:120px;
+    object-fit:cover;
+    border-radius:10px;
 }
 
-/* DEFAULT (Desktop / Large Screens) */
+/* ============= DEFAULT (Desktop / Large Screens) ==========
+============================================================= */
 .products-section h2,
 .categories-section h2 { 
     margin-left: 3ch !important; 
@@ -320,8 +322,10 @@ border-radius:10px;
     text-align: left;
 }
 
-/* SMART ADJUSTMENT (Tablets: iPad, Huawei MatePad, etc.) */
+/* == SMART ADJUSTMENT (Tablets: iPad, Huawei MatePad, etc.)==
+ ============================================================= */
 @media (max-width: 1024px) {
+
     .categories-section h2, 
     .products-section h2 {
         margin-left: 2ch; /* Reduces space slightly for tablets */
@@ -329,24 +333,26 @@ border-radius:10px;
     }
 }
 
-/* SMART ADJUSTMENT (Mobiles: iPhone, Samsung, etc.) */
+/* ======= SMART ADJUSTMENT (Mobiles: iPhone, Samsung, etc.) === 
+MOBILE — HEADINGS FIX (≤768px)
+ ============================================================= */
 @media (max-width: 768px) {
-    .top-section {
-    .categories-section h2, 
-    .products-section h2 {
-        margin-top: -10px; /* /* 👈 This sucks the hero up to close the white gap */ */
-        margin-left: 20px !important; /* Uses standard pixels for small screens */
-        white-space: nowrap; /* Prevents the title from splitting into 2 lines */
+
+    .products-section h2,
+    .categories-section h2 {
+        margin-top: -10px;
+        margin-left: 20px !important;
+        white-space: nowrap;
         font-size: 1.2rem;
         text-align: left !important;
-     }
+    }
 
-@media (max-width: 768px) {
-    .categories-section .row-arrow {
+}
+
+    .categories .row-arrow {
         display: block !important; /* Ensures they show up on mobile */
         background: rgba(255, 0, 0, 0.8);
     }
-}
 
     .identity-text {
 
@@ -370,17 +376,17 @@ FOOTER
 =============================== */
 
 footer{
-background:#111;
-color:#fff;
-text-align:center;
-padding:15px;
+    background:#111;
+    color:#fff;
+    text-align:center;
+    padding:15px;
 }
 
 .footer-links{
-display:flex;
-justify-content:center;
-gap:40px; /* 🔥 more spacing */
-margin-bottom:10px;
+    display:flex;
+    justify-content:center;
+    gap:40px; /* 🔥 more spacing */
+    margin-bottom:10px;
 }
 
 /* ===============================
@@ -388,73 +394,156 @@ TEXT MODALS
 =============================== */
 
 .text-modal{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.7);
-justify-content:center;
-align-items:center;
-z-index:999999;
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.7);
+    justify-content:center;
+    align-items:center;
+    z-index:999999;
 }
 
 .text-modal .modal-box{
-background:#111;
-color:#fff;
-padding:25px;
+    background:#111;
+    color:#fff;
+    padding:25px;
 }
 
 /* ===============================
 MOBILE (OVERRIDES)
 =============================== */
 
-@media(max-width:768px){
-    .site-header {
-       height: auto; /* Allow header to grow if items wrap */
-       padding: 10px 15px;
-    }
+/* @media(max-width:768px){ */
 
-    .logo-group h1 {
-        font-size: 18px; /* Shrink title text slightly on mobile */
-    }
+/* ===============================
+HEADER
+=============================== */
+.site-header {
+    height: auto; /* Allow header to grow if items wrap */
+    padding: 10px 15px;
+}
 
-    .header-nav {
-        font-size: 13px; /* Shrink links slightly */
-        gap: 1.5ch;
-    }
+.logo-group h1 {
+    font-size: 18px; /* Shrink title text slightly on mobile */
+}
+
+.header-nav {
+    font-size: 13px; /* Shrink links slightly */
+    gap: 1.5ch;
+}
 
 /* Fix for the Huawei White Space issue */
 
-    .top-section {
+.top-section {
 
-        margin-top: -1px; /* Close the microscopic gap */
-        padding-top: 0;
-        display: block !important;
+    margin-top: -1px; /* Close the microscopic gap */
+    padding-top: 0;
+    display: block !important;
 
-    }
+}
 .identity-panel {
-	width: 100%;
-	background-size: 100% 100%; /* Forces image to fit width/height exactly */
-	background-origin: content-box;
+    width: 100%;
+    background-size: 100% 100%; /* Forces image to fit width/height exactly */
+    background-origin: content-box;
+}
+.identity-text {
+    width: 85%;
+    margin-top: -60px;
+    font-soze: 16px;
+    max-width: 85%;
+    display: inline-block;
+    overflow-wrap: break-work
+}
+/* ===============================
+
+    PRODUCT ROW
+
+    =============================== */
+
+.product-row {
+
+    padding: 15px 10px;
+
+    max-width: 100%;
+
 }
 
 .product-card{
-min-width:160px; /* This makes cards smaller so they fit better on a phone screen. */
+    min-width: 160px; /* This makes cards smaller so they fit better on a phone screen. */
+}
+
+/* ===============================
+
+    ARROWS (IMPORTANT — PLACE HERE)
+
+    =============================== */
+
+.row-arrow.left {
+
+    left: 5px;
+
+}
+
+
+.row-arrow.right {
+
+    right: 5px;
+
+}
+
+/* ===============================
+
+    PREVIEW (DISABLED ON MOBILE)
+
+    =============================== */
+
+#floatingPreview {
+
+    display: none;
+
+}
+
+
+
+
+/* ===============================
+
+    CATEGORIES
+
+    =============================== */
+
+.categories {
+
+    display: flex;
+
+    overflow-x: auto;
+
+}
+
+
+
+.categories::-webkit-scrollbar {
+
+    display: none;
+
+}
+
+
+
+.category {
+
+    min-width: 120px; /* This allows users to swipe through categories sideways on their phones. */
+
 }
 
 #floatingPreview{
-display:none; /* critical. You cannot "hover" on a phone, so you must hide that preview box, or it might get stuck on the screen */
+    display:none; /* critical. You cannot "hover" on a phone, so you must hide that preview box, or it might get stuck on the screen */
 }
 
 .categories{
-display:flex;
-overflow-x:auto; /* This allows users to swipe through categories sideways on their phones. */
-}
-
-.category{
-min-width:120px; /* This allows users to swipe through categories sideways on their phones. */
-}
-
+    display:flex;
+    overflow-x:auto; /* This allows users to swipe through categories sideways on their phones. */
 }

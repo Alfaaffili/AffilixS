@@ -20,34 +20,58 @@ const MAX_ROWS = 5;
 
 /* LOAD */
 async function loadProducts(){
-try{
-const res = await fetch("Data/products.json?v=5");
-const data = await res.json();
-renderProducts(data);
-}catch(e){
-console.error(e);
-}
+	try{
+	   const res = await fetch("Data/products.json?v=5");
+	   const data = await res.json();
+
+	   data.sort((a,b)=> (b.priority || 0) - (a.priority || 0));
+           
+	   renderProducts(data);
+
+	}catch(e){
+	    console.error(e);
+	}
 }
 
 /* RENDER */
-function renderProducts(products){
+/* ===============================
+ROW DISTRIBUTION ENGINE
+=============================== */
+function distributeRows(products){
+    let rows = [];
 
-productSection.innerHTML = "<h2>Featured Products</h2>";
+    for(let i = 0; i < MAX_ROWS; i++){
+        const start = i * PRODUCTS_PER_ROW;
+        const end = start + PRODUCTS_PER_ROW;
 
-let rows = {};
+        const slice = products.slice(start, end);
 
-products.forEach((p,i)=>{
+        if(slice.length > 0){
+            rows.push(slice);
+        }
+    }
 
-let rowIndex = Math.floor(i/PRODUCTS_PER_ROW)+1;
-if(rowIndex>MAX_ROWS) return;
-
-if(!rows[rowIndex]){
-rows[rowIndex] = createRow();
-productSection.appendChild(rows[rowIndex].wrapper);
+    return rows;
 }
 
-rows[rowIndex].row.appendChild(createCard(p));
+/* ===============================
+RENDER
+=============================== */
+function renderProducts(products){
 
+if(!productSection) return;
+
+productSection.innerHTML = "<h2>Featured Products</h2>";
+const distributedRows = distributeRows(products);
+
+distributedRows.forEach(rowData=>{
+    const row = createRow();
+
+    rowData.forEach(p=>{
+        row.row.appendChild(createCard(p));
+    });
+
+    productSection.appendChild(row.wrapper);
 });
 }
 
@@ -112,15 +136,17 @@ previewPanel.classList.remove("active");
 /* CLICK */
 card.addEventListener("click",()=>{
 
-modal.style.display = "flex";
+    if(!modal) return;
 
-modalImage.src = p.image;
-modalTitle.textContent = p.name;
-modalPrice.textContent = p.price+" "+p.currency;
+    modal.style.display = "flex";
 
-if(buyButton){
-buyButton.href = p.affiliateLink;
-}
+    if(modalImage) modalImage.src = p.image;
+    if(modalTitle) modalTitle.textContent = p.name;
+    if(modalPrice) modalPrice.textContent = p.price+" "+p.currency;
+
+    if(buyButton){
+        buyButton.href = p.affiliateLink;
+    }
 
 });
 
@@ -128,12 +154,16 @@ return card;
 }
 
 /* CLOSE MODAL */
-closeModal.onclick = ()=> modal.style.display="none";
+if(closeModal){
+    closeModal.onclick = ()=> {
+        if(modal) modal.style.display="none";
+    };
+}
 
 window.onclick = e=>{
-if(e.target === modal){
-modal.style.display="none";
-}
+    if(modal && e.target === modal){
+        modal.style.display="none";
+    }
 };
 
 /* TEXT MODALS */
