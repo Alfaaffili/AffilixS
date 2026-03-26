@@ -108,6 +108,9 @@ HERO
     margin-left: 40px;
 
     display: inline-block; /* 👈 This stops the red box from stretching to the edge */
+  width: fit-content;          /* 🔥 KEY FIX */
+
+  max-width: 90%;              /* safety for mobile */
     background: rgba(255,0,0,0.85);
 
     padding: 8px 30px;
@@ -118,6 +121,7 @@ HERO
 
     font-size: 22px;
 
+    white-space: nowrap; /* prevents stretching */
     z-index: 10;
 
     position: relative; /* Keeps it on top of the product section border */
@@ -309,6 +313,14 @@ CATEGORIES
     justify-content: center;
 }
 
+.categories-wrapper {
+    position: relative;
+}
+
+.categories-wrapper .row-arrow {
+    display: none;
+}
+
 .category{
     text-align:center;
 }
@@ -322,38 +334,66 @@ CATEGORIES
 
 /* ============= DEFAULT (Desktop / Large Screens) ==========
 ============================================================= */
-.products-section h2,
-.categories-section h2 { 
-    margin-left: 0.5ch !important; 
+ /* .products-section h2, */
+ /* .categories-section h2 { */
+.products-section h2 {
+    margin-left: 0.5ch !important;
     margin-top: 40px;
     margin-bottom: 20px;
     text-align: left;
 }
 
+.categories-section h2 {
+    margin-left: 0.5ch !important; /* match exactly */
+    margin-top: 40px;
+    margin-bottom: 20px;
+    text-align: left;
+} 
+
 /* == SMART ADJUSTMENT (Tablets: iPad, Huawei MatePad, etc.)==
  ============================================================= */
 @media (max-width: 1024px) {
 
-    .categories-section h2, 
-    .products-section h2 {
-        margin-left: 2ch; /* Reduces space slightly for tablets */
-        text-align: left;
-    }
-}
+    /* .categories-section h2, */ 
+    /* .products-section h2 { */
+.products-section h2 {
+    margin-left: 2ch; /* Reduces space slightly for tablets */
+    text-align: left;
+ }
 
+.categories-section h2 {
+    margin-left: 0.5ch !important; /* match exactly */
+    text-align: left;
+ }
+}
 /* ======= SMART ADJUSTMENT (Mobiles: iPhone, Samsung, etc.) === 
 MOBILE — HEADINGS FIX (≤768px)
  ============================================================= */
 @media (max-width: 768px) {
 
-    .products-section h2,
-    .categories-section h2 {
-        margin-top: -10px;
-        margin-left: 20px !important;
-        white-space: nowrap;
-        font-size: 1.2rem;
-        text-align: left !important;
-    }
+    /* .products-section h2, */
+    /* .categories-section h2 { */
+.products-section h2 {
+    margin-top: -10px;
+        /* margin-left: 20px !important; */
+    margin-left: 0.5ch !important; /* match exactly */
+
+    white-space: nowrap;
+    font-size: 1.2rem;
+    text-align: left !important;
+ }
+
+.categories-section h2 {
+
+    margin-left: 0.5ch !important; /* match exactly */
+
+    margin-top: -10px;
+    margin-left: 0.5ch !important; /* match exactly */
+
+    white-space: nowrap;
+    font-size: 1.2rem;
+    text-align: left !important;
+ }
 
 }
 
@@ -430,9 +470,6 @@ TEXT MODALS
 /* ===============================
 MOBILE (OVERRIDES)
 =============================== */
-
-/* @media(max-width:768px){ */
-
 /* ===============================
 HEADER
 =============================== */
@@ -454,7 +491,7 @@ HEADER
 
 .top-section {
 
-    margin-top: -1px; /* Close the microscopic gap */
+    margin-top: 0 !important; /* Close the microscopic gap */
     padding-top: 0;
     display: block !important;
 
@@ -551,8 +588,9 @@ HEADER
 
 .category {
 
-    min-width: 120px; /* This allows users to swipe through categories sideways on their phones. */
+    min-width: 140px; /* This allows users to swipe through categories sideways on their phones. */
 
+    max-width: 140px; /* Forces equal width */
 }
 
 .categories-wrapper .row-arrow {
