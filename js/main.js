@@ -202,3 +202,27 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+/* ===============================
+CATEGORY ARROW SCROLL
+=============================== */
+const categoryWrapper = document.querySelector(".categories-wrapper");
+const categoryRow = document.querySelector(".categories");
+
+if(categoryWrapper && categoryRow){
+
+    const leftArrow = categoryWrapper.querySelector(".row-arrow.left");
+    const rightArrow = categoryWrapper.querySelector(".row-arrow.right");
+
+    if(leftArrow){
+        leftArrow.onclick = ()=>{
+            categoryRow.scrollBy({left:-200, behavior:"smooth"});
+        };
+    }
+
+    if(rightArrow){
+        rightArrow.onclick = ()=>{
+            categoryRow.scrollBy({left:200, behavior:"smooth"});
+        };
+    }
+}

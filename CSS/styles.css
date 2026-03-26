@@ -187,6 +187,13 @@ ARROWS
     z-index:10;
 }
 
+/* ===============================
+ARROWS DEFAULT
+=============================== */
+.categories-wrapper .row-arrow {
+    display: none; /* hidden on desktop */
+}
+
 .row-arrow.left{left:0;}
 .row-arrow.right{right:0;}
 
@@ -299,6 +306,7 @@ CATEGORIES
     display:grid;
     grid-template-columns:repeat(5,1fr);
     gap:20px;
+    justify-content: center;
 }
 
 .category{
@@ -316,7 +324,7 @@ CATEGORIES
 ============================================================= */
 .products-section h2,
 .categories-section h2 { 
-    margin-left: 3ch !important; 
+    margin-left: 0.5ch !important; 
     margin-top: 40px;
     margin-bottom: 20px;
     text-align: left;
@@ -349,10 +357,13 @@ MOBILE — HEADINGS FIX (≤768px)
 
 }
 
-    .categories .row-arrow {
-        display: block !important; /* Ensures they show up on mobile */
-        background: rgba(255, 0, 0, 0.8);
-    }
+/* ===============================
+MOBILE — CATEGORY ARROWS
+=============================== */
+.categories-wrapper .row-arrow {
+    display: block;
+    background: rgba(255, 0, 0, 0.8);
+}
 
     .identity-text {
 
@@ -376,7 +387,7 @@ FOOTER
 =============================== */
 
 footer{
-    background:#111;
+    background:#111 !important;
     color:#fff;
     text-align:center;
     padding:15px;
@@ -387,6 +398,10 @@ footer{
     justify-content:center;
     gap:40px; /* 🔥 more spacing */
     margin-bottom:10px;
+}
+
+footer p{
+    margin-left: 2ch;
 }
 
 /* ===============================
@@ -445,10 +460,11 @@ HEADER
 
 }
 .identity-panel {
-    width: 100%;
-    background-size: 100% 100%; /* Forces image to fit width/height exactly */
-    background-origin: content-box;
+         /* width: 100%; */
+    background-size: cover; /* Forces image to fit width/height exactly */
+    background-position: center;
 }
+
 .identity-text {
     width: 85%;
     margin-top: -60px;
@@ -539,8 +555,8 @@ HEADER
 
 }
 
-#floatingPreview{
-    display:none; /* critical. You cannot "hover" on a phone, so you must hide that preview box, or it might get stuck on the screen */
+.categories-wrapper .row-arrow {
+    display: block;
 }
 
 .categories{
