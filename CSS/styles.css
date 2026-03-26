@@ -173,6 +173,11 @@ CARD
     object-fit:cover;
 }
 
+.product-card:hover ~ #floatingPreview {
+    opacity:1;
+    visibility:visible;
+}
+
 /* ===============================
 ARROWS
 =============================== */
@@ -214,6 +219,7 @@ PREVIEW PANEL
     background:#111;
     border-radius:8px;
     overflow:hidden;
+    
     opacity:0;
     visibility:hidden;
     transition:.3s;
@@ -315,6 +321,8 @@ CATEGORIES
 
 .categories-wrapper {
     position: relative;
+    max-width: 1200px;
+    margin: auto;
 }
 
 .categories-wrapper .row-arrow {
@@ -334,9 +342,12 @@ CATEGORIES
 
 /* ============= DEFAULT (Desktop / Large Screens) ==========
 ============================================================= */
- /* .products-section h2, */
- /* .categories-section h2 { */
+
 .products-section h2 {
+    display: inline-block;
+    width: fit-content; /* prevents stretching */
+    margin-left: 0.5ch !important;
+    max-width: 90%;
     margin-left: 0.5ch !important;
     margin-top: 40px;
     margin-bottom: 20px;
@@ -344,6 +355,8 @@ CATEGORIES
 }
 
 .categories-section h2 {
+    display: inline-blck;
+    width: fit-content;
     margin-left: 0.5ch !important; /* match exactly */
     margin-top: 40px;
     margin-bottom: 20px;
@@ -354,8 +367,6 @@ CATEGORIES
  ============================================================= */
 @media (max-width: 1024px) {
 
-    /* .categories-section h2, */ 
-    /* .products-section h2 { */
 .products-section h2 {
     margin-left: 2ch; /* Reduces space slightly for tablets */
     text-align: left;
@@ -371,8 +382,6 @@ MOBILE — HEADINGS FIX (≤768px)
  ============================================================= */
 @media (max-width: 768px) {
 
-    /* .products-section h2, */
-    /* .categories-section h2 { */
 .products-section h2 {
     margin-top: -10px;
         /* margin-left: 20px !important; */
@@ -428,7 +437,7 @@ FOOTER
 
 footer{
     background:#111 !important;
-    color:#fff;
+    color:#fff !important;
     text-align:center;
     padding:15px;
 }
@@ -476,6 +485,7 @@ HEADER
 .site-header {
     height: auto; /* Allow header to grow if items wrap */
     padding: 10px 15px;
+    margin-bottom: 0 !important;
 }
 
 .logo-group h1 {
@@ -492,7 +502,7 @@ HEADER
 .top-section {
 
     margin-top: 0 !important; /* Close the microscopic gap */
-    padding-top: 0;
+    padding-top: 0 !important;
     display: block !important;
 
 }
@@ -536,14 +546,14 @@ HEADER
 
 .row-arrow.left {
 
-    left: 5px;
+    left: -10px;
 
 }
 
 
 .row-arrow.right {
 
-    right: 5px;
+    right: -10px;
 
 }
 
