@@ -1,121 +1,152 @@
 ﻿/* =============================================================
-   01. GLOBAL & RESET (Core Architecture)
+   01. GLOBAL RESET & FOUNDATION
    ============================================================= */
+* { box-sizing: border-box; }
+
 html, body {
     width: 100%;
     margin: 0;
     padding: 0;
-    overflow-x: hidden; 
+    overflow-x: hidden;
     background: #f5f2ed;
     font-family: Arial, Helvetica, sans-serif;
     color: #1f1f1f;
+    line-height: 1.6;
 }
 
-* { box-sizing: border-box; }
-
 /* =============================================================
-   02. HEADER ENGINE (Premium Minimalist)
+   02. HEADER ENGINE (Navigation & Logo)
    ============================================================= */
 .site-header {
-    display: flex !important;
+    display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 5%;
     background: #111;
     color: #fff;
     height: 60px;
-    width: 100%;
-    position: sticky; /* Keep navigation visible */
+    position: sticky;
     top: 0;
     z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
-.logo-group {
-    display: flex;
-    align-items: center;
-    gap: 15px;
+.logo-group { display: flex; align-items: center; gap: 12px; }
+.logo img { height: 35px; border-radius: 4px; }
+.logo-group h1 { font-size: 1.2rem; margin: 0; letter-spacing: 1px; }
+
+.header-nav span, .header-nav a {
+    margin-left: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: color 0.3s;
 }
-
-.logo img { height: 28px; width: auto; }
-
-.header-nav {
-    display: flex;
-    gap: 2ch;
-    margin-left: auto;
-}
-
-.header-nav span, .footer-links span { cursor: pointer; transition: 0.3s; }
-.header-nav span:hover { color: #ff2d2d; }
+.header-nav span:hover { color: #c6a96b; }
 
 /* =============================================================
-   03. HERO ENGINE (B04 Layout)
+   03. HERO ENGINE (Identity & Branding)
    ============================================================= */
-.top-section {
-    width: 100%;
-    margin-top: 0;
-    padding-top: 0;
-}
+.top-section { width: 100%; position: relative; margin-bottom: 60px; }
 
 .identity-panel {
     width: 100%;
-    height: 350px;
+    height: 300px;
     background: url("../images/hero8888.jpg") center/cover no-repeat;
-    position: relative;
+    border-bottom: 4px solid #111;
 }
 
 .identity-text {
-    margin-top: -30px;
-    margin-left: 40px;
-    background: rgba(255, 0, 0, 0.9);
-    padding: 10px 30px;
+    position: absolute;
+    bottom: -25px;
+    left: 40px;
+    background: rgba(255, 0, 0, 0.9); /* Your Signature Red */
+    padding: 12px 35px;
     border-radius: 6px;
     color: #fff;
     font-size: 22px;
-    display: inline-block;
-    width: fit-content;
-    max-width: 90%;
-    z-index: 20;
-    position: relative;
+    font-weight: 300;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 10;
 }
 
 /* =============================================================
-   04. PRODUCT ENGINE (B04 Algorithm: 5-Card Rows)
+   04. SECTION HEADINGS (Dynamic Alignment)
    ============================================================= */
-.products-section {
-    max-width: 1200px;
-    margin: 40px auto;
+.products-section h2, 
+.categories-section h2 {
+    margin-left: 5ch !important; /* Exactly 5 chars from left edge */
+    margin-top: 50px;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    position: relative;
 }
 
-.products-section h2, .categories-section h2 {
-    margin-left: 0.5ch;
-    font-size: 1.5rem;
+.products-section h2::after {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: #c6a96b;
+    margin-top: 8px;
 }
 
-.product-row-wrapper { position: relative; margin-bottom: 30px; }
+/* =============================================================
+   05. PRODUCT ROW ENGINE (Wrappers & Arrows)
+   ============================================================= */
+.product-row-wrapper {
+    position: relative;
+    width: 95%;
+    margin: 0 auto 50px;
+    padding: 0 40px; /* Space for absolute arrows */
+}
 
 .product-row {
     display: flex;
-    gap: 18px;
+    gap: 20px;
     overflow-x: auto;
-    padding: 20px 5px;
+    padding: 20px 0;
     scroll-behavior: smooth;
-    scroll-snap-type: x mandatory; /* Premium feel */
+    scrollbar-width: none; /* Firefox */
 }
+.product-row::-webkit-scrollbar { display: none; } /* Chrome/Safari */
 
-.product-row::-webkit-scrollbar { display: none; }
+.row-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 0, 0, 0.9) !important;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 100;
+    font-size: 20px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.row-arrow:hover { background: #cc0000 !important; scale: 1.1; }
+.row-arrow.left { left: -10px; }
+.row-arrow.right { right: -10px; }
 
+/* =============================================================
+   06. PRODUCT CARD ENGINE (Visual Styling)
+   ============================================================= */
 .product-card {
-    min-width: calc(20% - 15px); /* Forces exactly 5 cards per row on desktop */
+    min-width: 220px;
     background: #fff;
-    border-radius: 10px;
+    border-radius: 12px;
     overflow: hidden;
-    scroll-snap-align: start;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-    transition: transform 0.3s;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+    cursor: pointer;
 }
-
-.product-card:hover { transform: translateY(-5px); }
+.product-card:hover { transform: translateY(-8px); }
 
 .product-card img {
     width: 100%;
@@ -124,106 +155,121 @@ html, body {
 }
 
 /* =============================================================
-   05. PREVIEW & TOOLTIP ENGINE
+   07. CATEGORY ENGINE (Grid System)
    ============================================================= */
-#floatingPreview {
-    position: fixed;
-    top: 100px;
-    right: 40px;
-    width: 320px;
-    height: 320px;
-    background: #111;
-    border-radius: 8px;
-    overflow: hidden;
-    opacity: 0;
-    visibility: hidden;
-    transition: 0.3s;
-    z-index: 999;
-    border: 2px solid #ff2d2d;
+.categories-wrapper {
+    position: relative;
+    width: 95%;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+.categories {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 40px;
+}
+.category {
+    min-width: 150px;
+    text-align: center;
+}
+.category img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-#floatingPreview.active { opacity: 1; visibility: visible; }
+/* =============================================================
+   08. MODAL ENGINE (Overlay & Pop-up Control)
+   ============================================================= */
+#productModal, .text-modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
 
+.modal-box {
+    background: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 450px;
+    text-align: center;
+    position: relative;
+    animation: modalPop 0.3s ease-out;
+}
+
+@keyframes modalPop {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px; right: 20px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #999;
+}
+
+.buy-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 30px;
+    background: #111;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+/* =============================================================
+   09. SYSTEM TOOLTIP (Fox-tail)
+   ============================================================= */
 #cursorTooltip {
     position: fixed;
     pointer-events: none;
-    background: #ff2d2d;
+    background: rgba(17, 17, 17, 0.95);
     color: white;
-    padding: 5px 12px;
-    border-radius: 20px 20px 20px 0;
-    font-size: 12px;
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-size: 13px;
     z-index: 10000;
     display: none;
+    white-space: nowrap;
+    border: 1px solid rgba(255,255,255,0.1);
 }
 
 /* =============================================================
-   06. CATEGORY ENGINE
-   ============================================================= */
-.categories-wrapper { position: relative; max-width: 1200px; margin: auto; }
-
-.categories {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-    padding: 20px;
-}
-
-.category img {
-    width: 100%;
-    height: 140px;
-    object-fit: cover;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-/* =============================================================
-   07. FOOTER ENGINE (FIXED BLACK BACKGROUND)
+   10. FOOTER ENGINE (Clean 2-Line Architecture)
    ============================================================= */
 footer {
-    background-color: #111111 !important; /* Force black */
-    color: #ffffff !important;
+    background: #111;
+    color: #fff;
+    padding: 30px 0;
     text-align: center;
-    padding: 30px 15px;
-    width: 100%;
-    margin-top: 50px;
+    margin-top: 80px;
 }
 
-.footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin-bottom: 15px;
+.footer-links { margin-bottom: 12px; }
+.footer-links span {
+    margin: 0 15px;
+    font-size: 14px;
+    cursor: pointer;
+    opacity: 0.8;
 }
-
 .copyright-text {
-    text-align: left;
-    max-width: 1200px;
-    margin: 0 auto;
-    font-size: 0.8rem;
-    opacity: 0.7;
-}
-
-/* =============================================================
-   08. RESPONSIVE ENGINE (B02 & B04 Rules)
-   ============================================================= */
-@media (max-width: 768px) {
-    .site-header { height: auto; padding: 10px 15px; }
-    .header-nav { font-size: 12px; gap: 1ch; }
-
-    .identity-panel { height: 250px; }
-    .identity-text { font-size: 16px; margin-top: -40px; margin-left: 20px; max-width: 70%; }
-
-    .product-card { min-width: calc(50% - 10px); } /* 2 cards per screen on mobile */
-    
-    .categories {
-        display: flex;
-        overflow-x: auto;
-        gap: 15px;
-    }
-    .category { min-width: 140px; }
-
-    /* Disable Desktop-only engines */
-    #floatingPreview, #cursorTooltip { display: none !important; }
-    
-    footer .footer-links { flex-direction: column; gap: 15px; }
+    margin: 0;
+    font-size: 12px;
+    opacity: 0.5;
+    letter-spacing: 1px;
 }
