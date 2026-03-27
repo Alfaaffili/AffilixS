@@ -416,7 +416,7 @@ MOBILE — CATEGORY ARROWS
 
     .identity-text {
 
-        width: 85%;
+        width: 45%;
         margin-top: -60px; /* Pulls it up by roughly 2 lines */
            /* margin-left: 20px; */
 
@@ -424,7 +424,7 @@ MOBILE — CATEGORY ARROWS
 
         
 
-        max-width: 85%; /* Prevents red box from hitting screen edge */
+        max-width: 55%; /* Prevents red box from hitting screen edge */
         display: inline-block;
 
     }
