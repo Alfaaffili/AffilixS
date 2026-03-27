@@ -121,7 +121,7 @@ HERO
 
     font-size: 22px;
 
-    white-space: nowrap; /* prevents stretching */
+  white-space: nowrap; /* prevents stretching */
     z-index: 10;
 
     position: relative; /* Keeps it on top of the product section border */
@@ -144,7 +144,7 @@ PRODUCTS
 .product-row{
     display:flex;
     gap:18px;
-    max-width: 100%; /* Prevent row from exceeding viewport */
+  max-width: 100%; /* Prevent row from exceeding viewport */
     overflow-x:auto;
     padding:20px;
     scroll-behavior:smooth;
@@ -173,10 +173,10 @@ CARD
     object-fit:cover;
 }
 
-.product-card:hover ~ #floatingPreview {
-    opacity:1;
-    visibility:visible;
-}
+/* ==== .product-card:hover ~ #floatingPreview { ==== */
+/* ====    opacity:1; ==== */
+/* ====    visibility:visible; ==== */
+/* ===== } ==== */
 
 /* ===============================
 ARROWS
@@ -513,10 +513,10 @@ HEADER
 }
 
 .identity-text {
-    width: 85%;
+    width: 45%;
     margin-top: -60px;
-    font-soze: 16px;
-    max-width: 85%;
+    font-size: 16px;
+    max-width: 55%;
     display: inline-block;
     overflow-wrap: break-work
 }
