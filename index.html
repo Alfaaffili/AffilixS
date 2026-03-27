@@ -1,25 +1,14 @@
 ﻿<!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link rel="icon" href="images/logo.jpg">
-
-<title>AffilixS | Curated Discoveries</title>
-
-<link rel="stylesheet" href="CSS/styles.css?v=5">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <link rel="icon" href="images/logo.jpg">
+    <title>AffilixS | Curated Discoveries</title>
+    <link rel="stylesheet" href="CSS/styles.css?v=1.3">
 </head>
-
 <body>
-
-<!-- =================================================
-HEADER
-================================================= -->
 
 <header class="site-header">
     <div class="logo-group">
@@ -30,222 +19,119 @@ HEADER
     </div>
 
     <nav class="header-nav">
-     <span data-modal="visionModal">Vision</span>
-     <span data-modal="insightsModal">Insights</span>
-     <span data-modal="contactModal">Contact</span>
-   </nav>
+        <span data-modal="visionModal">Vision</span>
+        <span data-modal="insightsModal">Insights</span>
+        <span data-modal="contactModal">Contact</span>
+    </nav>
 </header>
-
-<!-- =================================================
-HERO
-================================================= -->
 
 <section class="top-section">
     <div class="identity-panel"></div>
-
     <div class="identity-text">
         A refined selection for modern living.
     </div>
-</div>
-
 </section>
 
-<!-- =================================================
-PRODUCTS
-(dynamic rows inserted by main.js)
-================================================= -->
-
-<section class="products-section">
-
-<h2>Featured Products</h2>
-
-</section>
-
-<!-- =================================================
-FLOATING PREVIEW
-================================================= -->
+<section class="products-section" id="productsContainer">
+    <h2>Featured Products</h2>
+    </section>
 
 <div id="floatingPreview" aria-hidden="true">
-<img id="previewImage" alt="Product preview">
+    <img id="previewImage" alt="Product preview">
 </div>
-
-<!-- =================================================
-PRODUCT MODAL
-================================================= -->
 
 <div id="productModal" class="modal">
-
-<div class="modal-box">
-
-<span class="close-modal">×</span>  <!-- 🔥 REQUIRED -->
-
-<img id="modalImage">
-<h2 id="modalTitle"></h2>
-<p id="modalPrice"></p>
-
-<a id="buyButton" class="buy-btn" target="_blank">Buy Now</a>
-
+    <div class="modal-box">
+        <span class="close-modal">&times;</span>
+        <img id="modalImage" src="" alt="Product Image">
+        <h2 id="modalTitle"></h2>
+        <p id="modalPrice"></p>
+        <a id="buyButton" class="buy-btn" target="_blank">Buy Now</a>
+    </div>
 </div>
-</div>
-
-<!-- =================================================
-CATEGORIES
-================================================= -->
 
 <section class="categories-section">
-  <h2>Browse Categories</h2>
-
-<div class="categories-wrapper">
-
-  <button class="row-arrow left">❮</button>
-
-  <div class="categories">
-
-    <div class="category">
-      <img src="images/cat-tech.jpg">
-      <p>Technology</p>
+    <h2>Browse Categories</h2>
+    <div class="categories-wrapper">
+        <button class="row-arrow left" id="catLeft">❮</button>
+        <div class="categories" id="categoriesRow">
+            <div class="category">
+                <img src="images/cat-tech.jpg" alt="Tech">
+                <p>Technology</p>
+            </div>
+            <div class="category">
+                <img src="images/Home.jpg" alt="Home">
+                <p>Home & Living</p>
+            </div>
+            <div class="category">
+                <img src="images/Fittness.jpg" alt="Fitness">
+                <p>Fitness</p>
+            </div>
+            <div class="category">
+                <img src="images/Style.jpg" alt="Style">
+                <p>Style</p>
+            </div>
+            <div class="category">
+                <img src="images/BeautyPersonnalCare.jpg" alt="Beauty">
+                <p>Beauty</p>
+            </div>
+        </div>
+        <button class="row-arrow right" id="catRight">❯</button>
     </div>
-
-    <div class="category">
-      <img src="images/Home.jpg">
-      <p>Home & Living</p>
-    </div>
-
-    <div class="category">
-      <img src="images/Fittness.jpg">
-      <p>Fitness</p>
-    </div>
-
-    <div class="category">
-      <img src="images/Style.jpg">
-      <p>Style</p>
-    </div>
-
-    <div class="category">
-      <img src="images/BeautyPersonnalCare.jpg">
-      <p>Beauty</p>
-    </div>
-
-  </div>
-    <button class="row-arrow right">❯</button>
-</div>
-
 </section>
-<!-- =================================================
-FOOTER
-================================================= -->
 
 <footer>
-
-<div class="footer-links">
-
-<span data-modal="privacyModal">Privacy</span> <span data-modal="disclaimerModal">Disclaimer</span> <span data-modal="contactModal">Contact</span>
-
-</div>
-
-<p>© 2026 AffilixS</p>
-
+    <div class="footer-links">
+        <span data-modal="privacyModal">Privacy</span>
+        <span data-modal="disclaimerModal">Disclaimer</span>
+        <span data-modal="contactModal">Contact</span>
+    </div>
+    <p class="copyright-text">&copy; 2026 AffilixS</p>
 </footer>
 
-<!-- =================================================
-HEADER MODALS
-================================================= -->
-
 <div id="visionModal" class="text-modal">
-
-<div class="modal-box">
-
-<h2>Our Vision</h2>
-
-<p>AffilixS curates refined products for modern living.</p>
-<span class="close-modal">×</span>
-</div>
-
+    <div class="modal-box">
+        <span class="close-modal">&times;</span>
+        <h2>Our Vision</h2>
+        <p>AffilixS curates refined products for modern living.</p>
+    </div>
 </div>
 
 <div id="insightsModal" class="text-modal">
-
-<div class="modal-box">
-
-<h2>Insights</h2>
-
-<p>Insights and trends about modern lifestyle and technology.</p>
-<span class="close-modal">×</span>
-</div>
-
+    <div class="modal-box">
+        <span class="close-modal">&times;</span>
+        <h2>Insights</h2>
+        <p>Insights and trends about modern lifestyle and technology.</p>
+    </div>
 </div>
 
 <div id="contactModal" class="text-modal">
-
-<div class="modal-box">
-
-<h2>Contact</h2>
-
-<p>For partnerships and inquiries please contact AffilixS.</p>
-<span class="close-modal">×</span>
+    <div class="modal-box">
+        <span class="close-modal">&times;</span>
+        <h2>Contact</h2>
+        <p>For partnerships and inquiries please contact AffilixS.</p>
+    </div>
 </div>
-
-</div>
-
-<!-- =================================================
-FOOTER MODALS
-================================================= -->
 
 <div id="privacyModal" class="text-modal">
-
-<div class="modal-box">
-
-<h2>Privacy Policy</h2>
-
-<p>Your privacy is important to us.</p>
-<span class="close-modal">×</span>
-</div>
-
+    <div class="modal-box">
+        <span class="close-modal">&times;</span>
+        <h2>Privacy Policy</h2>
+        <p>Your privacy is important to us.</p>
+    </div>
 </div>
 
 <div id="disclaimerModal" class="text-modal">
-
-<div class="modal-box">
-
-<h2>Affiliate Disclaimer</h2>
-
-<p>Some links on this site are affiliate links that may earn commission.</p>
-<span class="close-modal">×</span>
+    <div class="modal-box">
+        <span class="close-modal">&times;</span>
+        <h2>Affiliate Disclaimer</h2>
+        <p>Some links on this site are affiliate links that may earn commission.</p>
+    </div>
 </div>
 
-</div>
-
-<!-- =================================================
-CACHE PROTECTION
-================================================= -->
-
-<script>
-
-if ('serviceWorker' in navigator) {
-navigator.serviceWorker.getRegistrations().then(function(registrations) {
-for (let registration of registrations) {
-registration.unregister();
-}
-});
-}
-
-</script>
-
-<!-- =================================================
-MAIN ENGINE
-================================================= -->
-
-<script src="js/main.js?v=11"></script>
 <div id="cursorTooltip"></div>
 
-    <script>
-      // This handles closing ANY modal (Product or Text)
-      document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('close-modal')) {
-          const modal = e.target.closest('#productModal, .text-modal');
-          if (modal) modal.style.display = 'none';
-        }
-      });
-    </script>
+<script src="js/main.js?v=1.3"></script>
+
 </body>
 </html>

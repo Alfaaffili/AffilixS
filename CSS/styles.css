@@ -1,613 +1,229 @@
-﻿/* ===============================
-GLOBAL
-=============================== */
-
+﻿/* =============================================================
+   01. GLOBAL & RESET (Core Architecture)
+   ============================================================= */
 html, body {
-width: 100%;
-margin:0;
-padding:0;
-overflow-x: hidden; /* This stops the horizontal "wiggle" on mobile */
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; 
+    background: #f5f2ed;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #1f1f1f;
 }
 
-*{
-   box-sizing: border-box; /* This ensures padding doesn't push widths over 100% */
-}
+* { box-sizing: border-box; }
 
-body{
-font-family:Arial, Helvetica, sans-serif;
-background:#f5f2ed;
-color:#1f1f1f;
-}
-
-/* ===============================
-HEADER (BASE)
-=============================== */
-
-.site-header{
+/* =============================================================
+   02. HEADER ENGINE (Premium Minimalist)
+   ============================================================= */
+.site-header {
     display: flex !important;
     align-items: center;
-    justify-content: space-between; /* This is the key to the left/right split */
-    padding: 0 5%; /* Adds consistent breathing room on edges */
+    justify-content: space-between;
+    padding: 0 5%;
     background: #111;
     color: #fff;
     height: 60px;
-    width: 100%; /* Ensures it spans the whole screen */
-    position: relative;
+    width: 100%;
+    position: sticky; /* Keep navigation visible */
+    top: 0;
     z-index: 1000;
 }
 
-/* Group the logo and title so they stay on the left */
-
 .logo-group {
-
     display: flex;
-
     align-items: center;
-
-    gap: 15px; /* Space between logo and XXxxXXxx */
-
+    gap: 15px;
 }
 
-.header-nav {
+.logo img { height: 28px; width: auto; }
 
+.header-nav {
     display: flex;
-
-    gap: 2ch; /* Exactly 2 characters of space between links */
-
-    margin-left: auto; /* Pushes the whole nav group to the right */
-
+    gap: 2ch;
+    margin-left: auto;
 }
 
-.logo img{
-    height:28px;
-    width:auto;
-}
+.header-nav span, .footer-links span { cursor: pointer; transition: 0.3s; }
+.header-nav span:hover { color: #ff2d2d; }
 
-.header-nav span,
-  .footer-links span{
-    cursor:pointer;
-}
-
-/* ===============================
-HERO
-=============================== */
-
+/* =============================================================
+   03. HERO ENGINE (B04 Layout)
+   ============================================================= */
 .top-section {
-
-    display: block; /* Change from flex to block to stop 'ghost' spacing */ 
-
-    flex-direction: column; /* Stacks image and then text */
-
-    align-items: flex-start; /* Aligns text to the left like your original design */
-
     width: 100%;
-    overflow: hidden;
-    margin-top: 0 !important;
+    margin-top: 0;
     padding-top: 0;
- 
 }
 
 .identity-panel {
-
-    display: block;
     width: 100%;
-
-    height: 300px; /* Adjust height as needed */
-
+    height: 350px;
     background: url("../images/hero8888.jpg") center/cover no-repeat;
-
-    background-size: cover; /* 👈 Ensures image fits the screen width */
-    background-position: center;
-    margin: 0; /* Ensures no margin is pushing the header away */
-}
-
-.identity-text {
-
-    margin-top: -20px; /* This creates that "hanging" effect over the image */
-
-    margin-left: 40px;
-
-    display: inline-block; /* 👈 This stops the red box from stretching to the edge */
-  width: fit-content;          /* 🔥 KEY FIX */
-
-  max-width: 90%;              /* safety for mobile */
-    background: rgba(255,0,0,0.85);
-
-    padding: 8px 30px;
-
-    border-radius: 6px;
-
-    color: #fff;
-
-    font-size: 22px;
-
-  white-space: nowrap; /* prevents stretching */
-    z-index: 10;
-
-    position: relative; /* Keeps it on top of the product section border */
-
-}
-
-/* ===============================
-PRODUCTS
-=============================== */
-
-.products-section{
-    max-width:1200px;
-    margin:40px auto 40px; /* Increased top margin to 60px to clear the title */
- }
-
-.product-row-wrapper{
-    position:relative;
-}
-
-.product-row{
-    display:flex;
-    gap:18px;
-  max-width: 100%; /* Prevent row from exceeding viewport */
-    overflow-x:auto;
-    padding:20px;
-    scroll-behavior:smooth;
-}
-
-.product-row::-webkit-scrollbar{
-    display:none;
-}
-
-/* ===============================
-CARD
-=============================== */
-
-.product-card{
-    min-width:200px;
-    background:#fff;
-    border-radius:10px;
-    overflow:hidden;
-    cursor:pointer;
-    box-shadow:0 4px 12px rgba(0,0,0,0.12);
-}
-
-.product-card img{
-    width:100%;
-    height:160px;
-    object-fit:cover;
-}
-
-/* ==== .product-card:hover ~ #floatingPreview { ==== */
-/* ====    opacity:1; ==== */
-/* ====    visibility:visible; ==== */
-/* ===== } ==== */
-
-/* ===============================
-ARROWS
-=============================== */
-
-.row-arrow{
-    position:absolute;
-    top:50%;
-    transform:translateY(-50%);
-    width:40px;
-    height:40px;
-    border:none;
-    border-radius:50%;
-    background:rgba(255,0,0,0.6);
-    color:#fff;
-    cursor:pointer;
-    z-index:10;
-}
-
-/* ===============================
-ARROWS DEFAULT
-=============================== */
-.categories-wrapper .row-arrow {
-    display: none; /* hidden on desktop */
-}
-
-.row-arrow.left{left:0;}
-.row-arrow.right{right:0;}
-
-/* ===============================
-PREVIEW PANEL
-=============================== */
-
-#floatingPreview{
-    position:fixed;
-    top:100px;
-    right:40px;
-    width:360px;
-    height:420px;
-    background:#111;
-    border-radius:8px;
-    overflow:hidden;
-    
-    opacity:0;
-    visibility:hidden;
-    transition:.3s;
-    z-index:9999;
-}
-
-#floatingPreview img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-#floatingPreview.active{
-    opacity:1;
-    visibility:visible;
-}
-
-/* ===============================
-MODAL
-=============================== */
-
-#productModal{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.6);
-    display:none;
-    justify-content:center;
-    align-items:center;
-    z-index:999999;
-}
-
-.modal-box{
-    background:#fff;
-    padding:20px;
-    border-radius:10px;
-    text-align:center;
-    width:90%;
-    max-width:400px;
-    position: relative; /* this keeps X close button inside view card */
-}
-
-/* === close button style === */
-.close-modal{
-    position:absolute;
-    top:10px;
-    right:15px;
-    font-size:22px;
-    cursor:pointer;
-}
-
-/* ===============================
-BUY BUTTON
-=============================== */
-
-.buy-btn{
-    display:inline-block;
-    margin-top:15px;
-    padding:10px 20px;
-    background:#ff2d2d;
-    color:#fff;
-    text-decoration:none;
-    border-radius:6px;
-}
-
-/* ===============================
-Cursor Tool Tip " fox-tail or flurting cursorTip"
-=============================== */
-#cursorTooltip {
-    position: fixed;
-    pointer-events: none; /* Prevents the tooltip from blocking clicks */
-    background: #ff2d2d; /* Matching your theme red */
-    color: white;
-    padding: 5px 12px;
-    border-radius: 20px 20px 20px 0; /* Creates a "fox tail" or "speech bubble" shape */
-    font-size: 12px;
-    font-weight: bold;
-    z-index: 10000;
-    display: none; /* Hidden by default */
-    white-space: nowrap;
-    box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
-}
-
-/* ===============================
-CATEGORIES
-=============================== */
-
-.categories{
-    max-width:1200px;
-    margin:40px auto;
-    padding:20px;
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:20px;
-    justify-content: center;
-}
-
-.categories-wrapper {
     position: relative;
-    max-width: 1200px;
-    margin: auto;
-}
-
-.categories-wrapper .row-arrow {
-    display: none;
-}
-
-.category{
-    text-align:center;
-}
-
-.category img{
-    width:100%;
-    height:120px;
-    object-fit:cover;
-    border-radius:10px;
-}
-
-/* ============= DEFAULT (Desktop / Large Screens) ==========
-============================================================= */
-
-.products-section h2 {
-    display: inline-block;
-    width: fit-content; /* prevents stretching */
-    margin-left: 0.5ch !important;
-    max-width: 90%;
-    margin-left: 0.5ch !important;
-    margin-top: 40px;
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-.categories-section h2 {
-    display: inline-blck;
-    width: fit-content;
-    margin-left: 0.5ch !important; /* match exactly */
-    margin-top: 40px;
-    margin-bottom: 20px;
-    text-align: left;
-} 
-
-/* == SMART ADJUSTMENT (Tablets: iPad, Huawei MatePad, etc.)==
- ============================================================= */
-@media (max-width: 1024px) {
-
-.products-section h2 {
-    margin-left: 2ch; /* Reduces space slightly for tablets */
-    text-align: left;
- }
-
-.categories-section h2 {
-    margin-left: 0.5ch !important; /* match exactly */
-    text-align: left;
- }
-}
-/* ======= SMART ADJUSTMENT (Mobiles: iPhone, Samsung, etc.) === 
-MOBILE — HEADINGS FIX (≤768px)
- ============================================================= */
-@media (max-width: 768px) {
-
-.products-section h2 {
-    margin-top: -10px;
-        /* margin-left: 20px !important; */
-    margin-left: 0.5ch !important; /* match exactly */
-
-    white-space: nowrap;
-    font-size: 1.2rem;
-    text-align: left !important;
- }
-
-.categories-section h2 {
-
-    margin-left: 0.5ch !important; /* match exactly */
-
-    margin-top: -10px;
-    margin-left: 0.5ch !important; /* match exactly */
-
-    white-space: nowrap;
-    font-size: 1.2rem;
-    text-align: left !important;
- }
-
-}
-
-/* ===============================
-MOBILE — CATEGORY ARROWS
-=============================== */
-.categories-wrapper .row-arrow {
-    display: block;
-    background: rgba(255, 0, 0, 0.8);
-}
-
-    .identity-text {
-
-        width: 45%;
-        margin-top: -60px; /* Pulls it up by roughly 2 lines */
-           /* margin-left: 20px; */
-
-        font-size: 16px;
-
-        
-
-        max-width: 55%; /* Prevents red box from hitting screen edge */
-        display: inline-block;
-
-    }
- }
-}
-
-/* ===============================
-FOOTER
-=============================== */
-
-footer{
-    background:#111 !important;
-    color:#fff !important;
-    text-align:center;
-    padding:15px;
-}
-
-.footer-links{
-    display:flex;
-    justify-content:center;
-    gap:40px; /* 🔥 more spacing */
-    margin-bottom:10px;
-}
-
-footer p{
-    margin-left: 2ch;
-}
-
-/* ===============================
-TEXT MODALS
-=============================== */
-
-.text-modal{
-    display:none;
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.7);
-    justify-content:center;
-    align-items:center;
-    z-index:999999;
-}
-
-.text-modal .modal-box{
-    background:#111;
-    color:#fff;
-    padding:25px;
-}
-
-/* ===============================
-MOBILE (OVERRIDES)
-=============================== */
-/* ===============================
-HEADER
-=============================== */
-.site-header {
-    height: auto; /* Allow header to grow if items wrap */
-    padding: 10px 15px;
-    margin-bottom: 0 !important;
-}
-
-.logo-group h1 {
-    font-size: 18px; /* Shrink title text slightly on mobile */
-}
-
-.header-nav {
-    font-size: 13px; /* Shrink links slightly */
-    gap: 1.5ch;
-}
-
-/* Fix for the Huawei White Space issue */
-
-.top-section {
-
-    margin-top: 0 !important; /* Close the microscopic gap */
-    padding-top: 0 !important;
-    display: block !important;
-
-}
-.identity-panel {
-         /* width: 100%; */
-    background-size: cover; /* Forces image to fit width/height exactly */
-    background-position: center;
 }
 
 .identity-text {
-    width: 45%;
-    margin-top: -60px;
-    font-size: 16px;
-    max-width: 55%;
+    margin-top: -30px;
+    margin-left: 40px;
+    background: rgba(255, 0, 0, 0.9);
+    padding: 10px 30px;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 22px;
     display: inline-block;
-    overflow-wrap: break-work
+    width: fit-content;
+    max-width: 90%;
+    z-index: 20;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
-/* ===============================
 
-    PRODUCT ROW
+/* =============================================================
+   04. PRODUCT ENGINE (B04 Algorithm: 5-Card Rows)
+   ============================================================= */
+.products-section {
+    max-width: 1200px;
+    margin: 40px auto;
+}
 
-    =============================== */
+.products-section h2, .categories-section h2 {
+    margin-left: 0.5ch;
+    font-size: 1.5rem;
+}
+
+.product-row-wrapper { position: relative; margin-bottom: 30px; }
 
 .product-row {
-
-    padding: 15px 10px;
-
-    max-width: 100%;
-
+    display: flex;
+    gap: 18px;
+    overflow-x: auto;
+    padding: 20px 5px;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory; /* Premium feel */
 }
 
-.product-card{
-    min-width: 160px; /* This makes cards smaller so they fit better on a phone screen. */
+.product-row::-webkit-scrollbar { display: none; }
+
+.product-card {
+    min-width: calc(20% - 15px); /* Forces exactly 5 cards per row on desktop */
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    scroll-snap-align: start;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    transition: transform 0.3s;
 }
 
-/* ===============================
+.product-card:hover { transform: translateY(-5px); }
 
-    ARROWS (IMPORTANT — PLACE HERE)
-
-    =============================== */
-
-.row-arrow.left {
-
-    left: -10px;
-
+.product-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
 }
 
-
-.row-arrow.right {
-
-    right: -10px;
-
-}
-
-/* ===============================
-
-    PREVIEW (DISABLED ON MOBILE)
-
-    =============================== */
-
+/* =============================================================
+   05. PREVIEW & TOOLTIP ENGINE
+   ============================================================= */
 #floatingPreview {
-
-    display: none;
-
+    position: fixed;
+    top: 100px;
+    right: 40px;
+    width: 320px;
+    height: 320px;
+    background: #111;
+    border-radius: 8px;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    z-index: 999;
+    border: 2px solid #ff2d2d;
 }
 
+#floatingPreview.active { opacity: 1; visibility: visible; }
 
+#cursorTooltip {
+    position: fixed;
+    pointer-events: none;
+    background: #ff2d2d;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px 20px 20px 0;
+    font-size: 12px;
+    z-index: 10000;
+    display: none;
+}
 
-
-/* ===============================
-
-    CATEGORIES
-
-    =============================== */
+/* =============================================================
+   06. CATEGORY ENGINE
+   ============================================================= */
+.categories-wrapper { position: relative; max-width: 1200px; margin: auto; }
 
 .categories {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
 
+.category img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* =============================================================
+   07. FOOTER ENGINE (FIXED BLACK BACKGROUND)
+   ============================================================= */
+footer {
+    background-color: #111111 !important; /* Force black */
+    color: #ffffff !important;
+    text-align: center;
+    padding: 30px 15px;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.footer-links {
     display: flex;
-
-    overflow-x: auto;
-
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 15px;
 }
 
-
-
-.categories::-webkit-scrollbar {
-
-    display: none;
-
+.copyright-text {
+    text-align: left;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-size: 0.8rem;
+    opacity: 0.7;
 }
 
+/* =============================================================
+   08. RESPONSIVE ENGINE (B02 & B04 Rules)
+   ============================================================= */
+@media (max-width: 768px) {
+    .site-header { height: auto; padding: 10px 15px; }
+    .header-nav { font-size: 12px; gap: 1ch; }
 
+    .identity-panel { height: 250px; }
+    .identity-text { font-size: 16px; margin-top: -40px; margin-left: 20px; max-width: 70%; }
 
-.category {
+    .product-card { min-width: calc(50% - 10px); } /* 2 cards per screen on mobile */
+    
+    .categories {
+        display: flex;
+        overflow-x: auto;
+        gap: 15px;
+    }
+    .category { min-width: 140px; }
 
-    min-width: 140px; /* This allows users to swipe through categories sideways on their phones. */
-
-    max-width: 140px; /* Forces equal width */
-}
-
-.categories-wrapper .row-arrow {
-    display: block;
-}
-
-.categories{
-    display:flex;
-    overflow-x:auto; /* This allows users to swipe through categories sideways on their phones. */
+    /* Disable Desktop-only engines */
+    #floatingPreview, #cursorTooltip { display: none !important; }
+    
+    footer .footer-links { flex-direction: column; gap: 15px; }
 }
