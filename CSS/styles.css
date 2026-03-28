@@ -316,3 +316,95 @@ footer {
     opacity: 0.5;
     letter-spacing: 1px;
 }
+
+/* =============================================================
+   11. MOBILE & TABLET ADAPTATION ENGINE (Galaxy S20 / Pura 70)
+   ============================================================= */
+@media (max-width: 1024px) {
+    /* Header: 2-Line Stack Strategy */
+    .site-header {
+        height: auto !important;
+        flex-direction: column;
+        padding: 10px 5%;
+        background: #000; /* Black background as requested */
+    }
+    .logo-group { 
+        width: 100%; 
+        justify-content: flex-start; 
+        margin-bottom: 8px; 
+    }
+    .header-nav { 
+        width: 100%; 
+        display: flex; 
+        justify-content: space-between; 
+        padding: 5px 0;
+        border-top: 1px solid #333; /* Visual separator for 2nd line */
+    }
+    .header-nav span, .header-nav a { 
+        margin: 0; 
+        font-size: 0.8rem; 
+    }
+
+    /* Hero: Edge-to-Edge & Height Adjustment */
+    .top-section { margin-bottom: 20px; }
+    .identity-panel { 
+        height: 180px; 
+        border-right: none; 
+        width: 100vw; 
+        left: 0;
+    }
+    .identity-text { 
+        left: 15px; 
+        bottom: -8px; 
+        font-size: 16px; 
+        padding: 4px 15px; 
+    }
+
+    /* Section Headings */
+    .products-section h2, .categories-section h2 { 
+        margin-left: 2ch !important; 
+        font-size: 1rem; 
+    }
+
+    /* Product Rows: 3 Cards Visible Logic */
+    .product-row-wrapper { padding: 0 5px; }
+    .product-card {
+        min-width: calc(33.33% - 14px); /* Forces exactly 3 cards */
+        margin: 0 7px;
+    }
+    .product-card img { height: 100px; }
+
+    /* Mobile Arrows: Bottom Corner Positioning */
+    .row-arrow {
+        top: auto;
+        bottom: -40px; 
+        transform: none;
+        width: 32px;
+        height: 32px;
+    }
+    .row-arrow.left { left: 15px; }
+    .row-arrow.right { right: 15px; }
+
+    /* Category Engine: Single Row */
+    .categories {
+        padding-bottom: 50px;
+    }
+    .category img {
+        width: 80px;
+        height: 80px;
+    }
+
+    /* Footer: 2-Line Indented Left (2ch) */
+    footer {
+        height: 80px;
+        background: #000;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding-left: 2ch; /* 2-character indent */
+    }
+    .footer-links { margin-bottom: 6px; }
+    .footer-links span { font-size: 11px; margin-right: 12px; }
+    .copyright-text { font-size: 10px; opacity: 0.6; }
+}

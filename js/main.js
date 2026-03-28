@@ -180,3 +180,40 @@ document.addEventListener("DOMContentLoaded", async () => {
         categoryArrows.forEach(arrow => arrow.style.display = "none");
     }
 });
+
+/* =============================================================
+   11. MOBILE & TABLET DEVICE LOGIC (Touch & Resize)
+   ============================================================= */
+function updateMobileState() {
+    const isMobile = window.innerWidth <= 1024;
+    const preview = document.querySelector("#floatingPreview");
+    const tooltip = document.querySelector("#cursorTooltip");
+
+    // 1. Disable Desktop-Only UI on Touch Devices
+    if (isMobile) {
+        if (preview) preview.style.display = "none";
+        if (tooltip) tooltip.style.display = "none";
+    }
+
+    // 2. Category Arrow Logic (Hide if items <= 3 on Mobile)
+    const categoryCards = document.querySelectorAll(".category");
+    const categoryArrows = document.querySelectorAll(".categories-wrapper .row-arrow");
+    
+    if (isMobile && categoryArrows.length > 0) {
+        if (categoryCards.length <= 3) {
+            categoryArrows.forEach(a => a.style.display = "none");
+        } else {
+            categoryArrows.forEach(a => a.style.display = "flex");
+        }
+    }
+}
+
+// Ensure it runs after products are fully rendered
+window.addEventListener("resize", updateMobileState);
+
+// Append to your DOMContentLoaded or call it at the end of loadProducts
+const originalLoadProducts = loadProducts;
+loadProducts = async function() {
+    await originalLoadProducts();
+    updateMobileState();
+};
