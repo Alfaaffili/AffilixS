@@ -88,10 +88,27 @@ function createCard(p) {
     const img = document.createElement("img");
     img.src = p.image;
     img.alt = p.name;
-    img.loading = "lazy";
+      /* img.loading = "lazy"; */
     card.appendChild(img);
 
+
+    // HOVER COMMANDS
+    card.onmouseenter = () => {
+        const prev = document.querySelector("#floatingPreview");
+        const prevImg = document.querySelector("#previewImage");
+        if(prev && prevImg) {
+            prevImg.src = p.image;
+            prev.classList.add("active");
+        }
+    };
+    card.onmouseleave = () => {
+        const prev = document.querySelector("#floatingPreview");
+        if(prev) prev.classList.remove("active");
+    };
+
+    // Click Command
     card.onclick = () => openProductModal(p);
+
     return card;
 }
 
@@ -149,6 +166,17 @@ document.addEventListener("mousemove", (e) => {
 });
 
 /* =============================================================
-   10. INITIALIZATION
+   10. INITIALIZATION (Updated for Category Arrow Logic)
    ============================================================= */
-document.addEventListener("DOMContentLoaded", loadProducts);
+document.addEventListener("DOMContentLoaded", async () => {
+    // 1. Load Products
+    await loadProducts();
+
+    // 2. Check Categories for Arrows (Hide if 5 or less)
+    const categoryCards = document.querySelectorAll(".category");
+    const categoryArrows = document.querySelectorAll(".categories-wrapper .row-arrow");
+    
+    if (categoryCards.length <= 5) {
+        categoryArrows.forEach(arrow => arrow.style.display = "none");
+    }
+});
