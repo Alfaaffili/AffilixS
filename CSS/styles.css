@@ -374,6 +374,25 @@ footer {
     }
     .product-card img { height: 100px; }
 
+.product-row-wrapper .row-arrow {
+
+    top: auto !important;
+
+    bottom: 5px !important; /* Sits exactly at the bottom of the card row */
+
+    margin: 0;
+
+    width: 30px;
+
+    height: 30px;
+
+    background: rgba(255, 0, 0, 0.95) !important;}
+
+
+.product-row-wrapper .row-arrow.left { left: 5px !important; }
+
+.product-row-wrapper .row-arrow.right { right: 5px !important; }
+
     /* Mobile Arrows: Bottom Corner Positioning */
     .row-arrow {
         top: auto;
@@ -393,6 +412,59 @@ footer {
         width: 80px;
         height: 80px;
     }
+
+/* Fix 2: Category Arrow Positioning */
+
+.categories-wrapper {
+
+    position: relative;
+
+    padding-bottom: 0;
+ 
+}
+
+.categories-wrapper .row-arrow {
+
+    bottom: 10px !important; /* Keeps them inside the category section */
+
+}
+
+/* Fix 3: Modal Scroll & Size Limit */
+
+.modal-box {
+
+    max-height: 85vh; /* Never taller than 85% of screen */
+
+    overflow-y: auto; /* Allows scrolling INSIDE the modal if text is long */
+
+    margin: 20px;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+
+#modalTitle {
+
+    font-size: 1.1rem;
+
+    line-height: 1.2;
+
+    margin: 10px 0;
+
+    /* Limit long text to 3 lines to prevent box explosion */
+
+    display: -webkit-box;
+
+    -webkit-line-clamp: 3;
+
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+
+}
 
     /* Footer: 2-Line Indented Left (2ch) */
     footer {
