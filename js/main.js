@@ -136,30 +136,32 @@ function openProductModal(p) {
 }
 
 /* =============================================================
-   08. GLOBAL MODAL CONTROLLER (Desktop & Mobile)
+   08. GLOBAL MODAL CONTROLLER (With Tap-to-Close Hint Desktop & Mobile)
    ============================================================ */
-document.addEventListener("click", (e) => {
-    // 1. OPENING Modals (Header, Footer, or any data-modal button)
-    const trigger = e.target.closest("[data-modal]");
-    if (trigger) {
-        const target = document.getElementById(trigger.dataset.modal);
-        if (target) {
-            target.classList.add("active");
-            target.style.display = "flex";
-            document.body.style.overflow = "hidden";
-        }
+function openProductModal(p) {
+    const modal = document.querySelector("#productModal");
+    if (!modal) return;
+
+    document.querySelector("#modalImage").src = p.image;
+    document.querySelector("#modalTitle").textContent = p.name;
+    document.querySelector("#modalPrice").textContent = `${p.currency}${p.price}`;
+    
+    // Fix: Affiliate Button Logic
+    const buyBtn = document.querySelector("#buyButton");
+    buyBtn.href = p.affiliateLink;
+    buyBtn.onclick = (e) => e.stopPropagation(); // Allow click to pass to URL
+
+    // Add Hint if it doesn't exist
+    if (!document.querySelector(".modal-hint")) {
+        const hint = document.createElement("div");
+        hint.className = "modal-hint";
+        hint.innerText = "( Tap background to close )";
+        document.querySelector(".modal-box").appendChild(hint);
     }
 
-    // 2. CLOSING Modals (Clicking X or the Dark Background)
-    if (e.target.classList.contains("close-modal") || e.target.classList.contains("modal") || e.target.classList.contains("text-modal")) {
-        const activeModal = e.target.closest(".modal, .text-modal");
-        if (activeModal) {
-            activeModal.classList.remove("active");
-            activeModal.style.display = "none";
-            document.body.style.overflow = "auto";
-        }
-    }
-});
+    modal.style.display = "flex";
+    document.body.style.overflow = "hidden";
+}
 
 /* =============================================================
    09. CATEGORY & PRODUCT ARROW ENGINE (Logic Fix)
@@ -176,84 +178,23 @@ function setupArrows() {
 }
 
 /* =============================================================
-   10. INITIALIZATION
+   10. INITIALIZATION (Arrow & Device Logic)
    ============================================================= */
 document.addEventListener("DOMContentLoaded", async () => {
-    await loadProducts(); // Your 20-20-20 logic runs here
-    setupArrows();       // Activates all arrows (Category + Products)
-    
-    // Final check for Category arrow visibility
+    await loadProducts();
+    setupArrows();
+
+    const isMobile = window.innerWidth <= 1024;
     const catCount = document.querySelectorAll(".category").length;
-    if (catCount <= 3 && window.innerWidth <= 1024) {
-        document.querySelectorAll(".categories-wrapper .row-arrow").forEach(a => a.style.display = "none");
+    const catArrows = document.querySelectorAll(".categories-wrapper .row-arrow");
+
+    // DESKTOP RULE: Hide if <= 5
+    if (!isMobile && catCount <= 5) {
+        catArrows.forEach(a => a.style.display = "none");
+    }
+    
+    // MOBILE RULE: Always show arrows if scrollable (> 2 cards)
+    if (isMobile && catCount > 2) {
+        catArrows.forEach(a => a.style.display = "flex");
     }
 });
-
-/* =============================================================
-   11. MOBILE & TABLET DEVICE LOGIC (Touch & Resize)
-   ============================================================= */
-function updateMobileState() {
-    const isMobile = window.innerWidth <= 1024;
-    const preview = document.querySelector("#floatingPreview");
-    const tooltip = document.querySelector("#cursorTooltip");
-
-    // 1. Disable Desktop-Only UI on Touch Devices
-    if (isMobile) {
-        if (preview) preview.style.display = "none";
-        if (tooltip) tooltip.style.display = "none";
-    }
-
-    // 2. Category Arrow Logic (Hide if items <= 3 on Mobile)
-    const categoryCards = document.querySelectorAll(".category");
-    const categoryArrows = document.querySelectorAll(".categories-wrapper .row-arrow");
-    
-    if (isMobile && categoryArrows.length > 0) {
-        if (categoryCards.length <= 3) {
-            categoryArrows.forEach(a => a.style.display = "none");
-        } else {
-            categoryArrows.forEach(a => a.style.display = "flex");
-        }
-    }
-}
-
-// Ensure it runs after products are fully rendered
-window.addEventListener("resize", updateMobileState);
-
-// Append to your DOMContentLoaded or call it at the end of loadProducts
-const originalLoadProducts = loadProducts;
-loadProducts = async function() {
-    await originalLoadProducts();
-    updateMobileState();
-};
-
-/* --- Update Section 11: Mobile Tap Fix --- */
-
-function applyMobileLogic() {
-
-    const isMobile = window.innerWidth <= 1024;
-
-    
-
-    // Ensure all cards use 'pointer' cursor and responsive heights
-
-    document.querySelectorAll('.product-card').forEach(card => {
-
-        card.style.cursor = "pointer";
-
-        // On mobile, force the card to be the tap target
-
-        card.onclick = (e) => {
-
-            // This prevents "ghost clicks" or scroll interference
-
-            e.stopPropagation();
-
-            const pId = card.getAttribute('data-id');
- 
-            // The existing data retrieval logic remains same
-
-        };
-
-    });
-
-}

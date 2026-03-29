@@ -45,13 +45,13 @@
     <img id="previewImage" alt="Product preview">
 </div>
 
-<div id="productModal" class="modal">
-    <div class="modal-box">
+<div id="productModal" class="modal" onclick="this.style.display='none'; document.body.style.overflow='auto';">
+    <div class="modal-box" onclick="event.stopPropagation();">
         <span class="close-modal">&times;</span>
-        <img id="modalImage" src="" alt="Product Image">
-        <h2 id="modalTitle"></h2>
+        <img id="modalImage" src="" alt="">
+        <h3 id="modalTitle"></h3>
         <p id="modalPrice"></p>
-        <a id="buyButton" class="buy-btn" target="_blank">Buy Now</a>
+        <a id="buyButton" href="#" target="_blank" class="buy-btn">Buy Now</a>
     </div>
 </div>
 

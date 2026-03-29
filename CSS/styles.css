@@ -321,47 +321,58 @@ footer {
    11. MOBILE & TABLET REFINEMENTS (The "Invisible Wall" Fix)
    ============================================================= */
 @media (max-width: 1024px) {
-    /* Reduce space between rows & Header-Hero gap */
-    .top-section { margin-bottom: 5px; }
-    .products-section h2, .categories-section h2 { margin-top: 15px; margin-bottom: 10px; }
+    /* Header: Restore 2-Line Structure */
+    .site-header {
+        height: auto !important;
+        flex-direction: column !important;
+        padding: 10px 5% !important;
+        background: #000;
+    }
+    .logo-group { width: 100%; justify-content: flex-start; margin-bottom: 5px; }
+    .header-nav { 
+        width: 100%; 
+        display: flex !important; 
+        flex-direction: row !important; /* Forces horizontal links, not vertical */
+        justify-content: space-between; 
+    }
 
-    /* Increase Card Width (Show ~2.2 cards instead of 3 to make them bigger) */
+    /* Hero: Fix Horizontal Overflow & Identity Position */
+    .top-section { overflow: hidden; margin-bottom: 10px; }
+    .identity-panel { width: 100%; height: 180px; }
+    .identity-text { 
+        left: 20px; 
+        right: auto; 
+        bottom: -5px; 
+        transform: none; 
+        font-size: 16px; 
+    }
+
+    /* Cards: Increased Width & Tightened Spacing */
     .product-card {
-        min-width: calc(45% - 10px); /* Increased width by ~2 characters equivalent */
+        min-width: calc(48% - 10px) !important; /* Larger cards as requested */
         margin: 0 5px;
     }
-    
-    /* Reduce space between Category cards */
-    .category { min-width: 110px; margin-right: -10px; }
-    .category img { width: 100px; height: 100px; }
 
-    /* Arrows: Tucked into lower corners of the actual rows */
-    .product-row-wrapper .row-arrow, 
+    /* Category Arrows: Corner Anchoring */
+    .categories-wrapper { position: relative; padding-bottom: 40px; }
     .categories-wrapper .row-arrow {
         top: auto !important;
         bottom: 5px !important;
-        width: 30px;
-        height: 30px;
-        z-index: 50; /* Below the modal but above the card */
+        display: flex !important; /* Ensure they are visible on mobile */
     }
-    .row-arrow.left { left: 2px !important; }
-    .row-arrow.right { right: 2px !important; }
 
-    /* Fix: The Invisible Wall (Crucial for Tapping) */
-    #productModal, .text-modal, #floatingPreview {
-        pointer-events: none; /* Allows taps to "pass through" when hidden */
+    /* Modal: Tap-to-Close & Scroll Fix */
+    #productModal, .text-modal {
         display: none; 
+        position: fixed;
+        z-index: 99999;
     }
-    #productModal.active, .text-modal.active {
-        pointer-events: auto; /* Re-enables taps only when visible */
-        display: flex !important;
-    }
-
-    /* Modal Stability: Limit expansion only to Modal, not Cards */
-    .modal-box #modalTitle {
-        display: -webkit-box;
-        -webkit-line-clamp: 4;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
+    
+    .modal-hint {
+        color: rgba(255,255,255,0.6);
+        font-size: 12px;
+        margin-top: 15px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
     }
 }
