@@ -175,20 +175,41 @@ function setupArrows() {
 }
 
 /* =============================================================
-   10. INITIALIZATION (Device Logic)
+   10. INITIALIZATION (v1.3-B01 Bootloader)
    ============================================================= */
 document.addEventListener("DOMContentLoaded", async () => {
+    // 1. Build Page Content
     await loadProducts();
+    
+    // 2. Activate UI Engines
     setupArrows();
 
     const isMobile = window.innerWidth <= 1024;
-    const preview = document.querySelector("#floatingPreview");
+    const catWrapper = document.querySelector(".categories-wrapper");
+    const catCount = document.querySelectorAll(".category").length;
 
+    // --- DESKTOP ARROW RULE ---
+    if (!isMobile) {
+        if (catCount > 5) {
+            if (catWrapper) catWrapper.classList.add("show-arrows");
+        } else {
+            // Force Hide if 5 or fewer
+            document.querySelectorAll(".categories-wrapper .row-arrow")
+                    .forEach(a => a.style.display = "none");
+        }
+    }
+
+    // --- MOBILE ARROW RULE ---
     if (isMobile) {
-        // KILL Hover Preview on Mobile to prevent tap-blocking
-        if (preview) preview.style.display = "none";
-    } else {
-        // RESTORE Hover Preview for Desktop
-        if (preview) preview.style.display = "none"; // JS handles 'block' on mouseenter
+        // Always show on mobile if there's more than 1 category
+        if (catCount > 1) {
+            document.querySelectorAll(".categories-wrapper .row-arrow")
+                    .forEach(a => a.style.display = "flex");
+        }
+        
+        // Samsung/Huawei Cache Buster: Force a layout recalculation
+        setTimeout(() => {
+            window.dispatchEvent(new Event('resize'));
+        }, 100);
     }
 });

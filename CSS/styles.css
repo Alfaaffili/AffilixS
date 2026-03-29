@@ -302,31 +302,64 @@ footer {
 }
 
 /* =============================================================
-   11. MOBILE PRECISION (Galaxy & Huawei Wide-Card)
+   11. MOBILE & TABLET PRECISION (v1.3-B01 Final Stable)
    ============================================================= */
 @media (max-width: 1024px) {
-    /* Header: Centered Logo + Space-Around Nav */
-    .site-header { flex-direction: column; height: auto; padding: 10px 0; }
-    .logo-group { width: 100%; justify-content: center; margin-bottom: 8px; }
-    .header-nav { width: 100%; display: flex; justify-content: space-around; }
+    /* Header: Logo Left-Aligned & Nav Space-Around */
+    .site-header { 
+        height: auto !important; 
+        flex-direction: column !important; 
+        padding: 10px 0 !important; 
+    }
+    .logo-group { 
+        width: 100% !important; 
+        justify-content: flex-start !important; 
+        padding-left: 20px !important; /* Forces Logo to Left */
+        margin-bottom: 8px; 
+    }
+    .header-nav { 
+        width: 100% !important; 
+        display: flex !important; 
+        justify-content: space-around !important; 
+        border-top: 1px solid #222;
+        padding-top: 8px;
+    }
+    .header-nav span { font-size: 11px; white-space: nowrap; }
 
-    /* Hero & Identity */
-    .top-section { overflow: hidden; }
-    .identity-panel { height: 160px; }
+    /* Identity Statement: Centered */
     .identity-text { 
         left: 50% !important; 
         transform: translateX(-50%) !important; 
         font-size: 13px !important;
+        white-space: nowrap;
+        bottom: -12px !important;
     }
 
-    /* Product Cards: 2-Card "Premium" Width */
-    .product-card {
-        min-width: calc(48% - 10px) !important; /* Restored to 2 cards per view */
-        height: 170px !important; /* Proportional height for 2 cards */
-        margin: 0 5px;
-    }
-    .product-card img { height: 110px !important; }
-
-    /* Tighten Row Spacing */
+    /* Product Cards: 2-Card "Premium" View */
     .product-row-wrapper { margin-bottom: 5px !important; }
+    .product-card {
+        min-width: calc(48% - 10px) !important; /* 2 cards per row */
+        height: 175px !important;
+        margin: 0 5px !important;
+    }
+    .product-card img { height: 115px !important; object-fit: cover; }
+
+    /* Category Cards: Show ~2.5 cards */
+    .category { min-width: 100px !important; margin-right: 8px !important; }
+    .category img { width: 85px !important; height: 85px !important; }
+
+    /* Arrows: Lower Corners */
+    .row-arrow {
+        top: auto !important;
+        bottom: 5px !important;
+        width: 30px !important;
+        height: 30px !important;
+    }
+}
+
+/* DESKTOP SAFETY: Hide Category Arrows if categories <= 5 */
+@media (min-width: 1025px) {
+    .categories-wrapper:not(.show-arrows) .row-arrow {
+        display: none !important;
+    }
 }
