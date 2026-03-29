@@ -140,23 +140,21 @@ function openProductModal(p) {
    08. GLOBAL MODAL CONTROLLER (Stabilized)
    ============================================================= */
 document.addEventListener("click", (e) => {
-    // 1. OPENING (Header/Footer Nav)
+    // 1. OPENING Logic
     const trigger = e.target.closest("[data-modal]");
     if (trigger) {
         const target = document.getElementById(trigger.dataset.modal);
         if (target) {
             target.classList.add("active");
-            target.style.display = "flex";
             document.body.style.overflow = "hidden";
         }
     }
 
-    // 2. CLOSING (X button or clicking outside the box)
-    if (e.target.classList.contains("close-modal") || e.target.id === "productModal" || e.target.classList.contains("text-modal")) {
+    // 2. CLOSING Logic (X button OR background)
+    if (e.target.classList.contains("close-modal") || e.target.classList.contains("modal") || e.target.classList.contains("text-modal")) {
         const activeModal = document.querySelector(".modal.active, .text-modal.active");
         if (activeModal) {
             activeModal.classList.remove("active");
-            activeModal.style.display = "none";
             document.body.style.overflow = "auto";
         }
     }
@@ -177,30 +175,20 @@ function setupArrows() {
 }
 
 /* =============================================================
-   10. INITIALIZATION (Mobile Touch & Arrow Logic)
+   10. INITIALIZATION (Device Logic)
    ============================================================= */
 document.addEventListener("DOMContentLoaded", async () => {
     await loadProducts();
     setupArrows();
 
     const isMobile = window.innerWidth <= 1024;
+    const preview = document.querySelector("#floatingPreview");
 
-    // THE TOUCH FIX: Remove Hover Engine on Mobile entirely
     if (isMobile) {
-        const preview = document.querySelector("#floatingPreview");
-        if (preview) preview.remove(); 
-    }
-
-    // Desktop Category Arrow Logic (Hide if <= 5)
-    const catCount = document.querySelectorAll(".category").length;
-    const catArrows = document.querySelectorAll(".categories-wrapper .row-arrow");
-
-    if (!isMobile && catCount <= 5) {
-        catArrows.forEach(a => a.style.display = "none");
-    }
-    
-    // Mobile Arrow Logic (Always show if scrollable)
-    if (isMobile && catCount > 1) {
-        catArrows.forEach(a => a.style.display = "flex");
+        // KILL Hover Preview on Mobile to prevent tap-blocking
+        if (preview) preview.style.display = "none";
+    } else {
+        // RESTORE Hover Preview for Desktop
+        if (preview) preview.style.display = "none"; // JS handles 'block' on mouseenter
     }
 });
