@@ -137,25 +137,27 @@ function openProductModal(p) {
 }
 
 /* =============================================================
-   08. GLOBAL MODAL CONTROLLER (Nav & Closing)
+   08. GLOBAL MODAL CONTROLLER (Stabilized)
    ============================================================= */
 document.addEventListener("click", (e) => {
-    // 1. Trigger for Header/Footer Modals (Vision, Contact, etc.)
+    // 1. OPENING (Header/Footer Nav)
     const trigger = e.target.closest("[data-modal]");
     if (trigger) {
         const target = document.getElementById(trigger.dataset.modal);
         if (target) {
             target.classList.add("active");
+            target.style.display = "flex";
             document.body.style.overflow = "hidden";
         }
     }
 
-    // 2. Universal Closer (X Button OR clicking the dark background)
-    if (e.target.classList.contains("close-modal") || e.target.classList.contains("modal") || e.target.classList.contains("text-modal")) {
+    // 2. CLOSING (X button or clicking outside the box)
+    if (e.target.classList.contains("close-modal") || e.target.id === "productModal" || e.target.classList.contains("text-modal")) {
         const activeModal = document.querySelector(".modal.active, .text-modal.active");
         if (activeModal) {
             activeModal.classList.remove("active");
-            document.body.style.overflow = "auto"; // Restore scroll
+            activeModal.style.display = "none";
+            document.body.style.overflow = "auto";
         }
     }
 });
@@ -175,26 +177,29 @@ function setupArrows() {
 }
 
 /* =============================================================
-   10. INITIALIZATION (Bootloader)
+   10. INITIALIZATION (Mobile Touch & Arrow Logic)
    ============================================================= */
 document.addEventListener("DOMContentLoaded", async () => {
-    // 1. Render Products (20-20-20 Logic)
-    await loadProducts(); 
-    
-    // 2. Activate UI
+    await loadProducts();
     setupArrows();
-    
-    // 3. Category Arrow Rules
+
     const isMobile = window.innerWidth <= 1024;
+
+    // THE TOUCH FIX: Remove Hover Engine on Mobile entirely
+    if (isMobile) {
+        const preview = document.querySelector("#floatingPreview");
+        if (preview) preview.remove(); 
+    }
+
+    // Desktop Category Arrow Logic (Hide if <= 5)
     const catCount = document.querySelectorAll(".category").length;
     const catArrows = document.querySelectorAll(".categories-wrapper .row-arrow");
 
-    // Hide on Desktop if <= 5 categories
     if (!isMobile && catCount <= 5) {
         catArrows.forEach(a => a.style.display = "none");
     }
     
-    // Always show on Mobile if categories exist
+    // Mobile Arrow Logic (Always show if scrollable)
     if (isMobile && catCount > 1) {
         catArrows.forEach(a => a.style.display = "flex");
     }

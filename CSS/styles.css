@@ -184,48 +184,29 @@ html, body {
 }
 
 /* =============================================================
-   08. MODAL ENGINE (Consistency & Scroll Fix)
+   08. MODAL ENGINE (Close Button & Tap-Through Fix)
    ============================================================= */
-.modal, .text-modal {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.85);
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    pointer-events: none; /* Allows taps to pass through when hidden */
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #333;
+    z-index: 10001;
 }
-.modal.active, .text-modal.active {
+
+/* THE FIX: Ensure modals don't block taps when hidden */
+#productModal, .text-modal, #floatingPreview {
+    display: none;
+    pointer-events: none !important;
+    visibility: hidden !important;
+}
+
+#productModal.active, .text-modal.active {
     display: flex !important;
     pointer-events: auto !important;
-}
-
-.modal-box {
-    background: #fff;
-    padding: 25px;
-    border-radius: 12px;
-    position: relative;
-    width: 85%;
-    max-width: 400px;
-    /* --- THE FIX: Vertical Stability --- */
-    max-height: 80vh; /* Never taller than 80% of screen */
-    overflow-y: auto; /* Adds scrollbar inside if text is too long */
-    text-align: center;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-}
-
-.modal-hint {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 4px 12px;
-    background: #ff0000; /* Red Highlight */
-    color: #fff;
-    font-size: 10px;
-    border-radius: 4px;
-    text-transform: uppercase;
-    font-weight: bold;
+    visibility: visible !important;
 }
 
 /* =============================================================
@@ -314,27 +295,55 @@ footer {
 }
 
 /* =============================================================
-   11. MOBILE REFINEMENTS (Surgical v1.3-B01)
+   11. MOBILE & TABLET ENGINE (v1.3-B01 Stabilized)
    ============================================================= */
 @media (max-width: 1024px) {
-    .identity-text {
-        left: 50% !important;
-        transform: translateX(-50%) !important;
+    /* Header: Force 2-Line & Prevent Navigator Scatter */
+    .site-header { 
+        height: auto !important; 
+        flex-direction: column !important; 
+        padding: 5px 0 !important; 
+    }
+    .header-nav { 
+        width: 95% !important; 
+        display: flex !important; 
+        flex-direction: row !important;
+        justify-content: space-around !important; 
+        border-top: 1px solid #222;
+        padding-top: 8px;
+        margin-top: 5px;
+    }
+    .header-nav span { font-size: 11px; white-space: nowrap; margin: 0 2px; }
+
+    /* Hero: Kill Overflow & Center Title */
+    .top-section { overflow: hidden !important; margin-bottom: 0 !important; }
+    .identity-panel { height: 150px !important; width: 100% !important; }
+    .identity-text { 
+        font-size: 12px !important; 
+        bottom: -8px !important; 
+        left: 50% !important; 
+        transform: translateX(-50%) !important; 
         white-space: nowrap;
-        font-size: 13px !important; /* Shrunk for 1-line fit */
-        padding: 4px 15px !important;
     }
 
-    /* Proportional 3-Card View */
+    /* Product Cards: Proportional 3-Card Scaling */
+    .product-row-wrapper { margin-bottom: 5px !important; }
     .product-card {
-        min-width: calc(33.33% - 12px) !important;
-        height: 160px; /* Fixed height for symmetry */
+        min-width: calc(33.33% - 10px) !important;
+        height: 135px !important; /* Proportional height */
+        margin: 0 5px !important;
     }
-    .product-card img { height: 90px; }
+    .product-card img { height: 85px !important; object-fit: cover; }
 
-    /* Category Arrows corner anchoring */
-    .categories-wrapper .row-arrow {
-        bottom: 5px !important;
+    /* Category Cards: Tighten space to show > 1 card */
+    .category { min-width: 95px !important; margin-right: 5px !important; }
+    .category img { width: 85px !important; height: 85px !important; }
+
+    /* Arrows: Lower Corner Positioning */
+    .row-arrow {
         top: auto !important;
+        bottom: 5px !important;
+        width: 28px !important;
+        height: 28px !important;
     }
 }
