@@ -136,52 +136,56 @@ function openProductModal(p) {
 }
 
 /* =============================================================
-   08. GLOBAL EVENT LISTENERS (Fix: Unlock on Close)
-   ============================================================= */
+   08. GLOBAL MODAL CONTROLLER (Desktop & Mobile)
+   ============================================================ */
 document.addEventListener("click", (e) => {
-    if (e.target.classList.contains("close-modal") || 
-        e.target.classList.contains("modal") || 
-        e.target.classList.contains("text-modal")) {
-        
-        const activeModal = e.target.closest("#productModal, .text-modal") || e.target;
+    // 1. OPENING Modals (Header, Footer, or any data-modal button)
+    const trigger = e.target.closest("[data-modal]");
+    if (trigger) {
+        const target = document.getElementById(trigger.dataset.modal);
+        if (target) {
+            target.classList.add("active");
+            target.style.display = "flex";
+            document.body.style.overflow = "hidden";
+        }
+    }
+
+    // 2. CLOSING Modals (Clicking X or the Dark Background)
+    if (e.target.classList.contains("close-modal") || e.target.classList.contains("modal") || e.target.classList.contains("text-modal")) {
+        const activeModal = e.target.closest(".modal, .text-modal");
         if (activeModal) {
+            activeModal.classList.remove("active");
             activeModal.style.display = "none";
-            // Unlock page scrolling
-            document.body.style.overflow = "auto"; 
+            document.body.style.overflow = "auto";
         }
     }
 });
 
 /* =============================================================
-   09. TOOLTIP ENGINE (Fox-tail)
+   09. CATEGORY & PRODUCT ARROW ENGINE (Logic Fix)
    ============================================================= */
-document.addEventListener("mousemove", (e) => {
-    if (IS_TOUCH || window.innerWidth <= 1024 || !tooltip) return;
-    
-    const card = e.target.closest(".product-card");
-    if (card) {
-        tooltip.innerHTML = `<strong>${card.dataset.shortname}</strong> — ${card.dataset.price}`;
-        tooltip.style.display = "block";
-        tooltip.style.left = (e.clientX + 15) + "px";
-        tooltip.style.top = (e.clientY - 40) + "px";
-    } else {
-        tooltip.style.display = "none";
-    }
-});
+function setupArrows() {
+    document.querySelectorAll(".row-arrow").forEach(btn => {
+        btn.onclick = (e) => {
+            e.stopPropagation();
+            const row = btn.parentElement.querySelector(".product-row, .categories");
+            const direction = btn.classList.contains("left") ? -250 : 250;
+            if (row) row.scrollBy({ left: direction, behavior: "smooth" });
+        };
+    });
+}
 
 /* =============================================================
-   10. INITIALIZATION (Updated for Category Arrow Logic)
+   10. INITIALIZATION
    ============================================================= */
 document.addEventListener("DOMContentLoaded", async () => {
-    // 1. Load Products
-    await loadProducts();
-
-    // 2. Check Categories for Arrows (Hide if 5 or less)
-    const categoryCards = document.querySelectorAll(".category");
-    const categoryArrows = document.querySelectorAll(".categories-wrapper .row-arrow");
+    await loadProducts(); // Your 20-20-20 logic runs here
+    setupArrows();       // Activates all arrows (Category + Products)
     
-    if (categoryCards.length <= 5) {
-        categoryArrows.forEach(arrow => arrow.style.display = "none");
+    // Final check for Category arrow visibility
+    const catCount = document.querySelectorAll(".category").length;
+    if (catCount <= 3 && window.innerWidth <= 1024) {
+        document.querySelectorAll(".categories-wrapper .row-arrow").forEach(a => a.style.display = "none");
     }
 });
 
