@@ -115,86 +115,87 @@ function createCard(p) {
 }
 
 /* =============================================================
-   07. PRODUCT MODAL CONTROLLER (Fix: Tap & Scroll)
+   07. PRODUCT MODAL ENGINE (Opening Logic)
    ============================================================= */
-function openProductModal(p) {
-    if (!productModal) return;
-    
-    // Reset Modal internal scroll to top
-    const modalBox = document.querySelector(".modal-box");
-    if(modalBox) modalBox.scrollTop = 0;
-
-    qs("#modalImage").src = p.image;
-    qs("#modalTitle").textContent = p.name;
-    qs("#modalPrice").textContent = `${p.currency}${p.price}`;
-    qs("#buyButton").href = p.affiliateLink;
-    
-    productModal.style.display = "flex";
-    
-    // Lock background scroll to prevent "must scroll to tap" bug
-    document.body.style.overflow = "hidden";
-}
-
-/* =============================================================
-   08. GLOBAL MODAL CONTROLLER (With Tap-to-Close Hint Desktop & Mobile)
-   ============================================================ */
 function openProductModal(p) {
     const modal = document.querySelector("#productModal");
     if (!modal) return;
 
+    // Reset internal scroll of the box to the top
+    const modalBox = document.querySelector(".modal-box");
+    if (modalBox) modalBox.scrollTop = 0;
+
+    // Inject Data
     document.querySelector("#modalImage").src = p.image;
     document.querySelector("#modalTitle").textContent = p.name;
     document.querySelector("#modalPrice").textContent = `${p.currency}${p.price}`;
+    document.querySelector("#buyButton").href = p.affiliateLink;
     
-    // Fix: Affiliate Button Logic
-    const buyBtn = document.querySelector("#buyButton");
-    buyBtn.href = p.affiliateLink;
-    buyBtn.onclick = (e) => e.stopPropagation(); // Allow click to pass to URL
-
-    // Add Hint if it doesn't exist
-    if (!document.querySelector(".modal-hint")) {
-        const hint = document.createElement("div");
-        hint.className = "modal-hint";
-        hint.innerText = "( Tap background to close )";
-        document.querySelector(".modal-box").appendChild(hint);
-    }
-
-    modal.style.display = "flex";
-    document.body.style.overflow = "hidden";
+    // Activate
+    modal.classList.add("active");
+    document.body.style.overflow = "hidden"; // Prevent background scroll
 }
 
 /* =============================================================
-   09. CATEGORY & PRODUCT ARROW ENGINE (Logic Fix)
+   08. GLOBAL MODAL CONTROLLER (Nav & Closing)
+   ============================================================= */
+document.addEventListener("click", (e) => {
+    // 1. Trigger for Header/Footer Modals (Vision, Contact, etc.)
+    const trigger = e.target.closest("[data-modal]");
+    if (trigger) {
+        const target = document.getElementById(trigger.dataset.modal);
+        if (target) {
+            target.classList.add("active");
+            document.body.style.overflow = "hidden";
+        }
+    }
+
+    // 2. Universal Closer (X Button OR clicking the dark background)
+    if (e.target.classList.contains("close-modal") || e.target.classList.contains("modal") || e.target.classList.contains("text-modal")) {
+        const activeModal = document.querySelector(".modal.active, .text-modal.active");
+        if (activeModal) {
+            activeModal.classList.remove("active");
+            document.body.style.overflow = "auto"; // Restore scroll
+        }
+    }
+});
+
+/* =============================================================
+   09. SCROLL ARROW ENGINE (Setup)
    ============================================================= */
 function setupArrows() {
     document.querySelectorAll(".row-arrow").forEach(btn => {
         btn.onclick = (e) => {
-            e.stopPropagation();
+            e.stopPropagation(); // Stop tap from hitting cards behind arrow
             const row = btn.parentElement.querySelector(".product-row, .categories");
-            const direction = btn.classList.contains("left") ? -250 : 250;
+            const direction = btn.classList.contains("left") ? -300 : 300;
             if (row) row.scrollBy({ left: direction, behavior: "smooth" });
         };
     });
 }
 
 /* =============================================================
-   10. INITIALIZATION (Arrow & Device Logic)
+   10. INITIALIZATION (Bootloader)
    ============================================================= */
 document.addEventListener("DOMContentLoaded", async () => {
-    await loadProducts();
+    // 1. Render Products (20-20-20 Logic)
+    await loadProducts(); 
+    
+    // 2. Activate UI
     setupArrows();
-
+    
+    // 3. Category Arrow Rules
     const isMobile = window.innerWidth <= 1024;
     const catCount = document.querySelectorAll(".category").length;
     const catArrows = document.querySelectorAll(".categories-wrapper .row-arrow");
 
-    // DESKTOP RULE: Hide if <= 5
+    // Hide on Desktop if <= 5 categories
     if (!isMobile && catCount <= 5) {
         catArrows.forEach(a => a.style.display = "none");
     }
     
-    // MOBILE RULE: Always show arrows if scrollable (> 2 cards)
-    if (isMobile && catCount > 2) {
+    // Always show on Mobile if categories exist
+    if (isMobile && catCount > 1) {
         catArrows.forEach(a => a.style.display = "flex");
     }
 });
