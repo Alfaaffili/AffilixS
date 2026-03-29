@@ -302,56 +302,49 @@ footer {
 }
 
 /* =============================================================
-   11. MOBILE & TABLET PRECISION (v1.3-B01 FINAL LOCKDOWN)
+   11. MOBILE & TABLET PRECISION (The "Invisible Shelf" Fix)
    ============================================================= */
 @media (max-width: 1024px) {
-    /* 1. Header & Logo (Left-Aligned) */
+    /* Header & Logo */
     .site-header { height: auto !important; flex-direction: column !important; padding: 10px 0 !important; }
-    .logo-group { 
-        width: 100% !important; 
-        justify-content: flex-start !important; 
-        padding-left: 20px !important; 
-    }
+    .logo-group { width: 100% !important; justify-content: flex-start !important; padding-left: 20px !important; }
     .header-nav { width: 100% !important; display: flex !important; justify-content: space-around !important; }
 
-    /* 2. Hero: KILL OVERFLOW & FIX TAP-THROUGH */
+    /* 1. Hero: Shrink height & disable its "Tap Footprint" */
     .top-section { 
         width: 100vw !important; 
         overflow: hidden !important; 
-        margin-bottom: 0 !important; 
-        position: relative;
+        height: 140px !important; /* Shorter height to prevent overlap */
+        z-index: 1; 
+        pointer-events: none; /* Allows taps to pass through the Hero */
     }
-    .identity-panel { 
-        width: 100% !important; 
-        height: 150px !important; 
-        pointer-events: none !important; /* 🔥 Fixes the 'Top Half Tap' issue */
-    }
+    .identity-panel { height: 100% !important; width: 100% !important; }
+    
+    /* 2. Identity Title: Positioned so it doesn't touch products */
     .identity-text { 
-        pointer-events: auto !important; /* Keeps the title interactive if needed */
         left: 50% !important; 
         transform: translateX(-50%) !important; 
+        bottom: 5px !important; /* Moved up away from the edge */
         font-size: 12px !important;
-        bottom: -10px !important;
         white-space: nowrap;
+        pointer-events: auto; /* Title remains clickable if needed */
+        z-index: 2;
     }
 
-    /* 3. Product Cards: Samsung Height & Huawei Proportions */
+    /* 3. Product Section: BRING TO FRONT */
+    .products-section { 
+        position: relative !important;
+        z-index: 10 !important; /* Higher than Hero (1) */
+        margin-top: 15px !important;
+        background: #000; /* Ensure no gaps */
+    }
+
+    /* 4. Product Cards: 2-Card Premium Wide View */
     .product-card {
         min-width: calc(48% - 10px) !important;
-        height: 165px !important; /* Specific height for S20/Pura symmetry */
+        height: 170px !important;
         margin: 0 5px !important;
+        pointer-events: auto !important; /* Ensure they are interactive */
     }
-    .product-card img { 
-        height: 105px !important; 
-        object-fit: cover !important; 
-        pointer-events: none; /* Ensures tap goes to the card container */
-    }
-
-    /* 4. Spacing & Arrows */
-    .product-row-wrapper { margin-bottom: 5px !important; }
-    .row-arrow {
-        bottom: 8px !important;
-        width: 32px !important;
-        height: 32px !important;
-    }
+    .product-card img { height: 110px !important; object-fit: cover; }
 }

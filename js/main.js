@@ -175,37 +175,34 @@ function setupArrows() {
 }
 
 /* =============================================================
-   10. INITIALIZATION (v1.3-B01 Stability Boot)
+   10. INITIALIZATION (v1.3-B01 Final Interaction Fix)
    ============================================================= */
 document.addEventListener("DOMContentLoaded", async () => {
-    // 1. Render Products
+    // 1. Build Content
     await loadProducts();
     
-    // 2. Activate UI Engines
+    // 2. Activate Engines
     setupArrows();
 
     const isMobile = window.innerWidth <= 1024;
-    const catCount = document.querySelectorAll(".category").length;
+    
+    if (isMobile) {
+        // Force the browser to recognize the new Z-Index layering
+        document.querySelector('.products-section').style.position = 'relative';
+        document.querySelector('.products-section').style.zIndex = '10';
 
-    // --- ARROW LOGIC ---
-    if (!isMobile) {
-        if (catCount <= 5) {
-            document.querySelectorAll(".categories-wrapper .row-arrow")
-                    .forEach(a => a.style.display = "none");
-        }
-    } else {
-        // Force Category Arrows on Mobile
-        if (catCount > 1) {
-            document.querySelectorAll(".categories-wrapper .row-arrow")
-                    .forEach(a => a.style.display = "flex");
-        }
-
-        // --- THE SAMSUNG CACHE REFRESH ---
-        // We force the browser to re-measure heights after a tiny delay
+        // Samsung/Huawei Force-Refresh
         setTimeout(() => {
-            const cards = document.querySelectorAll('.product-card');
-            cards.forEach(card => card.style.display = 'inline-block');
+            window.scrollTo(0, 1);
+            window.scrollTo(0, 0);
             window.dispatchEvent(new Event('resize'));
-        }, 300);
+        }, 200);
+    }
+
+    // Desktop Category Arrow Logic
+    const catCount = document.querySelectorAll(".category").length;
+    if (!isMobile && catCount <= 5) {
+        document.querySelectorAll(".categories-wrapper .row-arrow")
+                .forEach(a => a.style.display = "none");
     }
 });
