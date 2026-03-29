@@ -175,41 +175,37 @@ function setupArrows() {
 }
 
 /* =============================================================
-   10. INITIALIZATION (v1.3-B01 Bootloader)
+   10. INITIALIZATION (v1.3-B01 Stability Boot)
    ============================================================= */
 document.addEventListener("DOMContentLoaded", async () => {
-    // 1. Build Page Content
+    // 1. Render Products
     await loadProducts();
     
     // 2. Activate UI Engines
     setupArrows();
 
     const isMobile = window.innerWidth <= 1024;
-    const catWrapper = document.querySelector(".categories-wrapper");
     const catCount = document.querySelectorAll(".category").length;
 
-    // --- DESKTOP ARROW RULE ---
+    // --- ARROW LOGIC ---
     if (!isMobile) {
-        if (catCount > 5) {
-            if (catWrapper) catWrapper.classList.add("show-arrows");
-        } else {
-            // Force Hide if 5 or fewer
+        if (catCount <= 5) {
             document.querySelectorAll(".categories-wrapper .row-arrow")
                     .forEach(a => a.style.display = "none");
         }
-    }
-
-    // --- MOBILE ARROW RULE ---
-    if (isMobile) {
-        // Always show on mobile if there's more than 1 category
+    } else {
+        // Force Category Arrows on Mobile
         if (catCount > 1) {
             document.querySelectorAll(".categories-wrapper .row-arrow")
                     .forEach(a => a.style.display = "flex");
         }
-        
-        // Samsung/Huawei Cache Buster: Force a layout recalculation
+
+        // --- THE SAMSUNG CACHE REFRESH ---
+        // We force the browser to re-measure heights after a tiny delay
         setTimeout(() => {
+            const cards = document.querySelectorAll('.product-card');
+            cards.forEach(card => card.style.display = 'inline-block');
             window.dispatchEvent(new Event('resize'));
-        }, 100);
+        }, 300);
     }
 });
