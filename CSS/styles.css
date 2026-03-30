@@ -302,67 +302,65 @@ footer {
 }
 
 /* =============================================================
-   11. MOBILE & TABLET PRECISION (The "Final Layering" Fix)
+   11. MOBILE & TABLET PRECISION (The "Zero-Footprint" Fix)
    ============================================================= */
 @media (max-width: 1024px) {
-    /* Header & Nav: Ensure visibility */
-    .site-header { display: flex !important; flex-direction: column !important; height: auto !important; background: #fff !important; }
+    /* Header: Restore Black Background so White Logo is Visible */
+    .site-header { 
+        display: flex !important; 
+        flex-direction: column !important; 
+        height: auto !important; 
+        background: #000 !important; /* Fixed: Back to Black */
+    }
     .logo-group { width: 100% !important; justify-content: flex-start !important; padding-left: 20px !important; }
-    .header-nav { display: flex !important; justify-content: space-evenly !important; border-top: 1px solid #eee; padding: 8px 0; }
-    .header-nav span { display: inline-block !important; font-size: 10px; color: #333; }
-
-    /* Hero & Identity: Force "Back" Layer */
-    .top-section { 
-        position: relative !important;
-        z-index: 1 !important; /* Sit at the very bottom layer */
-        width: 100vw !important; 
-        height: 130px !important; 
-        overflow: hidden !important;
-        background: #ffffff !important;
-        pointer-events: none !important; /* Fingers pass through to cards */
+    .header-nav { 
+        width: 100% !important; 
+        display: flex !important; 
+        justify-content: space-evenly !important; 
+        border-top: 1px solid #333; 
+        padding: 8px 0; 
     }
-    /* Ensure the Hero Image stays visible */
-    .identity-panel { display: block !important; width: 100% !important; height: 100% !important; background-size: cover !important; }
-    
+    .header-nav span { font-size: 10px; color: #fff !important; } /* Nav text white */
+
+    /* THE GLASS WALL FIX: Force hidden elements to have NO size */
+    #productModal:not(.active), 
+    .text-modal:not(.active), 
+    #floatingPreview {
+        position: fixed !important;
+        top: -9999px !important; /* Throw it off-screen */
+        left: -9999px !important;
+        width: 0 !important;
+        height: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+
+    /* Hero: Ensure image is visible behind the black nav */
+    .top-section { height: 130px !important; z-index: 1; background: #000 !important; }
     .identity-text { 
-        left: 50% !important; 
-        transform: translateX(-50%) !important; 
-        bottom: 10px !important;
-        font-size: 11px !important;
-        background: #000;
+        background: #ff0000; /* Red Highlight to match your brand */
         color: #fff;
-        padding: 4px 12px !important;
-        z-index: 2 !important;
+        font-size: 11px !important;
+        bottom: 5px !important;
+        z-index: 2;
     }
 
-    /* PRODUCTS: Force "Front" Layer (The Tap Fix) */
-    .products-section { 
-        position: relative !important;
-        z-index: 100 !important; /* Sit on top of everything else */
-        background: #ffffff !important;
-        margin-top: -10px !important; /* Pull up to overlap Hero safely */
-    }
-
-    /* Product Cards: Liberated (No Squeezing) */
-    .product-row-wrapper { position: relative !important; padding: 0 5px !important; }
+    /* Product Cards: Proportional 2-Wide View */
+    .product-row-wrapper { z-index: 100 !important; }
     .product-card {
-        min-width: calc(48% - 5px) !important;
-        height: 170px !important;
-        margin: 0 5px !important;
+        min-width: calc(46% - 5px) !important; /* Slightly smaller to fit better */
+        height: 160px !important; /* Reduced height for elegance */
+        margin: 5px !important;
         z-index: 101 !important;
     }
+    .product-card img { height: 100px !important; }
 
-    /* Arrows: Floating Red Corners (Saves Card Width) */
+    /* Arrows: Corner Floating */
     .row-arrow {
         position: absolute !important;
-        bottom: 15px !important;
-        top: auto !important;
-        width: 30px !important;
-        height: 30px !important;
-        background: rgba(255, 0, 0, 0.8) !important;
+        bottom: 10px !important;
+        width: 28px !important;
+        height: 28px !important;
         z-index: 200 !important;
-        border-radius: 4px !important;
     }
-    .row-arrow.left { left: 10px !important; }
-    .row-arrow.right { right: 10px !important; }
 }

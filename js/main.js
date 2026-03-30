@@ -175,7 +175,7 @@ function setupArrows() {
 }
 
 /* =============================================================
-   10. INITIALIZATION (v1.3-B01 Execution Lock)
+   10. INITIALIZATION (v1.3-B01 Final Tap Cleanup)
    ============================================================= */
 document.addEventListener("DOMContentLoaded", async () => {
     await loadProducts();
@@ -184,24 +184,27 @@ document.addEventListener("DOMContentLoaded", async () => {
     const isMobile = window.innerWidth <= 1024;
 
     if (isMobile) {
-        // 1. Force the Product Section to the front of the Z-space
+        // 1. Physically REMOVE the Desktop Hover box to kill the 'Glass Wall'
+        const preview = document.querySelector("#floatingPreview");
+        if (preview) {
+            preview.parentNode.removeChild(preview);
+        }
+
+        // 2. Force the Product Section to the absolute top of the touch layer
         const productArea = document.querySelector('.products-section');
         if (productArea) {
             productArea.style.position = 'relative';
-            productArea.style.zIndex = '100';
+            productArea.style.zIndex = '1000';
+            productArea.style.pointerEvents = 'auto';
         }
 
-        // 2. Kill any Desktop leftovers that block taps
-        const preview = document.querySelector("#floatingPreview");
-        if (preview) preview.remove();
-
-        // 3. Samsung/Huawei Layout Kick
+        // 3. Samsung/Huawei Refresh
         setTimeout(() => {
             window.dispatchEvent(new Event('resize'));
-        }, 300);
+        }, 500);
     }
 
-    // Desktop Category Arrow Logic
+    // Desktop Category Arrow Control
     const catCount = document.querySelectorAll(".category").length;
     if (!isMobile && catCount <= 5) {
         document.querySelectorAll(".categories-wrapper .row-arrow")
