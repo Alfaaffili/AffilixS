@@ -166,7 +166,7 @@ document.addEventListener("click", (e) => {
 function setupArrows() {
     document.querySelectorAll(".row-arrow").forEach(btn => {
         btn.onclick = (e) => {
-            e.stopPropagation(); // Stop tap from hitting cards behind arrow
+            e.stopPropagation(); // CRITICAL: Stop tap arrow click from hitting or opening a product card behind arrow
             const row = btn.parentElement.querySelector(".product-row, .categories");
             const direction = btn.classList.contains("left") ? -300 : 300;
             if (row) row.scrollBy({ left: direction, behavior: "smooth" });
