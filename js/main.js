@@ -175,38 +175,36 @@ function setupArrows() {
 }
 
 /* =============================================================
-   10. INITIALIZATION (v1.3-B01 Final Tap Cleanup)
+   10. INITIALIZATION (v1.3-B01 Final Stability)
    ============================================================= */
 document.addEventListener("DOMContentLoaded", async () => {
+    // 1. Build Content
     await loadProducts();
+    
+    // 2. Activate UI
     setupArrows();
 
     const isMobile = window.innerWidth <= 1024;
 
     if (isMobile) {
-        // 1. Physically REMOVE the Desktop Hover box to kill the 'Glass Wall'
+        // KILL the Desktop Hover box ONLY on actual mobile touch devices
         const preview = document.querySelector("#floatingPreview");
-        if (preview) {
-            preview.parentNode.removeChild(preview);
+        if (preview && 'ontouchstart' in window) {
+            preview.remove();
         }
 
-        // 2. Force the Product Section to the absolute top of the touch layer
-        const productArea = document.querySelector('.products-section');
-        if (productArea) {
-            productArea.style.position = 'relative';
-            productArea.style.zIndex = '1000';
-            productArea.style.pointerEvents = 'auto';
-        }
-
-        // 3. Samsung/Huawei Refresh
+        // Samsung/Huawei Force-Refresh
         setTimeout(() => {
             window.dispatchEvent(new Event('resize'));
-        }, 500);
+        }, 300);
     }
 
-    // Desktop Category Arrow Control
+    // --- ARROW LOGIC (Universal) ---
+    const isDesktop = window.innerWidth > 1024;
     const catCount = document.querySelectorAll(".category").length;
-    if (!isMobile && catCount <= 5) {
+
+    // Hide Category Arrows on Desktop if <= 5
+    if (isDesktop && catCount <= 5) {
         document.querySelectorAll(".categories-wrapper .row-arrow")
                 .forEach(a => a.style.display = "none");
     }

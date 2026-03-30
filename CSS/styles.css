@@ -302,65 +302,81 @@ footer {
 }
 
 /* =============================================================
-   11. MOBILE & TABLET PRECISION (The "Zero-Footprint" Fix)
+   11. MOBILE & TABLET PRECISION (v1.3-B01 Final Harmony)
    ============================================================= */
 @media (max-width: 1024px) {
-    /* Header: Restore Black Background so White Logo is Visible */
+    /* Header: Tighten the 4-line white space Gap */
     .site-header { 
-        display: flex !important; 
-        flex-direction: column !important; 
         height: auto !important; 
-        background: #000 !important; /* Fixed: Back to Black */
+        padding: 5px 0 !important; 
+        background: #000 !important; 
+        margin-bottom: 0 !important;
     }
-    .logo-group { width: 100% !important; justify-content: flex-start !important; padding-left: 20px !important; }
-    .header-nav { 
-        width: 100% !important; 
-        display: flex !important; 
-        justify-content: space-evenly !important; 
-        border-top: 1px solid #333; 
-        padding: 8px 0; 
-    }
-    .header-nav span { font-size: 10px; color: #fff !important; } /* Nav text white */
+    .header-nav { border-top: 1px solid #222; padding: 5px 0; margin-top: 2px; }
 
-    /* THE GLASS WALL FIX: Force hidden elements to have NO size */
-    #productModal:not(.active), 
-    .text-modal:not(.active), 
-    #floatingPreview {
-        position: fixed !important;
-        top: -9999px !important; /* Throw it off-screen */
-        left: -9999px !important;
-        width: 0 !important;
-        height: 0 !important;
-        visibility: hidden !important;
-        pointer-events: none !important;
+    /* Hero: Kill Overflow & Fix Identity Position */
+    .top-section { 
+        width: 100vw !important; 
+        height: 140px !important; 
+        overflow: hidden !important; 
+        margin-top: 0 !important; /* Removes gap between header and hero */
+        position: relative;
     }
-
-    /* Hero: Ensure image is visible behind the black nav */
-    .top-section { height: 130px !important; z-index: 1; background: #000 !important; }
+    .identity-panel { width: 100% !important; height: 100% !important; }
+    
+    /* Identity Title: Positioned at Bottom Edge (Like Desktop) */
     .identity-text { 
-        background: #ff0000; /* Red Highlight to match your brand */
-        color: #fff;
+        left: 50% !important; 
+        transform: translateX(-50%) !important; 
+        bottom: 5px !important; /* Anchored to bottom edge */
         font-size: 11px !important;
-        bottom: 5px !important;
-        z-index: 2;
+        white-space: nowrap;
+        background: #000;
+        color: #fff;
+        padding: 5px 15px !important;
+        z-index: 5;
     }
 
-    /* Product Cards: Proportional 2-Wide View */
-    .product-row-wrapper { z-index: 100 !important; }
+    /* Product Section: Spacing & Proportions */
+    .products-section { 
+        margin-top: 25px !important; /* Creates breathing room for the title */
+        padding-top: 10px;
+    }
+
+    /* Product Cards: Increased by 25% for "Premium" Feel */
+    .product-row-wrapper { position: relative !important; padding: 0 5px !important; }
     .product-card {
-        min-width: calc(46% - 5px) !important; /* Slightly smaller to fit better */
-        height: 160px !important; /* Reduced height for elegance */
-        margin: 5px !important;
-        z-index: 101 !important;
+        min-width: calc(48% - 8px) !important; /* Wider cards */
+        height: 195px !important; /* 25% taller than previous 160px */
+        margin: 0 4px 15px 4px !important;
     }
-    .product-card img { height: 100px !important; }
+    .product-card img { height: 130px !important; object-fit: cover; }
 
-    /* Arrows: Corner Floating */
+    /* ARROWS: Liberated (Floating Red Corners) */
     .row-arrow {
         position: absolute !important;
-        bottom: 10px !important;
-        width: 28px !important;
-        height: 28px !important;
-        z-index: 200 !important;
+        bottom: 15px !important;
+        top: auto !important;
+        width: 32px !important;
+        height: 32px !important;
+        background: rgba(255, 0, 0, 0.85) !important;
+        z-index: 20 !important;
+        border-radius: 6px !important;
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+    }
+    .row-arrow.left { left: 12px !important; }
+    .row-arrow.right { right: 12px !important; }
+
+    /* Category Cards Size Refinement */
+    .category { min-width: 105px !important; margin-right: 10px !important; }
+}
+
+/* DESKTOP HOVER FIX: Ensure Hover works even when minimized */
+@media (min-width: 768px) {
+    #floatingPreview {
+        /* JS will handle display: block on mouseenter */
+        pointer-events: none;
     }
 }
