@@ -175,7 +175,7 @@ function setupArrows() {
 }
 
 /* =============================================================
-   10. INITIALIZATION (The "Clean Slate" Boot)
+   10. INITIALIZATION (v1.3-B01 Final Touch Calibration)
    ============================================================= */
 document.addEventListener("DOMContentLoaded", async () => {
     await loadProducts();
@@ -184,18 +184,24 @@ document.addEventListener("DOMContentLoaded", async () => {
     const isMobile = window.innerWidth <= 1024;
 
     if (isMobile) {
-        // 1. Physically remove the Desktop Hover Preview to ensure NO tap interference
+        // KILL the Desktop Hover Box (Common Tap Blocker)
         const preview = document.querySelector("#floatingPreview");
         if (preview) preview.remove();
 
-        // 2. Ensure Modals start completely "dead"
-        document.querySelectorAll('.modal, .text-modal').forEach(m => {
-            m.style.display = 'none';
-            m.classList.remove('active');
+        // FORCE Row 1 to be touchable
+        const rows = document.querySelectorAll('.product-row-wrapper');
+        rows.forEach((row, index) => {
+            row.style.position = 'relative';
+            row.style.zIndex = '100'; // Higher than Hero
         });
+
+        // Samsung Cache/Layout Reset
+        setTimeout(() => {
+            window.dispatchEvent(new Event('resize'));
+        }, 200);
     }
 
-    // Desktop Arrow Logic (< 5)
+    // Desktop Arrow Control
     const catCount = document.querySelectorAll(".category").length;
     if (!isMobile && catCount <= 5) {
         document.querySelectorAll(".categories-wrapper .row-arrow")
