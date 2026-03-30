@@ -175,31 +175,27 @@ function setupArrows() {
 }
 
 /* =============================================================
-   10. INITIALIZATION (v1.3-B01 Final Interaction Fix)
+   10. INITIALIZATION (The "Clean Slate" Boot)
    ============================================================= */
 document.addEventListener("DOMContentLoaded", async () => {
-    // 1. Build Content
     await loadProducts();
-    
-    // 2. Activate Engines
     setupArrows();
 
     const isMobile = window.innerWidth <= 1024;
-    
-    if (isMobile) {
-        // Force the browser to recognize the new Z-Index layering
-        document.querySelector('.products-section').style.position = 'relative';
-        document.querySelector('.products-section').style.zIndex = '10';
 
-        // Samsung/Huawei Force-Refresh
-        setTimeout(() => {
-            window.scrollTo(0, 1);
-            window.scrollTo(0, 0);
-            window.dispatchEvent(new Event('resize'));
-        }, 200);
+    if (isMobile) {
+        // 1. Physically remove the Desktop Hover Preview to ensure NO tap interference
+        const preview = document.querySelector("#floatingPreview");
+        if (preview) preview.remove();
+
+        // 2. Ensure Modals start completely "dead"
+        document.querySelectorAll('.modal, .text-modal').forEach(m => {
+            m.style.display = 'none';
+            m.classList.remove('active');
+        });
     }
 
-    // Desktop Category Arrow Logic
+    // Desktop Arrow Logic (< 5)
     const catCount = document.querySelectorAll(".category").length;
     if (!isMobile && catCount <= 5) {
         document.querySelectorAll(".categories-wrapper .row-arrow")
