@@ -175,35 +175,35 @@ function setupArrows() {
 }
 
 /* =============================================================
-   10. INITIALIZATION (v1.3-B01 Final Stability)
+   10. INITIALIZATION (v1.3-B01 Absolute Final)
    ============================================================= */
 document.addEventListener("DOMContentLoaded", async () => {
-    // 1. Build Content
     await loadProducts();
-    
-    // 2. Activate UI
     setupArrows();
 
     const isMobile = window.innerWidth <= 1024;
+    const preview = document.querySelector("#floatingPreview");
 
     if (isMobile) {
-        // KILL the Desktop Hover box ONLY on actual mobile touch devices
-        const preview = document.querySelector("#floatingPreview");
+        // 1. Physically REMOVE hover preview on touch to kill the 'Glass Wall'
         if (preview && 'ontouchstart' in window) {
             preview.remove();
         }
 
-        // Samsung/Huawei Force-Refresh
+        // 2. Force Samsung to repaint the screen to fix 'Scattered Nav'
         setTimeout(() => {
+            const nav = document.querySelector('.header-nav');
+            if (nav) nav.style.display = 'flex';
             window.dispatchEvent(new Event('resize'));
-        }, 300);
+        }, 500);
+    } else {
+        // Desktop: Ensure preview is ready
+        if (preview) preview.style.display = 'none';
     }
 
-    // --- ARROW LOGIC (Universal) ---
+    // Desktop Arrow Logic (< 5)
     const isDesktop = window.innerWidth > 1024;
     const catCount = document.querySelectorAll(".category").length;
-
-    // Hide Category Arrows on Desktop if <= 5
     if (isDesktop && catCount <= 5) {
         document.querySelectorAll(".categories-wrapper .row-arrow")
                 .forEach(a => a.style.display = "none");
