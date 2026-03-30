@@ -175,7 +175,7 @@ function setupArrows() {
 }
 
 /* =============================================================
-   10. INITIALIZATION (v1.3-B01 Final Touch Calibration)
+   10. INITIALIZATION (v1.3-B01 Execution Lock)
    ============================================================= */
 document.addEventListener("DOMContentLoaded", async () => {
     await loadProducts();
@@ -184,24 +184,24 @@ document.addEventListener("DOMContentLoaded", async () => {
     const isMobile = window.innerWidth <= 1024;
 
     if (isMobile) {
-        // KILL the Desktop Hover Box (Common Tap Blocker)
+        // 1. Force the Product Section to the front of the Z-space
+        const productArea = document.querySelector('.products-section');
+        if (productArea) {
+            productArea.style.position = 'relative';
+            productArea.style.zIndex = '100';
+        }
+
+        // 2. Kill any Desktop leftovers that block taps
         const preview = document.querySelector("#floatingPreview");
         if (preview) preview.remove();
 
-        // FORCE Row 1 to be touchable
-        const rows = document.querySelectorAll('.product-row-wrapper');
-        rows.forEach((row, index) => {
-            row.style.position = 'relative';
-            row.style.zIndex = '100'; // Higher than Hero
-        });
-
-        // Samsung Cache/Layout Reset
+        // 3. Samsung/Huawei Layout Kick
         setTimeout(() => {
             window.dispatchEvent(new Event('resize'));
-        }, 200);
+        }, 300);
     }
 
-    // Desktop Arrow Control
+    // Desktop Category Arrow Logic
     const catCount = document.querySelectorAll(".category").length;
     if (!isMobile && catCount <= 5) {
         document.querySelectorAll(".categories-wrapper .row-arrow")

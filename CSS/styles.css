@@ -302,52 +302,67 @@ footer {
 }
 
 /* =============================================================
-   11. MOBILE & TABLET PRECISION (v1.3-B01 Final Polish)
+   11. MOBILE & TABLET PRECISION (The "Final Layering" Fix)
    ============================================================= */
 @media (max-width: 1024px) {
-    /* Header & Logo */
-    .site-header { height: auto !important; flex-direction: column !important; padding: 5px 0 !important; border-bottom: none !important; }
+    /* Header & Nav: Ensure visibility */
+    .site-header { display: flex !important; flex-direction: column !important; height: auto !important; background: #fff !important; }
     .logo-group { width: 100% !important; justify-content: flex-start !important; padding-left: 20px !important; }
-    .header-nav { width: 100% !important; display: flex !important; justify-content: space-evenly !important; border-top: 1px solid #eee; padding: 8px 0; }
-    .header-nav span { font-size: 10px; white-space: nowrap; color: #333; }
+    .header-nav { display: flex !important; justify-content: space-evenly !important; border-top: 1px solid #eee; padding: 8px 0; }
+    .header-nav span { display: inline-block !important; font-size: 10px; color: #333; }
 
-    /* Hero: TRIM THE FOOTPRINT (Fixes Row 1 Tap) */
+    /* Hero & Identity: Force "Back" Layer */
     .top-section { 
+        position: relative !important;
+        z-index: 1 !important; /* Sit at the very bottom layer */
         width: 100vw !important; 
-        overflow: hidden !important; 
-        height: 120px !important; /* Shrunk from 140px to free up Row 1 */
-        background: #ffffff !important; /* Pure White to match page */
-        border-bottom: none !important; 
-        box-shadow: none !important; /* Removes the "thick black line" */
-        pointer-events: none !important; 
+        height: 130px !important; 
+        overflow: hidden !important;
+        background: #ffffff !important;
+        pointer-events: none !important; /* Fingers pass through to cards */
     }
-    .identity-panel { background: #ffffff !important; }
+    /* Ensure the Hero Image stays visible */
+    .identity-panel { display: block !important; width: 100% !important; height: 100% !important; background-size: cover !important; }
     
-    /* Identity Title: Centered & Clean */
     .identity-text { 
         left: 50% !important; 
         transform: translateX(-50%) !important; 
-        bottom: 5px !important;
+        bottom: 10px !important;
         font-size: 11px !important;
-        white-space: nowrap;
-        background: #000; /* Contrast highlight */
+        background: #000;
         color: #fff;
         padding: 4px 12px !important;
-        pointer-events: auto;
+        z-index: 2 !important;
     }
 
-    /* Product Section: Match Whites */
+    /* PRODUCTS: Force "Front" Layer (The Tap Fix) */
     .products-section { 
-        background: #ffffff !important; 
-        margin-top: 0 !important; 
-        padding-top: 10px !important;
+        position: relative !important;
+        z-index: 100 !important; /* Sit on top of everything else */
+        background: #ffffff !important;
+        margin-top: -10px !important; /* Pull up to overlap Hero safely */
     }
 
-    /* Product Cards: 2-Card Premium Wide View */
+    /* Product Cards: Liberated (No Squeezing) */
+    .product-row-wrapper { position: relative !important; padding: 0 5px !important; }
     .product-card {
         min-width: calc(48% - 5px) !important;
         height: 170px !important;
-        margin: 0 5px 15px 5px !important;
-        z-index: 50 !important; /* Ensure they sit on top of everything */
+        margin: 0 5px !important;
+        z-index: 101 !important;
     }
+
+    /* Arrows: Floating Red Corners (Saves Card Width) */
+    .row-arrow {
+        position: absolute !important;
+        bottom: 15px !important;
+        top: auto !important;
+        width: 30px !important;
+        height: 30px !important;
+        background: rgba(255, 0, 0, 0.8) !important;
+        z-index: 200 !important;
+        border-radius: 4px !important;
+    }
+    .row-arrow.left { left: 10px !important; }
+    .row-arrow.right { right: 10px !important; }
 }
