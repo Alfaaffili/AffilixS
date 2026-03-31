@@ -175,39 +175,42 @@ function setupArrows() {
 }
 
 /* =============================================================
-   10. INITIALIZATION (v1.3-B01 Final Harmony)
+   10. INITIALIZATION (v1.3-B01 Feature Restoration)
    ============================================================= */
 document.addEventListener("DOMContentLoaded", async () => {
+    // 1. Build Page Content
     await loadProducts();
+    
+    // 2. Activate UI
     setupArrows();
 
     const isMobile = window.innerWidth <= 1024;
     const preview = document.querySelector("#floatingPreview");
 
-    if (isMobile) {
-        // 1. Physically remove hover on touch to prevent "Glass Wall"
-        if (preview && 'ontouchstart' in window) {
-            preview.remove();
-        }
-
-        // 2. Force Snap-to-Top for the Product Section
-        const productArea = document.querySelector('.products-section');
-        if (productArea) {
-            productArea.style.zIndex = '1000';
-        }
-
-        // Samsung/Huawei Force Refresh
-        setTimeout(() => {
-            window.dispatchEvent(new Event('resize'));
-        }, 500);
-    } else {
-        // DESKTOP: Reactivate Tooltip logic
-        if (preview) {
-            document.querySelectorAll('.product-card').forEach(card => {
-                card.onmouseenter = () => preview.style.display = 'block';
-                card.onmouseleave = () => preview.style.display = 'none';
+    if (!isMobile) {
+        // --- DESKTOP: Restore Fox-tail (MouseMove Follow) ---
+        const cards = document.querySelectorAll('.product-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => { if(preview) preview.style.display = 'block'; });
+            card.addEventListener('mouseleave', () => { if(preview) preview.style.display = 'none'; });
+            card.addEventListener('mousemove', (e) => {
+                if(preview) {
+                    preview.style.left = (e.clientX + 15) + 'px';
+                    preview.style.top = (e.clientY + 15) + 'px';
+                }
             });
-        }
+        });
+    } else {
+        // --- MOBILE: Kill 'Right-Click' menu & Cleanup ---
+        if (preview) preview.remove();
+
+        // Disables the 'Save Image' pop-up when long-pressing a card
+        document.addEventListener('contextmenu', (e) => {
+            if (e.target.closest('.product-card')) e.preventDefault();
+        }, false);
+
+        // Samsung/Huawei Force-Refresh
+        setTimeout(() => window.dispatchEvent(new Event('resize')), 300);
     }
 
     // Category Arrow Logic (< 5)
