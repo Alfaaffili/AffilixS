@@ -175,37 +175,42 @@ function setupArrows() {
 }
 
 /* =============================================================
-   10. INITIALIZATION (v1.3-B01 Golden Lock)
+   10. INITIALIZATION (v1.3-B01 Final Touch Calibration)
    ============================================================= */
 document.addEventListener("DOMContentLoaded", async () => {
+    // 1. Build Content
     await loadProducts();
+    
+    // 2. Activate UI
     setupArrows();
 
     const isMobile = window.innerWidth <= 1024;
-    
-    // THE TAP FIX: Ensure products are always the top layer
-    const productArea = document.querySelector('.products-section');
-    if (productArea) {
-        productArea.style.position = 'relative';
-        productArea.style.zIndex = '1000';
-    }
 
     if (isMobile) {
-        // Kill the 'Glass Wall' hover preview on touch screens
+        // KILL the Desktop Hover box - the #1 cause of 'Invisible Walls'
         const preview = document.querySelector("#floatingPreview");
-        if (preview && 'ontouchstart' in window) {
+        if (preview) {
             preview.remove();
         }
 
-        // Force a layout recalculation for Samsung/Huawei
+        // FORCE the Product Section to be the absolute top layer for tapping
+        const productArea = document.querySelector('.products-section');
+        if (productArea) {
+            productArea.style.position = 'relative';
+            productArea.style.zIndex = '1000';
+            productArea.style.pointerEvents = 'auto';
+        }
+
+        // Samsung/Huawei Layout Refresh
         setTimeout(() => {
             window.dispatchEvent(new Event('resize'));
-        }, 500);
+        }, 400);
     }
 
-    // Category Arrow Logic
+    // --- ARROW LOGIC (Universal) ---
+    const isDesktop = window.innerWidth > 1024;
     const catCount = document.querySelectorAll(".category").length;
-    if (window.innerWidth > 1024 && catCount <= 5) {
+    if (isDesktop && catCount <= 5) {
         document.querySelectorAll(".categories-wrapper .row-arrow")
                 .forEach(a => a.style.display = "none");
     }

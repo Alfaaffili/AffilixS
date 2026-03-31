@@ -302,63 +302,68 @@ footer {
 }
 
 /* =============================================================
-   11. MOBILE & MINIMIZED PRECISION (v1.3-B01 Final Anchor)
+   11. MOBILE & TABLET PRECISION (v1.3-B01 Gap Sealant Final)
    ============================================================= */
 @media (max-width: 1024px) {
-    /* Header & Nav */
-    .site-header { height: auto !important; background: #000 !important; padding: 5px 0 !important; }
-    .header-nav { display: flex !important; justify-content: space-evenly !important; padding: 6px 0 !important; }
-    .header-nav span { font-size: 10px !important; color: #fff !important; }
+    /* Header: Close the top gap */
+    .site-header { 
+        height: auto !important; 
+        background: #000 !important; 
+        padding: 5px 0 !important; 
+        margin-bottom: 0 !important; 
+        border-bottom: none !important;
+    }
+    .header-nav { border-top: 1px solid #222; padding: 6px 0; }
 
-    /* Hero: Anchor the Image so it doesn't slide away */
+    /* Hero: Pull UP to meet Header & Fix Identity */
     .top-section { 
         width: 100vw !important; 
-        height: 140px !important; /* Fixed height to keep image visible */
+        height: 135px !important; 
+        margin-top: -5px !important; /* 🔥 Pulls Hero UP to close top gap */
+        margin-bottom: 0 !important;
         overflow: hidden !important; 
         position: relative !important;
-        background: #000 !important;
         z-index: 1;
     }
-    .identity-panel { 
-        height: 100% !important; 
-        display: block !important;
-        background-size: cover !important;
-        background-position: center !important;
-    }
     
-    /* Identity Title: 1-Line Forced & Left-Shifted */
     .identity-text { 
         left: 47% !important; 
         transform: translateX(-50%) !important; 
-        bottom: 10px !important;
+        bottom: 8px !important; 
         background: #ff0000 !important;
-        white-space: nowrap !important; /* Prevents splitting on 2 lines */
+        white-space: nowrap !important;
         font-size: 11px !important;
-        padding: 5px 12px !important;
+        padding: 4px 12px !important;
         z-index: 5;
     }
 
-    /* Products: Layering to fix Tap Issue */
+    /* PRODUCTS: Pull UP to meet Hero & Close 4-line gap */
     .products-section { 
-        margin-top: 0 !important; 
+        margin-top: -20px !important; /* 🔥 Pulls Products UP to meet Hero */
+        padding-top: 0 !important;
         position: relative !important;
-        z-index: 100 !important; /* Sits on top of the 'sliding' hero layer */
+        z-index: 100 !important; 
         background: #fff !important;
     }
 
-    /* Product Cards: Premium Size */
-    .product-row-wrapper { position: relative !important; padding: 0 5px !important; }
+    /* Product Cards: Premium Size & Spacing */
+    .product-row-wrapper { 
+        margin-top: 0 !important; 
+        margin-bottom: 5px !important; 
+        padding: 0 5px !important; 
+    }
     .product-card {
         min-width: calc(48% - 6px) !important;
         height: 195px !important;
         margin: 5px 3px !important;
     }
+    .product-card img { height: 130px !important; object-fit: cover; }
 
-    /* ARROWS: Absolute Corner Anchoring (The Liberation Fix) */
+    /* ARROWS: Absolute Corner Anchoring (Liberated) */
     .row-arrow {
         position: absolute !important;
+        bottom: 15px !important;
         top: auto !important;
-        bottom: 15px !important; /* Pinned to bottom */
         width: 32px !important;
         height: 32px !important;
         background: rgba(255, 0, 0, 0.9) !important;
@@ -367,15 +372,4 @@ footer {
     }
     .row-arrow.left { left: 10px !important; }
     .row-arrow.right { right: 10px !important; }
-}
-
-/* DESKTOP FULL-SCREEN: Corner Arrows Fix */
-@media (min-width: 1025px) {
-    .product-row-wrapper .row-arrow {
-        position: absolute !important;
-        bottom: 20px !important;
-        top: auto !important;
-    }
-    .product-row-wrapper .row-arrow.left { left: -10px !important; }
-    .product-row-wrapper .row-arrow.right { right: -10px !important; }
 }
