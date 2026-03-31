@@ -175,36 +175,37 @@ function setupArrows() {
 }
 
 /* =============================================================
-   10. INITIALIZATION (v1.3-B01 Absolute Final)
+   10. INITIALIZATION (v1.3-B01 Golden Lock)
    ============================================================= */
 document.addEventListener("DOMContentLoaded", async () => {
     await loadProducts();
     setupArrows();
 
     const isMobile = window.innerWidth <= 1024;
-    const preview = document.querySelector("#floatingPreview");
+    
+    // THE TAP FIX: Ensure products are always the top layer
+    const productArea = document.querySelector('.products-section');
+    if (productArea) {
+        productArea.style.position = 'relative';
+        productArea.style.zIndex = '1000';
+    }
 
     if (isMobile) {
-        // 1. Physically REMOVE hover preview on touch to kill the 'Glass Wall'
+        // Kill the 'Glass Wall' hover preview on touch screens
+        const preview = document.querySelector("#floatingPreview");
         if (preview && 'ontouchstart' in window) {
             preview.remove();
         }
 
-        // 2. Force Samsung to repaint the screen to fix 'Scattered Nav'
+        // Force a layout recalculation for Samsung/Huawei
         setTimeout(() => {
-            const nav = document.querySelector('.header-nav');
-            if (nav) nav.style.display = 'flex';
             window.dispatchEvent(new Event('resize'));
         }, 500);
-    } else {
-        // Desktop: Ensure preview is ready
-        if (preview) preview.style.display = 'none';
     }
 
-    // Desktop Arrow Logic (< 5)
-    const isDesktop = window.innerWidth > 1024;
+    // Category Arrow Logic
     const catCount = document.querySelectorAll(".category").length;
-    if (isDesktop && catCount <= 5) {
+    if (window.innerWidth > 1024 && catCount <= 5) {
         document.querySelectorAll(".categories-wrapper .row-arrow")
                 .forEach(a => a.style.display = "none");
     }

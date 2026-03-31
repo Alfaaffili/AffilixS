@@ -302,70 +302,80 @@ footer {
 }
 
 /* =============================================================
-   11. MOBILE & TABLET PRECISION (v1.3-B01 Golden Lockdown)
+   11. MOBILE & MINIMIZED PRECISION (v1.3-B01 Final Anchor)
    ============================================================= */
 @media (max-width: 1024px) {
-    /* Header: Force Single Line & Fix Scatter */
+    /* Header & Nav */
     .site-header { height: auto !important; background: #000 !important; padding: 5px 0 !important; }
-    .header-nav { 
-        display: flex !important; 
-        flex-direction: row !important; 
-        justify-content: space-evenly !important; 
-        width: 100% !important;
-        border-top: 1px solid #222;
-        padding: 6px 0 !important;
-    }
-    .header-nav span { font-size: 10px !important; white-space: nowrap !important; color: #fff !important; }
+    .header-nav { display: flex !important; justify-content: space-evenly !important; padding: 6px 0 !important; }
+    .header-nav span { font-size: 10px !important; color: #fff !important; }
 
-    /* Hero: Kill 4-Line Gap & Fix Identity */
+    /* Hero: Anchor the Image so it doesn't slide away */
     .top-section { 
         width: 100vw !important; 
-        height: 130px !important; 
-        margin: 0 !important; 
-        padding: 0 !important;
-        overflow: hidden !important;
-        box-shadow: none !important; /* Kills the thick black line */
-        border: none !important;
+        height: 140px !important; /* Fixed height to keep image visible */
+        overflow: hidden !important; 
+        position: relative !important;
+        background: #000 !important;
+        z-index: 1;
     }
+    .identity-panel { 
+        height: 100% !important; 
+        display: block !important;
+        background-size: cover !important;
+        background-position: center !important;
+    }
+    
+    /* Identity Title: 1-Line Forced & Left-Shifted */
     .identity-text { 
-        left: 47% !important; /* Shifted 3 chars to the left from 50% */
+        left: 47% !important; 
         transform: translateX(-50%) !important; 
-        bottom: 8px !important;
-        background: #ff0000 !important; /* Forced Red Highlight */
-        color: #fff !important;
-        padding: 4px 12px !important;
+        bottom: 10px !important;
+        background: #ff0000 !important;
+        white-space: nowrap !important; /* Prevents splitting on 2 lines */
         font-size: 11px !important;
+        padding: 5px 12px !important;
         z-index: 5;
     }
 
-    /* Product Section: Close the "4-Line Gap" */
+    /* Products: Layering to fix Tap Issue */
     .products-section { 
-        margin-top: -5px !important; /* Pulls products up to meet the hero */
-        padding-top: 0 !important;
+        margin-top: 0 !important; 
+        position: relative !important;
+        z-index: 100 !important; /* Sits on top of the 'sliding' hero layer */
         background: #fff !important;
     }
-    
-    /* Rows: Utilize Wasted Space efficiently */
-    .product-row-wrapper { 
-        margin-bottom: 0px !important; /* Tightens space between rows */
-        padding: 5px 0 !important;
-    }
 
-    /* Product Cards: Premium Size (Restored Harmony) */
+    /* Product Cards: Premium Size */
+    .product-row-wrapper { position: relative !important; padding: 0 5px !important; }
     .product-card {
         min-width: calc(48% - 6px) !important;
-        height: 190px !important;
+        height: 195px !important;
         margin: 5px 3px !important;
     }
-    .product-card img { height: 125px !important; }
 
-    /* Arrows: Floating Red Corners */
+    /* ARROWS: Absolute Corner Anchoring (The Liberation Fix) */
     .row-arrow {
         position: absolute !important;
-        bottom: 12px !important;
-        width: 30px !important;
-        height: 30px !important;
+        top: auto !important;
+        bottom: 15px !important; /* Pinned to bottom */
+        width: 32px !important;
+        height: 32px !important;
         background: rgba(255, 0, 0, 0.9) !important;
-        z-index: 20 !important;
+        z-index: 200 !important;
+        border-radius: 4px !important;
     }
+    .row-arrow.left { left: 10px !important; }
+    .row-arrow.right { right: 10px !important; }
+}
+
+/* DESKTOP FULL-SCREEN: Corner Arrows Fix */
+@media (min-width: 1025px) {
+    .product-row-wrapper .row-arrow {
+        position: absolute !important;
+        bottom: 20px !important;
+        top: auto !important;
+    }
+    .product-row-wrapper .row-arrow.left { left: -10px !important; }
+    .product-row-wrapper .row-arrow.right { right: -10px !important; }
 }
