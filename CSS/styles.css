@@ -302,74 +302,98 @@ footer {
 }
 
 /* =============================================================
-   11. MOBILE & TABLET PRECISION (v1.3-B01 Gap Sealant Final)
+   11. MOBILE & TABLET PRECISION (v1.3-B01 Final Anchor)
    ============================================================= */
 @media (max-width: 1024px) {
-    /* Header: Close the top gap */
+    /* Header: Force Single-Line & Black Background */
     .site-header { 
         height: auto !important; 
         background: #000 !important; 
         padding: 5px 0 !important; 
-        margin-bottom: 0 !important; 
-        border-bottom: none !important;
     }
-    .header-nav { border-top: 1px solid #222; padding: 6px 0; }
+    .header-nav { 
+        display: flex !important; 
+        flex-wrap: nowrap !important; /* 🔥 Prevents scattering */
+        justify-content: space-evenly !important; 
+        width: 100% !important;
+        border-top: 1px solid #222;
+        padding: 8px 0 !important;
+    }
+    .header-nav span { font-size: 10px !important; white-space: nowrap !important; color: #fff !important; }
 
-    /* Hero: Pull UP to meet Header & Fix Identity */
+    /* Hero: Absolute Anchor (Prevents Sliding) */
     .top-section { 
         width: 100vw !important; 
-        height: 135px !important; 
-        margin-top: -5px !important; /* 🔥 Pulls Hero UP to close top gap */
-        margin-bottom: 0 !important;
-        overflow: hidden !important; 
+        height: 130px !important; 
+        margin: 0 !important;
         position: relative !important;
-        z-index: 1;
+        overflow: hidden !important; 
+        background: #fff !important; /* Unified White */
+    }
+    .identity-panel { 
+        position: absolute !important;
+        top: 0; left: 0;
+        width: 100% !important; 
+        height: 100% !important; 
+        background-size: cover !important;
+        background-position: center !important;
     }
     
     .identity-text { 
         left: 47% !important; 
         transform: translateX(-50%) !important; 
-        bottom: 8px !important; 
+        bottom: 5px !important; 
         background: #ff0000 !important;
         white-space: nowrap !important;
         font-size: 11px !important;
         padding: 4px 12px !important;
-        z-index: 5;
+        z-index: 10;
     }
 
-    /* PRODUCTS: Pull UP to meet Hero & Close 4-line gap */
+    /* PRODUCTS: Snap to Hero & Unified White */
     .products-section { 
-        margin-top: -20px !important; /* 🔥 Pulls Products UP to meet Hero */
-        padding-top: 0 !important;
+        margin-top: 0 !important; 
+        padding-top: 10px !important;
+        background: #fff !important; /* Unified White */
         position: relative !important;
         z-index: 100 !important; 
-        background: #fff !important;
     }
 
-    /* Product Cards: Premium Size & Spacing */
-    .product-row-wrapper { 
-        margin-top: 0 !important; 
-        margin-bottom: 5px !important; 
-        padding: 0 5px !important; 
-    }
+    /* Product Cards & Liberated Arrows */
     .product-card {
         min-width: calc(48% - 6px) !important;
         height: 195px !important;
         margin: 5px 3px !important;
     }
-    .product-card img { height: 130px !important; object-fit: cover; }
-
-    /* ARROWS: Absolute Corner Anchoring (Liberated) */
     .row-arrow {
         position: absolute !important;
-        bottom: 15px !important;
-        top: auto !important;
-        width: 32px !important;
-        height: 32px !important;
-        background: rgba(255, 0, 0, 0.9) !important;
+        bottom: 12px !important;
+        width: 30px !important;
+        height: 30px !important;
         z-index: 200 !important;
-        border-radius: 4px !important;
     }
-    .row-arrow.left { left: 10px !important; }
-    .row-arrow.right { right: 10px !important; }
+}
+
+/* DESKTOP FULL-SCREEN: Tooltip & Corner Arrows */
+@media (min-width: 1025px) {
+    /* 1. Restore Fox-tail Tooltip */
+    #floatingPreview {
+        display: none; /* Controlled by JS mouseenter */
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        padding: 10px;
+        border-radius: 4px;
+        border: 1px solid #444;
+    }
+
+    /* 2. Position Product Arrows at Lower Corners */
+    .product-row-wrapper .row-arrow {
+        top: auto !important;
+        bottom: 15px !important;
+    }
+    .product-row-wrapper .row-arrow.left { left: 5px !important; }
+    .product-row-wrapper .row-arrow.right { right: 5px !important; }
 }

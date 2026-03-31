@@ -175,42 +175,44 @@ function setupArrows() {
 }
 
 /* =============================================================
-   10. INITIALIZATION (v1.3-B01 Final Touch Calibration)
+   10. INITIALIZATION (v1.3-B01 Final Harmony)
    ============================================================= */
 document.addEventListener("DOMContentLoaded", async () => {
-    // 1. Build Content
     await loadProducts();
-    
-    // 2. Activate UI
     setupArrows();
 
     const isMobile = window.innerWidth <= 1024;
+    const preview = document.querySelector("#floatingPreview");
 
     if (isMobile) {
-        // KILL the Desktop Hover box - the #1 cause of 'Invisible Walls'
-        const preview = document.querySelector("#floatingPreview");
-        if (preview) {
+        // 1. Physically remove hover on touch to prevent "Glass Wall"
+        if (preview && 'ontouchstart' in window) {
             preview.remove();
         }
 
-        // FORCE the Product Section to be the absolute top layer for tapping
+        // 2. Force Snap-to-Top for the Product Section
         const productArea = document.querySelector('.products-section');
         if (productArea) {
-            productArea.style.position = 'relative';
             productArea.style.zIndex = '1000';
-            productArea.style.pointerEvents = 'auto';
         }
 
-        // Samsung/Huawei Layout Refresh
+        // Samsung/Huawei Force Refresh
         setTimeout(() => {
             window.dispatchEvent(new Event('resize'));
-        }, 400);
+        }, 500);
+    } else {
+        // DESKTOP: Reactivate Tooltip logic
+        if (preview) {
+            document.querySelectorAll('.product-card').forEach(card => {
+                card.onmouseenter = () => preview.style.display = 'block';
+                card.onmouseleave = () => preview.style.display = 'none';
+            });
+        }
     }
 
-    // --- ARROW LOGIC (Universal) ---
-    const isDesktop = window.innerWidth > 1024;
+    // Category Arrow Logic (< 5)
     const catCount = document.querySelectorAll(".category").length;
-    if (isDesktop && catCount <= 5) {
+    if (window.innerWidth > 1024 && catCount <= 5) {
         document.querySelectorAll(".categories-wrapper .row-arrow")
                 .forEach(a => a.style.display = "none");
     }
