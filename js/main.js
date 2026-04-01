@@ -175,7 +175,7 @@ function setupArrows() {
 }
 
 /* =============================================================
-   10. INITIALIZATION (v1.5 Diagnostic Logic)
+   10. INITIALIZATION (v1.6 Hardware Segregation)
    ============================================================= */
 document.addEventListener("DOMContentLoaded", async () => {
     await loadProducts();
@@ -188,31 +188,32 @@ document.addEventListener("DOMContentLoaded", async () => {
         // --- MOBILE SECTOR ---
         if (preview) preview.remove(); 
 
-        // 1. Comment out Hero Reference if necessary
+        // Restore Hero (since we proved it wasn't the blocker)
         const hero = document.querySelector('.top-section');
-        if (hero) hero.style.display = 'none'; // Uncomment to fully hide Hero for testing
+        if (hero) hero.style.display = 'block';
 
-        // 2. Force the Product Section to capture all touch events
+        // Add Direct Touch Support for Cards
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('touchstart', function() {
+                this.click(); // Force a standard click on touch
+            }, {passive: true});
+        });
+
+        // Ensure Product Section is at the VERY front
         const productArea = document.querySelector('.products-section');
         if (productArea) {
-            productArea.style.position = 'relative';
-            productArea.style.zIndex = '2800';
+            productArea.style.zIndex = '4000';
+            productArea.style.pointerEvents = 'auto';
         }
 
-        // 3. Disable long-press context menu for faster taps
-        document.addEventListener('contextmenu', e => {
-            if (e.target.closest('.product-card')) e.preventDefault();
-        }, false);
-
     } else {
-        // --- DESKTOP SECTOR (Re-positioned Preview) ---
+        // --- DESKTOP SECTOR (Stationary/Follow Up-Right) ---
         const cards = document.querySelectorAll('.product-card');
         cards.forEach(card => {
             card.addEventListener('mouseenter', () => { if(preview) preview.style.display = 'block'; });
             card.addEventListener('mouseleave', () => { if(preview) preview.style.display = 'none'; });
             card.addEventListener('mousemove', (e) => {
                 if(preview) {
-                    // +20px Right, -220px UP (Displays above the card level)
                     preview.style.left = (e.clientX + 20) + 'px';
                     preview.style.top = (e.clientY - 220) + 'px'; 
                 }
@@ -220,7 +221,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     }
 
-    // Desktop Category Arrow Logic
+    // Category Arrow Logic
     const catCount = document.querySelectorAll(".category").length;
     if (window.innerWidth > 1024 && catCount <= 5) {
         document.querySelectorAll(".categories-wrapper .row-arrow").forEach(a => a.style.display = "none");

@@ -302,62 +302,66 @@ footer {
 }
 
 /* =============================================================
-   11. MOBILE & MINIMIZED PRECISION (v1.5 Diagnostics)
+   11. MOBILE & MINIMIZED PRECISION (v1.6 Pass-Through Fix)
    ============================================================= */
 
-/* A. MOBILE ONLY (Strictly below 768px) */
-@media (max-width: 767px) {
-    /* UNIFIED WHITE */
-    body, .products-section, .categories, .categories-wrapper {
-        background-color: #ffffff !important;
+@media (max-width: 1024px) {
+    /* 1. HEADER: Stop the 'Ghost Box' from blocking taps */
+    .site-header { 
+        pointer-events: none !important; /* Taps pass through the header background */
+        background: #000 !important;
+        z-index: 3000 !important;
+    }
+    .logo-group, .header-nav span, .header-nav a { 
+        pointer-events: auto !important; /* Buttons still work */
     }
 
-    /* HEADER: Force Black & Single Line */
-    .site-header { background: #000 !important; z-index: 3000 !important; }
-    .header-nav { display: flex !important; flex-wrap: nowrap !important; }
+    /* 2. CATEGORIES: Stop the category row from blocking Row 1 */
+    .categories, .categories-wrapper {
+        pointer-events: none !important;
+        background: #fff !important;
+    }
+    .category { 
+        pointer-events: auto !important; /* Actual categories still work */
+    }
 
-    /* HERO DIAGNOSTICS: Commented out to test Tap Issue */
-    /* .top-section { display: none !important; } 
-    */
-    
-    /* THE TAP FIX: Push Products to the Front */
+    /* 3. PRODUCTS: The Master Touch Layer */
     .products-section { 
         position: relative !important;
-        z-index: 2500 !important; /* Higher than everything */
-        margin-top: 20px !important; /* Reduced gap since Hero is 'Ghosted' */
+        z-index: 4000 !important; /* Sit ABOVE the 'Ghost' layers */
+        margin-top: 10px !important; 
         background: #ffffff !important;
-        pointer-events: auto !important;
+        pointer-events: auto !important; /* Force browser to prioritize this */
     }
 
-    /* Product Cards: Premium Size */
+    /* 4. CARDS: Explicit Tap Zone */
     .product-card {
+        position: relative !important;
+        z-index: 4100 !important;
         min-width: calc(48% - 5px) !important;
         height: 195px !important;
-        margin: 5px 2px !important;
+        touch-action: auto !important; /* Ensure mobile browser knows this is a link */
     }
 
-    /* Mobile Arrows: Lower Corners */
+    /* Mobile Arrows: Corner Locked */
     .row-arrow {
         position: absolute !important;
-        bottom: 10px !important;
+        bottom: 12px !important;
         top: auto !important;
-        z-index: 2600 !important;
+        z-index: 4200 !important;
+        pointer-events: auto !important;
     }
 }
 
-/* B. DESKTOP MAXIMIZED (Locked & Re-positioned) */
+/* B. DESKTOP: Re-positioned Preview & Corner Arrows */
 @media (min-width: 1025px) {
-    /* Tooltip styling */
     #floatingPreview {
         position: fixed;
         pointer-events: none;
         z-index: 9999;
-        border: 1px solid #ff0000;
+        border: 2px solid #ff0000;
         background: rgba(0, 0, 0, 0.95);
-        border-radius: 4px;
     }
-
-    /* Product Arrows: Lower Corners */
     .product-row-wrapper .row-arrow {
         top: auto !important;
         bottom: 15px !important;
