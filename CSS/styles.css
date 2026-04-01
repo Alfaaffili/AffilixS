@@ -302,50 +302,82 @@ footer {
 }
 
 /* =============================================================
-   11. MOBILE & MINIMIZED PRECISION (v1.7 Smart-Touch)
+   11. FINAL POLISH & HARDWARE LOCK (v1.8)
    ============================================================= */
 
+/* A. MOBILE & TABLET (Below 1024px) */
 @media (max-width: 1024px) {
-    /* 1. Restore Natural Pointer Events to allow scrolling */
-    .site-header, .categories, .categories-wrapper {
-        pointer-events: auto !important;
+    /* 1. Header: Back to Black & Single Line */
+    .site-header { 
+        background: #000 !important; 
+        padding: 5px 0 !important; 
+        margin-bottom: -5px !important; /* Closes the 4-line gap */
+    }
+    .header-nav { 
+        display: flex !important; 
+        flex-wrap: nowrap !important; /* Forces 1-line Nav */
+        justify-content: space-evenly !important; 
+        border-top: 1px solid #222;
+        padding: 6px 0 !important;
+    }
+    .header-nav span { font-size: 10px !important; color: #fff !important; white-space: nowrap !important; }
+
+    /* 2. Hero: Fix Overflow & Remove Black Line */
+    .top-section { 
+        height: 140px !important; 
+        margin-top: 0 !important;
+        overflow: hidden !important;
+        box-shadow: none !important; /* Removes thick black line */
+        border: none !important;
         background: #fff !important;
     }
-
-    /* 2. THE SMART TAP FIX: High Priority but Not Global */
-    .products-section { 
-        position: relative !important;
-        z-index: 1000 !important; 
-        margin-top: 10px !important; 
-        background: #ffffff !important;
+    .identity-text { 
+        bottom: 5px !important;
+        white-space: nowrap !important; /* Forces 1-line Identity */
+        background: #ff0000 !important;
+        font-size: 11px !important;
+        padding: 4px 12px !important;
+        z-index: 10;
     }
 
-    .product-card {
-        position: relative !important;
-        z-index: 1100 !important;
-        min-width: calc(48% - 5px) !important;
-        height: 195px !important;
-        /* Allow normal scrolling but keep tap fast */
-        touch-action: pan-y !important; 
-        -webkit-tap-highlight-color: transparent;
+    /* 3. Modal: Enlarge Close Button */
+    .modal-close, .preview-close {
+        width: 45px !important; /* Larger for easy thumb tapping */
+        height: 45px !important;
+        font-size: 30px !important;
+        line-height: 45px !important;
+        background: rgba(0,0,0,0.5) !important;
+        border-radius: 50% !important;
+        color: #fff !important;
     }
 
-    /* Mobile Arrows: Corner Locked */
+    /* 4. Products & Arrows: Corner Anchoring */
+    .products-section { margin-top: 15px !important; }
     .row-arrow {
         position: absolute !important;
-        bottom: 12px !important;
+        bottom: 15px !important;
         top: auto !important;
+        width: 32px !important;
+        height: 32px !important;
         z-index: 1200 !important;
     }
 }
 
-/* B. DESKTOP: (Remains Locked/Perfect) */
+/* B. DESKTOP MAXIMIZED (The Final Lock) */
 @media (min-width: 1025px) {
-    #floatingPreview {
-        position: fixed;
-        pointer-events: none;
-        z-index: 9999;
-        border: 2px solid #ff0000;
-        background: rgba(0, 0, 0, 0.95);
+    /* Pin Arrows to Lower Corners */
+    .product-row-wrapper .row-arrow {
+        top: auto !important;
+        bottom: 15px !important;
+    }
+    .product-row-wrapper .row-arrow.left { left: 5px !important; }
+    .product-row-wrapper .row-arrow.right { right: 5px !important; }
+
+    /* Enlarge Close Button on Desktop Preview */
+    .preview-close {
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 24px !important;
+        cursor: pointer;
     }
 }

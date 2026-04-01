@@ -175,7 +175,7 @@ function setupArrows() {
 }
 
 /* =============================================================
-   10. INITIALIZATION (v1.7 Smart-Touch Logic)
+   10. INITIALIZATION (v1.8 Smart-Swipe Logic)
    ============================================================= */
 document.addEventListener("DOMContentLoaded", async () => {
     await loadProducts();
@@ -185,40 +185,37 @@ document.addEventListener("DOMContentLoaded", async () => {
     const preview = document.querySelector("#floatingPreview");
 
     if (isMobile) {
-        // --- MOBILE SECTOR ---
         if (preview) preview.remove(); 
 
-        let touchStartX = 0;
-        let touchStartY = 0;
+        let startX, startY;
 
+        // --- SMART TOUCH: Distinguish Tap from Scroll/Swipe ---
         document.querySelectorAll('.product-card').forEach(card => {
-            // Record where the touch started
             card.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
-                touchStartY = e.changedTouches[0].screenY;
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
             }, {passive: true});
 
-            // Only trigger click if the finger didn't move much (prevents scroll-triggers)
             card.addEventListener('touchend', (e) => {
-                const touchEndX = e.changedTouches[0].screenX;
-                const touchEndY = e.changedTouches[0].screenY;
+                const diffX = Math.abs(e.changedTouches[0].clientX - startX);
+                const diffY = Math.abs(e.changedTouches[0].clientY - startY);
                 
-                // If moved less than 10 pixels, it's a TAP, not a SCROLL
-                if (Math.abs(touchEndX - touchStartX) < 10 && Math.abs(touchEndY - touchStartY) < 10) {
-                    // Prevent "Blinking" by ensuring the modal stays open
-                    e.preventDefault(); 
-                    card.click(); 
+                // If the finger didn't move more than 10px, it's a TAP
+                if (diffX < 10 && diffY < 10) {
+                    card.click();
                 }
             }, false);
         });
 
-        // Ensure no long-press menus block us
-        document.addEventListener('contextmenu', e => {
-            if (e.target.closest('.product-card')) e.preventDefault();
-        }, false);
+        // --- RESTORE SWIPE: Ensure Category wrapper is scrollable ---
+        const catWrapper = document.querySelector('.categories-wrapper');
+        if (catWrapper) {
+            catWrapper.style.overflowX = 'auto';
+            catWrapper.style.webkitOverflowScrolling = 'touch';
+        }
 
     } else {
-        // --- DESKTOP SECTOR (Remains Perfect) ---
+        // --- DESKTOP SECTOR (Hover Up-Right) ---
         const cards = document.querySelectorAll('.product-card');
         cards.forEach(card => {
             card.addEventListener('mouseenter', () => { if(preview) preview.style.display = 'block'; });
