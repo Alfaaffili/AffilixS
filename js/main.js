@@ -175,7 +175,7 @@ function setupArrows() {
 }
 
 /* =============================================================
-   10. INITIALIZATION (v1.4 Hardware-Based Segregation)
+   10. INITIALIZATION (v1.4 Hardware Segregation)
    ============================================================= */
 document.addEventListener("DOMContentLoaded", async () => {
     await loadProducts();
@@ -186,42 +186,37 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (isMobile) {
         // --- MOBILE SECTOR ---
-        if (preview) preview.remove(); // Physically kill tooltip for Mobile
+        if (preview) preview.remove(); 
 
-        // Fix the "Slid Hero" Tap issue
+        // CRITICAL: Ensure the product section is ready for taps
         const productArea = document.querySelector('.products-section');
         if (productArea) {
             productArea.style.position = 'relative';
-            productArea.style.zIndex = '1000';
+            productArea.style.zIndex = '2000';
         }
 
-        // Fast-click enforcement
+        // Disable long-press context menu
         document.addEventListener('contextmenu', e => {
             if (e.target.closest('.product-card')) e.preventDefault();
         }, false);
 
     } else {
-        // --- DESKTOP SECTOR (Stationary Tooltip/Fox-tail) ---
+        // --- DESKTOP SECTOR (Follow-Preview: Up & Right) ---
         const cards = document.querySelectorAll('.product-card');
         cards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                if(preview) {
-                    preview.style.display = 'block';
-                    // Optional: Remove e.clientX logic here if you want it STATIONARY
-                    // but usually Tooltips follow the cursor.
-                }
-            });
+            card.addEventListener('mouseenter', () => { if(preview) preview.style.display = 'block'; });
             card.addEventListener('mouseleave', () => { if(preview) preview.style.display = 'none'; });
             card.addEventListener('mousemove', (e) => {
                 if(preview) {
-                    preview.style.left = (e.clientX + 15) + 'px';
-                    preview.style.top = (e.clientY + 15) + 'px';
+                    // Offset: -150px (Up) and +20px (Right)
+                    preview.style.left = (e.clientX + 20) + 'px';
+                    preview.style.top = (e.clientY - 150) + 'px'; 
                 }
             });
         });
     }
 
-    // Lock Category Arrows for Desktop
+    // Category Arrow Logic
     const catCount = document.querySelectorAll(".category").length;
     if (window.innerWidth > 1024 && catCount <= 5) {
         document.querySelectorAll(".categories-wrapper .row-arrow").forEach(a => a.style.display = "none");

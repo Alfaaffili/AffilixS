@@ -302,64 +302,59 @@ footer {
 }
 
 /* =============================================================
-   11. MOBILE & MINIMIZED PRECISION (v1.4 Structural Fortress)
+   11. MOBILE & TABLET PRECISION (v1.4 Final Polish)
    ============================================================= */
 
-/* A. TABLET / MINIMIZED DESKTOP (768px to 1024px) */
-@media (min-width: 768px) and (max-width: 1024px) {
-    .product-card { min-width: calc(33% - 10px) !important; height: 220px !important; }
-}
-
-/* B. MOBILE ONLY (Strictly below 768px) */
-@media (max-width: 767px) {
-    /* 1. Header: Force 1-Line & Black BG */
-    .site-header { background: #000 !important; padding: 5px 0 !important; }
-    .header-nav { 
-        display: flex !important; flex-wrap: nowrap !important; 
-        justify-content: space-evenly !important; border-top: 1px solid #222;
+@media (max-width: 1024px) {
+    /* 1. UNIFIED WHITE: Force every section to pure white */
+    body, .top-section, .products-section, .categories, .categories-wrapper {
+        background-color: #ffffff !important;
     }
-    .header-nav span { font-size: 10px !important; white-space: nowrap !important; color: #fff !important; }
 
-    /* 2. Hero: The "Anchor" (Prevents sliding and gaps) */
+    /* 2. HEADER & NAV: Single line and Black */
+    .site-header { background: #000 !important; padding: 5px 0 !important; margin-bottom: 0 !important; }
+    .header-nav { display: flex !important; flex-wrap: nowrap !important; justify-content: space-evenly !important; border-top: 1px solid #222; }
+    .header-nav span { font-size: 10px !important; color: #fff !important; }
+
+    /* 3. HERO: Absolute Anchor (No Gaps) */
     .top-section { 
-        position: relative !important; width: 100vw !important; height: 145px !important;
-        margin: 0 !important; overflow: hidden !important; background: #fff !important;
-    }
-    .identity-panel { 
-        position: absolute !important; top: 0; left: 0; width: 100%; height: 100%;
-        background-size: cover !important; background-position: center !important;
+        position: relative !important; width: 100vw !important; height: 140px !important;
+        margin: 0 !important; overflow: hidden !important; z-index: 1;
     }
     .identity-text { 
-        left: 47% !important; transform: translateX(-50%) !important; bottom: 8px !important;
+        left: 47% !important; transform: translateX(-50%) !important; bottom: 10px !important;
         background: #ff0000 !important; color: #fff !important; white-space: nowrap !important;
         font-size: 11px !important; padding: 4px 12px !important; z-index: 10;
     }
 
-    /* 3. Products: Add "Breathing Room" (The 2-line gap you wanted) */
+    /* 4. THE TAP FIX: Force Product Section to the VERY FRONT */
     .products-section { 
-        margin-top: 15px !important; /* Restored breathing room */
-        padding-top: 10px !important; background: #fff !important;
-        position: relative !important; z-index: 100 !important;
+        position: relative !important;
+        z-index: 2000 !important; /* Higher than any header or hero */
+        margin-top: 10px !important;
+        padding-top: 5px !important;
+        pointer-events: auto !important;
     }
 
-    /* 4. Row Spacing: Balanced (Utilizing space efficiently) */
-    .product-row-wrapper { margin-bottom: 10px !important; padding: 0 5px !important; }
+    /* 5. CARDS & ARROWS: Lower Corners */
     .product-card {
         min-width: calc(48% - 5px) !important; height: 195px !important;
-        margin: 5px 2px !important; touch-action: manipulation !important;
+        margin: 5px 2px !important;
     }
-
-    /* 5. Mobile Arrows: Lower Corners Only */
     .row-arrow {
-        position: absolute !important; bottom: 10px !important; top: auto !important;
-        width: 30px !important; height: 30px !important; z-index: 200 !important;
+        position: absolute !important; bottom: 12px !important; top: auto !important;
+        width: 32px !important; height: 32px !important; z-index: 2100 !important;
     }
     .row-arrow.left { left: 8px !important; }
     .row-arrow.right { right: 8px !important; }
 }
 
-/* C. DESKTOP MAXIMIZED (Locked - Pure Tooltip Mode) */
+/* DESKTOP: Hover Preview - Display Up and to the Right */
 @media (min-width: 1025px) {
-    #floatingPreview { position: fixed; pointer-events: none; z-index: 9999; }
-    /* Desktop arrows remain as they are in your "Perfect" state */
+    #floatingPreview {
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        /* Position is handled by JS below */
+    }
 }
