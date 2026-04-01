@@ -190,7 +190,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         // 1. Comment out Hero Reference if necessary
         const hero = document.querySelector('.top-section');
-        // if (hero) hero.style.display = 'none'; // Uncomment to fully hide Hero for testing
+        if (hero) hero.style.display = 'none'; // Uncomment to fully hide Hero for testing
 
         // 2. Force the Product Section to capture all touch events
         const productArea = document.querySelector('.products-section');
