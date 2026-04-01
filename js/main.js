@@ -175,7 +175,7 @@ function setupArrows() {
 }
 
 /* =============================================================
-   10. INITIALIZATION (v1.4 Hardware Segregation)
+   10. INITIALIZATION (v1.4 Force-Isolation Logic)
    ============================================================= */
 document.addEventListener("DOMContentLoaded", async () => {
     await loadProducts();
@@ -188,29 +188,32 @@ document.addEventListener("DOMContentLoaded", async () => {
         // --- MOBILE SECTOR ---
         if (preview) preview.remove(); 
 
-        // CRITICAL: Ensure the product section is ready for taps
+        // PHYSICAL TAP ENFORCEMENT
         const productArea = document.querySelector('.products-section');
         if (productArea) {
             productArea.style.position = 'relative';
-            productArea.style.zIndex = '2000';
+            productArea.style.zIndex = '2500'; // Higher than Hero/Header
         }
 
-        // Disable long-press context menu
+        // Disable Long-Press (Prevents the 'Menu' from blocking the click)
         document.addEventListener('contextmenu', e => {
             if (e.target.closest('.product-card')) e.preventDefault();
         }, false);
 
+        // Samsung/Huawei Layout Kick
+        setTimeout(() => window.dispatchEvent(new Event('resize')), 400);
+
     } else {
-        // --- DESKTOP SECTOR (Follow-Preview: Up & Right) ---
+        // --- DESKTOP SECTOR (Up & Right) ---
         const cards = document.querySelectorAll('.product-card');
         cards.forEach(card => {
             card.addEventListener('mouseenter', () => { if(preview) preview.style.display = 'block'; });
             card.addEventListener('mouseleave', () => { if(preview) preview.style.display = 'none'; });
             card.addEventListener('mousemove', (e) => {
                 if(preview) {
-                    // Offset: -150px (Up) and +20px (Right)
+                    // Display above and to the right
                     preview.style.left = (e.clientX + 20) + 'px';
-                    preview.style.top = (e.clientY - 150) + 'px'; 
+                    preview.style.top = (e.clientY - 160) + 'px'; 
                 }
             });
         });

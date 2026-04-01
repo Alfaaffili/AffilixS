@@ -302,59 +302,64 @@ footer {
 }
 
 /* =============================================================
-   11. MOBILE & TABLET PRECISION (v1.4 Final Polish)
+   11. MOBILE & MINIMIZED PRECISION (v1.4 Force-Isolation)
    ============================================================= */
 
 @media (max-width: 1024px) {
-    /* 1. UNIFIED WHITE: Force every section to pure white */
+    /* 1. Unified White: Kill all off-white shades */
     body, .top-section, .products-section, .categories, .categories-wrapper {
         background-color: #ffffff !important;
     }
 
-    /* 2. HEADER & NAV: Single line and Black */
-    .site-header { background: #000 !important; padding: 5px 0 !important; margin-bottom: 0 !important; }
-    .header-nav { display: flex !important; flex-wrap: nowrap !important; justify-content: space-evenly !important; border-top: 1px solid #222; }
-    .header-nav span { font-size: 10px !important; color: #fff !important; }
+    /* 2. Header & Nav: Single line and Black */
+    .site-header { background: #000 !important; padding: 5px 0 !important; z-index: 3000 !important; }
+    .header-nav { display: flex !important; flex-wrap: nowrap !important; border-top: 1px solid #222; }
 
-    /* 3. HERO: Absolute Anchor (No Gaps) */
+    /* 3. HERO: The "Ghost" Layer (Troubleshooting Slide & Tap) */
     .top-section { 
-        position: relative !important; width: 100vw !important; height: 140px !important;
-        margin: 0 !important; overflow: hidden !important; z-index: 1;
+        position: absolute !important; /* 🔥 Physically removes it from the 'stack' */
+        top: 60px !important; /* Sits exactly below the header */
+        left: 0 !important;
+        width: 100vw !important; 
+        height: 140px !important;
+        z-index: 1 !important; /* Moves it to the very back */
+        overflow: hidden !important;
     }
+    
     .identity-text { 
         left: 47% !important; transform: translateX(-50%) !important; bottom: 10px !important;
-        background: #ff0000 !important; color: #fff !important; white-space: nowrap !important;
+        background: #ff0000 !important; white-space: nowrap !important;
         font-size: 11px !important; padding: 4px 12px !important; z-index: 10;
     }
 
-    /* 4. THE TAP FIX: Force Product Section to the VERY FRONT */
+    /* 4. THE TAP FIX: The "Front Floor" */
     .products-section { 
         position: relative !important;
-        z-index: 2000 !important; /* Higher than any header or hero */
-        margin-top: 10px !important;
-        padding-top: 5px !important;
-        pointer-events: auto !important;
+        z-index: 2000 !important; /* 🔥 Moves the entire product area to the very front */
+        margin-top: 200px !important; /* Creates space for the Ghost Hero to be seen */
+        background: #ffffff !important;
+        pointer-events: auto !important; /* Forces the browser to listen for taps here */
     }
 
-    /* 5. CARDS & ARROWS: Lower Corners */
+    /* 5. Cards & Arrows: Corner Anchoring */
     .product-card {
         min-width: calc(48% - 5px) !important; height: 195px !important;
         margin: 5px 2px !important;
     }
     .row-arrow {
         position: absolute !important; bottom: 12px !important; top: auto !important;
-        width: 32px !important; height: 32px !important; z-index: 2100 !important;
+        width: 30px !important; height: 30px !important; z-index: 2100 !important;
     }
-    .row-arrow.left { left: 8px !important; }
-    .row-arrow.right { right: 8px !important; }
 }
 
-/* DESKTOP: Hover Preview - Display Up and to the Right */
+/* DESKTOP: Up & Right Follow-Preview */
 @media (min-width: 1025px) {
     #floatingPreview {
         position: fixed;
         pointer-events: none;
         z-index: 9999;
-        /* Position is handled by JS below */
+        /* Red Border for clarity */
+        border: 2px solid #ff0000;
+        background: rgba(0, 0, 0, 0.9);
     }
 }
