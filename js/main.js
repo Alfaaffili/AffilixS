@@ -175,7 +175,7 @@ function setupArrows() {
 }
 
 /* =============================================================
-   10. INITIALIZATION (v1.6 Hardware Segregation)
+   10. INITIALIZATION (v1.7 Smart-Touch Logic)
    ============================================================= */
 document.addEventListener("DOMContentLoaded", async () => {
     await loadProducts();
@@ -188,26 +188,37 @@ document.addEventListener("DOMContentLoaded", async () => {
         // --- MOBILE SECTOR ---
         if (preview) preview.remove(); 
 
-        // Restore Hero (since we proved it wasn't the blocker)
-        const hero = document.querySelector('.top-section');
-        if (hero) hero.style.display = 'block';
+        let touchStartX = 0;
+        let touchStartY = 0;
 
-        // Add Direct Touch Support for Cards
         document.querySelectorAll('.product-card').forEach(card => {
-            card.addEventListener('touchstart', function() {
-                this.click(); // Force a standard click on touch
+            // Record where the touch started
+            card.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+                touchStartY = e.changedTouches[0].screenY;
             }, {passive: true});
+
+            // Only trigger click if the finger didn't move much (prevents scroll-triggers)
+            card.addEventListener('touchend', (e) => {
+                const touchEndX = e.changedTouches[0].screenX;
+                const touchEndY = e.changedTouches[0].screenY;
+                
+                // If moved less than 10 pixels, it's a TAP, not a SCROLL
+                if (Math.abs(touchEndX - touchStartX) < 10 && Math.abs(touchEndY - touchStartY) < 10) {
+                    // Prevent "Blinking" by ensuring the modal stays open
+                    e.preventDefault(); 
+                    card.click(); 
+                }
+            }, false);
         });
 
-        // Ensure Product Section is at the VERY front
-        const productArea = document.querySelector('.products-section');
-        if (productArea) {
-            productArea.style.zIndex = '4000';
-            productArea.style.pointerEvents = 'auto';
-        }
+        // Ensure no long-press menus block us
+        document.addEventListener('contextmenu', e => {
+            if (e.target.closest('.product-card')) e.preventDefault();
+        }, false);
 
     } else {
-        // --- DESKTOP SECTOR (Stationary/Follow Up-Right) ---
+        // --- DESKTOP SECTOR (Remains Perfect) ---
         const cards = document.querySelectorAll('.product-card');
         cards.forEach(card => {
             card.addEventListener('mouseenter', () => { if(preview) preview.style.display = 'block'; });

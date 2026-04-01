@@ -302,45 +302,32 @@ footer {
 }
 
 /* =============================================================
-   11. MOBILE & MINIMIZED PRECISION (v1.6 Pass-Through Fix)
+   11. MOBILE & MINIMIZED PRECISION (v1.7 Smart-Touch)
    ============================================================= */
 
 @media (max-width: 1024px) {
-    /* 1. HEADER: Stop the 'Ghost Box' from blocking taps */
-    .site-header { 
-        pointer-events: none !important; /* Taps pass through the header background */
-        background: #000 !important;
-        z-index: 3000 !important;
-    }
-    .logo-group, .header-nav span, .header-nav a { 
-        pointer-events: auto !important; /* Buttons still work */
-    }
-
-    /* 2. CATEGORIES: Stop the category row from blocking Row 1 */
-    .categories, .categories-wrapper {
-        pointer-events: none !important;
+    /* 1. Restore Natural Pointer Events to allow scrolling */
+    .site-header, .categories, .categories-wrapper {
+        pointer-events: auto !important;
         background: #fff !important;
     }
-    .category { 
-        pointer-events: auto !important; /* Actual categories still work */
-    }
 
-    /* 3. PRODUCTS: The Master Touch Layer */
+    /* 2. THE SMART TAP FIX: High Priority but Not Global */
     .products-section { 
         position: relative !important;
-        z-index: 4000 !important; /* Sit ABOVE the 'Ghost' layers */
+        z-index: 1000 !important; 
         margin-top: 10px !important; 
         background: #ffffff !important;
-        pointer-events: auto !important; /* Force browser to prioritize this */
     }
 
-    /* 4. CARDS: Explicit Tap Zone */
     .product-card {
         position: relative !important;
-        z-index: 4100 !important;
+        z-index: 1100 !important;
         min-width: calc(48% - 5px) !important;
         height: 195px !important;
-        touch-action: auto !important; /* Ensure mobile browser knows this is a link */
+        /* Allow normal scrolling but keep tap fast */
+        touch-action: pan-y !important; 
+        -webkit-tap-highlight-color: transparent;
     }
 
     /* Mobile Arrows: Corner Locked */
@@ -348,12 +335,11 @@ footer {
         position: absolute !important;
         bottom: 12px !important;
         top: auto !important;
-        z-index: 4200 !important;
-        pointer-events: auto !important;
+        z-index: 1200 !important;
     }
 }
 
-/* B. DESKTOP: Re-positioned Preview & Corner Arrows */
+/* B. DESKTOP: (Remains Locked/Perfect) */
 @media (min-width: 1025px) {
     #floatingPreview {
         position: fixed;
@@ -362,10 +348,4 @@ footer {
         border: 2px solid #ff0000;
         background: rgba(0, 0, 0, 0.95);
     }
-    .product-row-wrapper .row-arrow {
-        top: auto !important;
-        bottom: 15px !important;
-    }
-    .product-row-wrapper .row-arrow.left { left: 5px !important; }
-    .product-row-wrapper .row-arrow.right { right: 5px !important; }
 }
