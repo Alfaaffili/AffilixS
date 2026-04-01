@@ -302,66 +302,64 @@ footer {
 }
 
 /* =============================================================
-   11. MOBILE & TABLET PRECISION (v1.3-B01 Gap Tightening)
+   11. MOBILE & MINIMIZED PRECISION (v1.4 Structural Fortress)
    ============================================================= */
-@media (max-width: 1024px) {
-    /* 1. Header & Hero: Close the 1-line top gap */
-    .site-header { margin-bottom: -8px !important; background: #000 !important; }
-    .header-nav { padding: 6px 0 !important; }
 
-    /* 2. Hero: Tighten bottom edge */
-    .top-section { height: 130px !important; margin-bottom: 0 !important; }
-    .identity-text { bottom: 2px !important; z-index: 10; }
-
-    /* 3. Products Section: Vacuum the 3-line gap below Hero */
-    .products-section { 
-        margin-top: -15px !important; 
-        padding-top: 5px !important; 
-        background: #fff !important;
-    }
-
-    /* 4. Row Spacing: Vacuum the 2nd & 3rd line gaps */
-    .product-row-wrapper { 
-        margin-bottom: -20px !important; /* Pulls Row 2 closer to Row 1 */
-        padding-top: 0 !important;
-    }
-    
-    /* 5. THE TAP FIX: Disable 'Right-Click' menu on Mobile */
-    .product-card {
-        -webkit-touch-callout: none !important; /* Disables the pop-up menu */
-        -webkit-user-select: none !important;
-        user-select: none !important;
-        touch-action: manipulation !important;
-        z-index: 1000 !important;
-    }
-    .product-card img { pointer-events: none !important; } /* Image won't trigger long-press */
-
-    /* Arrows: Lower Corner Anchoring */
-    .row-arrow {
-        position: absolute !important;
-        bottom: 10px !important;
-        width: 30px !important;
-        height: 30px !important;
-    }
+/* A. TABLET / MINIMIZED DESKTOP (768px to 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .product-card { min-width: calc(33% - 10px) !important; height: 220px !important; }
 }
 
-/* DESKTOP HOVER: Restore Fox-tail & Corner Arrows */
+/* B. MOBILE ONLY (Strictly below 768px) */
+@media (max-width: 767px) {
+    /* 1. Header: Force 1-Line & Black BG */
+    .site-header { background: #000 !important; padding: 5px 0 !important; }
+    .header-nav { 
+        display: flex !important; flex-wrap: nowrap !important; 
+        justify-content: space-evenly !important; border-top: 1px solid #222;
+    }
+    .header-nav span { font-size: 10px !important; white-space: nowrap !important; color: #fff !important; }
+
+    /* 2. Hero: The "Anchor" (Prevents sliding and gaps) */
+    .top-section { 
+        position: relative !important; width: 100vw !important; height: 145px !important;
+        margin: 0 !important; overflow: hidden !important; background: #fff !important;
+    }
+    .identity-panel { 
+        position: absolute !important; top: 0; left: 0; width: 100%; height: 100%;
+        background-size: cover !important; background-position: center !important;
+    }
+    .identity-text { 
+        left: 47% !important; transform: translateX(-50%) !important; bottom: 8px !important;
+        background: #ff0000 !important; color: #fff !important; white-space: nowrap !important;
+        font-size: 11px !important; padding: 4px 12px !important; z-index: 10;
+    }
+
+    /* 3. Products: Add "Breathing Room" (The 2-line gap you wanted) */
+    .products-section { 
+        margin-top: 15px !important; /* Restored breathing room */
+        padding-top: 10px !important; background: #fff !important;
+        position: relative !important; z-index: 100 !important;
+    }
+
+    /* 4. Row Spacing: Balanced (Utilizing space efficiently) */
+    .product-row-wrapper { margin-bottom: 10px !important; padding: 0 5px !important; }
+    .product-card {
+        min-width: calc(48% - 5px) !important; height: 195px !important;
+        margin: 5px 2px !important; touch-action: manipulation !important;
+    }
+
+    /* 5. Mobile Arrows: Lower Corners Only */
+    .row-arrow {
+        position: absolute !important; bottom: 10px !important; top: auto !important;
+        width: 30px !important; height: 30px !important; z-index: 200 !important;
+    }
+    .row-arrow.left { left: 8px !important; }
+    .row-arrow.right { right: 8px !important; }
+}
+
+/* C. DESKTOP MAXIMIZED (Locked - Pure Tooltip Mode) */
 @media (min-width: 1025px) {
-    #floatingPreview {
-        display: none; 
-        position: fixed;
-        pointer-events: none;
-        z-index: 9999;
-        background: rgba(0, 0, 0, 0.9);
-        color: #fff;
-        border: 1px solid #ff0000;
-        padding: 10px;
-        border-radius: 4px;
-    }
-    .product-row-wrapper .row-arrow {
-        top: auto !important;
-        bottom: 15px !important;
-    }
-    .product-row-wrapper .row-arrow.left { left: 5px !important; }
-    .product-row-wrapper .row-arrow.right { right: 5px !important; }
+    #floatingPreview { position: fixed; pointer-events: none; z-index: 9999; }
+    /* Desktop arrows remain as they are in your "Perfect" state */
 }

@@ -175,23 +175,42 @@ function setupArrows() {
 }
 
 /* =============================================================
-   10. INITIALIZATION (v1.3-B01 Feature Restoration)
+   10. INITIALIZATION (v1.4 Hardware-Based Segregation)
    ============================================================= */
 document.addEventListener("DOMContentLoaded", async () => {
-    // 1. Build Page Content
     await loadProducts();
-    
-    // 2. Activate UI
     setupArrows();
 
-    const isMobile = window.innerWidth <= 1024;
+    const isMobile = window.innerWidth <= 1024 || ('ontouchstart' in window);
     const preview = document.querySelector("#floatingPreview");
 
-    if (!isMobile) {
-        // --- DESKTOP: Restore Fox-tail (MouseMove Follow) ---
+    if (isMobile) {
+        // --- MOBILE SECTOR ---
+        if (preview) preview.remove(); // Physically kill tooltip for Mobile
+
+        // Fix the "Slid Hero" Tap issue
+        const productArea = document.querySelector('.products-section');
+        if (productArea) {
+            productArea.style.position = 'relative';
+            productArea.style.zIndex = '1000';
+        }
+
+        // Fast-click enforcement
+        document.addEventListener('contextmenu', e => {
+            if (e.target.closest('.product-card')) e.preventDefault();
+        }, false);
+
+    } else {
+        // --- DESKTOP SECTOR (Stationary Tooltip/Fox-tail) ---
         const cards = document.querySelectorAll('.product-card');
         cards.forEach(card => {
-            card.addEventListener('mouseenter', () => { if(preview) preview.style.display = 'block'; });
+            card.addEventListener('mouseenter', () => {
+                if(preview) {
+                    preview.style.display = 'block';
+                    // Optional: Remove e.clientX logic here if you want it STATIONARY
+                    // but usually Tooltips follow the cursor.
+                }
+            });
             card.addEventListener('mouseleave', () => { if(preview) preview.style.display = 'none'; });
             card.addEventListener('mousemove', (e) => {
                 if(preview) {
@@ -200,23 +219,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
             });
         });
-    } else {
-        // --- MOBILE: Kill 'Right-Click' menu & Cleanup ---
-        if (preview) preview.remove();
-
-        // Disables the 'Save Image' pop-up when long-pressing a card
-        document.addEventListener('contextmenu', (e) => {
-            if (e.target.closest('.product-card')) e.preventDefault();
-        }, false);
-
-        // Samsung/Huawei Force-Refresh
-        setTimeout(() => window.dispatchEvent(new Event('resize')), 300);
     }
 
-    // Category Arrow Logic (< 5)
+    // Lock Category Arrows for Desktop
     const catCount = document.querySelectorAll(".category").length;
     if (window.innerWidth > 1024 && catCount <= 5) {
-        document.querySelectorAll(".categories-wrapper .row-arrow")
-                .forEach(a => a.style.display = "none");
+        document.querySelectorAll(".categories-wrapper .row-arrow").forEach(a => a.style.display = "none");
     }
 });
