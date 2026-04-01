@@ -302,64 +302,66 @@ footer {
 }
 
 /* =============================================================
-   11. MOBILE & MINIMIZED PRECISION (v1.4 Force-Isolation)
+   11. MOBILE & MINIMIZED PRECISION (v1.5 Diagnostics)
    ============================================================= */
 
-@media (max-width: 1024px) {
-    /* 1. Unified White: Kill all off-white shades */
-    body, .top-section, .products-section, .categories, .categories-wrapper {
+/* A. MOBILE ONLY (Strictly below 768px) */
+@media (max-width: 767px) {
+    /* UNIFIED WHITE */
+    body, .products-section, .categories, .categories-wrapper {
         background-color: #ffffff !important;
     }
 
-    /* 2. Header & Nav: Single line and Black */
-    .site-header { background: #000 !important; padding: 5px 0 !important; z-index: 3000 !important; }
-    .header-nav { display: flex !important; flex-wrap: nowrap !important; border-top: 1px solid #222; }
+    /* HEADER: Force Black & Single Line */
+    .site-header { background: #000 !important; z-index: 3000 !important; }
+    .header-nav { display: flex !important; flex-wrap: nowrap !important; }
 
-    /* 3. HERO: The "Ghost" Layer (Troubleshooting Slide & Tap) */
-    .top-section { 
-        position: absolute !important; /* 🔥 Physically removes it from the 'stack' */
-        top: 60px !important; /* Sits exactly below the header */
-        left: 0 !important;
-        width: 100vw !important; 
-        height: 140px !important;
-        z-index: 1 !important; /* Moves it to the very back */
-        overflow: hidden !important;
-    }
+    /* HERO DIAGNOSTICS: Commented out to test Tap Issue */
+    /* .top-section { display: none !important; } 
+    */
     
-    .identity-text { 
-        left: 47% !important; transform: translateX(-50%) !important; bottom: 10px !important;
-        background: #ff0000 !important; white-space: nowrap !important;
-        font-size: 11px !important; padding: 4px 12px !important; z-index: 10;
-    }
-
-    /* 4. THE TAP FIX: The "Front Floor" */
+    /* THE TAP FIX: Push Products to the Front */
     .products-section { 
         position: relative !important;
-        z-index: 2000 !important; /* 🔥 Moves the entire product area to the very front */
-        margin-top: 200px !important; /* Creates space for the Ghost Hero to be seen */
+        z-index: 2500 !important; /* Higher than everything */
+        margin-top: 20px !important; /* Reduced gap since Hero is 'Ghosted' */
         background: #ffffff !important;
-        pointer-events: auto !important; /* Forces the browser to listen for taps here */
+        pointer-events: auto !important;
     }
 
-    /* 5. Cards & Arrows: Corner Anchoring */
+    /* Product Cards: Premium Size */
     .product-card {
-        min-width: calc(48% - 5px) !important; height: 195px !important;
+        min-width: calc(48% - 5px) !important;
+        height: 195px !important;
         margin: 5px 2px !important;
     }
+
+    /* Mobile Arrows: Lower Corners */
     .row-arrow {
-        position: absolute !important; bottom: 12px !important; top: auto !important;
-        width: 30px !important; height: 30px !important; z-index: 2100 !important;
+        position: absolute !important;
+        bottom: 10px !important;
+        top: auto !important;
+        z-index: 2600 !important;
     }
 }
 
-/* DESKTOP: Up & Right Follow-Preview */
+/* B. DESKTOP MAXIMIZED (Locked & Re-positioned) */
 @media (min-width: 1025px) {
+    /* Tooltip styling */
     #floatingPreview {
         position: fixed;
         pointer-events: none;
         z-index: 9999;
-        /* Red Border for clarity */
-        border: 2px solid #ff0000;
-        background: rgba(0, 0, 0, 0.9);
+        border: 1px solid #ff0000;
+        background: rgba(0, 0, 0, 0.95);
+        border-radius: 4px;
     }
+
+    /* Product Arrows: Lower Corners */
+    .product-row-wrapper .row-arrow {
+        top: auto !important;
+        bottom: 15px !important;
+    }
+    .product-row-wrapper .row-arrow.left { left: 5px !important; }
+    .product-row-wrapper .row-arrow.right { right: 5px !important; }
 }

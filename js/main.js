@@ -175,7 +175,7 @@ function setupArrows() {
 }
 
 /* =============================================================
-   10. INITIALIZATION (v1.4 Force-Isolation Logic)
+   10. INITIALIZATION (v1.5 Diagnostic Logic)
    ============================================================= */
 document.addEventListener("DOMContentLoaded", async () => {
     await loadProducts();
@@ -188,38 +188,39 @@ document.addEventListener("DOMContentLoaded", async () => {
         // --- MOBILE SECTOR ---
         if (preview) preview.remove(); 
 
-        // PHYSICAL TAP ENFORCEMENT
+        // 1. Comment out Hero Reference if necessary
+        const hero = document.querySelector('.top-section');
+        // if (hero) hero.style.display = 'none'; // Uncomment to fully hide Hero for testing
+
+        // 2. Force the Product Section to capture all touch events
         const productArea = document.querySelector('.products-section');
         if (productArea) {
             productArea.style.position = 'relative';
-            productArea.style.zIndex = '2500'; // Higher than Hero/Header
+            productArea.style.zIndex = '2800';
         }
 
-        // Disable Long-Press (Prevents the 'Menu' from blocking the click)
+        // 3. Disable long-press context menu for faster taps
         document.addEventListener('contextmenu', e => {
             if (e.target.closest('.product-card')) e.preventDefault();
         }, false);
 
-        // Samsung/Huawei Layout Kick
-        setTimeout(() => window.dispatchEvent(new Event('resize')), 400);
-
     } else {
-        // --- DESKTOP SECTOR (Up & Right) ---
+        // --- DESKTOP SECTOR (Re-positioned Preview) ---
         const cards = document.querySelectorAll('.product-card');
         cards.forEach(card => {
             card.addEventListener('mouseenter', () => { if(preview) preview.style.display = 'block'; });
             card.addEventListener('mouseleave', () => { if(preview) preview.style.display = 'none'; });
             card.addEventListener('mousemove', (e) => {
                 if(preview) {
-                    // Display above and to the right
+                    // +20px Right, -220px UP (Displays above the card level)
                     preview.style.left = (e.clientX + 20) + 'px';
-                    preview.style.top = (e.clientY - 160) + 'px'; 
+                    preview.style.top = (e.clientY - 220) + 'px'; 
                 }
             });
         });
     }
 
-    // Category Arrow Logic
+    // Desktop Category Arrow Logic
     const catCount = document.querySelectorAll(".category").length;
     if (window.innerWidth > 1024 && catCount <= 5) {
         document.querySelectorAll(".categories-wrapper .row-arrow").forEach(a => a.style.display = "none");
