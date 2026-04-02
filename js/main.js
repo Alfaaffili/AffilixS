@@ -175,13 +175,14 @@ function setupArrows() {
 }
 
 /* =============================================================
-   10. INITIALIZATION (v1.9 Final Refresh)
+   10. INITIALIZATION (v2.0 Hardware Precision)
    ============================================================= */
 document.addEventListener("DOMContentLoaded", async () => {
     await loadProducts();
     setupArrows();
 
-    const isMobile = window.innerWidth <= 1024 || ('ontouchstart' in window);
+    const screenWidth = window.innerWidth;
+    const isMobile = screenWidth <= 1024 || ('ontouchstart' in window);
     const preview = document.querySelector("#floatingPreview");
 
     if (isMobile) {
@@ -201,12 +202,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                 if (diffX < 10 && diffY < 10) { card.click(); }
             }, false);
         });
-
-        // REFRESH: Force Samsung/Huawei to paint 2 columns
-        window.dispatchEvent(new Event('resize'));
-        
     } else {
-        // DESKTOP: (Preserved Follow-Preview)
+        // DESKTOP: Hover Follow-Preview (Up & Right)
         const cards = document.querySelectorAll('.product-card');
         cards.forEach(card => {
             card.addEventListener('mouseenter', () => { if(preview) preview.style.display = 'block'; });
@@ -220,8 +217,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     }
 
-    // Category Logic
-    if (window.innerWidth > 1024 && document.querySelectorAll(".category").length <= 5) {
-        document.querySelectorAll(".categories-wrapper .row-arrow").forEach(a => a.style.display = "none");
+    // --- CATEGORY ARROW TOGGLE (Minimized Desktop) ---
+    const catArrows = document.querySelectorAll(".categories-wrapper .row-arrow");
+    const catCount = document.querySelectorAll(".category").length;
+    
+    if (screenWidth > 1150 && catCount <= 5) {
+        // Hide on Maximized if few categories
+        catArrows.forEach(a => a.style.display = "none");
+    } else if (screenWidth <= 1150 && screenWidth > 767) {
+        // Force show on Minimized Desktop
+        catArrows.forEach(a => a.style.display = "flex");
     }
 });

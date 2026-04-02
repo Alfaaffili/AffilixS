@@ -302,83 +302,70 @@ footer {
 }
 
 /* =============================================================
-   11. FINAL GUARD & HARDWARE LOCK (v1.9)
+   11. HARDWARE SYMMETRY & EDGE GUARD (v2.0 Final)
    ============================================================= */
 
 @media (max-width: 1024px) {
-    /* 1. Header & Hero: The "Snap" Fix */
-    .site-header { 
-        background: #000 !important; 
-        padding: 5px 0 !important; 
-        margin-bottom: 0 !important; 
-        position: relative;
-        z-index: 3000;
+    /* 1. Header & Nav: Safe Zone Fix */
+    .site-header { background: #000 !important; padding: 5px 0 !important; width: 100% !important; overflow: hidden; }
+    .header-nav { 
+        display: flex !important; 
+        flex-wrap: nowrap !important; 
+        justify-content: space-around !important; 
+        padding: 6px 4px !important; /* Slight side padding to prevent cut-off */
     }
+    .header-nav span { font-size: 9px !important; white-space: nowrap !important; color: #fff !important; }
+
+    /* 2. Hero & Identity: Center Alignment Fix */
+    .top-section { height: 140px !important; position: relative !important; width: 100% !important; overflow: hidden; }
+    .identity-panel { position: absolute !important; top: 0 !important; left: 0; width: 100%; height: 100%; background-size: cover !important; }
     
-    /* Hero: Fix Slide & Overflow */
-    .top-section { 
-        height: 140px !important; 
-        margin-top: -2px !important; /* Closes the white gap */
-        position: relative !important;
-        overflow: hidden !important;
-        background: #fff !important;
-        border: none !important;
-        box-shadow: none !important;
-    }
-    .identity-panel {
-        position: absolute !important;
-        top: 0 !important; /* Pins image to top */
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-size: cover !important;
+    .identity-text { 
+        left: 50% !important; /* Centered for Samsung/Huawei symmetry */
+        transform: translateX(-50%) !important; 
+        bottom: 10px !important;
+        width: 92% !important; /* Forces it to stay inside the screen edges */
+        text-align: center !important;
+        white-space: nowrap !important;
+        overflow: hidden;
+        text-overflow: ellipsis; /* Graceful exit for long titles */
+        background: #ff0000 !important;
+        font-size: 10px !important;
+        padding: 5px 0 !important;
     }
 
-    /* 2. Nav & Identity: Forced 1-Line */
-    .header-nav { display: flex !important; flex-wrap: nowrap !important; }
-    .header-nav span { white-space: nowrap !important; }
-    .identity-text { white-space: nowrap !important; bottom: 8px !important; }
-
-    /* 3. THE "X" BUTTON: Extra Large for Mobile */
-    .modal-close, .preview-close, #closePreview {
-        width: 60px !important; /* Doubled for easy tapping */
-        height: 60px !important;
-        font-size: 40px !important;
-        line-height: 60px !important;
-        background: rgba(255, 0, 0, 0.8) !important; /* Red for visibility */
-        color: #fff !important;
-        border-radius: 50% !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        z-index: 9999 !important;
-    }
-
-    /* 4. PRODUCT CARDS: Restore 2-Column Layout */
-    .products-section { margin-top: 10px !important; }
+    /* 3. PRODUCT CARDS: Symmetrical 2-Column Restore */
+    .products-section { padding: 0 4px !important; background: #fff !important; }
     .product-row-wrapper { 
         display: flex !important; 
         flex-wrap: wrap !important; 
-        justify-content: center !important;
+        justify-content: space-between !important; /* Symmetrical spacing */
+        padding: 0 4px !important;
     }
     .product-card {
-        flex: 0 0 calc(46% - 5px) !important; /* Forces 2 per row */
-        max-width: 46% !important;
-        height: 195px !important;
-        margin: 5px !important;
+        flex: 0 0 47% !important; /* Perfect 2-column split */
+        max-width: 47% !important;
+        height: 185px !important;
+        margin: 5px 0 !important;
+        box-sizing: border-box !important;
     }
+    .product-card img { height: 120px !important; width: 100% !important; object-fit: cover; }
 
-    /* Arrows: Lower Corners */
-    .row-arrow {
-        position: absolute !important;
-        bottom: 15px !important;
-        width: 32px !important;
-        height: 32px !important;
+    /* 4. THE "X" BUTTON: Extra Large Red Target */
+    .modal-close, .preview-close {
+        width: 55px !important; height: 55px !important;
+        font-size: 35px !important; background: #ff0000 !important;
+        border-radius: 50% !important; display: flex !important;
+        align-items: center !important; justify-content: center !important;
     }
 }
 
-/* B. DESKTOP: (Preserved & Untouched) */
-@media (min-width: 1025px) {
+/* DESKTOP MINIMIZED (Show Arrows) */
+@media (min-width: 768px) and (max-width: 1150px) {
+    .categories-wrapper .row-arrow { display: flex !important; }
+}
+
+/* DESKTOP MAXIMIZED (Hide Arrows if <= 5) */
+@media (min-width: 1151px) {
     .product-row-wrapper .row-arrow { bottom: 15px !important; top: auto !important; }
-    .preview-close { width: 45px !important; height: 45px !important; font-size: 30px !important; }
 }
