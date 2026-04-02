@@ -175,7 +175,7 @@ function setupArrows() {
 }
 
 /* =============================================================
-   10. INITIALIZATION (v1.8 Smart-Swipe Logic)
+   10. INITIALIZATION (v1.9 Final Refresh)
    ============================================================= */
 document.addEventListener("DOMContentLoaded", async () => {
     await loadProducts();
@@ -187,9 +187,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (isMobile) {
         if (preview) preview.remove(); 
 
+        // SMART TAP: Prevent Scrolling from opening products
         let startX, startY;
-
-        // --- SMART TOUCH: Distinguish Tap from Scroll/Swipe ---
         document.querySelectorAll('.product-card').forEach(card => {
             card.addEventListener('touchstart', (e) => {
                 startX = e.touches[0].clientX;
@@ -199,23 +198,15 @@ document.addEventListener("DOMContentLoaded", async () => {
             card.addEventListener('touchend', (e) => {
                 const diffX = Math.abs(e.changedTouches[0].clientX - startX);
                 const diffY = Math.abs(e.changedTouches[0].clientY - startY);
-                
-                // If the finger didn't move more than 10px, it's a TAP
-                if (diffX < 10 && diffY < 10) {
-                    card.click();
-                }
+                if (diffX < 10 && diffY < 10) { card.click(); }
             }, false);
         });
 
-        // --- RESTORE SWIPE: Ensure Category wrapper is scrollable ---
-        const catWrapper = document.querySelector('.categories-wrapper');
-        if (catWrapper) {
-            catWrapper.style.overflowX = 'auto';
-            catWrapper.style.webkitOverflowScrolling = 'touch';
-        }
-
+        // REFRESH: Force Samsung/Huawei to paint 2 columns
+        window.dispatchEvent(new Event('resize'));
+        
     } else {
-        // --- DESKTOP SECTOR (Hover Up-Right) ---
+        // DESKTOP: (Preserved Follow-Preview)
         const cards = document.querySelectorAll('.product-card');
         cards.forEach(card => {
             card.addEventListener('mouseenter', () => { if(preview) preview.style.display = 'block'; });
@@ -229,9 +220,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     }
 
-    // Category Arrow Logic
-    const catCount = document.querySelectorAll(".category").length;
-    if (window.innerWidth > 1024 && catCount <= 5) {
+    // Category Logic
+    if (window.innerWidth > 1024 && document.querySelectorAll(".category").length <= 5) {
         document.querySelectorAll(".categories-wrapper .row-arrow").forEach(a => a.style.display = "none");
     }
 });
