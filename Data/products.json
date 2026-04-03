@@ -11,7 +11,7 @@
 "image": "images/p1.jpg",
 "price": 189,
 "currency": "USD",
-"affiliateLink": "https://example.com"
+"affiliateLink": "https://example.com",
 "fullDescription": "Hand-crafted 18k gold...",
 
 "specifications": {
@@ -35,7 +35,7 @@
 "image": "images/p2.jpg",
 "price": 209,
 "currency": "USD",
-"affiliateLink": "https://example.com"
+"affiliateLink": "https://example.com",
 "fullDescription": "Hand-crafted 18k gold...",
 
 "specifications": {
@@ -59,7 +59,7 @@
 "image": "images/p3.jpg",
 "price": 480,
 "currency": "USD",
-"affiliateLink": "https://example.com"
+"affiliateLink": "https://example.com",
 "fullDescription": "Hand-crafted 18k gold...",
 
 "specifications": {
@@ -83,7 +83,7 @@
 "image": "images/p4.jpg",
 "price": 501,
 "currency": "USD",
-"affiliateLink": "https://example.com"
+"affiliateLink": "https://example.com",
 "fullDescription": "Hand-crafted 18k gold...",
 
 "specifications": {
@@ -107,7 +107,7 @@
 "image": "images/p5.jpg",
 "price": 110,
 "currency": "USD",
-"affiliateLink": "https://example.com"
+"affiliateLink": "https://example.com",
 "fullDescription": "Hand-crafted 18k gold...",
 
 "specifications": {
@@ -131,7 +131,7 @@
 "image": "images/p6.jpg",
 "price": 1223.73,
 "currency": "USD",
-"affiliateLink": "https://example.com"
+"affiliateLink": "https://example.com",
 "fullDescription": "Hand-crafted 18k gold...",
 
 "specifications": {
@@ -155,7 +155,7 @@
 "image": "images/p7.jpg",
 "price": 300,
 "currency": "USD",
-"affiliateLink": "https://example.com"
+"affiliateLink": "https://example.com",
 "fullDescription": "Hand-crafted 18k gold...",
 
 "specifications": {
@@ -179,7 +179,7 @@
 "image": "images/p8.jpg",
 "price": 310,
 "currency": "USD",
-"affiliateLink": "https://example.com"
+"affiliateLink": "https://example.com",
 "fullDescription": "Hand-crafted 18k gold...",
 
 "specifications": {
@@ -203,7 +203,7 @@
 "image": "images/p9.jpg",
 "price": 305,
 "currency": "USD",
-"affiliateLink": "https://example.com"
+"affiliateLink": "https://example.com",
 "fullDescription": "Hand-crafted 18k gold...",
 
 "specifications": {
@@ -227,7 +227,7 @@
 "image": "images/p10.jpg",
 "price": 499,
 "currency": "USD",
-"affiliateLink": "https://example.com"
+"affiliateLink": "https://example.com",
 "fullDescription": "Hand-crafted 18k gold...",
 
 "specifications": {
@@ -251,7 +251,7 @@
 "image": "images/p11.jpg",
 "price": 189,
 "currency": "USD",
-"affiliateLink": "https://example.com"
+"affiliateLink": "https://example.com",
 "fullDescription": "Hand-crafted 18k gold...",
 
 "specifications": {
@@ -275,7 +275,7 @@
 "image": "images/p12.jpg",
 "price": 189,
 "currency": "USD",
-"affiliateLink": "https://example.com"
+"affiliateLink": "https://example.com",
 "fullDescription": "Hand-crafted 18k gold...",
 
 "specifications": {
@@ -299,7 +299,7 @@
 "image": "images/p13.jpg",
 "price": 189,
 "currency": "USD",
-"affiliateLink": "https://example.com"
+"affiliateLink": "https://example.com",
 "fullDescription": "Hand-crafted 18k gold...",
 
 "specifications": {
@@ -323,7 +323,7 @@
 "image": "images/p14.jpg",
 "price": 189,
 "currency": "USD",
-"affiliateLink": "https://example.com"
+"affiliateLink": "https://example.com",
 "fullDescription": "Hand-crafted 18k gold...",
 
 "specifications": {
@@ -347,7 +347,7 @@
 "image": "images/p15.jpg",
 "price": 189,
 "currency": "USD",
-"affiliateLink": "https://example.com"
+"affiliateLink": "https://example.com",
 "fullDescription": "Hand-crafted 18k gold...",
 
 "specifications": {
@@ -371,7 +371,7 @@
 "image": "images/p16.jpg",
 "price": 189,
 "currency": "USD",
-"affiliateLink": "https://example.com"
+"affiliateLink": "https://example.com",
 "fullDescription": "Hand-crafted 18k gold...",
 
 "specifications": {
@@ -395,7 +395,7 @@
 "image": "images/p17.jpg",
 "price": 189,
 "currency": "USD",
-"affiliateLink": "https://example.com"
+"affiliateLink": "https://example.com",
 "fullDescription": "Hand-crafted 18k gold...",
 
 "specifications": {
@@ -419,7 +419,7 @@
 "image": "images/p18.jpg",
 "price": 189,
 "currency": "USD",
-"affiliateLink": "https://example.com"
+"affiliateLink": "https://example.com",
 "fullDescription": "Hand-crafted 18k gold...",
 
 "specifications": {
@@ -443,7 +443,7 @@
 "image": "images/p19.jpg",
 "price": 189,
 "currency": "USD",
-"affiliateLink": "https://example.com"
+"affiliateLink": "https://example.com",
 "fullDescription": "Hand-crafted 18k gold...",
 
 "specifications": {
@@ -467,7 +467,7 @@
 "image": "images/p2.jpg",
 "price": 189,
 "currency": "USD",
-"affiliateLink": "https://example.com"
+"affiliateLink": "https://example.com",
 "fullDescription": "Hand-crafted 18k gold...",
 
 "specifications": {
@@ -491,7 +491,7 @@
 "image": "images/p21.jpg",
 "price": 189,
 "currency": "USD",
-"affiliateLink": "https://example.com"
+"affiliateLink": "https://example.com",
 "fullDescription": "Hand-crafted 18k gold...",
 
 "specifications": {
@@ -515,7 +515,7 @@
 "image": "images/p22.jpg",
 "price": 189,
 "currency": "USD",
-"affiliateLink": "https://example.com"
+"affiliateLink": "https://example.com",
 "fullDescription": "Hand-crafted 18k gold...",
 
 "specifications": {
@@ -539,7 +539,7 @@
 "image": "images/p23.jpg",
 "price": 189,
 "currency": "USD",
-"affiliateLink": "https://example.com"
+"affiliateLink": "https://example.com",
 "fullDescription": "Hand-crafted 18k gold...",
 
 "specifications": {
@@ -563,7 +563,7 @@
 "image": "images/p24.jpg",
 "price": 189,
 "currency": "USD",
-"affiliateLink": "https://example.com"
+"affiliateLink": "https://example.com",
 "fullDescription": "Hand-crafted 18k gold...",
 
 "specifications": {
@@ -587,7 +587,7 @@
 "image": "images/p25.jpg",
 "price": 189,
 "currency": "USD",
-"affiliateLink": "https://example.com"
+"affiliateLink": "https://example.com",
 "fullDescription": "Hand-crafted 18k gold...",
 
 "specifications": {
@@ -611,7 +611,7 @@
 "image": "images/p26.jpg",
 "price": 189,
 "currency": "USD",
-"affiliateLink": "https://example.com"
+"affiliateLink": "https://example.com",
 "fullDescription": "Hand-crafted 18k gold...",
 
 "specifications": {
