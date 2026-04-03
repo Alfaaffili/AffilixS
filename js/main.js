@@ -94,7 +94,7 @@ function createCard(p) {
     card.appendChild(img);
 
 
-    // HOVER COMMANDS
+    // HOVER COMMANDS  (Preserved Desktop Logic)
     card.onmouseenter = () => {
         const prev = document.querySelector("#floatingPreview");
         const prevImg = document.querySelector("#previewImage");
@@ -108,16 +108,30 @@ function createCard(p) {
         if(prev) prev.classList.remove("active");
     };
 
-    // Click Command
-    card.onclick = () => openProductModal(p);
+    // --- UPDATED CLICK COMMAND ---
+
+    // Instead of opening a modal, we redirect to the new premium page.
+
+    card.onclick = () => {
+
+        window.location.href = `product.html?id=${p.id}`;
+
+    };
+
+
 
     return card;
-}
+
+ }
 
 /* =============================================================
    07. PRODUCT MODAL ENGINE (Opening Logic)
    ============================================================= */
 function openProductModal(p) {
+    // ADD THIS LINE: It stops the modal from opening and lets Section 06 handle the page jump
+
+    return;
+
     const modal = document.querySelector("#productModal");
     if (!modal) return;
 

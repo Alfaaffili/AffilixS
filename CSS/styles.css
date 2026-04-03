@@ -369,3 +369,71 @@ footer {
 @media (min-width: 1151px) {
     .product-row-wrapper .row-arrow { bottom: 15px !important; top: auto !important; }
 }
+/* =============================================================
+   12. PRODUCT PAGE: PREMIUM GALLERY & EXCHANGE (v1.0)
+   ============================================================= */
+.product-page { background: #ffffff; }
+
+.hero-display {
+    position: relative;
+    width: 100%;
+    height: 65vh; 
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    border-bottom: 1px solid #eee;
+}
+
+.hero-image-container { width: 100%; height: 100%; display: flex; justify-content: center; }
+.hero-image-container img { height: 90%; width: auto; object-fit: contain; margin-top: 20px; }
+
+.hero-info-overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+    padding: 50px 20px 30px;
+    color: #fff;
+    text-align: center;
+}
+
+.premium-price { font-size: 1.5rem; font-weight: bold; color: #ff0000; display: block; margin-bottom: 10px; }
+
+.buy-now-trigger {
+    background: #ff0000;
+    color: #fff;
+    padding: 15px 45px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    display: inline-block;
+    transition: transform 0.2s;
+}
+
+.details-section {
+    padding: 40px 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.specs-list { list-style: none; padding: 0; }
+.specs-list li { 
+    padding: 12px 0; 
+    border-bottom: 1px solid #eee; 
+    display: flex; 
+    justify-content: space-between; 
+    font-size: 0.95rem;
+}
+
+.section-title { text-align: center; margin: 40px 0 20px; font-weight: 300; letter-spacing: 2px; }
+
+/* Mobile Adaptation for Section 12 */
+@media (max-width: 768px) {
+    .hero-display { height: 50vh; }
+    .details-section { grid-template-columns: 1fr; gap: 30px; }
+    .hero-info-overlay h1 { font-size: 1.1rem; }
+}
