@@ -1,625 +1,496 @@
 ﻿[
-{
-"id": "p1",
-"shortName": "Necklace",
-"name": "Collection of Necklace & Jewlery (pracelet, earings, rings, cuflinlks)",
-"brand": "GVC",
-"category": "style",
-"priority": 80,
-"rating": 4.6,
-"trendScore": 55,
-"image": "images/p1.jpg",
-"price": 189,
-"currency": "USD",
-"affiliateLink": "https://example.com",
-"fullDescription": "Hand-crafted 18k gold...",
-
-"specifications": {
-
-   "Material": "18k Gold",
-
-   "Warranty": "2 Years"
-
- }
-},
-
-{
-"id": "p2",
-"shortName": "Smart Watch",
-"name": "Galaxy Smart Ellegant watch (black, white, grey)",
-"brand": "GLXY",
-"category": "style",
-"priority": 79,
-"rating": 4.3,
-"trendScore": 45,
-"image": "images/p2.jpg",
-"price": 209,
-"currency": "USD",
-"affiliateLink": "https://example.com",
-"fullDescription": "Hand-crafted 18k gold...",
-
-"specifications": {
-
-   "Material": "18k Gold",
-
-   "Warranty": "2 Years"
-
- }
-},
-
-{
-"id": "p3",
-"shortName": "Conon Printer",
-"name": "Three-in-one Canon 3000 Series Scanner & Printer (3 sizes & 3 colors)",
-"brand": "Canon3000",
-"category": "style",
-"priority": 80,
-"rating": 4.6,
-"trendScore": 55,
-"image": "images/p3.jpg",
-"price": 480,
-"currency": "USD",
-"affiliateLink": "https://example.com",
-"fullDescription": "Hand-crafted 18k gold...",
-
-"specifications": {
-
-   "Material": "18k Gold",
-
-   "Warranty": "2 Years"
-
- }
-},
-
-{
-"id": "p4",
-"shortName": "Flat Printer",
-"name": "Flat Printer Brothers 2040 Series (Black & White)",
-"brand": "Brothers",
-"category": "style",
-"priority": 70,
-"rating": 4.1,
-"trendScore": 85,
-"image": "images/p4.jpg",
-"price": 501,
-"currency": "USD",
-"affiliateLink": "https://example.com",
-"fullDescription": "Hand-crafted 18k gold...",
-
-"specifications": {
-
-   "Material": "18k Gold",
-
-   "Warranty": "2 Years"
-
- }
-},
-
-{
-"id": "p5",
-"shortName": "Ear Piece",
-"name": "Smart Earbud, small wireless speaker",
-"brand": "HUAWEI",
-"category": "style",
-"priority": 80,
-"rating": 4.6,
-"trendScore": 55,
-"image": "images/p5.jpg",
-"price": 110,
-"currency": "USD",
-"affiliateLink": "https://example.com",
-"fullDescription": "Hand-crafted 18k gold...",
-
-"specifications": {
-
-   "Material": "18k Gold",
-
-   "Warranty": "2 Years"
-
- }
-},
-
-{
-"id": "p6",
-"shortName": "iPad Pro",
-"name": "Apple iPad Pro 11-inch (M5)",
-"brand": "Apple",
-"category": "style",
-"priority": 87,
-"rating": 4.8,
-"trendScore": 81,
-"image": "images/p6.jpg",
-"price": 1223.73,
-"currency": "USD",
-"affiliateLink": "https://example.com",
-"fullDescription": "Hand-crafted 18k gold...",
-
-"specifications": {
-
-   "Material": "18k Gold",
-
-   "Warranty": "2 Years"
-
- }
-},
-
-{
-"id": "p7",
-"shortName": "Earings",
-"name": "Golden Earings (gold plated & silver plated))",
-"brand": "GVC",
-"category": "style",
-"priority": 95,
-"rating": 4.7,
-"trendScore": 56,
-"image": "images/p7.jpg",
-"price": 300,
-"currency": "USD",
-"affiliateLink": "https://example.com",
-"fullDescription": "Hand-crafted 18k gold...",
-
-"specifications": {
-
-   "Material": "18k Gold",
-
-   "Warranty": "2 Years"
-
- }
-},
-
-{
-"id": "p8",
-"shortName": "Coated Necklace",
-"name": "Blue Gem coated Necklace",
-"brand": "GVC",
-"category": "style",
-"priority": 80,
-"rating": 4.6,
-"trendScore": 55,
-"image": "images/p8.jpg",
-"price": 310,
-"currency": "USD",
-"affiliateLink": "https://example.com",
-"fullDescription": "Hand-crafted 18k gold...",
-
-"specifications": {
-
-   "Material": "18k Gold",
-
-   "Warranty": "2 Years"
-
- }
-},
-
-{
-"id": "p9",
-"shortName": "Gem pracelet",
-"name": "Gem decorated pracelet",
-"brand": "GVC",
-"category": "style",
-"priority": 82,
-"rating": 4.8,
-"trendScore": 55,
-"image": "images/p9.jpg",
-"price": 305,
-"currency": "USD",
-"affiliateLink": "https://example.com",
-"fullDescription": "Hand-crafted 18k gold...",
-
-"specifications": {
-
-   "Material": "18k Gold",
-
-   "Warranty": "2 Years"
-
- }
-},
-
-{
-"id": "p10",
-"shortName": "Blue necklace",
-"name": "Blue Gem Necklace",
-"brand": "GVC",
-"category": "style",
-"priority": 82,
-"rating": 4.8,
-"trendScore": 58,
-"image": "images/p10.jpg",
-"price": 499,
-"currency": "USD",
-"affiliateLink": "https://example.com",
-"fullDescription": "Hand-crafted 18k gold...",
-
-"specifications": {
-
-   "Material": "18k Gold",
-
-   "Warranty": "2 Years"
-
- }
-},
-
-{
-"id": "p11",
-"shortName": "Feminine Purse",
-"name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
-"brand": "GVC",
-"category": "style",
-"priority": 80,
-"rating": 4.6,
-"trendScore": 55,
-"image": "images/p11.jpg",
-"price": 189,
-"currency": "USD",
-"affiliateLink": "https://example.com",
-"fullDescription": "Hand-crafted 18k gold...",
-
-"specifications": {
-
-   "Material": "18k Gold",
-
-   "Warranty": "2 Years"
-
- }
-},
-
-{
-"id": "p12",
-"shortName": "Feminine Purse",
-"name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
-"brand": "GVC",
-"category": "style",
-"priority": 80,
-"rating": 4.6,
-"trendScore": 55,
-"image": "images/p12.jpg",
-"price": 189,
-"currency": "USD",
-"affiliateLink": "https://example.com",
-"fullDescription": "Hand-crafted 18k gold...",
-
-"specifications": {
-
-   "Material": "18k Gold",
-
-   "Warranty": "2 Years"
-
- }
-},
-
-{
-"id": "p13",
-"shortName": "Feminine Purse",
-"name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
-"brand": "GVC",
-"category": "style",
-"priority": 80,
-"rating": 4.6,
-"trendScore": 55,
-"image": "images/p13.jpg",
-"price": 189,
-"currency": "USD",
-"affiliateLink": "https://example.com",
-"fullDescription": "Hand-crafted 18k gold...",
-
-"specifications": {
-
-   "Material": "18k Gold",
-
-   "Warranty": "2 Years"
-
- }
-},
-
-{
-"id": "p14",
-"shortName": "Feminine Purse",
-"name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
-"brand": "GVC",
-"category": "style",
-"priority": 80,
-"rating": 4.6,
-"trendScore": 55,
-"image": "images/p14.jpg",
-"price": 189,
-"currency": "USD",
-"affiliateLink": "https://example.com",
-"fullDescription": "Hand-crafted 18k gold...",
-
-"specifications": {
-
-   "Material": "18k Gold",
-
-   "Warranty": "2 Years"
-
- }
-},
-
-{
-"id": "p15",
-"shortName": "Feminine Purse",
-"name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
-"brand": "GVC",
-"category": "style",
-"priority": 80,
-"rating": 4.6,
-"trendScore": 55,
-"image": "images/p15.jpg",
-"price": 189,
-"currency": "USD",
-"affiliateLink": "https://example.com",
-"fullDescription": "Hand-crafted 18k gold...",
-
-"specifications": {
-
-   "Material": "18k Gold",
-
-   "Warranty": "2 Years"
-
- }
-},
-
-{
-"id": "p16",
-"shortName": "Feminine Purse",
-"name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
-"brand": "GVC",
-"category": "style",
-"priority": 80,
-"rating": 4.6,
-"trendScore": 55,
-"image": "images/p16.jpg",
-"price": 189,
-"currency": "USD",
-"affiliateLink": "https://example.com",
-"fullDescription": "Hand-crafted 18k gold...",
-
-"specifications": {
-
-   "Material": "18k Gold",
-
-   "Warranty": "2 Years"
-
- }
-},
-
-{
-"id": "p17",
-"shortName": "Feminine Purse",
-"name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
-"brand": "GVC",
-"category": "style",
-"priority": 80,
-"rating": 4.6,
-"trendScore": 55,
-"image": "images/p17.jpg",
-"price": 189,
-"currency": "USD",
-"affiliateLink": "https://example.com",
-"fullDescription": "Hand-crafted 18k gold...",
-
-"specifications": {
-
-   "Material": "18k Gold",
-
-   "Warranty": "2 Years"
-
- }
-},
-
-{
-"id": "p18",
-"shortName": "Feminine Purse",
-"name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
-"brand": "GVC",
-"category": "style",
-"priority": 80,
-"rating": 4.6,
-"trendScore": 55,
-"image": "images/p18.jpg",
-"price": 189,
-"currency": "USD",
-"affiliateLink": "https://example.com",
-"fullDescription": "Hand-crafted 18k gold...",
-
-"specifications": {
-
-   "Material": "18k Gold",
-
-   "Warranty": "2 Years"
-
- }
-},
-
-{
-"id": "p19",
-"shortName": "Feminine Purse",
-"name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
-"brand": "GVC",
-"category": "style",
-"priority": 80,
-"rating": 4.6,
-"trendScore": 55,
-"image": "images/p19.jpg",
-"price": 189,
-"currency": "USD",
-"affiliateLink": "https://example.com",
-"fullDescription": "Hand-crafted 18k gold...",
-
-"specifications": {
-
-   "Material": "18k Gold",
-
-   "Warranty": "2 Years"
-
- }
-},
-
-{
-"id": "p20",
-"shortName": "Feminine Purse",
-"name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
-"brand": "GVC",
-"category": "style",
-"priority": 80,
-"rating": 4.6,
-"trendScore": 55,
-"image": "images/p2.jpg",
-"price": 189,
-"currency": "USD",
-"affiliateLink": "https://example.com",
-"fullDescription": "Hand-crafted 18k gold...",
-
-"specifications": {
-
-   "Material": "18k Gold",
-
-   "Warranty": "2 Years"
-
- }
-},
-
-{
-"id": "p21",
-"shortName": "Feminine Purse",
-"name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
-"brand": "GVC",
-"category": "style",
-"priority": 80,
-"rating": 4.6,
-"trendScore": 55,
-"image": "images/p21.jpg",
-"price": 189,
-"currency": "USD",
-"affiliateLink": "https://example.com",
-"fullDescription": "Hand-crafted 18k gold...",
-
-"specifications": {
-
-   "Material": "18k Gold",
-
-   "Warranty": "2 Years"
-
- }
-},
-
-{
-"id": "p22",
-"shortName": "Feminine Purse",
-"name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
-"brand": "GVC",
-"category": "style",
-"priority": 80,
-"rating": 4.6,
-"trendScore": 55,
-"image": "images/p22.jpg",
-"price": 189,
-"currency": "USD",
-"affiliateLink": "https://example.com",
-"fullDescription": "Hand-crafted 18k gold...",
-
-"specifications": {
-
-   "Material": "18k Gold",
-
-   "Warranty": "2 Years"
-
- }
-},
-
-{
-"id": "p23",
-"shortName": "Feminine Purse",
-"name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
-"brand": "GVC",
-"category": "style",
-"priority": 80,
-"rating": 4.6,
-"trendScore": 55,
-"image": "images/p23.jpg",
-"price": 189,
-"currency": "USD",
-"affiliateLink": "https://example.com",
-"fullDescription": "Hand-crafted 18k gold...",
-
-"specifications": {
-
-   "Material": "18k Gold",
-
-   "Warranty": "2 Years"
-
- }
-},
-
-{
-"id": "p24",
-"shortName": "Feminine Purse",
-"name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
-"brand": "GVC",
-"category": "style",
-"priority": 80,
-"rating": 4.6,
-"trendScore": 55,
-"image": "images/p24.jpg",
-"price": 189,
-"currency": "USD",
-"affiliateLink": "https://example.com",
-"fullDescription": "Hand-crafted 18k gold...",
-
-"specifications": {
-
-   "Material": "18k Gold",
-
-   "Warranty": "2 Years"
-
- }
-},
-
-{
-"id": "p25",
-"shortName": "Feminine Purse",
-"name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
-"brand": "GVC",
-"category": "style",
-"priority": 80,
-"rating": 4.6,
-"trendScore": 55,
-"image": "images/p25.jpg",
-"price": 189,
-"currency": "USD",
-"affiliateLink": "https://example.com",
-"fullDescription": "Hand-crafted 18k gold...",
-
-"specifications": {
-
-   "Material": "18k Gold",
-
-   "Warranty": "2 Years"
-
- }
-}, <-- COMMA HERE (Because another product follows)
-
-{
-"id": "p26",
-"shortName": "Feminine Purse",
-"name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
-"brand": "GVC",
-"category": "style",
-"priority": 80,
-"rating": 4.6,
-"trendScore": 55,
-"image": "images/p26.jpg",
-"price": 189,
-"currency": "USD",
-"affiliateLink": "https://example.com",
-"fullDescription": "Hand-crafted 18k gold...",
-
-"specifications": {
-
-   "Material": "18k Gold",
-
-   "Warranty": "2 Years"
-
- }
-}  <-- NO COMMA HERE (Because this is the LAST product)
+  {
+    "id": "p1",
+    "shortName": "Necklace",
+    "name": "Collection of Necklace & Jewlery (pracelet, earings, rings, cuflinlks)",
+    "brand": "GVC",
+    "category": "style",
+    "priority": 80,
+    "rating": 4.6,
+    "trendScore": 55,
+    "image": "images/p1.jpg",
+    "price": 189,
+    "currency": "USD",
+    "affiliateLink": "https://example.com",
+    "fullDescription": "Hand-crafted 18k gold...",
+    "specifications": {
+      "Material": "18k Gold",
+      "Warranty": "2 Years"
+    }
+  },
+  {
+    "id": "p2",
+    "shortName": "Smart Watch",
+    "name": "Galaxy Smart Ellegant watch (black, white, grey)",
+    "brand": "GLXY",
+    "category": "style",
+    "priority": 79,
+    "rating": 4.3,
+    "trendScore": 45,
+    "image": "images/p2.jpg",
+    "price": 209,
+    "currency": "USD",
+    "affiliateLink": "https://example.com",
+    "fullDescription": "Hand-crafted 18k gold...",
+    "specifications": {
+      "Material": "18k Gold",
+      "Warranty": "2 Years"
+    }
+  },
+  {
+    "id": "p3",
+    "shortName": "Conon Printer",
+    "name": "Three-in-one Canon 3000 Series Scanner & Printer (3 sizes & 3 colors)",
+    "brand": "Canon3000",
+    "category": "style",
+    "priority": 80,
+    "rating": 4.6,
+    "trendScore": 55,
+    "image": "images/p3.jpg",
+    "price": 480,
+    "currency": "USD",
+    "affiliateLink": "https://example.com",
+    "fullDescription": "Hand-crafted 18k gold...",
+    "specifications": {
+      "Material": "18k Gold",
+      "Warranty": "2 Years"
+    }
+  },
+  {
+    "id": "p4",
+    "shortName": "Flat Printer",
+    "name": "Flat Printer Brothers 2040 Series (Black & White)",
+    "brand": "Brothers",
+    "category": "style",
+    "priority": 70,
+    "rating": 4.1,
+    "trendScore": 85,
+    "image": "images/p4.jpg",
+    "price": 501,
+    "currency": "USD",
+    "affiliateLink": "https://example.com",
+    "fullDescription": "Hand-crafted 18k gold...",
+    "specifications": {
+      "Material": "18k Gold",
+      "Warranty": "2 Years"
+    }
+  },
+  {
+    "id": "p5",
+    "shortName": "Ear Piece",
+    "name": "Smart Earbud, small wireless speaker",
+    "brand": "HUAWEI",
+    "category": "style",
+    "priority": 80,
+    "rating": 4.6,
+    "trendScore": 55,
+    "image": "images/p5.jpg",
+    "price": 110,
+    "currency": "USD",
+    "affiliateLink": "https://example.com",
+    "fullDescription": "Hand-crafted 18k gold...",
+    "specifications": {
+      "Material": "18k Gold",
+      "Warranty": "2 Years"
+    }
+  },
+  {
+    "id": "p6",
+    "shortName": "iPad Pro",
+    "name": "Apple iPad Pro 11-inch (M5)",
+    "brand": "Apple",
+    "category": "style",
+    "priority": 87,
+    "rating": 4.8,
+    "trendScore": 81,
+    "image": "images/p6.jpg",
+    "price": 1223.73,
+    "currency": "USD",
+    "affiliateLink": "https://example.com",
+    "fullDescription": "Hand-crafted 18k gold...",
+    "specifications": {
+      "Material": "18k Gold",
+      "Warranty": "2 Years"
+    }
+  },
+  {
+    "id": "p7",
+    "shortName": "Earings",
+    "name": "Golden Earings (gold plated & silver plated))",
+    "brand": "GVC",
+    "category": "style",
+    "priority": 95,
+    "rating": 4.7,
+    "trendScore": 56,
+    "image": "images/p7.jpg",
+    "price": 300,
+    "currency": "USD",
+    "affiliateLink": "https://example.com",
+    "fullDescription": "Hand-crafted 18k gold...",
+    "specifications": {
+      "Material": "18k Gold",
+      "Warranty": "2 Years"
+    }
+  },
+  {
+    "id": "p8",
+    "shortName": "Coated Necklace",
+    "name": "Blue Gem coated Necklace",
+    "brand": "GVC",
+    "category": "style",
+    "priority": 80,
+    "rating": 4.6,
+    "trendScore": 55,
+    "image": "images/p8.jpg",
+    "price": 310,
+    "currency": "USD",
+    "affiliateLink": "https://example.com",
+    "fullDescription": "Hand-crafted 18k gold...",
+    "specifications": {
+      "Material": "18k Gold",
+      "Warranty": "2 Years"
+    }
+  },
+  {
+    "id": "p9",
+    "shortName": "Gem pracelet",
+    "name": "Gem decorated pracelet",
+    "brand": "GVC",
+    "category": "style",
+    "priority": 82,
+    "rating": 4.8,
+    "trendScore": 55,
+    "image": "images/p9.jpg",
+    "price": 305,
+    "currency": "USD",
+    "affiliateLink": "https://example.com",
+    "fullDescription": "Hand-crafted 18k gold...",
+    "specifications": {
+      "Material": "18k Gold",
+      "Warranty": "2 Years"
+    }
+  },
+  {
+    "id": "p10",
+    "shortName": "Blue necklace",
+    "name": "Blue Gem Necklace",
+    "brand": "GVC",
+    "category": "style",
+    "priority": 82,
+    "rating": 4.8,
+    "trendScore": 58,
+    "image": "images/p10.jpg",
+    "price": 499,
+    "currency": "USD",
+    "affiliateLink": "https://example.com",
+    "fullDescription": "Hand-crafted 18k gold...",
+    "specifications": {
+      "Material": "18k Gold",
+      "Warranty": "2 Years"
+    }
+  },
+  {
+    "id": "p11",
+    "shortName": "Feminine Purse",
+    "name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
+    "brand": "GVC",
+    "category": "style",
+    "priority": 80,
+    "rating": 4.6,
+    "trendScore": 55,
+    "image": "images/p11.jpg",
+    "price": 189,
+    "currency": "USD",
+    "affiliateLink": "https://example.com",
+    "fullDescription": "Hand-crafted 18k gold...",
+    "specifications": {
+      "Material": "18k Gold",
+      "Warranty": "2 Years"
+    }
+  },
+  {
+    "id": "p12",
+    "shortName": "Feminine Purse",
+    "name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
+    "brand": "GVC",
+    "category": "style",
+    "priority": 80,
+    "rating": 4.6,
+    "trendScore": 55,
+    "image": "images/p12.jpg",
+    "price": 189,
+    "currency": "USD",
+    "affiliateLink": "https://example.com",
+    "fullDescription": "Hand-crafted 18k gold...",
+    "specifications": {
+      "Material": "18k Gold",
+      "Warranty": "2 Years"
+    }
+  },
+  {
+    "id": "p13",
+    "shortName": "Feminine Purse",
+    "name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
+    "brand": "GVC",
+    "category": "style",
+    "priority": 80,
+    "rating": 4.6,
+    "trendScore": 55,
+    "image": "images/p13.jpg",
+    "price": 189,
+    "currency": "USD",
+    "affiliateLink": "https://example.com",
+    "fullDescription": "Hand-crafted 18k gold...",
+    "specifications": {
+      "Material": "18k Gold",
+      "Warranty": "2 Years"
+    }
+  },
+  {
+    "id": "p14",
+    "shortName": "Feminine Purse",
+    "name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
+    "brand": "GVC",
+    "category": "style",
+    "priority": 80,
+    "rating": 4.6,
+    "trendScore": 55,
+    "image": "images/p14.jpg",
+    "price": 189,
+    "currency": "USD",
+    "affiliateLink": "https://example.com",
+    "fullDescription": "Hand-crafted 18k gold...",
+    "specifications": {
+      "Material": "18k Gold",
+      "Warranty": "2 Years"
+    }
+  },
+  {
+    "id": "p15",
+    "shortName": "Feminine Purse",
+    "name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
+    "brand": "GVC",
+    "category": "style",
+    "priority": 80,
+    "rating": 4.6,
+    "trendScore": 55,
+    "image": "images/p15.jpg",
+    "price": 189,
+    "currency": "USD",
+    "affiliateLink": "https://example.com",
+    "fullDescription": "Hand-crafted 18k gold...",
+    "specifications": {
+      "Material": "18k Gold",
+      "Warranty": "2 Years"
+    }
+  },
+  {
+    "id": "p16",
+    "shortName": "Feminine Purse",
+    "name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
+    "brand": "GVC",
+    "category": "style",
+    "priority": 80,
+    "rating": 4.6,
+    "trendScore": 55,
+    "image": "images/p16.jpg",
+    "price": 189,
+    "currency": "USD",
+    "affiliateLink": "https://example.com",
+    "fullDescription": "Hand-crafted 18k gold...",
+    "specifications": {
+      "Material": "18k Gold",
+      "Warranty": "2 Years"
+    }
+  },
+  {
+    "id": "p17",
+    "shortName": "Feminine Purse",
+    "name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
+    "brand": "GVC",
+    "category": "style",
+    "priority": 80,
+    "rating": 4.6,
+    "trendScore": 55,
+    "image": "images/p17.jpg",
+    "price": 189,
+    "currency": "USD",
+    "affiliateLink": "https://example.com",
+    "fullDescription": "Hand-crafted 18k gold...",
+    "specifications": {
+      "Material": "18k Gold",
+      "Warranty": "2 Years"
+    }
+  },
+  {
+    "id": "p18",
+    "shortName": "Feminine Purse",
+    "name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
+    "brand": "GVC",
+    "category": "style",
+    "priority": 80,
+    "rating": 4.6,
+    "trendScore": 55,
+    "image": "images/p18.jpg",
+    "price": 189,
+    "currency": "USD",
+    "affiliateLink": "https://example.com",
+    "fullDescription": "Hand-crafted 18k gold...",
+    "specifications": {
+      "Material": "18k Gold",
+      "Warranty": "2 Years"
+    }
+  },
+  {
+    "id": "p19",
+    "shortName": "Feminine Purse",
+    "name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
+    "brand": "GVC",
+    "category": "style",
+    "priority": 80,
+    "rating": 4.6,
+    "trendScore": 55,
+    "image": "images/p19.jpg",
+    "price": 189,
+    "currency": "USD",
+    "affiliateLink": "https://example.com",
+    "fullDescription": "Hand-crafted 18k gold...",
+    "specifications": {
+      "Material": "18k Gold",
+      "Warranty": "2 Years"
+    }
+  },
+  {
+    "id": "p20",
+    "shortName": "Feminine Purse",
+    "name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
+    "brand": "GVC",
+    "category": "style",
+    "priority": 80,
+    "rating": 4.6,
+    "trendScore": 55,
+    "image": "images/p2.jpg",
+    "price": 189,
+    "currency": "USD",
+    "affiliateLink": "https://example.com",
+    "fullDescription": "Hand-crafted 18k gold...",
+    "specifications": {
+      "Material": "18k Gold",
+      "Warranty": "2 Years"
+    }
+  },
+  {
+    "id": "p21",
+    "shortName": "Feminine Purse",
+    "name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
+    "brand": "GVC",
+    "category": "style",
+    "priority": 80,
+    "rating": 4.6,
+    "trendScore": 55,
+    "image": "images/p21.jpg",
+    "price": 189,
+    "currency": "USD",
+    "affiliateLink": "https://example.com",
+    "fullDescription": "Hand-crafted 18k gold...",
+    "specifications": {
+      "Material": "18k Gold",
+      "Warranty": "2 Years"
+    }
+  },
+  {
+    "id": "p22",
+    "shortName": "Feminine Purse",
+    "name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
+    "brand": "GVC",
+    "category": "style",
+    "priority": 80,
+    "rating": 4.6,
+    "trendScore": 55,
+    "image": "images/p22.jpg",
+    "price": 189,
+    "currency": "USD",
+    "affiliateLink": "https://example.com",
+    "fullDescription": "Hand-crafted 18k gold...",
+    "specifications": {
+      "Material": "18k Gold",
+      "Warranty": "2 Years"
+    }
+  },
+  {
+    "id": "p23",
+    "shortName": "Feminine Purse",
+    "name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
+    "brand": "GVC",
+    "category": "style",
+    "priority": 80,
+    "rating": 4.6,
+    "trendScore": 55,
+    "image": "images/p23.jpg",
+    "price": 189,
+    "currency": "USD",
+    "affiliateLink": "https://example.com",
+    "fullDescription": "Hand-crafted 18k gold...",
+    "specifications": {
+      "Material": "18k Gold",
+      "Warranty": "2 Years"
+    }
+  },
+  {
+    "id": "p24",
+    "shortName": "Feminine Purse",
+    "name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
+    "brand": "GVC",
+    "category": "style",
+    "priority": 80,
+    "rating": 4.6,
+    "trendScore": 55,
+    "image": "images/p24.jpg",
+    "price": 189,
+    "currency": "USD",
+    "affiliateLink": "https://example.com",
+    "fullDescription": "Hand-crafted 18k gold...",
+    "specifications": {
+      "Material": "18k Gold",
+      "Warranty": "2 Years"
+    }
+  },
+  {
+    "id": "p25",
+    "shortName": "Feminine Purse",
+    "name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
+    "brand": "GVC",
+    "category": "style",
+    "priority": 80,
+    "rating": 4.6,
+    "trendScore": 55,
+    "image": "images/p25.jpg",
+    "price": 189,
+    "currency": "USD",
+    "affiliateLink": "https://example.com",
+    "fullDescription": "Hand-crafted 18k gold...",
+    "specifications": {
+      "Material": "18k Gold",
+      "Warranty": "2 Years"
+    }
+  },
+  {
+    "id": "p26",
+    "shortName": "Feminine Purse",
+    "name": "Lady's Elegant Leather Bag (Black, White, Gold, Grey)",
+    "brand": "GVC",
+    "category": "style",
+    "priority": 80,
+    "rating": 4.6,
+    "trendScore": 55,
+    "image": "images/p26.jpg",
+    "price": 189,
+    "currency": "USD",
+    "affiliateLink": "https://example.com",
+    "fullDescription": "Hand-crafted 18k gold...",
+    "specifications": {
+      "Material": "18k Gold",
+      "Warranty": "2 Years"
+    }
+  }
 ]
