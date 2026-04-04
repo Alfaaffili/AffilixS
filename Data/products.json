@@ -1052,9 +1052,9 @@
  
    "id": "p28",
 
-    "shortName": "Manual Entry",
+    "shortName": "Jogging Strollers",
 
-    "name": "Manual Entry Needed",
+    "name": "For runners who would bring a kid along for the ride, this is a stroller that can keep pace. compared to some other models, this one is among the three top performers",
 
     "brand": "TBD",
 
@@ -1091,29 +1091,29 @@
  
    "id": "p29",
 
-    "shortName": "Manual Entry",
+    "shortName": "Triple-Camera Drone",
 
-    "name": "Manual Entry Needed",
+    "name": "Flagship Triple-Camera Drone, DJI Mavic 3 Pro with RC, and 4/3 CMOS Hasselblad 4K Camera",
 
     "brand": "TBD",
 
-    "category": "style",
+    "category": "Technology",
 
-    "priority": 80,
+    "priority": 87,
 
-    "rating": 4.5,
+    "rating": 4.7,
 
-    "trendScore": 50,
+    "trendScore": 65,
 
     "image": "images/placeholder.jpg",
 
-    "price": 0,
+    "price": 489,
 
     "currency": "USD",
 
     "affiliateLink": "https://example.com",
 
-    "fullDescription": "Update this description...",
+    "fullDescription": "Flagship Triple-Camera Drone, DJI Mavic 3 Pro with RC, and 4/3 CMOS Hasselblad 4K Camera, 43 Minutes of Flying Time, , FAA Remote ID Compliant, 15km HD Video Transmission, for Adults, Black",
 
     "specifications": {
 
@@ -1130,9 +1130,9 @@
  
    "id": "p30",
 
-    "shortName": "Unknown Product",
+    "shortName": "Smar Drone",
 
-    "name": "Unknown Product",
+    "name": "Row Model Drone",
 
     "brand": "TBD",
 
@@ -1146,13 +1146,13 @@
 
     "image": "images/placeholder.jpg",
 
-    "price": 0,
+    "price": 2979,
 
     "currency": "USD",
 
     "affiliateLink": "https://example.com",
 
-    "fullDescription": "Update this description...",
+    "fullDescription": "This model has the best cameras in a drone. Main camera has a larger sensor than some other brands available, with its 70mm- and 166mm-equivalent lenses it can capture more-distant subjects",
 
     "specifications": {
 
