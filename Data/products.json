@@ -1,4 +1,4 @@
-﻿[
+[
   {
     "id": "p1",
     "shortName": "Necklace",
@@ -490,6 +490,82 @@
     "fullDescription": "Hand-crafted 18k gold...",
     "specifications": {
       "Material": "18k Gold",
+      "Warranty": "2 Years"
+    }
+  },
+  {
+    "id": "p27",
+    "shortName": "Manual Entry",
+    "name": "Manual Entry Needed",
+    "brand": "TBD",
+    "category": "style",
+    "priority": 80,
+    "rating": 4.5,
+    "trendScore": 50,
+    "image": "images/placeholder.jpg",
+    "price": 0,
+    "currency": "USD",
+    "affiliateLink": "file:///C:/Users/SONY/Documents/My%20Website%20AffilixS_com/Product%20Builder/builder-v3.html",
+    "fullDescription": "Update this description...",
+    "specifications": {
+      "Material": "TBD",
+      "Warranty": "2 Years"
+    }
+  },
+  {
+    "id": "p28",
+    "shortName": "Manual Entry",
+    "name": "Manual Entry Needed",
+    "brand": "TBD",
+    "category": "style",
+    "priority": 80,
+    "rating": 4.5,
+    "trendScore": 50,
+    "image": "images/placeholder.jpg",
+    "price": 0,
+    "currency": "USD",
+    "affiliateLink": "file:///C:/Users/SONY/Documents/My%20Website%20AffilixS_com/Product%20Builder/builder-v3.html",
+    "fullDescription": "Update this description...",
+    "specifications": {
+      "Material": "TBD",
+      "Warranty": "2 Years"
+    }
+  },
+  {
+    "id": "p29",
+    "shortName": "Manual Entry",
+    "name": "Manual Entry Needed",
+    "brand": "TBD",
+    "category": "style",
+    "priority": 80,
+    "rating": 4.5,
+    "trendScore": 50,
+    "image": "images/placeholder.jpg",
+    "price": 0,
+    "currency": "USD",
+    "affiliateLink": "file:///C:/Users/SONY/Documents/My%20Website%20AffilixS_com/Product%20Builder/builder-v3.html",
+    "fullDescription": "Update this description...",
+    "specifications": {
+      "Material": "TBD",
+      "Warranty": "2 Years"
+    }
+  },
+  {
+    "id": "p30",
+    "shortName": "Unknown Product",
+    "name": "Unknown Product",
+    "brand": "TBD",
+    "category": "style",
+    "priority": 80,
+    "rating": 4.5,
+    "trendScore": 50,
+    "image": "images/placeholder.jpg",
+    "price": 0,
+    "currency": "USD",
+    "affiliateLink": "file:///C:/Users/SONY/Documents/My%20Website%20AffilixS_com/Product%20Builder/builder-v3.html",
+    "fullDescription": "Update this description...",
+    "specifications": {
+      "Material": "TBD",
       "Warranty": "2 Years"
     }
   }
