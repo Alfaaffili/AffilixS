@@ -369,16 +369,17 @@ footer {
 @media (min-width: 1151px) {
     .product-row-wrapper .row-arrow { bottom: 15px !important; top: auto !important; }
 }
+/* ... [Sections 01 through 11 remain exactly as you have them] ... */
+
 /* =============================================================
-   12. PRODUCT PAGE: PREMIUM GALLERY & EXCHANGE (v2.0 Refined)
+   12. PRODUCT PAGE: PREMIUM GALLERY & EXCHANGE (v2.1 Repaired)
    ============================================================= */
 .product-page { background: #f5f2ed; }
 
-/* FIX: Hero Image Size & Container */
 .hero-display {
     position: relative;
     width: 100%;
-    height: 60vh; /* Reduced slightly for better balance */
+    height: 60vh; 
     background: #fff;
     display: flex;
     justify-content: center;
@@ -387,67 +388,69 @@ footer {
     border-bottom: 2px solid #111;
 }
 
-.hero-image-container { width: 100%; height: 100%; }
+.hero-image-container { width: 100%; height: 100%; padding: 20px; }
 
 .hero-image-container img { 
     width: 100%; 
     height: 100%; 
-    object-fit: contain /* Takes full hero size as requested; changed from cover to contain */
+    object-fit: contain; /* Shows full product without cropping */
 }
 
-/* NEW: The 4-Line Horizontal Info Bar */
 .product-detail-bar {
     background: #fff;
     border-bottom: 1px solid #ddd;
-    padding: 20px 5%;
+    padding: 25px 5%;
     display: flex;
-    align-items: flex-start;
-    gap: 30px;
-    height: 140px; /* Locked height for roughly 4-5 lines */
-    overflow: hidden;
+    flex-direction: row; 
+    align-items: center; 
+    gap: 40px;
+    min-height: 120px; 
+    height: auto; 
 }
 
-.detail-item.title-group { flex: 1; min-width: 200px; }
-.detail-item.title-group h1 { margin: 0; font-size: 1.4rem; color: #111; }
+.detail-item.title-group { 
+    flex: 1; 
+    min-width: 200px; 
+}
+.detail-item.title-group h1 { margin: 0 0 10px 0; font-size: 1.4rem; color: #111; }
 
+/* REPAIR: Description box is now wide (flex: 3) */
 .detail-item.description-box { 
-    flex: 2; 
-    height: 100%;
-    overflow-y: auto; /* Only scrolls if text exceeds 4-5 lines */
+    flex: 3; 
+    max-height: 110px; /* Locked to ~4 lines */
+    overflow-y: auto; 
     font-size: 0.95rem;
+    line-height: 1.5;
     color: #444;
     padding-right: 15px;
 }
 
-/* Custom Scrollbar for Description */
-.description-box::-webkit-scrollbar { width: 4px; }
-.description-box::-webkit-scrollbar-thumb { background: #c6a96b; border-radius: 10px; }
+/* PRO-TIP: Subtle Gold Scrollbar */
+.detail-item.description-box::-webkit-scrollbar { width: 4px; }
+.detail-item.description-box::-webkit-scrollbar-track { background: #f1f1f1; }
+.detail-item.description-box::-webkit-scrollbar-thumb { background: #c6a96b; border-radius: 10px; }
 
 .detail-item.stats-group { 
-    flex: 1; 
+    flex: 1.2; 
     display: flex; 
     flex-direction: column; 
-    justify-content: center; 
     border-left: 1px solid #eee;
-    padding-left: 20px;
+    padding-left: 25px;
 }
 
-.stat-row { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 5px; }
+.stat-row { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 6px; }
 .stat-val { font-weight: bold; color: #ff0000; }
 
-/* NEW: Similar Products Row (5 items) */
-.similar-products-section { padding: 40px 5%; }
-
+.similar-products-section { padding: 40px 0; }
 .similar-products-row {
     display: flex;
     gap: 20px;
     overflow-x: auto;
-    padding: 20px 0;
-    scrollbar-width: none; /* Keep it clean like homepage */
+    padding: 20px 5%;
+    scrollbar-width: none;
 }
 .similar-products-row::-webkit-scrollbar { display: none; }
 
-/* Forces 5 items per view on Desktop */
 .similar-products-row .product-card {
     flex: 0 0 calc(20% - 16px); 
     min-width: 200px;
@@ -459,28 +462,29 @@ footer {
 @media (max-width: 1024px) {
     .product-detail-bar {
         flex-direction: column;
-        height: auto; /* Let it grow on mobile */
-        gap: 15px;
+        align-items: flex-start;
+        padding: 20px 5%;
+        gap: 20px;
     }
     
     .detail-item.description-box {
-        max-height: 120px; /* 4 lines equivalent on mobile */
+        flex: none;
         width: 100%;
+        max-height: 150px;
     }
 
     .detail-item.stats-group {
         border-left: none;
         border-top: 1px solid #eee;
         padding-left: 0;
-        padding-top: 15px;
+        padding-top: 20px;
         width: 100%;
     }
 
-    .hero-display { height: 40vh; }
+    .hero-display { height: 45vh; }
 
-    /* Show 2.5 cards on mobile to signal it's a slider */
     .similar-products-row .product-card {
-        flex: 0 0 45% !important;
-        max-width: 45% !important;
+        flex: 0 0 70% !important;
+        max-width: 70% !important;
     }
 }
