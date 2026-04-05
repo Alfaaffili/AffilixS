@@ -370,70 +370,117 @@ footer {
     .product-row-wrapper .row-arrow { bottom: 15px !important; top: auto !important; }
 }
 /* =============================================================
-   12. PRODUCT PAGE: PREMIUM GALLERY & EXCHANGE (v1.0)
+   12. PRODUCT PAGE: PREMIUM GALLERY & EXCHANGE (v2.0 Refined)
    ============================================================= */
-.product-page { background: #ffffff; }
+.product-page { background: #f5f2ed; }
 
+/* FIX: Hero Image Size & Container */
 .hero-display {
     position: relative;
     width: 100%;
-    height: 65vh; 
+    height: 60vh; /* Reduced slightly for better balance */
     background: #fff;
     display: flex;
     justify-content: center;
+    align-items: center;
     overflow: hidden;
-    border-bottom: 1px solid #eee;
+    border-bottom: 2px solid #111;
 }
 
-.hero-image-container { width: 100%; height: 100%; display: flex; justify-content: center; }
-.hero-image-container img { height: 90%; width: auto; object-fit: contain; margin-top: 20px; }
+.hero-image-container { width: 100%; height: 100%; }
 
-.hero-info-overlay {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background: linear-gradient(transparent, rgba(0,0,0,0.9));
-    padding: 50px 20px 30px;
-    color: #fff;
-    text-align: center;
+.hero-image-container img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; /* Takes full hero size as requested */
 }
 
-.premium-price { font-size: 1.5rem; font-weight: bold; color: #ff0000; display: block; margin-bottom: 10px; }
-
-.buy-now-trigger {
-    background: #ff0000;
-    color: #fff;
-    padding: 15px 45px;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 4px;
-    display: inline-block;
-    transition: transform 0.2s;
+/* NEW: The 4-Line Horizontal Info Bar */
+.product-detail-bar {
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    padding: 20px 5%;
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    height: 140px; /* Locked height for roughly 4-5 lines */
+    overflow: hidden;
 }
 
-.details-section {
-    padding: 40px 20px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
+.detail-item.title-group { flex: 1; min-width: 200px; }
+.detail-item.title-group h1 { margin: 0; font-size: 1.4rem; color: #111; }
 
-.specs-list { list-style: none; padding: 0; }
-.specs-list li { 
-    padding: 12px 0; 
-    border-bottom: 1px solid #eee; 
-    display: flex; 
-    justify-content: space-between; 
+.detail-item.description-box { 
+    flex: 2; 
+    height: 100%;
+    overflow-y: auto; /* Only scrolls if text exceeds 4-5 lines */
     font-size: 0.95rem;
+    color: #444;
+    padding-right: 15px;
 }
 
-.section-title { text-align: center; margin: 40px 0 20px; font-weight: 300; letter-spacing: 2px; }
+/* Custom Scrollbar for Description */
+.description-box::-webkit-scrollbar { width: 4px; }
+.description-box::-webkit-scrollbar-thumb { background: #c6a96b; border-radius: 10px; }
 
-/* Mobile Adaptation for Section 12 */
-@media (max-width: 768px) {
-    .hero-display { height: 50vh; }
-    .details-section { grid-template-columns: 1fr; gap: 30px; }
-    .hero-info-overlay h1 { font-size: 1.1rem; }
+.detail-item.stats-group { 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    border-left: 1px solid #eee;
+    padding-left: 20px;
+}
+
+.stat-row { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 5px; }
+.stat-val { font-weight: bold; color: #ff0000; }
+
+/* NEW: Similar Products Row (5 items) */
+.similar-products-section { padding: 40px 5%; }
+
+.similar-products-row {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 20px 0;
+    scrollbar-width: none; /* Keep it clean like homepage */
+}
+.similar-products-row::-webkit-scrollbar { display: none; }
+
+/* Forces 5 items per view on Desktop */
+.similar-products-row .product-card {
+    flex: 0 0 calc(20% - 16px); 
+    min-width: 200px;
+}
+
+/* =============================================================
+   13. PRODUCT PAGE: MOBILE & TABLET RESPONSIVENESS
+   ============================================================= */
+@media (max-width: 1024px) {
+    .product-detail-bar {
+        flex-direction: column;
+        height: auto; /* Let it grow on mobile */
+        gap: 15px;
+    }
+    
+    .detail-item.description-box {
+        max-height: 120px; /* 4 lines equivalent on mobile */
+        width: 100%;
+    }
+
+    .detail-item.stats-group {
+        border-left: none;
+        border-top: 1px solid #eee;
+        padding-left: 0;
+        padding-top: 15px;
+        width: 100%;
+    }
+
+    .hero-display { height: 40vh; }
+
+    /* Show 2.5 cards on mobile to signal it's a slider */
+    .similar-products-row .product-card {
+        flex: 0 0 45% !important;
+        max-width: 45% !important;
+    }
 }

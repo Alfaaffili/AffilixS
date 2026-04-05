@@ -9,57 +9,124 @@
 <body class="product-page">
 
     <header class="site-header">
-        <div class="header-content">
-            <div class="logo-group">
-                <span class="logo-text">AffilixS</span>
-            </div>
-            <nav class="header-nav">
-                <a href="index.html" style="text-decoration:none;"><span style="color:#fff;">Home</span></a>
-                <span>Vision</span>
-                <span>Insights</span>
-                <span>Contact</span>
-            </nav>
+        <div class="logo-group">
+            <div class="logo">AffilixS</div>
+            <h1>PREMIUM</h1>
         </div>
+        <nav class="header-nav">
+            <a href="index.html" style="text-decoration:none; color:#fff;"><span>HOME</span></a>
+            <span>VISION</span>
+            <span>INSIGHTS</span>
+        </nav>
     </header>
 
-    <main class="product-container">
-        <section id="main-product-view" class="hero-display">
+    <main>
+        <section class="hero-display">
             <div class="hero-image-container">
-                <img id="main-img" src="" alt="Loading Product...">
-            </div>
-            <div class="hero-info-overlay">
-                <h1 id="prod-name">---</h1>
-                <p id="prod-brand">---</p>
-                <div class="action-bar">
-                    <span id="prod-price" class="premium-price">---</span>
-                    <a id="buy-btn" href="#" target="_blank" class="buy-now-trigger">BUY NOW</a>
-                </div>
+                <img id="heroImage" src="" alt="Loading Product...">
             </div>
         </section>
 
-        <section class="details-section">
-            <div class="description-box">
-                <h3>Editor's Insight</h3>
-                <p id="full-desc">---</p>
+        <section class="product-detail-bar">
+            <div class="detail-item title-group">
+                <h1 id="prodName" style="margin-bottom:10px;">---</h1>
+                <a id="buyNowBtn" href="#" target="_blank" class="buy-now-trigger">BUY NOW</a>
             </div>
-            <div class="specs-box">
-                <h3>Specifications</h3>
-                <ul id="specs-list" class="specs-list">
-                    </ul>
+
+            <div class="detail-item description-box" id="prodDesc">
+                Loading description...
+            </div>
+
+            <div class="detail-item stats-group">
+                <div class="stat-row"><span>Rating:</span> <span class="stat-val" id="prodRating">---</span></div>
+                <div class="stat-row"><span>Trend:</span> <span class="stat-val" id="prodTrend">---</span></div>
+                <div class="stat-row"><span>Price:</span> <span class="stat-val" id="prodPrice">---</span></div>
             </div>
         </section>
 
-        <section class="comparison-section">
-            <h3 class="section-title">Explore Similar Picks</h3>
-            <div id="sibling-row" class="product-row-wrapper">
-                </div>
+        <section class="similar-products-section">
+            <h2 class="section-title">EXPLORE SIMILAR PICKS</h2>
+            <div class="product-row-wrapper">
+                <div id="similarProductsRow" class="similar-products-row">
+                    </div>
+            </div>
         </section>
     </main>
 
     <footer class="site-footer">
-        <p>&copy; 2026 AffilixS Premium Curations</p>
+        <div class="footer-links">
+            <span>ABOUT</span>
+            <span>TERMS</span>
+            <span>CONTACT</span>
+        </div>
+        <p class="copyright-text">© 2026 AFFILIXS. ALL RIGHTS RESERVED.</p>
     </footer>
 
-    <script src="js/product-logic.js"></script>
+    <script>
+        async function initProductPage() {
+            try {
+                const params = new URLSearchParams(window.location.search);
+                const productId = params.get('id');
+
+                // Using the same data source as main.js
+                const res = await fetch("Data/products.json?v=1.3.1");
+                const allProducts = await res.json();
+
+                const currentProduct = allProducts.find(p => p.id == productId);
+                
+                if (!currentProduct) {
+                    window.location.href = 'index.html';
+                    return;
+                }
+
+                // 1. Render Main View
+                document.querySelector("#heroImage").src = currentProduct.image;
+                document.querySelector("#prodName").textContent = currentProduct.name;
+                document.querySelector("#prodDesc").textContent = currentProduct.description || "Selection details pending...";
+                
+                // 2. Render Characteristics
+                document.querySelector("#prodRating").textContent = currentProduct.rating || "4.8/5";
+                document.querySelector("#prodTrend").textContent = currentProduct.trendScore ? currentProduct.trendScore + "%" : "HOT";
+                document.querySelector("#prodPrice").textContent = (currentProduct.currency || "$") + currentProduct.price;
+                
+                const buyBtn = document.querySelector("#buyNowBtn");
+                if (buyBtn) buyBtn.href = currentProduct.affiliateLink || "#";
+
+                // 3. Filter Similar Products (Same Category, Different ID)
+                const similar = allProducts.filter(p => 
+                    p.category === currentProduct.category && p.id !== currentProduct.id
+                );
+                
+                renderSimilar(similar);
+
+            } catch (e) {
+                console.error("Product Engine Error:", e);
+            }
+        }
+
+        function renderSimilar(products) {
+            const container = document.querySelector("#similarProductsRow");
+            if (!container) return;
+            container.innerHTML = ""; 
+
+            // Showing 5 per view via the CSS calc(20% - 16px) we discussed
+            products.slice(0, 10).forEach(p => {
+                const card = document.createElement("div");
+                card.className = "product-card";
+                card.onclick = () => window.location.href = `product.html?id=${p.id}`;
+                
+                card.innerHTML = `
+                    <img src="${p.image}" alt="${p.name}">
+                    <div style="padding:12px;">
+                        <h4 style="font-size:0.8rem; margin:0; color:#111; text-transform:uppercase;">${p.shortName || p.name}</h4>
+                        <p style="color:#ff0000; font-weight:bold; margin:5px 0 0;">${p.currency || '$'}${p.price}</p>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", initProductPage);
+    </script>
 </body>
 </html>
