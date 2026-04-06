@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AffilixS | Premium Product View</title>
-    <link rel="stylesheet" href="CSS/styles.css?v=1.3">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AffilixS | Premium Dashboard</title>
+    <link rel="stylesheet" href="CSS/styles.css?v=1.5">
 </head>
 <body class="product-page">
 
@@ -14,104 +14,91 @@
             <h1>AffilixS</h1>
         </div>
         <nav class="header-nav">
-            <a href="index.html" style="text-decoration:none; color:#fff;"><span>Home</span></a>
-            <span>Vision</span>
-            <span>Insights</span>
-            <span>Contact</span>
+            <a href="index.html" style="text-decoration:none; color:#fff;"><span>HOME</span></a>
         </nav>
     </header>
 
     <main>
-        <section class="hero-display">
-            <div class="hero-image-container">
-                <img id="heroImage" src="" alt="Loading...">
-            </div>
-        </section>
+        <div class="main-display-area">
+            <section class="hero-display">
+                <img id="heroImage" src="" alt="Product Hero">
+            </section>
 
-        <section class="product-detail-bar">
-            <div class="detail-item title-group">
-                <h1 id="prodName">---</h1>
-                <a id="buyNowBtn" href="#" target="_blank" class="buy-now-trigger" style="display:inline-block; margin-top:10px; background:#ff0000; color:#fff; padding:8px 20px; text-decoration:none; border-radius:4px; font-weight:bold; font-size:0.8rem;">BUY NOW</a>
-            </div>
-
-            <div class="detail-item description-box" id="prodDesc">
-                Loading product insight...
-            </div>
-
-            <div class="detail-item stats-group">
-                <div class="stat-row"><span>Rating:</span> <span class="stat-val" id="prodRating">---</span></div>
-                <div class="stat-row"><span>Trend:</span> <span class="stat-val" id="prodTrend">---</span></div>
-                <div class="stat-row"><span>Price:</span> <span class="stat-val" id="prodPrice">---</span></div>
-            </div>
-        </section>
-
-        <section class="products-section">
-            <h2>Similar Discoveries</h2>
-            <div class="product-row-wrapper">
-                <div id="similarProductsRow" class="similar-products-row">
+            <section class="info-horizontal-bar">
+                <div class="info-text-stack">
+                    <h3 id="pShortName">---</h3>
+                    <h1 id="pName">---</h1>
+                    <p id="pDesc">---</p>
+                </div>
+                <div class="info-action-stack">
+                    <div class="stat-row-item">Rating: <span class="stat-val-red" id="pRating">---</span></div>
+                    <div class="stat-row-item">Trend: <span class="stat-val-red" id="pTrend">---</span></div>
+                    <div class="stat-row-item">Price: <span class="stat-val-red" id="pPrice">---</span></div>
+                    <div class="btn-row">
+                        <a id="buyBtn" href="#" target="_blank" style="background:#ff0000; color:#fff; padding:10px; border-radius:4px; text-decoration:none; font-weight:bold; font-size:0.75rem; flex:1; text-align:center;">BUY NOW</a>
+                        <button style="background:#444; color:#fff; border:none; padding:10px; border-radius:4px; cursor:pointer; font-size:0.75rem; flex:1;" onclick="window.location.href='index.html'">GO BACK</button>
                     </div>
-            </div>
-        </section>
+                </div>
+            </section>
+
+            <h2 style="font-size:0.9rem; margin:10px 0 0 0;">SIMILAR DISCOVERIES</h2>
+            <section class="horizontal-product-row" id="productRow"></section>
+        </div>
+
+        <aside class="category-sidebar">
+            <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/cat-tech.jpg"><p>TECH</p></div>
+            <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/Home.jpg"><p>HOME</p></div>
+            <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/Fittness.jpg"><p>FITNESS</p></div>
+            <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/Style.jpg"><p>STYLE</p></div>
+            <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/BeautyPersonnalCare.jpg"><p>BEAUTY</p></div>
+        </aside>
     </main>
 
     <footer>
-        <div class="footer-links">
-            <span>Privacy</span>
-            <span>Disclaimer</span>
-            <span>Contact</span>
-        </div>
-        <p class="copyright-text">&copy; 2026 AffilixS</p>
+        <p class="copyright-text" style="padding-left:3ch; margin-top:20px;">&copy; 2026 AffilixS</p>
     </footer>
 
     <script>
-        async function initProductPage() {
+        // ESC KEY TO HOME
+        window.addEventListener('keydown', (e) => {
+            if (e.key === "Escape") window.location.href = 'index.html';
+        });
+
+        async function initDashboard() {
             try {
                 const params = new URLSearchParams(window.location.search);
-                const productId = params.get('id');
-                const res = await fetch("Data/products.json?v=1.3.1");
-                const allProducts = await res.json();
-                const currentProduct = allProducts.find(p => p.id == productId);
-                
-                if (!currentProduct) {
-                    window.location.href = 'index.html';
-                    return;
+                let currentId = params.get('id');
+                const res = await fetch("Data/products.json");
+                const all = await res.json();
+
+                function renderView(id) {
+                    const p = all.find(x => x.id == id);
+                    if(!p) return;
+
+                    document.getElementById("heroImage").src = p.image;
+                    document.getElementById("pShortName").innerText = p.shortName;
+                    document.getElementById("pName").innerText = p.name;
+                    document.getElementById("pDesc").innerText = p.fullDescription;
+                    document.getElementById("pRating").innerText = p.rating || "4.8";
+                    document.getElementById("pTrend").innerText = (p.trendScore || "95") + "%";
+                    document.getElementById("pPrice").innerText = (p.currency || "$") + p.price;
+                    document.getElementById("buyBtn").href = p.affiliateLink;
+
+                    const similar = all.filter(x => x.category === p.category && x.id !== p.id);
+                    const row = document.getElementById("productRow");
+                    row.innerHTML = "";
+                    similar.forEach(item => {
+                        const card = document.createElement("div");
+                        card.className = "small-card";
+                        card.onclick = () => { renderView(item.id); window.scrollTo(0,0); };
+                        card.innerHTML = `<img src="${item.image}"><p>${item.shortName}</p>`;
+                        row.appendChild(card);
+                    });
                 }
-
-                // DATA INJECTION
-                document.querySelector("#heroImage").src = currentProduct.image;
-                document.querySelector("#prodName").textContent = currentProduct.name;
-                
-                // REPAIR: Use fullDescription from your JSON
-                document.querySelector("#prodDesc").textContent = currentProduct.fullDescription || "No description available.";
-                
-                document.querySelector("#prodRating").textContent = currentProduct.rating || "4.8/5";
-                document.querySelector("#prodTrend").textContent = currentProduct.trendScore ? currentProduct.trendScore + "%" : "Rising";
-                document.querySelector("#prodPrice").textContent = (currentProduct.currency || "$") + currentProduct.price;
-                document.querySelector("#buyNowBtn").href = currentProduct.affiliateLink || "#";
-
-                // SIMILAR PRODUCTS LOGIC
-                const similar = allProducts.filter(p => p.category === currentProduct.category && p.id !== currentProduct.id);
-                renderSimilar(similar);
+                renderView(currentId);
             } catch (e) { console.error(e); }
         }
-
-        function renderSimilar(products) {
-            const container = document.querySelector("#similarProductsRow");
-            container.innerHTML = ""; 
-            products.slice(0, 10).forEach(p => {
-                const card = document.createElement("div");
-                card.className = "product-card";
-                card.onclick = () => window.location.href = `product.html?id=${p.id}`;
-                card.innerHTML = `
-                    <img src="${p.image}" alt="${p.name}">
-                    <div style="padding:12px;">
-                        <h4 style="font-size:0.8rem; margin:0; color:#111; text-transform:uppercase;">${p.shortName || p.name}</h4>
-                        <p style="color:#ff0000; font-weight:bold; margin:5px 0 0;">${p.currency || '$'}${p.price}</p>
-                    </div>`;
-                container.appendChild(card);
-            });
-        }
-        document.addEventListener("DOMContentLoaded", initProductPage);
+        document.addEventListener("DOMContentLoaded", initDashboard);
     </script>
 </body>
 </html>
