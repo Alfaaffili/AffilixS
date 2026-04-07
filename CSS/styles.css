@@ -372,7 +372,7 @@ footer {
 /* ... [Sections 01 through 11 remain exactly as you have them] ... */
 
 /* =============================================================
-   12. PRODUCT DASHBOARD: SPATIAL REFINEMENT (v6.0)
+   12. PRODUCT DASHBOARD: GRID OPTIMIZATION (v7.0)
    ============================================================= */
 .product-page main {
     display: flex; 
@@ -381,83 +381,93 @@ footer {
     gap: 30px;
 }
 
-.main-display-area { flex: 0 0 75%; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.main-display-area { flex: 0 0 75%; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
 
-/* HERO LOCKED */
+/* HERO DISPLAY */
 .hero-display { width: 100%; height: 48vh; background: #fff; border-radius: 12px; display: flex; justify-content: center; border: 1px solid #eee; overflow: hidden; }
 .hero-display img { width: 100%; height: 100%; object-fit: contain; }
 
-/* 3-LINE SPACE: TIGHTENED */
-.info-horizontal-bar { width: 100%; display: flex; background: #fff; border: 1px solid #ddd; border-radius: 8px; min-height: 120px; margin-top: -5px; }
-
-.info-text-stack { flex: 0 0 72%; padding: 12px 15px; border-right: 1px solid #eee; overflow-y: auto; max-height: 130px; }
-.info-text-stack div { font-size: 0.88rem; margin-bottom: 2px; line-height: 1.2; } 
-.info-text-stack b { color: #111; margin-right: 5px; font-size: 0.75rem; }
-
-.info-action-stack { flex: 1; padding: 10px 15px; display: flex; flex-direction: column; justify-content: center; gap: 4px; background: #fafafa; }
-
-/* GOLD TITLE: REDUCED MARGIN */
-.section-title-gold {
-    font-size: 0.85rem;
-    margin: 10px 0 5px; 
-    position: relative;
-    text-transform: uppercase;
+/* 3-LINE SPACE: TRIPLE COLUMN LAYOUT */
+.info-horizontal-bar { 
+    width: 100%; 
+    display: flex; 
+    background: #fff; 
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    min-height: 100px; 
+    overflow: hidden;
 }
-.section-title-gold::after { content: ""; display: block; width: 40px; height: 3px; background: #c6a96b; margin-top: 3px; }
 
-/* SCROLL ROW & CARDS */
-.scroll-container { position: relative; width: 100%; margin-top: -5px; }
+/* Column 1: Expanded Text Area */
+.info-text-stack { 
+    flex: 1; 
+    padding: 12px 15px; 
+    border-right: 1px solid #eee; 
+    overflow-y: auto; 
+    max-height: 110px; 
+}
+.info-text-stack div { font-size: 0.88rem; margin-bottom: 2px; line-height: 1.2; }
+.info-text-stack b { color: #111; margin-right: 5px; font-size: 0.72rem; }
+
+/* Column 2: Tightened Stats */
+.info-stats-stack { 
+    flex: 0 0 140px; 
+    padding: 12px 15px; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    gap: 4px; 
+    background: #fafafa;
+    border-right: 1px solid #eee;
+}
+.stat-row-item { display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: bold; }
+
+/* Column 3: Buttons on the right */
+.info-btn-stack {
+    flex: 0 0 160px; 
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    background: #fdfdfd;
+}
+
+/* BUTTONS */
+.buy-now-btn { background: red; color: white; padding: 7px; border-radius: 4px; text-align: center; text-decoration: none; font-weight: bold; font-size: 0.65rem; }
+.go-back-btn { background: #444; color: white; border: none; padding: 7px; border-radius: 4px; cursor: pointer; font-size: 0.65rem; }
+
+/* CARDS & SCROLL */
+.scroll-container { position: relative; width: 100%; }
 .horizontal-product-row { display: flex; gap: 12px; overflow-x: hidden; scroll-behavior: smooth; padding: 5px 0; }
-
-.small-card {
-    flex: 0 0 calc(20% - 10px);
-    height: 155px; 
-    background: #fff;
-    border-radius: 8px;
-    border: 1px solid #eee;
-    text-align: center;
-    cursor: pointer;
-}
+.small-card { flex: 0 0 calc(20% - 10px); height: 155px; background: #fff; border-radius: 8px; border: 1px solid #eee; text-align: center; cursor: pointer; }
 .small-card img { width: 100%; height: 110px; object-fit: cover; }
 .small-card p { font-size: 10px; padding: 4px; margin: 0; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-/* SIDEBAR: SHRUNKEN CATEGORIES */
-.category-sidebar { flex: 0 0 25%; display: flex; flex-direction: column; align-items: center; gap: 10px; border-left: 1px solid #ddd; padding-left: 20px; }
-.sidebar-cat-card { width: 125px; height: 140px; background: #fff; border-radius: 8px; text-align: center; border: 1px solid #eee; }
-.sidebar-cat-card img { width: 100%; height: 105px; object-fit: cover; }
-
-/* ARROWS */
-.nav-arrow {
-    position: absolute; top: 50%; transform: translateY(-50%);
-    background: rgba(255,0,0,0.8); color: white; border: none; 
-    width: 25px; height: 25px; border-radius: 50%; cursor: pointer; z-index: 10;
-}
-.nav-arrow.left { left: -12px; }
-.nav-arrow.right { right: -12px; }
-
-/* FOOTER ARCHITECTURE */
-.site-footer { background: #111; color: #fff; padding: 20px 5%; border-top: 1px solid #333; margin-top: 30px; }
-.footer-top { display: flex; justify-content: center; gap: 30px; margin-bottom: 10px; }
-.footer-top span { font-size: 11px; cursor: pointer; opacity: 0.8; letter-spacing: 1px; }
-.footer-bottom { font-size: 10px; opacity: 0.5; text-align: left; }
+/* FOOTER FIX */
+.site-footer { background: #111; color: #fff; padding: 15px 5%; border-top: 1px solid #333; margin-top: 20px; }
+.footer-top { display: flex; justify-content: center; gap: 30px; margin-bottom: 8px; }
+.footer-top span { font-size: 11px; cursor: pointer; opacity: 0.8; }
+.footer-bottom { font-size: 10px; opacity: 0.6; text-align: left; width: 100%; }
 
 /* =============================================================
-   13. PRODUCT PAGE: MOBILE RESPONSIVENESS
+   13. PRODUCT PAGE: MOBILE RESPONSIVENESS (v7.0)
    ============================================================= */
 @media (max-width: 1024px) {
-    .header-nav { display: flex; gap: 10px; flex-wrap: nowrap; overflow-x: auto; }
+    .header-nav { display: flex; gap: 10px; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 5px; }
     .header-nav span { font-size: 9px !important; white-space: nowrap; }
 
-    .product-page main { flex-direction: column; padding: 10px; gap: 15px; }
-    .main-display-area, .category-sidebar { width: 100%; flex: none; border: none; padding: 0; }
+    .product-page main { flex-direction: column; padding: 10px; gap: 10px; }
+    .main-display-area { width: 100%; flex: none; }
     
-    .category-sidebar { flex-direction: row; overflow-x: auto; gap: 10px; padding: 10px 0; border: none; scrollbar-width: none; }
-    .sidebar-cat-card { min-width: 110px; height: 125px; flex: 0 0 auto; }
+    .info-horizontal-bar { flex-direction: column; height: auto; }
+    .info-text-stack { border-right: none; border-bottom: 1px solid #eee; }
+    .info-stats-stack { flex: none; width: 100%; border-right: none; padding: 10px 15px; }
+    .info-btn-stack { flex: none; width: 100%; flex-direction: row; gap: 10px; padding: 10px 15px; }
     
-    .footer-top { gap: 15px; flex-wrap: wrap; }
-    .footer-bottom { text-align: left; }
-
-    .horizontal-product-row { overflow-x: auto; display: flex !important; }
-    .small-card { flex: 0 0 45%; }
-    .nav-arrow { display: none; } /* Hide arrows on touch screens */
+    .category-sidebar { flex-direction: row; overflow-x: auto; gap: 10px; width: 100%; padding: 10px 0; border: none; }
+    .sidebar-cat-card { min-width: 105px; height: 125px; flex: 0 0 auto; }
+    
+    .footer-top { gap: 15px; justify-content: center; flex-wrap: wrap; }
+    .footer-bottom { text-align: left; padding-top: 5px; }
 }
