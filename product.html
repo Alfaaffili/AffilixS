@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AffilixS | Premium Dashboard</title>
-    <link rel="stylesheet" href="CSS/styles.css?v=1.5">
+    <title>AffilixS | Dashboard</title>
+    <link rel="stylesheet" href="CSS/styles.css?v=1.6">
 </head>
 <body class="product-page">
 
@@ -15,34 +15,41 @@
         </div>
         <nav class="header-nav">
             <a href="index.html" style="text-decoration:none; color:#fff;"><span>HOME</span></a>
+            <span>VISION</span>
+            <span>INSIGHTS</span>
+            <span>CONTACT</span>
         </nav>
     </header>
 
     <main>
         <div class="main-display-area">
             <section class="hero-display">
-                <img id="heroImage" src="" alt="Product Hero">
+                <img id="heroImage" src="" alt="Main View">
             </section>
 
             <section class="info-horizontal-bar">
                 <div class="info-text-stack">
-                    <h3 id="pShortName">---</h3>
-                    <h1 id="pName">---</h1>
-                    <p id="pDesc">---</p>
+                    <div><b>SHORT NAME:</b> <span id="pShortName">---</span></div>
+                    <div><b>FULL NAME:</b> <span id="pName">---</span></div>
+                    <div><b>DESCRIPTION:</b> <span id="pDesc">---</span></div>
                 </div>
                 <div class="info-action-stack">
-                    <div class="stat-row-item">Rating: <span class="stat-val-red" id="pRating">---</span></div>
-                    <div class="stat-row-item">Trend: <span class="stat-val-red" id="pTrend">---</span></div>
-                    <div class="stat-row-item">Price: <span class="stat-val-red" id="pPrice">---</span></div>
+                    <div class="stat-row-item">Rating: <span style="color:red;" id="pRating">---</span></div>
+                    <div class="stat-row-item">Trend: <span style="color:red;" id="pTrend">---</span></div>
+                    <div class="stat-row-item">Price: <span style="color:red;" id="pPrice">---</span></div>
                     <div class="btn-row">
-                        <a id="buyBtn" href="#" target="_blank" style="background:#ff0000; color:#fff; padding:10px; border-radius:4px; text-decoration:none; font-weight:bold; font-size:0.75rem; flex:1; text-align:center;">BUY NOW</a>
-                        <button style="background:#444; color:#fff; border:none; padding:10px; border-radius:4px; cursor:pointer; font-size:0.75rem; flex:1;" onclick="window.location.href='index.html'">GO BACK</button>
+                        <a id="buyBtn" href="#" target="_blank" class="buy-now-btn" style="background:red; color:white; padding:8px; border-radius:4px; text-align:center; text-decoration:none; font-weight:bold; flex:1; font-size:0.7rem;">BUY NOW</a>
+                        <button class="go-back-btn" onclick="window.location.href='index.html'">GO BACK</button>
                     </div>
                 </div>
             </section>
 
-            <h2 style="font-size:0.9rem; margin:10px 0 0 0;">SIMILAR DISCOVERIES</h2>
-            <section class="horizontal-product-row" id="productRow"></section>
+            <h2 class="section-title-gold">Similar Discoveries</h2>
+            <div class="scroll-container">
+                <button class="nav-arrow left" onclick="scrollRow(-1)">&#10094;</button>
+                <section class="horizontal-product-row" id="productRow"></section>
+                <button class="nav-arrow right" onclick="scrollRow(1)">&#10095;</button>
+            </div>
         </div>
 
         <aside class="category-sidebar">
@@ -54,24 +61,32 @@
         </aside>
     </main>
 
-    <footer>
-        <p class="copyright-text" style="padding-left:3ch; margin-top:20px;">&copy; 2026 AffilixS</p>
+    <footer style="background:#111; color:#fff; padding:20px 3ch; margin-top:40px;">
+        <div style="margin-bottom:10px;">
+            <span style="margin-right:20px; font-size:12px; cursor:pointer;">PRIVACY</span>
+            <span style="margin-right:20px; font-size:12px; cursor:pointer;">DISCLAIMER</span>
+            <span style="margin-right:20px; font-size:12px; cursor:pointer;">CONTACT</span>
+        </div>
+        <p style="font-size:10px; opacity:0.6;">&copy; 2026 AffilixS</p>
     </footer>
 
     <script>
-        // ESC KEY TO HOME
-        window.addEventListener('keydown', (e) => {
-            if (e.key === "Escape") window.location.href = 'index.html';
-        });
+        window.addEventListener('keydown', (e) => { if (e.key === "Escape") window.location.href = 'index.html'; });
 
-        async function initDashboard() {
+        function scrollRow(direction) {
+            const row = document.getElementById("productRow");
+            const scrollAmount = row.offsetWidth;
+            row.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+        }
+
+        async function init() {
             try {
                 const params = new URLSearchParams(window.location.search);
                 let currentId = params.get('id');
                 const res = await fetch("Data/products.json");
                 const all = await res.json();
 
-                function renderView(id) {
+                function render(id) {
                     const p = all.find(x => x.id == id);
                     if(!p) return;
 
@@ -80,25 +95,26 @@
                     document.getElementById("pName").innerText = p.name;
                     document.getElementById("pDesc").innerText = p.fullDescription;
                     document.getElementById("pRating").innerText = p.rating || "4.8";
-                    document.getElementById("pTrend").innerText = (p.trendScore || "95") + "%";
+                    document.getElementById("pTrend").innerText = (p.trendScore || "92") + "%";
                     document.getElementById("pPrice").innerText = (p.currency || "$") + p.price;
                     document.getElementById("buyBtn").href = p.affiliateLink;
 
+                    // FILTER BY SAME CATEGORY ONLY
                     const similar = all.filter(x => x.category === p.category && x.id !== p.id);
                     const row = document.getElementById("productRow");
                     row.innerHTML = "";
                     similar.forEach(item => {
                         const card = document.createElement("div");
                         card.className = "small-card";
-                        card.onclick = () => { renderView(item.id); window.scrollTo(0,0); };
+                        card.onclick = () => { render(item.id); window.scrollTo({top:0, behavior:'smooth'}); };
                         card.innerHTML = `<img src="${item.image}"><p>${item.shortName}</p>`;
                         row.appendChild(card);
                     });
                 }
-                renderView(currentId);
+                render(currentId);
             } catch (e) { console.error(e); }
         }
-        document.addEventListener("DOMContentLoaded", initDashboard);
+        document.addEventListener("DOMContentLoaded", init);
     </script>
 </body>
 </html>
