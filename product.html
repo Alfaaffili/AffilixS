@@ -2,29 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AffilixS | Dashboard</title>
-    <link rel="stylesheet" href="CSS/styles.css?v=1.6">
+    <link rel="stylesheet" href="CSS/styles.css?v=1.7">
 </head>
 <body class="product-page">
 
     <header class="site-header">
         <div class="logo-group">
             <div class="logo"><img src="images/logo.jpg" alt="Logo"></div>
-            <h1>AffilixS</h1>
+            <h1 style="font-size: 1rem;">AffilixS</h1>
         </div>
         <nav class="header-nav">
             <a href="index.html" style="text-decoration:none; color:#fff;"><span>HOME</span></a>
-            <span>VISION</span>
-            <span>INSIGHTS</span>
-            <span>CONTACT</span>
+            <span onclick="alert('Vision Modal')">VISION</span>
+            <span onclick="alert('Insights Modal')">INSIGHTS</span>
+            <span onclick="alert('Contact Modal')">CONTACT</span>
         </nav>
     </header>
 
     <main>
         <div class="main-display-area">
             <section class="hero-display">
-                <img id="heroImage" src="" alt="Main View">
+                <img id="heroImage" src="" alt="View">
             </section>
 
             <section class="info-horizontal-bar">
@@ -38,21 +38,21 @@
                     <div class="stat-row-item">Trend: <span style="color:red;" id="pTrend">---</span></div>
                     <div class="stat-row-item">Price: <span style="color:red;" id="pPrice">---</span></div>
                     <div class="btn-row">
-                        <a id="buyBtn" href="#" target="_blank" class="buy-now-btn" style="background:red; color:white; padding:8px; border-radius:4px; text-align:center; text-decoration:none; font-weight:bold; flex:1; font-size:0.7rem;">BUY NOW</a>
-                        <button class="go-back-btn" onclick="window.location.href='index.html'">GO BACK</button>
+                        <a id="buyBtn" href="#" target="_blank" style="background:red; color:white; padding:6px; border-radius:4px; text-align:center; text-decoration:none; font-weight:bold; flex:1; font-size:0.65rem;">BUY NOW</a>
+                        <button style="background:#444; color:white; border:none; padding:6px; border-radius:4px; cursor:pointer; font-size:0.65rem; flex:1;" onclick="window.location.href='index.html'">GO BACK</button>
                     </div>
                 </div>
             </section>
 
             <h2 class="section-title-gold">Similar Discoveries</h2>
             <div class="scroll-container">
-                <button class="nav-arrow left" onclick="scrollRow(-1)">&#10094;</button>
+                <button class="nav-arrow left" onclick="scrollRow('productRow', -1)">&#10094;</button>
                 <section class="horizontal-product-row" id="productRow"></section>
-                <button class="nav-arrow right" onclick="scrollRow(1)">&#10095;</button>
+                <button class="nav-arrow right" onclick="scrollRow('productRow', 1)">&#10095;</button>
             </div>
         </div>
 
-        <aside class="category-sidebar">
+        <aside class="category-sidebar" id="catSidebar">
             <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/cat-tech.jpg"><p>TECH</p></div>
             <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/Home.jpg"><p>HOME</p></div>
             <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/Fittness.jpg"><p>FITNESS</p></div>
@@ -61,22 +61,22 @@
         </aside>
     </main>
 
-    <footer style="background:#111; color:#fff; padding:20px 3ch; margin-top:40px;">
-        <div style="margin-bottom:10px;">
-            <span style="margin-right:20px; font-size:12px; cursor:pointer;">PRIVACY</span>
-            <span style="margin-right:20px; font-size:12px; cursor:pointer;">DISCLAIMER</span>
-            <span style="margin-right:20px; font-size:12px; cursor:pointer;">CONTACT</span>
+    <footer class="site-footer">
+        <div class="footer-top">
+            <span onclick="alert('Privacy')">PRIVACY</span>
+            <span onclick="alert('Disclaimer')">DISCLAIMER</span>
+            <span onclick="alert('Contact')">CONTACT</span>
         </div>
-        <p style="font-size:10px; opacity:0.6;">&copy; 2026 AffilixS</p>
+        <div class="footer-bottom">2026 Copyright-AffilixS</div>
     </footer>
 
     <script>
         window.addEventListener('keydown', (e) => { if (e.key === "Escape") window.location.href = 'index.html'; });
 
-        function scrollRow(direction) {
-            const row = document.getElementById("productRow");
-            const scrollAmount = row.offsetWidth;
-            row.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+        function scrollRow(id, direction) {
+            const el = document.getElementById(id);
+            const move = el.offsetWidth * 0.8;
+            el.scrollBy({ left: direction * move, behavior: 'smooth' });
         }
 
         async function init() {
@@ -99,7 +99,6 @@
                     document.getElementById("pPrice").innerText = (p.currency || "$") + p.price;
                     document.getElementById("buyBtn").href = p.affiliateLink;
 
-                    // FILTER BY SAME CATEGORY ONLY
                     const similar = all.filter(x => x.category === p.category && x.id !== p.id);
                     const row = document.getElementById("productRow");
                     row.innerHTML = "";
@@ -107,7 +106,11 @@
                         const card = document.createElement("div");
                         card.className = "small-card";
                         card.onclick = () => { render(item.id); window.scrollTo({top:0, behavior:'smooth'}); };
-                        card.innerHTML = `<img src="${item.image}"><p>${item.shortName}</p>`;
+                        
+                        let displayName = item.shortName;
+                        if(displayName.length > 20) displayName = displayName.substring(0, 17) + "...";
+
+                        card.innerHTML = `<img src="${item.image}"><p>${displayName}</p>`;
                         row.appendChild(card);
                     });
                 }
