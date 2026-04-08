@@ -372,67 +372,64 @@ footer {
 /* ... [Sections 01 through 11 remain exactly as you have them] ... */
 
 /* =============================================================
-   12. PRODUCT DASHBOARD: FINAL ARCHITECTURE (v11.0)
+   12. PRODUCT DASHBOARD: FINAL REPAIR (v12.0)
    ============================================================= */
-.product-page main { display: flex; width: 100%; padding: 20px 3%; gap: 25px; box-sizing: border-box; align-items: flex-start; }
+.product-page main { 
+    display: flex; width: 100%; padding: 20px 3%; gap: 20px; box-sizing: border-box; 
+}
+
 .product-page .main-display-area { flex: 1; display: flex; flex-direction: column; min-width: 0; }
 
-/* COLUMN RATIO FIX: 1 (Text) expanded, 2 & 3 (Stats/Btns) narrowed */
+/* HERO IMAGE CENTERED */
+.product-page .hero-display { 
+    width: 100%; height: 48vh; background: #fff; border-radius: 12px; 
+    display: flex; justify-content: center; align-items: center; 
+    border: 1px solid #eee; margin-bottom: 15px; overflow: hidden;
+}
+.product-page .hero-display img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+/* TRIPLE COLUMN BAR: Expanded Text, Narrowed Stats/Buttons */
 .product-page .info-horizontal-bar { 
-    width: 100%; display: flex; flex-direction: row !important; 
-    background: #fff; border: 1px solid #ddd; border-radius: 8px; height: 110px; margin-bottom: 20px;
+    width: 100%; display: flex; background: #fff; border: 1px solid #ddd; 
+    border-radius: 8px; height: 110px; margin-bottom: 20px; overflow: hidden;
 }
-.product-page .info-text-stack { flex: 0 0 60%; padding: 12px; border-right: 1px solid #eee; overflow-y: auto; }
-.product-page .info-stats-stack { flex: 0 0 20%; padding: 12px; background: #fafafa; border-right: 1px solid #eee; display: flex; flex-direction: column; justify-content: center; gap: 4px; }
-.product-page .info-btn-stack { flex: 0 0 20%; padding: 12px; display: flex; flex-direction: column; justify-content: center; gap: 8px; }
+.product-page .info-text-stack { flex: 0 0 65%; padding: 12px; border-right: 1px solid #eee; overflow-y: auto; }
+.product-page .info-stats-stack { flex: 0 0 17%; padding: 12px; background: #fafafa; border-right: 1px solid #eee; display: flex; flex-direction: column; justify-content: center; gap: 4px; }
+.product-page .info-btn-stack { flex: 0 0 18%; padding: 12px; display: flex; flex-direction: column; justify-content: center; gap: 8px; }
 
-/* UNIFIED ARROW LOGIC: Attached to Lower Corners */
-.nav-arrow, .row-arrow {
-    width: 30px !important; height: 30px !important; background: #ff0000 !important;
+/* ARROWS: ATTACHED TO LOWER CORNERS */
+.product-page .nav-arrow {
+    width: 28px !important; height: 28px !important; background: #ff0000 !important;
     color: #fff !important; border-radius: 50% !important; border: none;
-    position: absolute; bottom: 0 !important; top: auto !important;
-    transform: translateY(50%); /* Half-overlap the bottom edge */
-    display: flex !important; align-items: center; justify-content: center;
-    cursor: pointer; z-index: 100; font-size: 14px;
+    position: absolute; bottom: 0 !important; z-index: 100;
+    display: flex !important; align-items: center; justify-content: center; cursor: pointer;
 }
-.nav-arrow.left, .row-arrow.left { left: 0 !important; }
-.nav-arrow.right, .row-arrow.right { right: 0 !important; }
+.product-page .nav-arrow.left { left: 0; }
+.product-page .nav-arrow.right { right: 0; }
 
-/* Hide desktop arrows if few items (applied via JS or manual) */
+/* Hide arrows on desktop if 5 or fewer cards */
 @media (min-width: 1025px) {
-    .hide-desktop-arrows .row-arrow { display: none !important; }
+    .hide-arrows .nav-arrow { display: none !important; }
 }
-
-/* FOOTER & MODAL RESTORATION */
-.product-page footer { background: #000; color: #fff; padding: 20px; text-align: center; width: 100%; margin-top: auto; }
-.product-page .footer-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 10px; cursor: pointer; font-size: 0.8rem; }
-
-/* PRODUCT ROW CARDS & SCROLLBAR HIDING */
-.product-page .scroll-container { position: relative; width: 100%; margin-bottom: 30px; }
-.product-page .horizontal-product-row { 
-    display: flex !important; overflow-x: auto; gap: 15px; padding-bottom: 10px;
-    scrollbar-width: none; -ms-overflow-style: none;
-}
-.product-page .horizontal-product-row::-webkit-scrollbar { display: none; }
 
 /* SIDEBAR RESTORATION */
 .product-page .category-sidebar { flex: 0 0 120px; display: flex; flex-direction: column; gap: 12px; }
+.product-page .sidebar-cat-card { width: 110px; height: 135px; background: #fff; border: 1px solid #eee; border-radius: 8px; overflow: hidden; text-align: center; cursor: pointer; }
+.product-page .sidebar-cat-card img { width: 100%; height: 100px; object-fit: cover; }
+.product-page .sidebar-cat-card p { font-size: 10px; font-weight: bold; margin: 5px 0; }
 
 /* =============================================================
-   13. MOBILE & SAMSUNG REPAIRS
+   13. MOBILE REPAIRS (SAMSUNG & ALIGNMENT)
    ============================================================= */
 @media (max-width: 1024px) {
     .product-page main { flex-direction: column; }
-    .product-page .info-horizontal-bar { height: auto; flex-direction: column !important; }
+    .product-page .info-horizontal-bar { height: auto; flex-direction: column; }
     .product-page .info-text-stack, .product-page .info-stats-stack, .product-page .info-btn-stack { flex: 1 0 100%; border-right: none; border-bottom: 1px solid #eee; }
-    .product-page .info-btn-stack { flex-direction: row !important; padding: 15px; }
+    .product-page .info-btn-stack { flex-direction: row !important; gap: 10px; }
     
-    .product-page .category-sidebar { 
-        flex-direction: row !important; overflow-x: auto !important; width: 100%; 
-        padding-bottom: 25px; position: relative; border-bottom: 1px solid #eee;
-    }
+    .product-page .category-sidebar { flex-direction: row !important; overflow-x: auto; width: 100%; padding-bottom: 35px; position: relative; }
     .product-page .sidebar-cat-card { min-width: 110px; flex-shrink: 0; }
     
-    .product-page .header-nav { display: flex; justify-content: space-around; width: 100%; padding: 10px 0; }
-    .product-page .header-nav span { font-size: 0.75rem; white-space: nowrap; }
+    .product-page .header-nav { display: flex; justify-content: space-between; padding: 10px; }
+    .product-page .header-nav span { font-size: 10px; }
 }
