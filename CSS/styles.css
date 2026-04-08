@@ -372,7 +372,7 @@ footer {
 /* ... [Sections 01 through 11 remain exactly as you have them] ... */
 
 /* =============================================================
-   12. PRODUCT DASHBOARD: RECOVERY & ARROW REFINEMENT (v14.0)
+   12. PRODUCT DASHBOARD: SOLID STATE REPAIR (v15.0)
    ============================================================= */
 .product-page main { 
     display: flex; width: 100%; padding: 20px 3%; gap: 20px; box-sizing: border-box; 
@@ -386,6 +386,7 @@ footer {
 }
 .product-page .hero-display img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
+/* COLUMNS: 65% Text | 17% Stats | 18% Buttons */
 .product-page .info-horizontal-bar { 
     width: 100%; display: flex; background: #fff; border: 1px solid #ddd; 
     border-radius: 8px; height: 110px; margin-bottom: 20px; overflow: hidden;
@@ -394,13 +395,13 @@ footer {
 .product-page .info-stats-stack { flex: 0 0 17%; padding: 12px; background: #fafafa; border-right: 1px solid #eee; display: flex; flex-direction: column; justify-content: center; gap: 4px; }
 .product-page .info-btn-stack { flex: 0 0 18%; padding: 12px; display: flex; flex-direction: column; justify-content: center; gap: 8px; }
 
-/* UNIFIED ARROWS: LIFTED OFF FOOTER */
+/* ARROWS: POSITIONED & LIFTED OFF FOOTER */
 .nav-arrow, .row-arrow {
     width: 28px !important; height: 28px !important; 
     background: #ff0000 !important; color: #fff !important; 
     border-radius: 50% !important; border: none;
     position: absolute; 
-    bottom: 8px !important; /* Lifted up from footer border */
+    bottom: 8px !important; /* LIFTED UP: Fixed note #2 */
     top: auto !important;
     transform: none !important;
     display: flex !important; align-items: center; justify-content: center; 
@@ -409,7 +410,7 @@ footer {
 .nav-arrow.left, .row-arrow.left { left: 5px !important; }
 .nav-arrow.right, .row-arrow.right { right: 5px !important; }
 
-/* Hide arrows on desktop if items <= 5 */
+/* DESKTOP HIDE LOGIC: Fixed note #3 */
 @media (min-width: 1025px) {
     .hide-arrows .nav-arrow, .hide-arrows .row-arrow { display: none !important; }
 }
@@ -417,22 +418,22 @@ footer {
 .product-page .category-sidebar { flex: 0 0 120px; display: flex; flex-direction: column; gap: 12px; }
 
 /* =============================================================
-   13. MOBILE REPAIRS (HORIZONTAL CATEGORIES)
+   13. MOBILE REPAIRS (SAMSUNG & HORIZONTAL SCROLL)
    ============================================================= */
 @media (max-width: 1024px) {
     .product-page main { flex-direction: column; }
     .product-page .info-horizontal-bar { height: auto; flex-direction: column; }
     .product-page .info-btn-stack { flex-direction: row !important; gap: 10px; }
     
-    /* FIX: FORCE HORIZONTAL CATEGORIES ON MOBILE */
+    /* MOBILE CATEGORY SCROLL: Fixed note #1 & #4 */
     .product-page .category-sidebar { 
         display: flex !important;
         flex-direction: row !important; 
-        flex-wrap: nowrap !important; /* Stop vertical stacking */
+        flex-wrap: nowrap !important; 
         overflow-x: auto !important; 
         overflow-y: hidden !important;
         width: 100%; 
-        padding-bottom: 40px; /* Space for lifted arrows */
+        padding-bottom: 40px; 
         position: relative; 
     }
     .product-page #catSidebar { 
@@ -442,6 +443,12 @@ footer {
     }
     .product-page .sidebar-cat-card { min-width: 110px; flex: 0 0 auto; }
     
-    .product-page .header-nav { display: flex; justify-content: space-between; width: 100%; padding: 10px 5px; }
-    .product-page .header-nav span, .product-page .header-nav a { font-size: 9px !important; white-space: nowrap; }
+    /* MODAL ALIGNMENT: Fixed note #3 */
+    .product-page .header-nav { 
+        display: flex; justify-content: space-between; 
+        width: 100%; padding: 10px 5px; box-sizing: border-box; 
+    }
+    .product-page .header-nav span, .product-page .header-nav a { 
+        font-size: 9px !important; white-space: nowrap; margin: 0 2px;
+    }
 }
