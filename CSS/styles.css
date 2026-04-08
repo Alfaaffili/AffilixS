@@ -372,82 +372,110 @@ footer {
 /* ... [Sections 01 through 11 remain exactly as you have them] ... */
 
 /* =============================================================
-   12. PRODUCT DASHBOARD: FINAL REFINEMENT (v9.0)
+   12. PRODUCT DASHBOARD: ARCHITECTURE RECOVERY (v10.0)
    ============================================================= */
 .product-page main { 
-    display: flex; width: 100%; padding: 10px 3% 20px; gap: 30px; 
+    display: flex; 
+    width: 100%; 
+    padding: 20px 3%; 
+    gap: 25px; 
+    box-sizing: border-box;
 }
 
-/* FIX: CENTER HERO IMAGE & KEEP SIZE */
+.product-page .main-display-area { 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+    min-width: 0; /* Prevents flex-item from overflowing */
+}
+
+/* HERO IMAGE RESTORATION */
 .product-page .hero-display { 
-    width: 100%; height: 48vh; background: #fff; border-radius: 12px; 
-    display: flex; justify-content: center; align-items: center; /* Centering */
-    border: 1px solid #eee; overflow: hidden; margin-bottom: 10px;
+    width: 100%; 
+    height: 48vh; 
+    background: #fff; 
+    border-radius: 12px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    border: 1px solid #eee; 
+    margin-bottom: 15px;
+    overflow: hidden;
 }
 .product-page .hero-display img { 
-    max-width: 100%; height: 100%; object-fit: contain; margin: 0 auto; 
+    max-width: 100%; 
+    max-height: 100%; 
+    object-fit: contain; 
 }
 
-/* FIX: HORIZONTAL ROW & SMALLER ARROWS */
-.product-page .scroll-container { 
-    position: relative; width: 100%; padding-bottom: 40px; /* Space for bottom arrows */
+/* TRIPLE COLUMN BAR: FORCE HORIZONTAL */
+.product-page .info-horizontal-bar { 
+    width: 100%; 
+    display: flex; 
+    flex-direction: row !important; /* Force side-by-side */
+    background: #fff; 
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    height: 110px; 
+    margin-bottom: 20px;
 }
-.product-page .horizontal-product-row { 
-    display: flex !important; /* Force horizontal */
-    flex-direction: row !important;
-    gap: 12px; overflow-x: auto; scroll-behavior: smooth; padding: 5px 0;
-    scrollbar-width: none;
-}
-.product-page .horizontal-product-row::-webkit-scrollbar { display: none; }
+.product-page .info-text-stack { flex: 2; padding: 12px; border-right: 1px solid #eee; overflow-y: auto; }
+.product-page .info-stats-stack { flex: 1; padding: 12px; background: #fafafa; border-right: 1px solid #eee; display: flex; flex-direction: column; justify-content: center; gap: 4px; }
+.product-page .info-btn-stack { flex: 1; padding: 12px; display: flex; flex-direction: column; justify-content: center; gap: 8px; }
 
-/* SHARED ARROW SIZE REDUCTION (Main & Product) */
-.row-arrow, .nav-arrow {
-    width: 30px !important;  /* Reduced Size */
-    height: 30px !important; /* Reduced Size */
-    font-size: 14px !important;
-    background: rgba(255, 0, 0, 0.9) !important;
+/* SHARED ARROW FIX */
+.nav-arrow, .row-arrow {
+    width: 30px !important; 
+    height: 30px !important;
+    background: #ff0000 !important;
+    color: #fff !important;
+    border-radius: 50% !important;
+    border: none;
     position: absolute;
-    bottom: 5px !important;
+    bottom: -5px !important; /* Place in lower corner */
     top: auto !important;
     transform: none !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
     z-index: 100;
 }
 .nav-arrow.left, .row-arrow.left { left: 0 !important; }
 .nav-arrow.right, .row-arrow.right { right: 0 !important; }
 
-/* FIX: SIDE-BY-SIDE BUTTONS (Desktop) */
-.product-page .info-btn-stack { 
-    flex: 0 0 180px; padding: 10px; display: flex; 
-    flex-direction: row; align-items: center; gap: 8px; /* Side by side */
+/* PRODUCT ROW FIX */
+.product-page .scroll-container { position: relative; width: 100%; padding-bottom: 40px; }
+.product-page .horizontal-product-row { 
+    display: flex !important; 
+    overflow-x: auto; 
+    gap: 15px; 
+    padding: 10px 0;
+    scrollbar-width: none;
 }
-.product-page .buy-now-btn, .product-page .go-back-btn { 
-    flex: 1; padding: 8px 2px; font-size: 0.6rem; text-align: center; border-radius: 4px;
+
+/* SIDEBAR RESTORATION */
+.product-page .category-sidebar { 
+    flex: 0 0 120px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; 
 }
+.product-page .sidebar-cat-card {
+    width: 110px; height: 130px;
+    background: #fff; border: 1px solid #eee; border-radius: 8px;
+    overflow: hidden; cursor: pointer; text-align: center;
+}
+.product-page .sidebar-cat-card img { width: 100%; height: 90px; object-fit: cover; }
+.product-page .sidebar-cat-card p { font-size: 10px; font-weight: bold; margin: 5px 0; }
 
 /* =============================================================
-   13. MOBILE & SAMSUNG BROWSER GUARD
+   13. MOBILE REPAIRS
    ============================================================= */
 @media (max-width: 1024px) {
-    /* FIX: HEADER MODAL OVERFLOW (Samsung) */
-    .product-page .site-header { overflow: hidden; padding: 0 5px; }
-    .product-page .header-nav { 
-        display: flex; justify-content: space-between; width: auto; 
-        gap: 8px; padding-right: 10px; 
-    }
-    .product-page .header-nav span, .product-page .header-nav a { 
-        font-size: 9px !important; margin-left: 5px; white-space: nowrap; 
-    }
-
-    /* FIX: BUTTONS ONE LINE (Mobile) */
-    .product-page .info-btn-stack { 
-        width: 100%; flex-direction: row !important; padding: 10px; gap: 10px;
-    }
-    
-    /* FIX: MOBILE PRODUCT CARDS */
-    .product-page .small-card { flex: 0 0 140px !important; height: 150px; }
-    
-    /* CATEGORY SIDEBAR MOBILE ARROWS */
-    .product-page .category-sidebar { 
-        flex-direction: row; overflow-x: auto; padding-bottom: 40px; 
-    }
+    .product-page main { flex-direction: column; }
+    .product-page .category-sidebar { flex-direction: row; overflow-x: auto; width: 100%; padding-bottom: 45px; position: relative; }
+    .product-page .info-horizontal-bar { height: auto; flex-direction: column !important; }
+    .product-page .info-btn-stack { flex-direction: row !important; }
+    .product-page .header-nav { display: flex; justify-content: space-around; width: 100%; }
 }
