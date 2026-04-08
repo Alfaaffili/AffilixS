@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AffilixS | Dashboard</title>
-    <link rel="stylesheet" href="CSS/styles.css?v=2.6">
+    <link rel="stylesheet" href="CSS/styles.css?v=2.7">
 </head>
 <body class="product-page">
 
@@ -21,9 +21,9 @@
     </div>
     <nav class="header-nav">
         <a href="index.html" style="text-decoration:none; color:inherit;"><span>HOME</span></a>
-        <span data-modal="visionModal" onclick="openM('visionModal')">Vision</span>
-        <span data-modal="insightsModal" onclick="openM('insightsModal')">Insights</span>
-        <span data-modal="contactModal" onclick="openM('contactModal')">Contact</span>
+        <span onclick="openM('visionModal')">Vision</span>
+        <span onclick="openM('insightsModal')">Insights</span>
+        <span onclick="openM('contactModal')">Contact</span>
     </nav>
 </header>
 
@@ -79,6 +79,9 @@
 </footer>
 
 <script>
+    // 1. ESC KEY ACTIVATION
+    window.addEventListener('keydown', (e) => { if(e.key === "Escape") window.location.href='index.html'; });
+
     function openM(id) { document.getElementById(id).classList.add('active'); }
     document.querySelectorAll('.close-modal').forEach(b => b.onclick = () => b.closest('.text-modal').classList.remove('active'));
     window.onclick = (e) => { if(e.target.classList.contains('text-modal')) e.target.classList.remove('active'); }
@@ -106,7 +109,6 @@
             row.innerHTML = "";
             const similar = all.filter(x => x.category === p.category && x.id !== p.id);
             
-            // Hide arrows if <= 5
             if(similar.length <= 5) document.getElementById("prodScrollBox").classList.add('hide-arrows');
             else document.getElementById("prodScrollBox").classList.remove('hide-arrows');
 
@@ -114,7 +116,12 @@
                 const card = document.createElement("div");
                 card.className = "small-card";
                 card.style = "flex: 0 0 170px; background:#fff; border:1px solid #eee; border-radius:8px; text-align:center; cursor:pointer;";
-                card.innerHTML = `<img src="${item.image}" style="width:100%; height:105px; object-fit:cover;"><p style="font-size:10px; font-weight:bold; padding:5px;">${item.shortName}</p>`;
+                
+                // 2. LIMIT SHORT NAME TO 17 CHARACTERS
+                let shortName = item.shortName;
+                if(shortName.length > 17) shortName = shortName.substring(0, 14) + "...";
+
+                card.innerHTML = `<img src="${item.image}" style="width:100%; height:105px; object-fit:cover;"><p style="font-size:10px; font-weight:bold; padding:5px;">${shortName}</p>`;
                 card.onclick = () => { render(item.id); window.scrollTo(0,0); };
                 row.appendChild(card);
             });
