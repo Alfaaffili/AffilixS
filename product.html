@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AffilixS | Dashboard</title>
-    <link rel="stylesheet" href="CSS/styles.css?v=2.9">
+    <link rel="stylesheet" href="CSS/styles.css?v=3.0">
 </head>
 <body class="product-page">
 
@@ -48,16 +48,12 @@
             </div>
         </section>
 
-        <div class="scroll-container" id="prodScrollBox" style="position:relative; padding-bottom:35px;">
-            <h2 style="font-size:0.9rem; margin-bottom:10px;">Similar Discoveries</h2>
-            <section class="horizontal-product-row" id="productRow" style="display:flex; overflow-x:auto; gap:15px; scrollbar-width:none;"></section>
-            <button class="nav-arrow left" onclick="scrollX('productRow', -1)">&#10094;</button>
-            <button class="nav-arrow right" onclick="scrollX('productRow', 1)">&#10095;</button>
-        </div>
+        <div id="productRowsContainer">
+            </div>
     </div>
 
-    <aside class="category-sidebar scroll-container" id="catScrollBox" style="position:relative;">
-        <div id="catSidebar" style="display:flex; flex-direction:inherit; gap:12px;">
+    <aside class="category-sidebar scroll-container" id="catScrollBox">
+        <div id="catSidebar">
             <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/cat-tech.jpg"><p>TECH</p></div>
             <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/Home.jpg"><p>HOME</p></div>
             <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/Fittness.jpg"><p>FITNESS</p></div>
@@ -79,23 +75,24 @@
 </footer>
 
 <script>
-    // NOTE #1: ESC KEY
     window.addEventListener('keydown', (e) => { if(e.key === "Escape") window.location.href='index.html'; });
 
     function openM(id) { document.getElementById(id).classList.add('active'); }
     document.querySelectorAll('.close-modal').forEach(b => b.onclick = () => b.closest('.text-modal').classList.remove('active'));
     window.onclick = (e) => { if(e.target.classList.contains('text-modal')) e.target.classList.remove('active'); }
 
-    function scrollX(id, dir) { document.getElementById(id).scrollBy({ left: dir * 300, behavior: 'smooth' }); }
+    function scrollX(id, dir) { document.getElementById(id).scrollBy({ left: dir * 400, behavior: 'smooth' }); }
 
     async function init() {
         const res = await fetch("Data/products.json");
         const all = await res.json();
-        const id = new URLSearchParams(window.location.search).get('id');
+        const currentProductId = new URLSearchParams(window.location.search).get('id');
 
         function render(targetId) {
             const p = all.find(x => x.id == targetId);
             if(!p) return;
+            
+            // Render Hero & Info
             document.getElementById("heroImage").src = p.image;
             document.getElementById("pShortName").innerText = p.shortName;
             document.getElementById("pName").innerText = p.name;
@@ -105,31 +102,52 @@
             document.getElementById("pPrice").innerText = (p.currency || "$") + p.price;
             document.getElementById("buyBtn").href = p.affiliateLink;
 
-            const row = document.getElementById("productRow");
-            row.innerHTML = "";
+            const container = document.getElementById("productRowsContainer");
+            container.innerHTML = "";
+            
+            // Filter Similar Products
             const similar = all.filter(x => x.category === p.category && x.id !== p.id);
             
-            // NOTE #3: DESKTOP HIDE IF <= 5
-            if(similar.length <= 5) document.getElementById("prodScrollBox").classList.add('hide-arrows');
-            else document.getElementById("prodScrollBox").classList.remove('hide-arrows');
+            // Logic: Max 5 rows, 20 items per row
+            for (let i = 0; i < 5; i++) {
+                const chunk = similar.slice(i * 20, (i + 1) * 20);
+                if (chunk.length === 0) break;
 
-            similar.forEach(item => {
-                const card = document.createElement("div");
-                card.className = "small-card";
-                card.style = "flex: 0 0 170px; background:#fff; border:1px solid #eee; border-radius:8px; text-align:center; cursor:pointer;";
+                const rowId = `row-${i}`;
+                const scrollBox = document.createElement("div");
+                scrollBox.className = "scroll-container";
+                scrollBox.id = `box-${i}`;
+                scrollBox.style = "position:relative; padding-bottom:35px; margin-bottom:15px;";
                 
-                // NOTE #2: LIMIT 17 CHARS
-                let sn = item.shortName;
-                if(sn.length > 17) sn = sn.substring(0, 14) + "...";
+                // Hide arrows on desktop if row has 5 or fewer items
+                if(window.innerWidth > 1024 && chunk.length <= 5) scrollBox.classList.add('hide-arrows');
 
-                card.innerHTML = `<img src="${item.image}" style="width:100%; height:105px; object-fit:cover;"><p style="font-size:10px; font-weight:bold; padding:5px;">${sn}</p>`;
-                card.onclick = () => { render(item.id); window.scrollTo(0,0); };
-                row.appendChild(card);
-            });
+                scrollBox.innerHTML = `
+                    <h2 style="font-size:0.8rem; margin-bottom:8px;">Similar Discoveries - Row ${i+1}</h2>
+                    <section class="horizontal-product-row" id="${rowId}" style="display:flex; overflow-x:auto; gap:15px; scrollbar-width:none;"></section>
+                    <button class="nav-arrow left" onclick="scrollX('${rowId}', -1)">&#10094;</button>
+                    <button class="nav-arrow right" onclick="scrollX('${rowId}', 1)">&#10095;</button>
+                `;
+                container.appendChild(scrollBox);
+
+                const rowElement = document.getElementById(rowId);
+                chunk.forEach(item => {
+                    const card = document.createElement("div");
+                    card.className = "small-card";
+                    card.style = "flex: 0 0 170px; background:#fff; border:1px solid #eee; border-radius:8px; text-align:center; cursor:pointer;";
+                    
+                    let sn = item.shortName;
+                    if(sn.length > 17) sn = sn.substring(0, 14) + "...";
+
+                    card.innerHTML = `<img src="${item.image}" style="width:100%; height:105px; object-fit:cover; border-radius:8px 8px 0 0;"><p style="font-size:10px; font-weight:bold; padding:5px;">${sn}</p>`;
+                    card.onclick = () => { render(item.id); window.scrollTo(0,0); };
+                    rowElement.appendChild(card);
+                });
+            }
         }
-        render(id);
+        render(currentProductId);
         
-        // Hide Category arrows on Desktop (since it's exactly 5 items)
+        // Category Arrow Logic: On desktop, hide if <= 5. On Mobile, always show.
         if(window.innerWidth > 1024) document.getElementById("catScrollBox").classList.add('hide-arrows');
     }
     document.addEventListener("DOMContentLoaded", init);
