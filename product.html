@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AffilixS | Dashboard</title>
-    <link rel="stylesheet" href="CSS/styles.css?v=2.2">
+    <link rel="stylesheet" href="CSS/styles.css?v=2.3">
 </head>
 <body class="product-page">
 
@@ -54,8 +54,8 @@
             
             <div class="scroll-container">
                 <section class="horizontal-product-row" id="productRow"></section>
-                <button class="nav-arrow left" onclick="scrollRow('productRow', -1)">&#10094;</button>
-                <button class="nav-arrow right" onclick="scrollRow('productRow', 1)">&#10095;</button>
+                <button class="nav-arrow left" onclick="scrollR('productRow', -1)">&#10094;</button>
+                <button class="nav-arrow right" onclick="scrollR('productRow', 1)">&#10095;</button>
             </div>
         </div>
 
@@ -66,8 +66,8 @@
             <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/Style.jpg"><p>STYLE</p></div>
             <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/BeautyPersonnalCare.jpg"><p>BEAUTY</p></div>
             
-            <button class="nav-arrow left mobile-only" style="bottom: 5px;" onclick="scrollRow('catSidebar', -1)">&#10094;</button>
-            <button class="nav-arrow right mobile-only" style="bottom: 5px;" onclick="scrollRow('catSidebar', 1)">&#10095;</button>
+            <button class="nav-arrow left" onclick="scrollR('catSidebar', -1)">&#10094;</button>
+            <button class="nav-arrow right" onclick="scrollR('catSidebar', 1)">&#10095;</button>
         </aside>
     </main>
 
@@ -81,54 +81,45 @@
     </footer>
 
     <script>
-        // Modal Control (Matching main.js logic)
         function openM(id) { document.getElementById(id).classList.add('active'); }
         document.querySelectorAll('.close-modal').forEach(btn => {
             btn.onclick = function() { this.closest('.text-modal').classList.remove('active'); }
         });
         window.onclick = function(e) { if(e.target.classList.contains('text-modal')) e.target.classList.remove('active'); }
 
-        window.addEventListener('keydown', (e) => { if (e.key === "Escape") window.location.href = 'index.html'; });
-
-        function scrollRow(id, direction) {
-            const el = document.getElementById(id);
-            el.scrollBy({ left: direction * 280, behavior: 'smooth' });
-        }
+        function scrollR(id, dir) { document.getElementById(id).scrollBy({ left: dir * 280, behavior: 'smooth' }); }
 
         async function init() {
-            try {
-                const params = new URLSearchParams(window.location.search);
-                let currentId = params.get('id');
-                const res = await fetch("Data/products.json");
-                const all = await res.json();
+            const params = new URLSearchParams(window.location.search);
+            let id = params.get('id');
+            const res = await fetch("Data/products.json");
+            const all = await res.json();
 
-                function render(id) {
-                    const p = all.find(x => x.id == id);
-                    if(!p) return;
+            function render(targetId) {
+                const p = all.find(x => x.id == targetId);
+                if(!p) return;
+                document.getElementById("heroImage").src = p.image;
+                document.getElementById("pShortName").innerText = p.shortName;
+                document.getElementById("pName").innerText = p.name;
+                document.getElementById("pDesc").innerText = p.fullDescription;
+                document.getElementById("pRating").innerText = p.rating || "4.8";
+                document.getElementById("pTrend").innerText = (p.trendScore || "92") + "%";
+                document.getElementById("pPrice").innerText = (p.currency || "$") + p.price;
+                document.getElementById("buyBtn").href = p.affiliateLink;
 
-                    document.getElementById("heroImage").src = p.image;
-                    document.getElementById("pShortName").innerText = p.shortName;
-                    document.getElementById("pName").innerText = p.name;
-                    document.getElementById("pDesc").innerText = p.fullDescription;
-                    document.getElementById("pRating").innerText = p.rating || "4.8";
-                    document.getElementById("pTrend").innerText = (p.trendScore || "92") + "%";
-                    document.getElementById("pPrice").innerText = (p.currency || "$") + p.price;
-                    document.getElementById("buyBtn").href = p.affiliateLink;
-
-                    const row = document.getElementById("productRow");
-                    row.innerHTML = "";
-                    all.filter(x => x.category === p.category && x.id !== p.id).forEach(item => {
-                        const card = document.createElement("div");
-                        card.className = "small-card";
-                        card.onclick = () => { render(item.id); window.scrollTo({top:0, behavior:'smooth'}); };
-                        let name = item.shortName;
-                        if(name.length > 20) name = name.substring(0, 17) + "...";
-                        card.innerHTML = `<img src="${item.image}"><p>${name}</p>`;
-                        row.appendChild(card);
-                    });
-                }
-                render(currentId);
-            } catch (e) { console.error(e); }
+                const row = document.getElementById("productRow");
+                row.innerHTML = "";
+                all.filter(x => x.category === p.category && x.id !== p.id).forEach(item => {
+                    const card = document.createElement("div");
+                    card.className = "small-card";
+                    card.onclick = () => { render(item.id); window.scrollTo({top:0, behavior:'smooth'}); };
+                    let name = item.shortName;
+                    if(name.length > 20) name = name.substring(0, 17) + "...";
+                    card.innerHTML = `<img src="${item.image}"><p>${name}</p>`;
+                    row.appendChild(card);
+                });
+            }
+            render(id);
         }
         document.addEventListener("DOMContentLoaded", init);
     </script>
