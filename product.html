@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AffilixS | Dashboard</title>
-    <link rel="stylesheet" href="CSS/styles.css?v=3.0">
+    <title>AffilixS | Product View</title>
+    <link rel="stylesheet" href="CSS/styles.css?v=3.1">
 </head>
 <body class="product-page">
 
@@ -29,7 +29,7 @@
 
 <main>
     <div class="main-display-area">
-        <section class="hero-display"><img id="heroImage" src="" alt="Product"></section>
+        <section class="hero-display"><img id="heroImage" src="" alt="Product Hero"></section>
 
         <section class="info-horizontal-bar">
             <div class="info-text-stack">
@@ -48,8 +48,7 @@
             </div>
         </section>
 
-        <div id="productRowsContainer">
-            </div>
+        <div id="productRowsContainer"></div>
     </div>
 
     <aside class="category-sidebar scroll-container" id="catScrollBox">
@@ -75,6 +74,7 @@
 </footer>
 
 <script>
+    // 4. ESC ACTIVE
     window.addEventListener('keydown', (e) => { if(e.key === "Escape") window.location.href='index.html'; });
 
     function openM(id) { document.getElementById(id).classList.add('active'); }
@@ -86,13 +86,12 @@
     async function init() {
         const res = await fetch("Data/products.json");
         const all = await res.json();
-        const currentProductId = new URLSearchParams(window.location.search).get('id');
+        const currentId = new URLSearchParams(window.location.search).get('id');
 
         function render(targetId) {
             const p = all.find(x => x.id == targetId);
             if(!p) return;
             
-            // Render Hero & Info
             document.getElementById("heroImage").src = p.image;
             document.getElementById("pShortName").innerText = p.shortName;
             document.getElementById("pName").innerText = p.name;
@@ -105,10 +104,9 @@
             const container = document.getElementById("productRowsContainer");
             container.innerHTML = "";
             
-            // Filter Similar Products
+            // 1. ONLY SIMILAR CATEGORY PRODUCTS
             const similar = all.filter(x => x.category === p.category && x.id !== p.id);
             
-            // Logic: Max 5 rows, 20 items per row
             for (let i = 0; i < 5; i++) {
                 const chunk = similar.slice(i * 20, (i + 1) * 20);
                 if (chunk.length === 0) break;
@@ -119,11 +117,11 @@
                 scrollBox.id = `box-${i}`;
                 scrollBox.style = "position:relative; padding-bottom:35px; margin-bottom:15px;";
                 
-                // Hide arrows on desktop if row has 5 or fewer items
+                // Hide arrows if <= 5 items in row (Desktop Only)
                 if(window.innerWidth > 1024 && chunk.length <= 5) scrollBox.classList.add('hide-arrows');
 
                 scrollBox.innerHTML = `
-                    <h2 style="font-size:0.8rem; margin-bottom:8px;">Similar Discoveries - Row ${i+1}</h2>
+                    <h2 style="font-size:0.8rem; margin-bottom:8px;">Similar Discoveries</h2>
                     <section class="horizontal-product-row" id="${rowId}" style="display:flex; overflow-x:auto; gap:15px; scrollbar-width:none;"></section>
                     <button class="nav-arrow left" onclick="scrollX('${rowId}', -1)">&#10094;</button>
                     <button class="nav-arrow right" onclick="scrollX('${rowId}', 1)">&#10095;</button>
@@ -136,6 +134,7 @@
                     card.className = "small-card";
                     card.style = "flex: 0 0 170px; background:#fff; border:1px solid #eee; border-radius:8px; text-align:center; cursor:pointer;";
                     
+                    // LIMIT TO 17 CHARACTERS
                     let sn = item.shortName;
                     if(sn.length > 17) sn = sn.substring(0, 14) + "...";
 
@@ -145,9 +144,9 @@
                 });
             }
         }
-        render(currentProductId);
+        render(currentId);
         
-        // Category Arrow Logic: On desktop, hide if <= 5. On Mobile, always show.
+        // 5. DESKTOP CATEGORY ARROW LOGIC
         if(window.innerWidth > 1024) document.getElementById("catScrollBox").classList.add('hide-arrows');
     }
     document.addEventListener("DOMContentLoaded", init);
