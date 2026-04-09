@@ -369,107 +369,73 @@ footer {
 @media (min-width: 1151px) {
     .product-row-wrapper .row-arrow { bottom: 15px !important; top: auto !important; }
 }
-/* ... [Sections 01 through 11 remain exactly as you have them] ... */
 
 /* =============================================================
-   12. PRODUCT DASHBOARD: SYMMETRY & ALIGNMENT (v17.0)
+   12. PRODUCT PAGE: ADVANCED REFINEMENT (v1.5)
    ============================================================= */
-.product-page main { 
-    display: flex; width: 100%; padding: 20px 3%; gap: 30px; 
-    box-sizing: border-box; align-items: flex-start;
+.product-page .main-display-area { flex: 1; display: flex; flex-direction: column; }
+
+/* Note #2 & #3: Desktop Button Alignment */
+.product-page .info-horizontal-bar {
+    display: flex; flex-direction: column; width: 100%;
+}
+.product-page .info-text-stack {
+    display: flex; justify-content: space-between; align-items: flex-start; padding: 20px; gap: 20px;
+}
+.product-page .name-desc-box { flex: 1; }
+.product-page .scrollable-desc { 
+    max-height: 80px; overflow-y: auto; margin-top: 10px; font-size: 13px; color: #555; 
 }
 
-.product-page .main-display-area { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-
-/* HERO CENTERING & SIZE */
-.product-page .hero-display { 
-    width: 100%; height: 48vh; background: #fff; border-radius: 12px; 
-    display: flex; justify-content: center; align-items: center; 
-    border: 1px solid #eee; margin-bottom: 15px; overflow: hidden;
+.product-page .desktop-action-container {
+    flex: 0 0 220px; display: flex; flex-direction: column; gap: 10px; align-items: flex-end;
 }
-.product-page .hero-display img { max-width: 100%; max-height: 100%; object-fit: contain; margin: 0 auto; }
+.product-page .price-display { font-size: 18px; font-weight: bold; color: red; }
 
-/* SYMMETRICAL CATEGORY CARDS */
-.product-page .category-sidebar { width: 120px; flex: 0 0 120px; display: flex; flex-direction: column; gap: 15px; }
-.product-page .sidebar-cat-card {
-    width: 110px; height: 110px; /* Symmetrical Square Look */
-    background: #fff; border: 1px solid #eee; border-radius: 8px;
-    overflow: hidden; text-align: center; cursor: pointer;
-    display: flex; flex-direction: column;
-}
-.product-page .sidebar-cat-card img { width: 100%; height: 75px; object-fit: cover; }
-.product-page .sidebar-cat-card p { font-size: 10px; font-weight: bold; margin: auto 0; padding: 2px 0; }
+/* Buttons Styling */
+.buy-now-btn { background: red; color: white; padding: 10px 20px; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 12px; text-align: center; }
+.go-back-btn { background: #444; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: 12px; }
 
-/* ARROW POSITIONING */
-.nav-arrow, .row-arrow {
-    width: 28px !important; height: 28px !important; background: #ff0000 !important;
-    color: #fff !important; border-radius: 50% !important; border: none;
-    position: absolute; bottom: 10px !important; top: auto !important;
-    display: flex !important; align-items: center; justify-content: center; 
-    cursor: pointer; z-index: 100; font-size: 12px !important;
+/* Note #9: Stationary Arrows Logic */
+.category-sidebar-wrapper, .scroll-container-wrapper {
+    position: relative; width: 100%;
 }
-.nav-arrow.left, .row-arrow.left { left: 5px !important; }
-.nav-arrow.right, .row-arrow.right { right: 5px !important; }
+.category-sidebar, .scroll-box-inner {
+    display: flex; overflow-x: auto; scroll-behavior: smooth; scrollbar-width: none;
+}
+.category-sidebar::-webkit-scrollbar, .scroll-box-inner::-webkit-scrollbar { display: none; }
+
+/* Arrow placement outside the scrolling content */
+.product-page .nav-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 32px; height: 32px; background: red; color: white; 
+    border-radius: 50%; border: none; z-index: 10; cursor: pointer;
+}
+.product-page .nav-arrow.left { left: -10px; }
+.product-page .nav-arrow.right { right: -10px; }
 
 /* =============================================================
-   13. MOBILE & HOME PAGE LOGIC
+   13. MOBILE PRODUCT PAGE REPAIRS
    ============================================================= */
-@media (min-width: 1025px) {
-    /* Hide arrows on desktop if class is applied (handled by JS) */
-    .hide-arrows .nav-arrow, .hide-arrows .row-arrow { display: none !important; }
-}
-
 @media (max-width: 1024px) {
-    .product-page main { flex-direction: column; }
-    .product-page .hero-display { height: 35vh; } /* Taller for mobile impact */
+    .product-page .desktop-action-container { display: none; }
+    .product-page .mobile-action-bar { display: flex !important; justify-content: flex-start; align-items: center; gap: 16px; padding: 15px; border-top: 1px solid #eee; }
     
-    .product-page .category-sidebar { 
-        width: 100%; flex: none; flex-direction: row !important; 
-        overflow-x: auto !important; padding-bottom: 45px; position: relative; gap: 12px;
-    }
-    .product-page .sidebar-cat-card { min-width: 100px; height: 100px; flex: 0 0 100px; }
+    .product-page .hero-display { height: 35vh !important; }
+    .product-page .hero-display img { display: block !important; width: auto; height: 100%; }
+
+    /* Fix Note #7 & #8: Enable scrolling/swiping */
+    .product-page .scrollable-desc { overflow-y: scroll !important; -webkit-overflow-scrolling: touch; }
+    .product-page .scroll-box-inner { overflow-x: scroll !important; -webkit-overflow-scrolling: touch; }
     
-    .product-page .info-horizontal-bar { height: auto; flex-direction: column; }
-    .product-page .info-btn-stack { flex-direction: row !important; }
+    .similar-card { flex: 0 0 150px; margin: 5px; background: #fff; border-radius: 8px; border: 1px solid #eee; text-align: center; }
+    .similar-card img { width: 100%; height: 100px; object-fit: cover; }
+    .similar-card p { font-size: 10px; font-weight: bold; padding: 5px; }
+
+    /* Note #10: Footer fix */
+    footer { margin-top: 40px !important; display: flex !important; }
+    .header-nav { overflow: visible !important; }
 }
 
-/* FIX FOR NOTE #3: Home Page Category Arrows logic */
-@media (min-width: 1025px) {
-    /* If categories are 5 or less, we hide the arrows on desktop home */
-    .categories-wrapper.hide-arrows .row-arrow {
-        display: none !important;
-    }
-}
-
-/* FIX FOR NOTE #5: Mobile Product Page Price & Buttons on same line */
-@media (max-width: 1024px) {
-    .product-page .mobile-action-bar {
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        justify-content: flex-start !important;
-        gap: 16px; /* Approx 2-character space */
-        background: #fff;
-        padding: 10px;
-        border-radius: 8px;
-        margin-bottom: 15px;
-    }
-    .product-page .info-stats-stack { padding: 0 !important; background: transparent !important; }
-    .product-page .info-btn-stack { display: flex !important; flex-direction: row !important; gap: 10px !important; }
-    
-    /* FIX FOR NOTE #7: Prevent vertical stacking of categories */
-    .product-page .category-sidebar {
-        display: flex !important;
-        flex-direction: row !important;
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        width: 100% !important;
-        padding-bottom: 40px !important;
-        gap: 12px !important;
-    }
-    .product-page #catSidebar {
-        display: flex !important;
-        flex-direction: row !important;
-        flex-wrap: nowrap !important;
-    }
-}
+/* Modal Fix for Mobile (Note #6) */
+.text-modal { z-index: 99999 !important; }
