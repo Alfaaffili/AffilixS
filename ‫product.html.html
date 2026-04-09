@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AffilixS | Dashboard</title>
+    <link rel="stylesheet" href="CSS/styles.css?v=2.6">
+</head>
+<body class="product-page">
+
+<div id="visionModal" class="text-modal"><div class="modal-box"><span class="close-modal">&times;</span><h2>Our Vision</h2><p>AffilixS curates refined products for modern living.</p></div></div>
+<div id="insightsModal" class="text-modal"><div class="modal-box"><span class="close-modal">&times;</span><h2>Insights</h2><p>Latest trends and modern insights.</p></div></div>
+<div id="contactModal" class="text-modal"><div class="modal-box"><span class="close-modal">&times;</span><h2>Contact</h2><p>Contact us at support@affilixs.com</p></div></div>
+<div id="privacyModal" class="text-modal"><div class="modal-box"><span class="close-modal">&times;</span><h2>Privacy Policy</h2><p>Your privacy is our priority.</p></div></div>
+<div id="disclaimerModal" class="text-modal"><div class="modal-box"><span class="close-modal">&times;</span><h2>Affiliate Disclaimer</h2><p>Links may earn commission.</p></div></div>
+
+<header class="site-header">
+    <div class="logo-group">
+        <div class="logo"><img src="images/logo.jpg" alt="Logo"></div>
+        <h1>AffilixS</h1>
+    </div>
+    <nav class="header-nav">
+        <a href="index.html" style="text-decoration:none; color:inherit;"><span>HOME</span></a>
+        <span data-modal="visionModal" onclick="openM('visionModal')">Vision</span>
+        <span data-modal="insightsModal" onclick="openM('insightsModal')">Insights</span>
+        <span data-modal="contactModal" onclick="openM('contactModal')">Contact</span>
+    </nav>
+</header>
+
+<main>
+    <div class="main-display-area">
+        <section class="hero-display"><img id="heroImage" src="" alt="Product"></section>
+
+        <section class="info-horizontal-bar">
+            <div class="info-text-stack">
+                <div><b>SHORT NAME:</b> <span id="pShortName">---</span></div>
+                <div><b>FULL NAME:</b> <span id="pName">---</span></div>
+                <div><b>DESCRIPTION:</b> <span id="pDesc">---</span></div>
+            </div>
+            <div class="info-stats-stack">
+                <div class="stat-row-item">Rating: <span style="color:red;" id="pRating">---</span></div>
+                <div class="stat-row-item">Trend: <span style="color:red;" id="pTrend">---</span></div>
+                <div class="stat-row-item">Price: <span style="color:red;" id="pPrice">---</span></div>
+            </div>
+            <div class="info-btn-stack">
+                <a id="buyBtn" href="#" target="_blank" style="background:red; color:white; padding:10px; border-radius:4px; text-align:center; text-decoration:none; font-weight:bold; font-size:11px;">BUY NOW</a>
+                <button onclick="window.location.href='index.html'" style="background:#444; color:white; border:none; padding:10px; border-radius:4px; cursor:pointer; font-size:11px;">GO BACK</button>
+            </div>
+        </section>
+
+        <div class="scroll-container" id="prodScrollBox" style="position:relative; padding-bottom:35px;">
+            <h2 style="font-size:0.9rem; margin-bottom:10px;">Similar Discoveries</h2>
+            <section class="horizontal-product-row" id="productRow" style="display:flex; overflow-x:auto; gap:15px; scrollbar-width:none;"></section>
+            <button class="nav-arrow left" onclick="scrollX('productRow', -1)">&#10094;</button>
+            <button class="nav-arrow right" onclick="scrollX('productRow', 1)">&#10095;</button>
+        </div>
+    </div>
+
+    <aside class="category-sidebar scroll-container" id="catScrollBox" style="position:relative;">
+        <div id="catSidebar" style="display:flex; flex-direction:column; gap:12px;">
+            <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/cat-tech.jpg"><p>TECH</p></div>
+            <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/Home.jpg"><p>HOME</p></div>
+            <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/Fittness.jpg"><p>FITNESS</p></div>
+            <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/Style.jpg"><p>STYLE</p></div>
+            <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/BeautyPersonnalCare.jpg"><p>BEAUTY</p></div>
+        </div>
+        <button class="nav-arrow left" onclick="scrollX('catSidebar', -1)">&#10094;</button>
+        <button class="nav-arrow right" onclick="scrollX('catSidebar', 1)">&#10095;</button>
+    </aside>
+</main>
+
+<footer>
+    <div class="footer-links">
+        <span onclick="openM('privacyModal')">Privacy</span>
+        <span onclick="openM('disclaimerModal')">Disclaimer</span>
+        <span onclick="openM('contactModal')">Contact</span>
+    </div>
+    <p class="copyright-text">&copy; 2026 AffilixS</p>
+</footer>
+
+<script>
+    function openM(id) { document.getElementById(id).classList.add('active'); }
+    document.querySelectorAll('.close-modal').forEach(b => b.onclick = () => b.closest('.text-modal').classList.remove('active'));
+    window.onclick = (e) => { if(e.target.classList.contains('text-modal')) e.target.classList.remove('active'); }
+
+    function scrollX(id, dir) { document.getElementById(id).scrollBy({ left: dir * 300, behavior: 'smooth' }); }
+
+    async function init() {
+        const res = await fetch("Data/products.json");
+        const all = await res.json();
+        const id = new URLSearchParams(window.location.search).get('id');
+
+        function render(targetId) {
+            const p = all.find(x => x.id == targetId);
+            if(!p) return;
+            document.getElementById("heroImage").src = p.image;
+            document.getElementById("pShortName").innerText = p.shortName;
+            document.getElementById("pName").innerText = p.name;
+            document.getElementById("pDesc").innerText = p.fullDescription;
+            document.getElementById("pRating").innerText = p.rating || "4.8";
+            document.getElementById("pTrend").innerText = (p.trendScore || "92") + "%";
+            document.getElementById("pPrice").innerText = (p.currency || "$") + p.price;
+            document.getElementById("buyBtn").href = p.affiliateLink;
+
+            const row = document.getElementById("productRow");
+            row.innerHTML = "";
+            const similar = all.filter(x => x.category === p.category && x.id !== p.id);
+            
+            // Hide arrows if <= 5
+            if(similar.length <= 5) document.getElementById("prodScrollBox").classList.add('hide-arrows');
+            else document.getElementById("prodScrollBox").classList.remove('hide-arrows');
+
+            similar.forEach(item => {
+                const card = document.createElement("div");
+                card.className = "small-card";
+                card.style = "flex: 0 0 170px; background:#fff; border:1px solid #eee; border-radius:8px; text-align:center; cursor:pointer;";
+                card.innerHTML = `<img src="${item.image}" style="width:100%; height:105px; object-fit:cover;"><p style="font-size:10px; font-weight:bold; padding:5px;">${item.shortName}</p>`;
+                card.onclick = () => { render(item.id); window.scrollTo(0,0); };
+                row.appendChild(card);
+            });
+        }
+        render(id);
+        document.getElementById("catScrollBox").classList.add('hide-arrows');
+    }
+    document.addEventListener("DOMContentLoaded", init);
+</script>
+</body>
+</html>
