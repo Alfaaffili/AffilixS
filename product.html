@@ -4,15 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AffilixS | Product View</title>
-    <link rel="stylesheet" href="CSS/styles.css?v=1.6">
+    <link rel="stylesheet" href="CSS/styles.css?v=1.4">
 </head>
 <body class="product-page">
-
-<div id="visionModal" class="text-modal" onclick="closeM(event, 'visionModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('visionModal').classList.remove('active')">&times;</span><h2>Our Vision</h2><p>AffilixS curates refined products for modern living.</p></div></div>
-<div id="insightsModal" class="text-modal" onclick="closeM(event, 'insightsModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('insightsModal').classList.remove('active')">&times;</span><h2>Insights</h2><p>Latest trends and modern insights.</p></div></div>
-<div id="contactModal" class="text-modal" onclick="closeM(event, 'contactModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('contactModal').classList.remove('active')">&times;</span><h2>Contact</h2><p>Contact us at support@affilixs.com</p></div></div>
-<div id="privacyModal" class="text-modal" onclick="closeM(event, 'privacyModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('privacyModal').classList.remove('active')">&times;</span><h2>Privacy Policy</h2><p>Your privacy is our priority.</p></div></div>
-<div id="disclaimerModal" class="text-modal" onclick="closeM(event, 'disclaimerModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('disclaimerModal').classList.remove('active')">&times;</span><h2>Affiliate Disclaimer</h2><p>Links may earn commission.</p></div></div>
 
 <header class="site-header">
     <div class="logo-group">
@@ -20,29 +14,29 @@
         <h1>AffilixS</h1>
     </div>
     <nav class="header-nav">
-        <a href="index.html" class="nav-home-btn">home</a> <span onclick="openM('visionModal')">Vision</span>
-        <span onclick="openM('insightsModal')">Insights</span>
-        <span onclick="openM('contactModal')">Contact</span>
+        <a href="index.html" style="text-decoration:none; color:inherit; font-size:0.9rem;">HOME</a>
     </nav>
 </header>
 
-<main class="product-main-layout">
-    <div class="center-content">
-        <section class="hero-display-container">
-            <img id="heroImage" src="" alt="Product Hero">
+<main>
+    <div class="main-display-area">
+        <section class="hero-display" style="display:flex; justify-content:center; align-items:center; background:#fff; border-radius:12px; height:45vh; overflow:hidden; border:1px solid #eee;">
+            <img id="heroImage" src="" alt="Product Hero" style="max-width:95%; max-height:95%; object-fit:contain;">
         </section>
 
-        <section class="description-area">
-            <div class="name-desc-box">
-                <b>FULL NAME:</b> <span id="pName">---</span>
-                <div id="pDesc" class="p-full-description">---</div>
+        <section class="info-horizontal-bar" style="background:#fff; border:1px solid #ddd; border-radius:8px; overflow:hidden; margin-bottom:20px;">
+            <div class="info-text-stack" style="padding:15px; border-bottom:1px solid #eee;">
+                <div style="font-size:13px;"><b>FULL NAME:</b> <span id="pName">---</span></div>
+                <div style="font-size:12px; color:#555; margin-top:5px;" id="pDesc">---</div>
             </div>
             
-            <div class="mobile-only-actions">
-                <div class="price-mob">Price: <span id="pPriceMob" style="color:red;">---</span></div>
-                <div class="mob-btns">
-                    <a id="buyBtnMob" href="#" class="buy-now-btn">BUY NOW</a>
-                    <button onclick="window.location.href='index.html'" class="go-back-btn">GO BACK</button>
+            <div class="mobile-action-bar">
+                <div class="info-stats-stack">
+                    <span style="font-size:14px; font-weight:bold;">Price: <span style="color:red;" id="pPrice">---</span></span>
+                </div>
+                <div class="info-btn-stack">
+                    <a id="buyBtn" href="#" target="_blank" style="background:red; color:white; padding:8px 15px; border-radius:4px; text-decoration:none; font-weight:bold; font-size:11px;">BUY NOW</a>
+                    <button onclick="window.location.href='index.html'" style="background:#444; color:white; border:none; padding:8px 15px; border-radius:4px; cursor:pointer; font-size:11px;">GO BACK</button>
                 </div>
             </div>
         </section>
@@ -50,51 +44,26 @@
         <div id="productRowsContainer"></div>
     </div>
 
-    <aside class="right-sidebar">
-        <div class="desktop-action-column">
-            <div class="stats-row"><b>Rating:</b> <span id="pRating">★★★★★</span></div>
-            <div class="stats-row"><b>Trend:</b> <span id="pTrend">High</span></div>
-            <div class="stats-row" style="margin-bottom:15px;"><b>Price:</b> <span id="pPrice" style="color:red; font-weight:bold;">---</span></div>
-            
-            <div class="desktop-btns">
-                <a id="buyBtn" href="#" target="_blank" class="buy-now-btn">BUY NOW</a>
-                <button onclick="window.location.href='index.html'" class="go-back-btn">GO BACK</button>
-            </div>
-        </div>
-
-        <div class="category-vertical-stack" id="catSidebar">
+    <aside class="category-sidebar scroll-container" id="catScrollBox">
+        <div id="catSidebar">
             <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/cat-tech.jpg"><p>TECH</p></div>
             <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/Home.jpg"><p>HOME</p></div>
             <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/Fittness.jpg"><p>FITNESS</p></div>
             <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/Style.jpg"><p>STYLE</p></div>
             <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/BeautyPersonnalCare.jpg"><p>BEAUTY</p></div>
         </div>
+        <button class="nav-arrow left" onclick="scrollX('catSidebar', -1)">❮</button>
+        <button class="nav-arrow right" onclick="scrollX('catSidebar', 1)">❯</button>
     </aside>
 </main>
 
-<footer>
-    <div class="footer-links">
-        <span onclick="openM('privacyModal')">Privacy</span>
-        <span onclick="openM('disclaimerModal')">Disclaimer</span>
-        <span onclick="openM('contactModal')">Contact</span>
-    </div>
-    <p class="copyright-text">&copy; 2026 AffilixS</p>
-</footer>
-
 <script>
-    // Note #6 & #11: Esc and Click-Outside logic
+    // NOTE #2: ESC Fix (Immediate response)
     window.addEventListener('keydown', (e) => { 
-        if(e.key === "Escape") {
-            document.querySelectorAll('.text-modal').forEach(m => m.classList.remove('active'));
-        }
+        if(e.key === "Escape") { window.location.href = 'index.html'; }
     });
 
-    function openM(id) { document.getElementById(id).classList.add('active'); }
-    function closeM(e, id) { if(e.target.id === id) document.getElementById(id).classList.remove('active'); }
-
-    function scrollX(id, dir) { 
-        document.getElementById(id).scrollBy({ left: dir * 300, behavior: 'smooth' }); 
-    }
+    function scrollX(id, dir) { document.getElementById(id).scrollBy({ left: dir * 300, behavior: 'smooth' }); }
 
     async function init() {
         try {
@@ -103,37 +72,51 @@
             const pId = new URLSearchParams(window.location.search).get('id');
             const p = all.find(x => x.id == pId) || all[0];
 
+            // NOTE #4: Load Hero Image
             document.getElementById("heroImage").src = p.image;
             document.getElementById("pName").innerText = p.name;
             document.getElementById("pDesc").innerText = p.fullDescription;
-            const price = (p.currency || "$") + p.price;
-            document.getElementById("pPrice").innerText = price;
-            document.getElementById("pPriceMob").innerText = price;
+            document.getElementById("pPrice").innerText = (p.currency || "$") + p.price;
             document.getElementById("buyBtn").href = p.affiliateLink;
-            document.getElementById("buyBtnMob").href = p.affiliateLink;
 
+            // NOTE #1 & #6: Filter strictly by category
             const container = document.getElementById("productRowsContainer");
+            container.innerHTML = "";
             const similar = all.filter(x => x.category === p.category && x.id !== p.id);
 
             if (similar.length > 0) {
                 const rowId = "row-similar";
                 const box = document.createElement("div");
-                box.className = "scroll-container-wrapper";
-                box.innerHTML = `<h2 class="row-title">Similar Discoveries</h2>
-                    <div class="scroll-box-inner" id="${rowId}"></div>
+                box.className = "scroll-container";
+                box.style = "position:relative; padding-bottom:40px; margin-top:20px;";
+                
+                // NOTE #3: Hide arrows on desktop if <= 5
+                if(window.innerWidth > 1024 && similar.length <= 5) box.classList.add('hide-arrows');
+
+                box.innerHTML = `<h2 style="font-size:1rem; margin-bottom:15px;">Similar in ${p.category}</h2>
+                    <div id="${rowId}" style="display:flex; overflow-x:auto; gap:15px; scrollbar-width:none;"></div>
                     <button class="nav-arrow left" onclick="scrollX('${rowId}', -1)">❮</button>
                     <button class="nav-arrow right" onclick="scrollX('${rowId}', 1)">❯</button>`;
                 container.appendChild(box);
+
                 const row = document.getElementById(rowId);
                 similar.forEach(item => {
                     const card = document.createElement("div");
-                    card.className = "similar-card";
-                    card.innerHTML = `<img src="${item.image}"><p>${item.shortName}</p>`;
+                    card.style = "flex:0 0 160px; background:#fff; border:1px solid #eee; border-radius:8px; text-align:center; cursor:pointer; overflow:hidden;";
+                    let sn = item.shortName.length > 17 ? item.shortName.substring(0,14) + "..." : item.shortName;
+                    card.innerHTML = `<img src="${item.image}" style="width:100%; height:100px; object-fit:cover;">
+                                      <p style="font-size:10px; font-weight:bold; padding:8px; margin:0;">${sn}</p>`;
                     card.onclick = () => { window.location.href = `product.html?id=${item.id}`; };
                     row.appendChild(card);
                 });
             }
-        } catch (e) { console.error(e); }
+
+            // NOTE #3: Category Arrow Hiding logic for this page
+            if(window.innerWidth > 1024) {
+                document.getElementById("catScrollBox").classList.add('hide-arrows');
+            }
+
+        } catch (e) { console.error("Data error", e); }
     }
     document.addEventListener("DOMContentLoaded", init);
 </script>
