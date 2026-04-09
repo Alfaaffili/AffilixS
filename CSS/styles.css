@@ -302,140 +302,158 @@ footer {
 }
 
 /* =============================================================
-   11. HARDWARE SYMMETRY & EDGE GUARD (v2.0 Final)
+   11. HOME PAGE: ARROW & NAVIGATION REFINEMENT (Note #1)
    ============================================================= */
-
-@media (max-width: 1024px) {
-    /* 1. Header & Nav: Safe Zone Fix */
-    .site-header { background: #000 !important; padding: 5px 0 !important; width: 100% !important; overflow: hidden; }
-    .header-nav { 
-        display: flex !important; 
-        flex-wrap: nowrap !important; 
-        justify-content: space-around !important; 
-        padding: 6px 4px !important; /* Slight side padding to prevent cut-off */
-    }
-    .header-nav span { font-size: 9px !important; white-space: nowrap !important; color: #fff !important; }
-
-    /* 2. Hero & Identity: Center Alignment Fix */
-    .top-section { height: 140px !important; position: relative !important; width: 100% !important; overflow: hidden; }
-    .identity-panel { position: absolute !important; top: 0 !important; left: 0; width: 100%; height: 100%; background-size: cover !important; }
-    
-    .identity-text { 
-        left: 50% !important; /* Centered for Samsung/Huawei symmetry */
-        transform: translateX(-50%) !important; 
-        bottom: 10px !important;
-        width: 92% !important; /* Forces it to stay inside the screen edges */
-        text-align: center !important;
-        white-space: nowrap !important;
-        overflow: hidden;
-        text-overflow: ellipsis; /* Graceful exit for long titles */
-        background: #ff0000 !important;
-        font-size: 10px !important;
-        padding: 5px 0 !important;
-    }
-
-    /* 3. PRODUCT CARDS: Symmetrical 2-Column Restore */
-    .products-section { padding: 0 4px !important; background: #fff !important; }
-    .product-row-wrapper { 
-        display: flex !important; 
-        flex-wrap: wrap !important; 
-        justify-content: space-between !important; /* Symmetrical spacing */
-        padding: 0 4px !important;
-    }
-    .product-card {
-        flex: 0 0 47% !important; /* Perfect 2-column split */
-        max-width: 47% !important;
-        height: 185px !important;
-        margin: 5px 0 !important;
-        box-sizing: border-box !important;
-    }
-    .product-card img { height: 120px !important; width: 100% !important; object-fit: cover; }
-
-    /* 4. THE "X" BUTTON: Extra Large Red Target */
-    .modal-close, .preview-close {
-        width: 55px !important; height: 55px !important;
-        font-size: 35px !important; background: #ff0000 !important;
-        border-radius: 50% !important; display: flex !important;
-        align-items: center !important; justify-content: center !important;
-    }
+/* Reduce size and move arrows to lower corners */
+.row-arrow {
+    width: 32px !important; 
+    height: 32px !important;
+    background: rgba(255, 0, 0, 0.9) !important;
+    font-size: 14px !important;
+    top: auto !important;
+    bottom: 10px !important; /* Positions them at the bottom */
+    transform: none !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
 }
-
-/* DESKTOP MINIMIZED (Show Arrows) */
-@media (min-width: 768px) and (max-width: 1150px) {
-    .categories-wrapper .row-arrow { display: flex !important; }
-}
-
-/* DESKTOP MAXIMIZED (Hide Arrows if <= 5) */
-@media (min-width: 1151px) {
-    .product-row-wrapper .row-arrow { bottom: 15px !important; top: auto !important; }
-}
+.row-arrow.left { left: 10px !important; }
+.row-arrow.right { right: 10px !important; }
 
 /* =============================================================
-   12. PRODUCT PAGE: ADVANCED REFINEMENT (v1.5)
+   12. DESKTOP PRODUCT PAGE: COLUMN ARCHITECTURE (Notes 2-6)
    ============================================================= */
-.product-page .main-display-area { flex: 1; display: flex; flex-direction: column; }
-
-/* Note #2 & #3: Desktop Button Alignment */
-.product-page .info-horizontal-bar {
-    display: flex; flex-direction: column; width: 100%;
-}
-.product-page .info-text-stack {
-    display: flex; justify-content: space-between; align-items: flex-start; padding: 20px; gap: 20px;
-}
-.product-page .name-desc-box { flex: 1; }
-.product-page .scrollable-desc { 
-    max-height: 80px; overflow-y: auto; margin-top: 10px; font-size: 13px; color: #555; 
+/* Main layout: Splits screen into Left (Hero/Desc) and Right (Sidebar) */
+.product-page .product-main-layout {
+    display: flex;
+    gap: 40px;
+    padding: 30px 5%;
+    align-items: flex-start;
 }
 
-.product-page .desktop-action-container {
-    flex: 0 0 220px; display: flex; flex-direction: column; gap: 10px; align-items: flex-end;
+.product-page .center-content {
+    flex: 1;
+    min-width: 0;
 }
-.product-page .price-display { font-size: 18px; font-weight: bold; color: red; }
 
-/* Buttons Styling */
-.buy-now-btn { background: red; color: white; padding: 10px 20px; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 12px; text-align: center; }
-.go-back-btn { background: #444; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: 12px; }
+/* Note #2: Locked Hero Display - No zooming or resizing */
+.product-page .hero-display-container {
+    width: 100%;
+    height: 500px; /* Locked height */
+    background: #fff;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #eee;
+    margin-bottom: 25px;
+    overflow: hidden;
+}
+.product-page #heroImage {
+    max-width: 95%;
+    max-height: 95%;
+    object-fit: contain; /* Centers image without cropping */
+}
 
-/* Note #9: Stationary Arrows Logic */
-.category-sidebar-wrapper, .scroll-container-wrapper {
-    position: relative; width: 100%;
+/* Note #8: Text Wrapping and Description Scrolling */
+.product-page .p-full-description {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #444;
+    margin-top: 15px;
+    white-space: normal;
+    word-wrap: break-word;
 }
-.category-sidebar, .scroll-box-inner {
-    display: flex; overflow-x: auto; scroll-behavior: smooth; scrollbar-width: none;
-}
-.category-sidebar::-webkit-scrollbar, .scroll-box-inner::-webkit-scrollbar { display: none; }
 
-/* Arrow placement outside the scrolling content */
-.product-page .nav-arrow {
-    position: absolute; top: 50%; transform: translateY(-50%);
-    width: 32px; height: 32px; background: red; color: white; 
-    border-radius: 50%; border: none; z-index: 10; cursor: pointer;
+/* Note #4 & #5: Right Sidebar (Rating, Trend, Price + Categories) */
+.product-page .right-sidebar {
+    flex: 0 0 280px;
 }
-.product-page .nav-arrow.left { left: -10px; }
-.product-page .nav-arrow.right { right: -10px; }
+
+.product-page .desktop-action-column {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    margin-bottom: 30px;
+}
+
+.product-page .stats-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.product-page .desktop-btns {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Note #5: Uniformed Vertical Category Cards */
+.product-page .category-vertical-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.product-page .sidebar-cat-card {
+    width: 100%;
+    height: 110px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+}
+.product-page .sidebar-cat-card img { width: 100%; height: 75px; object-fit: cover; }
+.product-page .sidebar-cat-card p { font-size: 10px; font-weight: bold; margin: 6px 0; text-align: center; }
 
 /* =============================================================
-   13. MOBILE PRODUCT PAGE REPAIRS
+   13. MOBILE PRODUCT PAGE REPAIRS (Notes 7-11)
    ============================================================= */
 @media (max-width: 1024px) {
-    .product-page .desktop-action-container { display: none; }
-    .product-page .mobile-action-bar { display: flex !important; justify-content: flex-start; align-items: center; gap: 16px; padding: 15px; border-top: 1px solid #eee; }
+    .product-page .product-main-layout { flex-direction: column; padding: 15px; }
+    .product-page .right-sidebar { display: none; } /* Hide desktop sidebar on mobile */
     
-    .product-page .hero-display { height: 35vh !important; }
-    .product-page .hero-display img { display: block !important; width: auto; height: 100%; }
+    /* Note #7: Mobile Hero Size Consistency */
+    .product-page .hero-display-container { height: 300px !important; }
 
-    /* Fix Note #7 & #8: Enable scrolling/swiping */
-    .product-page .scrollable-desc { overflow-y: scroll !important; -webkit-overflow-scrolling: touch; }
-    .product-page .scroll-box-inner { overflow-x: scroll !important; -webkit-overflow-scrolling: touch; }
-    
-    .similar-card { flex: 0 0 150px; margin: 5px; background: #fff; border-radius: 8px; border: 1px solid #eee; text-align: center; }
-    .similar-card img { width: 100%; height: 100px; object-fit: cover; }
-    .similar-card p { font-size: 10px; font-weight: bold; padding: 5px; }
+    /* Note #8: Mobile Text Swiping/Wrapping */
+    .product-page .p-full-description {
+        overflow-y: auto;
+        max-height: 200px;
+        -webkit-overflow-scrolling: touch;
+    }
 
-    /* Note #10: Footer fix */
-    footer { margin-top: 40px !important; display: flex !important; }
-    .header-nav { overflow: visible !important; }
+    /* Note #10: Small Letters for Header Link */
+    .nav-home-btn { 
+        text-transform: lowercase !important; 
+        font-size: 0.85rem !important; 
+    }
+
+    /* Note #9: Uniformed Categories for Mobile */
+    .product-page #productRowsContainer {
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Mobile Buy-Now + Go-Back bar */
+    .product-page .mobile-only-actions {
+        display: block;
+        background: #fff;
+        padding: 15px;
+        border-radius: 10px;
+        margin-top: 20px;
+        border: 1px solid #eee;
+    }
+    .product-page .mob-btns { display: flex; gap: 10px; margin-top: 10px; }
+
+    /* Note #11: Ensure Modal is clickable to close */
+    .text-modal { cursor: pointer; }
+    .modal-box { cursor: default; }
 }
-
-/* Modal Fix for Mobile (Note #6) */
-.text-modal { z-index: 99999 !important; }

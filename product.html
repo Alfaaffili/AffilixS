@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AffilixS | Product View</title>
-    <link rel="stylesheet" href="CSS/styles.css?v=1.5">
+    <link rel="stylesheet" href="CSS/styles.css?v=1.6">
 </head>
 <body class="product-page">
 
-<div id="visionModal" class="text-modal"><div class="modal-box"><span class="close-modal">&times;</span><h2>Our Vision</h2><p>AffilixS curates refined products for modern living.</p></div></div>
-<div id="insightsModal" class="text-modal"><div class="modal-box"><span class="close-modal">&times;</span><h2>Insights</h2><p>Latest trends and modern insights.</p></div></div>
-<div id="contactModal" class="text-modal"><div class="modal-box"><span class="close-modal">&times;</span><h2>Contact</h2><p>Contact us at support@affilixs.com</p></div></div>
-<div id="privacyModal" class="text-modal"><div class="modal-box"><span class="close-modal">&times;</span><h2>Privacy Policy</h2><p>Your privacy is our priority.</p></div></div>
-<div id="disclaimerModal" class="text-modal"><div class="modal-box"><span class="close-modal">&times;</span><h2>Affiliate Disclaimer</h2><p>Links may earn commission.</p></div></div>
+<div id="visionModal" class="text-modal" onclick="closeM(event, 'visionModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('visionModal').classList.remove('active')">&times;</span><h2>Our Vision</h2><p>AffilixS curates refined products for modern living.</p></div></div>
+<div id="insightsModal" class="text-modal" onclick="closeM(event, 'insightsModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('insightsModal').classList.remove('active')">&times;</span><h2>Insights</h2><p>Latest trends and modern insights.</p></div></div>
+<div id="contactModal" class="text-modal" onclick="closeM(event, 'contactModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('contactModal').classList.remove('active')">&times;</span><h2>Contact</h2><p>Contact us at support@affilixs.com</p></div></div>
+<div id="privacyModal" class="text-modal" onclick="closeM(event, 'privacyModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('privacyModal').classList.remove('active')">&times;</span><h2>Privacy Policy</h2><p>Your privacy is our priority.</p></div></div>
+<div id="disclaimerModal" class="text-modal" onclick="closeM(event, 'disclaimerModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('disclaimerModal').classList.remove('active')">&times;</span><h2>Affiliate Disclaimer</h2><p>Links may earn commission.</p></div></div>
 
 <header class="site-header">
     <div class="logo-group">
@@ -20,41 +20,28 @@
         <h1>AffilixS</h1>
     </div>
     <nav class="header-nav">
-        <a href="index.html" style="text-decoration:none; color:inherit; font-size:0.9rem;">HOME</a>
-        <span onclick="openM('visionModal')">Vision</span>
+        <a href="index.html" class="nav-home-btn">home</a> <span onclick="openM('visionModal')">Vision</span>
         <span onclick="openM('insightsModal')">Insights</span>
         <span onclick="openM('contactModal')">Contact</span>
     </nav>
 </header>
 
-<main>
-    <div class="main-display-area">
-        <section class="hero-display">
+<main class="product-main-layout">
+    <div class="center-content">
+        <section class="hero-display-container">
             <img id="heroImage" src="" alt="Product Hero">
         </section>
 
-        <section class="info-horizontal-bar">
-            <div class="info-text-stack">
-                <div class="name-desc-box">
-                    <div><b>FULL NAME:</b> <span id="pName">---</span></div>
-                    <div id="pDesc" class="scrollable-desc">---</div>
-                </div>
-                
-                <div class="desktop-action-container">
-                    <div class="price-display">Price: <span id="pPrice">---</span></div>
-                    <div class="info-btn-stack">
-                        <a id="buyBtn" href="#" target="_blank" class="buy-now-btn">BUY NOW</a>
-                        <button onclick="window.location.href='index.html'" class="go-back-btn">GO BACK</button>
-                    </div>
-                </div>
+        <section class="description-area">
+            <div class="name-desc-box">
+                <b>FULL NAME:</b> <span id="pName">---</span>
+                <div id="pDesc" class="p-full-description">---</div>
             </div>
             
-            <div class="mobile-action-bar">
-                <div class="info-stats-stack">
-                    <span style="font-size:14px; font-weight:bold;">Price: <span style="color:red;" id="pPriceMob">---</span></span>
-                </div>
-                <div class="info-btn-stack">
-                    <a id="buyBtnMob" href="#" target="_blank" class="buy-now-btn">BUY NOW</a>
+            <div class="mobile-only-actions">
+                <div class="price-mob">Price: <span id="pPriceMob" style="color:red;">---</span></div>
+                <div class="mob-btns">
+                    <a id="buyBtnMob" href="#" class="buy-now-btn">BUY NOW</a>
                     <button onclick="window.location.href='index.html'" class="go-back-btn">GO BACK</button>
                 </div>
             </div>
@@ -63,16 +50,25 @@
         <div id="productRowsContainer"></div>
     </div>
 
-    <aside class="category-sidebar-wrapper">
-        <div class="category-sidebar" id="catSidebar">
+    <aside class="right-sidebar">
+        <div class="desktop-action-column">
+            <div class="stats-row"><b>Rating:</b> <span id="pRating">★★★★★</span></div>
+            <div class="stats-row"><b>Trend:</b> <span id="pTrend">High</span></div>
+            <div class="stats-row" style="margin-bottom:15px;"><b>Price:</b> <span id="pPrice" style="color:red; font-weight:bold;">---</span></div>
+            
+            <div class="desktop-btns">
+                <a id="buyBtn" href="#" target="_blank" class="buy-now-btn">BUY NOW</a>
+                <button onclick="window.location.href='index.html'" class="go-back-btn">GO BACK</button>
+            </div>
+        </div>
+
+        <div class="category-vertical-stack" id="catSidebar">
             <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/cat-tech.jpg"><p>TECH</p></div>
             <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/Home.jpg"><p>HOME</p></div>
             <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/Fittness.jpg"><p>FITNESS</p></div>
             <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/Style.jpg"><p>STYLE</p></div>
             <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/BeautyPersonnalCare.jpg"><p>BEAUTY</p></div>
         </div>
-        <button class="nav-arrow left" onclick="scrollX('catSidebar', -1)">❮</button>
-        <button class="nav-arrow right" onclick="scrollX('catSidebar', 1)">❯</button>
     </aside>
 </main>
 
@@ -86,15 +82,18 @@
 </footer>
 
 <script>
-    window.addEventListener('keydown', (e) => { if(e.key === "Escape") window.location.href = 'index.html'; });
+    // Note #6 & #11: Esc and Click-Outside logic
+    window.addEventListener('keydown', (e) => { 
+        if(e.key === "Escape") {
+            document.querySelectorAll('.text-modal').forEach(m => m.classList.remove('active'));
+        }
+    });
 
     function openM(id) { document.getElementById(id).classList.add('active'); }
-    document.querySelectorAll('.close-modal').forEach(b => b.onclick = () => b.closest('.text-modal').classList.remove('active'));
+    function closeM(e, id) { if(e.target.id === id) document.getElementById(id).classList.remove('active'); }
 
     function scrollX(id, dir) { 
-        const el = document.getElementById(id);
-        const amount = dir * 300;
-        el.scrollBy({ left: amount, behavior: 'smooth' }); 
+        document.getElementById(id).scrollBy({ left: dir * 300, behavior: 'smooth' }); 
     }
 
     async function init() {
@@ -104,46 +103,37 @@
             const pId = new URLSearchParams(window.location.search).get('id');
             const p = all.find(x => x.id == pId) || all[0];
 
-            // Note #5 Fix: Ensure src is set clearly
-            const hero = document.getElementById("heroImage");
-            hero.src = p.image; 
-
+            document.getElementById("heroImage").src = p.image;
             document.getElementById("pName").innerText = p.name;
             document.getElementById("pDesc").innerText = p.fullDescription;
-            const priceStr = (p.currency || "$") + p.price;
-            document.getElementById("pPrice").innerText = priceStr;
-            document.getElementById("pPriceMob").innerText = priceStr;
-            
-            const link = p.affiliateLink;
-            document.getElementById("buyBtn").href = link;
-            document.getElementById("buyBtnMob").href = link;
+            const price = (p.currency || "$") + p.price;
+            document.getElementById("pPrice").innerText = price;
+            document.getElementById("pPriceMob").innerText = price;
+            document.getElementById("buyBtn").href = p.affiliateLink;
+            document.getElementById("buyBtnMob").href = p.affiliateLink;
 
-            // Strict category filter
             const container = document.getElementById("productRowsContainer");
-            container.innerHTML = "";
             const similar = all.filter(x => x.category === p.category && x.id !== p.id);
 
             if (similar.length > 0) {
                 const rowId = "row-similar";
                 const box = document.createElement("div");
-                box.className = "scroll-container-wrapper"; 
-                box.innerHTML = `<h2 style="font-size:1rem; margin-bottom:15px; margin-left:10px;">Similar Discoveries</h2>
+                box.className = "scroll-container-wrapper";
+                box.innerHTML = `<h2 class="row-title">Similar Discoveries</h2>
                     <div class="scroll-box-inner" id="${rowId}"></div>
                     <button class="nav-arrow left" onclick="scrollX('${rowId}', -1)">❮</button>
                     <button class="nav-arrow right" onclick="scrollX('${rowId}', 1)">❯</button>`;
                 container.appendChild(box);
-
                 const row = document.getElementById(rowId);
                 similar.forEach(item => {
                     const card = document.createElement("div");
                     card.className = "similar-card";
-                    let sn = item.shortName.length > 17 ? item.shortName.substring(0,14) + "..." : item.shortName;
-                    card.innerHTML = `<img src="${item.image}"><p>${sn}</p>`;
+                    card.innerHTML = `<img src="${item.image}"><p>${item.shortName}</p>`;
                     card.onclick = () => { window.location.href = `product.html?id=${item.id}`; };
                     row.appendChild(card);
                 });
             }
-        } catch (e) { console.error("Data error", e); }
+        } catch (e) { console.error(e); }
     }
     document.addEventListener("DOMContentLoaded", init);
 </script>
