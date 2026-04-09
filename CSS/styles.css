@@ -432,3 +432,44 @@ footer {
     .product-page .info-horizontal-bar { height: auto; flex-direction: column; }
     .product-page .info-btn-stack { flex-direction: row !important; }
 }
+
+/* FIX FOR NOTE #3: Home Page Category Arrows logic */
+@media (min-width: 1025px) {
+    /* If categories are 5 or less, we hide the arrows on desktop home */
+    .categories-wrapper.hide-arrows .row-arrow {
+        display: none !important;
+    }
+}
+
+/* FIX FOR NOTE #5: Mobile Product Page Price & Buttons on same line */
+@media (max-width: 1024px) {
+    .product-page .mobile-action-bar {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 16px; /* Approx 2-character space */
+        background: #fff;
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+    .product-page .info-stats-stack { padding: 0 !important; background: transparent !important; }
+    .product-page .info-btn-stack { display: flex !important; flex-direction: row !important; gap: 10px !important; }
+    
+    /* FIX FOR NOTE #7: Prevent vertical stacking of categories */
+    .product-page .category-sidebar {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        width: 100% !important;
+        padding-bottom: 40px !important;
+        gap: 12px !important;
+    }
+    .product-page #catSidebar {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+    }
+}
