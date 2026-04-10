@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AffilixS | Product View</title>
-    <link rel="stylesheet" href="CSS/styles.css?v=2.2">
+    <link rel="stylesheet" href="CSS/styles.css?v=2.3">
 </head>
 <body class="product-page">
 
@@ -29,15 +29,13 @@
 
 <main class="product-main-layout">
     <div class="main-display-area">
-        <section class="hero-display">
-            <img id="heroImage" src="" alt="Product Hero">
+        <section class="hero-display" style="display:flex; justify-content:center; align-items:center; background:#fff; border-radius:12px; height:45vh; border:1px solid #eee; margin-bottom:20px; overflow:hidden;">
+            <img id="heroImage" src="" alt="Product Hero" style="max-width:95%; max-height:95%; object-fit:contain;">
         </section>
 
-        <section class="info-horizontal-bar">
-            <div class="p-text-block">
-                <div class="p-name-label"><b>FULL NAME:</b> <span id="pName">---</span></div>
-                <div id="pDesc" class="p-description-text">---</div>
-            </div>
+        <section class="info-horizontal-bar" style="background:#fff; border:1px solid #ddd; border-radius:8px; padding:15px; margin-bottom:20px;">
+            <div style="font-size:13px;"><b>FULL NAME:</b> <span id="pName">---</span></div>
+            <div id="pDesc" style="font-size:12px; color:#555; margin-top:10px; line-height:1.6;">---</div>
         </section>
 
         <div id="productRowsContainer"></div>
@@ -78,10 +76,9 @@
 </footer>
 
 <script>
-    // Note #4: Global Modal Functions
     function openM(id) { document.getElementById(id).classList.add('active'); }
     function closeM(e, id) { if(e.target.id === id) document.getElementById(id).classList.remove('active'); }
-    window.addEventListener('keydown', (e) => { if(e.key === "Escape") document.querySelectorAll('.text-modal').forEach(m => m.classList.remove('active')); });
+    function scrollX(id, dir) { document.getElementById(id).scrollBy({ left: dir * 300, behavior: 'smooth' }); }
 
     async function init() {
         try {
@@ -97,14 +94,13 @@
             document.getElementById("buyBtn").href = p.affiliateLink;
 
             const container = document.getElementById("productRowsContainer");
-            // Note #6: Strict Category Filtering
             const similar = all.filter(x => x.category === p.category && x.id !== p.id);
 
             if (similar.length > 0) {
                 const rowId = "row-similar";
                 const wrapper = document.createElement("div");
                 wrapper.className = "similar-wrapper";
-                wrapper.innerHTML = `<h2 class="row-title">Similar Discoveries</h2>
+                wrapper.innerHTML = `<h2 style="font-size:1rem; margin-bottom:10px;">Similar Discoveries</h2>
                     <div class="horizontal-scroll" id="${rowId}"></div>
                     <button class="nav-arrow left" onclick="scrollX('${rowId}', -1)">❮</button>
                     <button class="nav-arrow right" onclick="scrollX('${rowId}', 1)">❯</button>`;
@@ -120,7 +116,6 @@
             }
         } catch (e) { console.error(e); }
     }
-    function scrollX(id, dir) { document.getElementById(id).scrollBy({ left: dir * 300, behavior: 'smooth' }); }
     document.addEventListener("DOMContentLoaded", init);
 </script>
 </body>

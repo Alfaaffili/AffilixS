@@ -302,64 +302,78 @@ footer {
 }
 
 /* =============================================================
-   11. SCROLLBAR & MODAL FIXES (Note #2 & #4)
+   11. LAYOUT & SCROLLBAR (Fix Note #2)
    ============================================================= */
-html, body { 
-    overflow-x: hidden; /* Removes the double horizontal scroll */
-    height: auto; 
-}
-.text-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 9999; align-items: center; justify-content: center; cursor: pointer; }
-.text-modal.active { display: flex; }
-.modal-box { background: #fff; padding: 30px; border-radius: 12px; width: 90%; max-width: 450px; cursor: default; }
+html, body { overflow-x: hidden; height: 100%; margin: 0; padding: 0; }
+body { overflow-y: auto; } /* Single scrollbar only */
+
+.product-main-layout { display: flex; gap: 20px; padding: 20px 5%; align-items: flex-start; }
+.main-display-area { flex: 1; min-width: 0; }
 
 /* =============================================================
-   12. SIDEBAR & CATEGORY SPACING (Note #3)
+   12. SIDEBAR: TWO COLUMNS (Fix Note #1 & #3)
    ============================================================= */
-.master-sidebar { display: flex; gap: 12px; width: 380px; }
-.category-column { flex: 0 0 130px; display: flex; flex-direction: column; gap: 4px; } /* Reduced spacing by 1 line */
+.master-sidebar { display: flex; gap: 15px; width: 340px; }
+
+/* Left Column: Stats & Buttons */
+.action-column { 
+    flex: 0 0 160px; background: #fff; border: 1px solid #eee; border-radius: 10px; 
+    padding: 12px; display: flex; flex-direction: column; gap: 15px; 
+}
+.tight-stats p { margin: 0 0 6px 0; font-size: 12px; border-bottom: 1px solid #f5f5f5; }
+.price-text { color: red; font-weight: bold; border: none !important; margin-top: 5px; }
+
+.twin-btn { 
+    width: 100%; padding: 10px 0; border-radius: 4px; font-weight: bold; font-size: 11px; 
+    text-align: center; border: none; cursor: pointer; text-decoration: none; display: block;
+}
+.buy { background: red; color: white; margin-bottom: 8px; }
+.back { background: #444; color: white; }
+
+/* Right Column: Symmetrical Categories (Fix Note #3) */
+.category-column { flex: 0 0 130px; display: flex; flex-direction: column; gap: 4px; } /* Tight 4px gap */
 
 .sidebar-cat-card {
     width: 130px; height: 130px; background: #fff; border: 1px solid #eee;
-    border-radius: 8px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column;
+    border-radius: 8px; overflow: hidden; cursor: pointer;
 }
 .sidebar-cat-card img { width: 100%; height: 95px; object-fit: cover; }
-.sidebar-cat-card p { font-size: 9px; font-weight: bold; text-align: center; margin: auto 0; }
+.sidebar-cat-card p { font-size: 9px; font-weight: bold; text-align: center; margin-top: 5px; }
 
 /* =============================================================
-   13. FOOTER LOGIC (Note #5)
+   13. FOOTER & MODALS (Fix Note #4 & #5)
    ============================================================= */
-.site-footer { background: #111; color: #fff; padding: 40px 5%; margin-top: 60px; }
+.site-footer { background: #111; color: #fff; padding: 40px 5%; margin-top: 50px; }
 .footer-nav-centered { display: flex; justify-content: center; gap: 30px; font-size: 13px; margin-bottom: 15px; }
-.footer-nav-centered span { cursor: pointer; }
-.footer-copyright { padding-left: 3ch; font-size: 11px; opacity: 0.6; }
+.footer-copyright { padding-left: 3ch; font-size: 11px; opacity: 0.6; margin-top: 5px; }
+
+.text-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 9999; align-items: center; justify-content: center; }
+.text-modal.active { display: flex; }
+.modal-box { background: #fff; color: #333; padding: 30px; border-radius: 12px; width: 90%; max-width: 400px; }
 
 /* =============================================================
-   14. MOBILE COMPREHENSIVE FIXES (Notes #7 - #10)
+   14. MOBILE COMPREHENSIVE (Fix Notes #7 - #10)
    ============================================================= */
 @media (max-width: 1024px) {
-    /* Note #7: Header Modals on one line */
-    .header-nav { display: flex; flex-wrap: nowrap; gap: 10px; overflow-x: auto; font-size: 0.75rem; }
+    .product-main-layout { flex-direction: column; }
+    .master-sidebar { width: 100%; flex-direction: column; }
     
-    /* Note #8: Title on one line */
-    .hero-title, .logo-group h1 { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-    /* Note #9: Red Arrows Corners & Small Size */
+    /* Header modals on one line */
+    .header-nav { display: flex; flex-wrap: nowrap; gap: 12px; white-space: nowrap; font-size: 12px; }
+    
+    /* Red Arrow Corners & Small Size */
     .nav-arrow { width: 24px !important; height: 24px !important; font-size: 10px !important; bottom: 2px !important; }
     .nav-arrow.left { left: 2px !important; }
     .nav-arrow.right { right: 2px !important; }
 
-    /* Note #10: Symmetrical Card sizing */
-    .product-card, .sidebar-cat-card { 
-        width: 140px !important; height: 140px !important; 
-        flex: 0 0 140px !important; 
-    }
-    
-    .master-sidebar { flex-direction: column; width: 100%; }
-    .category-column { flex-direction: row; overflow-x: auto; gap: 10px; width: 100%; }
+    /* Category Column to horizontal row on mobile */
+    .category-column { flex-direction: row; overflow-x: auto; width: 100%; }
+    .sidebar-cat-card, .similar-item-card { width: 140px !important; height: 140px !important; flex: 0 0 140px; }
 }
 
-/* Product Detail UI consistency */
-.hero-display { background: #fff; border: 1px solid #eee; border-radius: 12px; height: 45vh; display: flex; justify-content: center; align-items: center; overflow: hidden; }
-.hero-display img { max-width: 95%; max-height: 95%; object-fit: contain; }
-.info-horizontal-bar { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 20px; }
-.p-description-text { font-size: 12px; color: #555; margin-top: 8px; line-height: 1.6; }
+/* Horizontal Row Logic */
+.similar-wrapper { position: relative; padding-bottom: 40px; }
+.horizontal-scroll { display: flex; gap: 15px; overflow-x: auto; scrollbar-width: none; }
+.nav-arrow { position: absolute; bottom: 0; width: 30px; height: 30px; background: red !important; border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; }
+.nav-arrow.left { left: 0; }
+.nav-arrow.right { right: 0; }
