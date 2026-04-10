@@ -4,15 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AffilixS | Product View</title>
-    <link rel="stylesheet" href="CSS/styles.css?v=2.0">
+    <link rel="stylesheet" href="CSS/styles.css?v=2.1">
 </head>
 <body class="product-page">
-
-<div id="visionModal" class="text-modal" onclick="closeM(event, 'visionModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('visionModal').classList.remove('active')">&times;</span><h2>Our Vision</h2><p>AffilixS curates refined products for modern living.</p></div></div>
-<div id="insightsModal" class="text-modal" onclick="closeM(event, 'insightsModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('insightsModal').classList.remove('active')">&times;</span><h2>Insights</h2><p>Latest trends and modern insights.</p></div></div>
-<div id="contactModal" class="text-modal" onclick="closeM(event, 'contactModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('contactModal').classList.remove('active')">&times;</span><h2>Contact</h2><p>Contact us at support@affilixs.com</p></div></div>
-<div id="privacyModal" class="text-modal" onclick="closeM(event, 'privacyModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('privacyModal').classList.remove('active')">&times;</span><h2>Privacy Policy</h2><p>Your privacy is our priority.</p></div></div>
-<div id="disclaimerModal" class="text-modal" onclick="closeM(event, 'disclaimerModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('disclaimerModal').classList.remove('active')">&times;</span><h2>Affiliate Disclaimer</h2><p>Links may earn commission.</p></div></div>
 
 <header class="site-header">
     <div class="logo-group">
@@ -21,9 +15,6 @@
     </div>
     <nav class="header-nav">
         <a href="index.html" style="text-decoration:none; color:inherit; font-size:0.85rem;">home</a>
-        <span onclick="openM('visionModal')">Vision</span>
-        <span onclick="openM('insightsModal')">Insights</span>
-        <span onclick="openM('contactModal')">Contact</span>
     </nav>
 </header>
 
@@ -33,32 +24,29 @@
             <img id="heroImage" src="" alt="Product Hero" style="max-width:95%; max-height:95%; object-fit:contain;">
         </section>
 
-        <section class="info-horizontal-bar" style="background:#fff; border:1px solid #ddd; border-radius:8px; overflow:hidden; margin-bottom:20px; padding:15px;">
-            <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:20px;">
-                <div style="flex:1; min-width:200px;">
-                    <div style="font-size:13px;"><b>FULL NAME:</b> <span id="pName">---</span></div>
-                    <div style="font-size:12px; color:#555; margin-top:8px; line-height:1.5;" id="pDesc">---</div>
-                </div>
-                
-                <div class="action-cluster" style="min-width:250px;">
-                    <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:5px;"><b>Rate:</b> ★★★★★</div>
-                    <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:10px;"><b>Rank:</b> #1 Trend</div>
-                    <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid #eee; padding-top:10px;">
-                        <span style="font-size:14px; font-weight:bold;">Price: <span style="color:red;" id="pPrice">---</span></span>
-                        <div style="display:flex; gap:8px;">
-                            <a id="buyBtn" href="#" target="_blank" class="twin-btn buy">BUY NOW</a>
-                            <button onclick="window.location.href='index.html'" class="twin-btn back">GO BACK</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <section class="info-horizontal-bar" style="background:#fff; border:1px solid #ddd; border-radius:8px; padding:15px; margin-bottom:20px;">
+            <div style="font-size:13px;"><b>FULL NAME:</b> <span id="pName">---</span></div>
+            <div style="font-size:12px; color:#555; margin-top:8px; line-height:1.5;" id="pDesc">---</div>
         </section>
 
         <div id="productRowsContainer"></div>
     </div>
 
-    <aside class="right-sidebar">
-        <div class="category-vertical-stack">
+    <aside class="master-sidebar">
+        
+        <div class="action-column">
+            <div class="tight-stats">
+                <p><b>Rate:</b> ★★★★★</p>
+                <p><b>Rank:</b> #1 Trend</p>
+                <p class="price-text">Price: <span id="pPrice">---</span></p>
+            </div>
+            <div class="button-stack">
+                <a id="buyBtn" href="#" target="_blank" class="twin-btn buy">BUY NOW</a>
+                <button onclick="window.location.href='index.html'" class="twin-btn back">GO BACK</button>
+            </div>
+        </div>
+
+        <div class="category-column">
             <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/cat-tech.jpg"><p>TECH</p></div>
             <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/Home.jpg"><p>HOME</p></div>
             <div class="sidebar-cat-card" onclick="window.location.href='index.html'"><img src="images/Fittness.jpg"><p>FITNESS</p></div>
@@ -68,21 +56,16 @@
     </aside>
 </main>
 
-<footer class="site-footer" style="background:#111; color:#fff; padding:30px 5%; margin-top:50px;">
-    <div style="display:flex; gap:20px; margin-bottom:15px; font-size:12px;">
-        <span onclick="openM('privacyModal')" style="cursor:pointer;">Privacy</span>
-        <span onclick="openM('disclaimerModal')" style="cursor:pointer;">Disclaimer</span>
-        <span onclick="openM('contactModal')" style="cursor:pointer;">Contact</span>
+<footer class="site-footer">
+    <div class="footer-links">
+        <span onclick="openM('privacyModal')">Privacy</span>
+        <span onclick="openM('disclaimerModal')">Disclaimer</span>
+        <span onclick="openM('contactModal')">Contact</span>
     </div>
-    <p style="margin:0; font-size:11px; opacity:0.5;">&copy; 2026 AffilixS | All Rights Reserved</p>
+    <p>&copy; 2026 AffilixS</p>
 </footer>
 
 <script>
-    window.addEventListener('keydown', (e) => { if(e.key === "Escape") window.location.href = 'index.html'; });
-    function openM(id) { document.getElementById(id).classList.add('active'); }
-    function closeM(e, id) { if(e.target.id === id) document.getElementById(id).classList.remove('active'); }
-    function scrollX(id, dir) { document.getElementById(id).scrollBy({ left: dir * 300, behavior: 'smooth' }); }
-
     async function init() {
         try {
             const res = await fetch("Data/products.json");
@@ -103,7 +86,7 @@
                 const rowId = "row-similar";
                 const wrapper = document.createElement("div");
                 wrapper.className = "similar-wrapper";
-                wrapper.innerHTML = `<h2 style="font-size:1rem; margin-bottom:15px;">Similar Discoveries</h2>
+                wrapper.innerHTML = `<h2 style="font-size:1rem; margin-bottom:10px;">Similar Discoveries</h2>
                     <div class="horizontal-scroll" id="${rowId}"></div>
                     <button class="nav-arrow left" onclick="scrollX('${rowId}', -1)">❮</button>
                     <button class="nav-arrow right" onclick="scrollX('${rowId}', 1)">❯</button>`;
@@ -119,6 +102,7 @@
             }
         } catch (e) { console.error(e); }
     }
+    function scrollX(id, dir) { document.getElementById(id).scrollBy({ left: dir * 300, behavior: 'smooth' }); }
     document.addEventListener("DOMContentLoaded", init);
 </script>
 </body>

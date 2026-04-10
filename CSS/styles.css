@@ -302,83 +302,74 @@ footer {
 }
 
 /* =============================================================
-   11. TWIN BUTTONS & ACTION CLUSTER
+   11. MASTER SIDEBAR: TWO-COLUMN DESIGN
    ============================================================= */
-.twin-btn {
-    display: inline-block;
-    white-space: nowrap; /* Prevents text splitting into 2 lines */
-    padding: 10px 16px;
-    font-size: 11px;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 4px;
-    text-align: center;
-    min-width: 90px; /* Ensures buttons are symmetrical in size */
-    cursor: pointer;
-    border: none;
+.product-main-layout {
+    display: flex; gap: 20px; padding: 20px 5%; align-items: flex-start;
 }
-.twin-btn.buy { background: red; color: white; }
-.twin-btn.back { background: #444; color: white; }
+.main-display-area { flex: 1; min-width: 0; }
 
-/* =============================================================
-   12. SYMMETRICAL CATEGORY CARDS (Note #3)
-   ============================================================= */
-.right-sidebar { flex: 0 0 220px; }
+/* The container holding both columns on the right */
+.master-sidebar {
+    display: flex; gap: 15px; width: 420px; /* Fixed width to prevent full-screen stretching */
+}
+
+/* Sidebar Left: Stats & Buttons */
+.action-column {
+    flex: 1; background: #fff; border: 1px solid #eee; 
+    border-radius: 12px; padding: 15px; display: flex; flex-direction: column; gap: 20px;
+}
+.tight-stats p { margin: 0 0 8px 0; font-size: 13px; border-bottom: 1px solid #f9f9f9; padding-bottom: 4px; }
+.price-text { color: red; font-weight: bold; font-size: 15px !important; border: none !important; }
+
+.button-stack { display: flex; flex-direction: column; gap: 10px; }
+.twin-btn {
+    width: 100%; padding: 12px 0; border-radius: 6px; font-weight: bold;
+    font-size: 11px; text-align: center; border: none; cursor: pointer; text-decoration: none;
+}
+.buy { background: red; color: white; }
+.back { background: #444; color: white; }
+
+/* Sidebar Right: Category Vertical Stack */
+.category-column { flex: 0 0 140px; display: flex; flex-direction: column; gap: 10px; }
 
 .sidebar-cat-card {
-    width: 100%;
-    aspect-ratio: 1 / 1; /* Makes card a perfect square */
-    background: #fff;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    margin-bottom: 12px;
-    overflow: hidden;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
+    width: 140px; height: 140px; /* Forces symmetrical square */
+    background: #fff; border: 1px solid #eee; border-radius: 8px;
+    overflow: hidden; cursor: pointer; display: flex; flex-direction: column;
 }
-
-.sidebar-cat-card img {
-    width: 100%;
-    height: 75%; /* Keeps image area consistent */
-    object-fit: cover;
-}
-
-.sidebar-cat-card p {
-    font-size: 10px;
-    font-weight: bold;
-    text-align: center;
-    margin: auto 0;
-}
+.sidebar-cat-card img { width: 100%; height: 100px; object-fit: cover; }
+.sidebar-cat-card p { font-size: 10px; font-weight: bold; text-align: center; margin: auto 0; }
 
 /* =============================================================
-   13. PRODUCT ROW & ARROWS REPAIR
+   12. HORIZONTAL ROW & CORNER ARROWS
    ============================================================= */
-.similar-wrapper { position: relative; width: 100%; padding-bottom: 40px; margin-top: 20px; }
-.horizontal-scroll {
-    display: flex; gap: 15px; overflow-x: auto; 
-    scrollbar-width: none; padding-bottom: 5px;
-}
+.similar-wrapper { position: relative; padding-bottom: 40px; margin-top: 20px; }
+.horizontal-scroll { display: flex; gap: 15px; overflow-x: auto; scrollbar-width: none; }
 .horizontal-scroll::-webkit-scrollbar { display: none; }
 
-.similar-item-card { 
-    flex: 0 0 160px; background: #fff; border: 1px solid #eee; 
-    border-radius: 8px; overflow: hidden; cursor: pointer; 
-}
+.similar-item-card { flex: 0 0 160px; background: #fff; border: 1px solid #eee; border-radius: 8px; overflow: hidden; }
 .similar-item-card img { width: 100%; height: 110px; object-fit: cover; }
 .similar-item-card p { font-size: 10px; font-weight: bold; padding: 10px; text-align: center; margin: 0; }
 
 .nav-arrow {
-    position: absolute; bottom: 0; width: 32px; height: 32px;
-    background: red !important; color: white; border: none; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center; z-index: 10;
+    position: absolute; bottom: 0; width: 30px; height: 30px;
+    background: red !important; color: #fff; border: none; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; z-index: 5;
 }
 .nav-arrow.left { left: 0; }
 .nav-arrow.right { right: 0; }
 
-/* Mobile logic */
+/* =============================================================
+   13. FOOTER & MOBILE
+   ============================================================= */
+.site-footer { background: #111; color: #fff; padding: 30px 5%; margin-top: 50px; text-align: left; }
+.footer-links { display: flex; gap: 20px; margin-bottom: 10px; font-size: 12px; }
+.footer-links span { cursor: pointer; }
+
 @media (max-width: 1024px) {
     .product-main-layout { flex-direction: column; }
-    .right-sidebar { width: 100%; display: flex; flex-direction: row; overflow-x: auto; gap: 10px; }
-    .sidebar-cat-card { flex: 0 0 120px; aspect-ratio: 1/1; }
+    .master-sidebar { width: 100%; flex-direction: column; }
+    .category-column { flex-direction: row; width: 100%; overflow-x: auto; }
+    .sidebar-cat-card { flex: 0 0 120px; height: 120px; }
 }
