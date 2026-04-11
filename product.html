@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AffilixS | Product View</title>
-    <link rel="stylesheet" href="CSS/styles.css?v=2.5">
+    <link rel="stylesheet" href="CSS/styles.css?v=2.6">
 </head>
 <body class="product-page">
 
@@ -74,11 +74,7 @@
 </footer>
 
 <script>
-    // Note #2: ESC logic
-    window.addEventListener('keydown', (e) => { 
-        if(e.key === "Escape") window.location.href = 'index.html'; 
-    });
-
+    window.addEventListener('keydown', (e) => { if(e.key === "Escape") window.location.href = 'index.html'; });
     function openM(id) { document.getElementById(id).classList.add('active'); }
     function closeM(e, id) { if(e.target.id === id) document.getElementById(id).classList.remove('active'); }
     function scrollX(id, dir) { document.getElementById(id).scrollBy({ left: dir * 300, behavior: 'smooth' }); }
@@ -112,7 +108,6 @@
                 similar.forEach(item => {
                     const card = document.createElement("div");
                     card.className = "prod-card-small";
-                    // Note #3: Character limit logic (17 chars)
                     let name = item.shortName;
                     if(name.length > 17) name = name.substring(0, 14) + "...";
                     card.innerHTML = `<img src="${item.image}"><p>${name}</p>`;

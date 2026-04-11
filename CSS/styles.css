@@ -302,69 +302,84 @@ footer {
 }
 
 /* =============================================================
-   11. GLOBAL POINTER & HEADER (Note #1 & #6)
+   11. LAYOUT & HERO CENTERING
    ============================================================= */
-/* Note #6: Force Index Finger on everything clickable */
 [onclick], a, button, .cat-square, .prod-card-small { cursor: pointer !important; }
 
-.header-nav { display: flex; gap: 20px; }
-.nav-item { 
-    color: #fff !important; 
-    text-decoration: none !important; 
-    font-size: 0.85rem; 
-    text-transform: lowercase; 
+.product-main-layout { 
+    display: flex; 
+    gap: 30px; 
+    padding: 20px 5%; 
+    align-items: flex-start; /* Ensures sidebar stays at the TOP */
+    max-width: 1600px;
+    margin: 0 auto;
 }
 
+.main-display-area { flex: 1; min-width: 0; }
+
+.hero-display { 
+    background: #fff; 
+    border: 1px solid #eee; 
+    border-radius: 12px; 
+    height: 45vh; 
+    display: flex; 
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+    overflow: hidden; 
+    margin-bottom: 20px;
+}
+.hero-display img { max-width: 95%; max-height: 95%; object-fit: contain; }
+
 /* =============================================================
-   12. SIDEBAR LOCK
+   12. SIDEBAR TOP-RIGHT LOCK
    ============================================================= */
-.master-sidebar { display: flex; gap: 15px; width: 340px; }
-.sidebar-action-col { flex: 0 0 160px; background: #fff; border: 1px solid #eee; border-radius: 10px; padding: 12px; height: fit-content; }
+.master-sidebar { 
+    display: flex; 
+    gap: 15px; 
+    width: 330px; 
+    flex-shrink: 0; /* Prevents sidebar from being squished or moved */
+}
+
+.sidebar-action-col { flex: 0 0 155px; background: #fff; border: 1px solid #eee; border-radius: 10px; padding: 12px; }
 .tight-stats p { margin: 0 0 8px 0; font-size: 12px; border-bottom: 1px solid #f9f9f9; }
 .price-val { color: red; font-weight: bold; border: none !important; }
-.sidebar-btns { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
 
-.t-btn { width: 100%; padding: 10px 0; border: none; border-radius: 4px; font-weight: bold; font-size: 11px; text-align: center; text-decoration: none; }
-.buy-p { background: red; color: #fff; }
-.back-p { background: #444; color: #fff; }
-
-.sidebar-cat-col { flex: 0 0 130px; display: flex; flex-direction: column; gap: 5px; }
+.sidebar-cat-col { flex: 0 0 130px; display: flex; flex-direction: column; gap: 4px; }
 .cat-square { width: 130px; height: 130px; background: #fff; border: 1px solid #eee; border-radius: 8px; overflow: hidden; }
-.cat-square img { width: 100%; height: 95px; object-fit: cover; }
-.cat-square p { font-size: 9px; font-weight: bold; text-align: center; margin: 6px 0; }
 
 /* =============================================================
-   13. PRODUCT ROW & ARROWS (Note #4)
+   13. PRODUCT ROW & ARROWS
    ============================================================= */
 .row-wrapper { position: relative; padding-bottom: 45px; margin-top: 30px; }
 .row-scroll { display: flex; gap: 15px; overflow-x: auto; scrollbar-width: none; }
-.row-scroll::-webkit-scrollbar { display: none; }
 
-.prod-card-small { flex: 0 0 160px; height: 155px; background: #fff; border: 1px solid #eee; border-radius: 8px; overflow: hidden; }
-.prod-card-small img { width: 100%; height: 115px; object-fit: cover; }
-.prod-card-small p { font-size: 10px; text-align: center; margin: 8px 0; font-weight: bold; }
-
-/* Note #4: Arrows attached to lower corners */
 .arrow-btn { 
     position: absolute; bottom: 0; width: 30px; height: 30px; 
-    background: red !important; border-radius: 50%; color: #fff; 
-    border: none; display: flex; align-items: center; justify-content: center; z-index: 10;
+    background: red !important; border-radius: 50%; color: #fff; border: none; 
 }
 .arrow-btn.l { left: 0; }
 .arrow-btn.r { right: 0; }
 
 /* =============================================================
-   14. FOOTER INDENT & HEIGHT (Note #5)
+   14. FOOTER TIGHTENING (Note #5)
    ============================================================= */
-.site-footer { background: #111; color: #fff; padding: 15px 5%; margin-top: 50px; }
-.footer-links-row { display: flex; justify-content: center; gap: 30px; font-size: 12px; margin-bottom: 8px; }
+.site-footer { 
+    background: #111; 
+    color: #fff; 
+    padding: 10px 5%; /* Tightened height (1 line of padding top/bottom) */
+    margin-top: 40px; 
+}
+.footer-links-row { 
+    display: flex; 
+    justify-content: center; 
+    gap: 30px; 
+    font-size: 12px; 
+    margin-bottom: 2px; /* Pulls copyright closer */
+}
 .copyright-line { 
-    padding-left: 2ch; /* 2 character indent */
-    font-size: 10px; 
-    opacity: 0.7; 
+    padding-left: 2ch; /* Exact 2 character indent */
+    font-size: 12px;   /* Unified font size */
+    opacity: 0.8; 
 }
 
-/* Modals Core */
-.text-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 9999; align-items: center; justify-content: center; }
-.text-modal.active { display: flex; }
-.modal-box { background: #fff; color: #111; padding: 30px; border-radius: 12px; width: 90%; max-width: 400px; }
+.nav-item { color: #fff !important; text-decoration: none; font-size: 0.85rem; text-transform: lowercase; }
