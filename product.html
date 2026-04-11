@@ -4,9 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AffilixS | Product View</title>
-    <link rel="stylesheet" href="CSS/styles.css?v=2.9">
+    <link rel="stylesheet" href="CSS/styles.css?v=3.0">
 </head>
 <body class="product-page">
+
+<div id="visionModal" class="text-modal" onclick="closeM(event, 'visionModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('visionModal').classList.remove('active')">&times;</span><h2>Our Vision</h2><p>AffilixS curates refined products for modern living.</p></div></div>
+<div id="insightsModal" class="text-modal" onclick="closeM(event, 'insightsModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('insightsModal').classList.remove('active')">&times;</span><h2>Insights</h2><p>Latest trends and modern insights.</p></div></div>
+<div id="contactModal" class="text-modal" onclick="closeM(event, 'contactModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('contactModal').classList.remove('active')">&times;</span><h2>Contact</h2><p>Contact us at support@affilixs.com</p></div></div>
+<div id="privacyModal" class="text-modal" onclick="closeM(event, 'privacyModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('privacyModal').classList.remove('active')">&times;</span><h2>Privacy Policy</h2><p>Your privacy is our priority.</p></div></div>
+<div id="disclaimerModal" class="text-modal" onclick="closeM(event, 'disclaimerModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('disclaimerModal').classList.remove('active')">&times;</span><h2>Affiliate Disclaimer</h2><p>Links may earn commission.</p></div></div>
 
 <header class="site-header">
     <div class="logo-group">
@@ -14,7 +20,7 @@
         <h1>AffilixS</h1>
     </div>
     <nav class="header-nav">
-        <a href="index.html" class="nav-item">home</a>
+        <a href="index.html" class="nav-item home-link">home</a>
         <span class="nav-item" onclick="openM('visionModal')">vision</span>
         <span class="nav-item" onclick="openM('insightsModal')">insights</span>
         <span class="nav-item" onclick="openM('contactModal')">contact</span>
@@ -68,9 +74,12 @@
 </footer>
 
 <script>
-    // System Handlers
     window.addEventListener('keydown', (e) => { if(e.key === "Escape") window.location.href = 'index.html'; });
-    function scrollX(id, dir) { document.getElementById(id).scrollBy({ left: dir * 300, behavior: 'smooth' }); }
+    
+    // Note #2: Modal Functions
+    function openM(id) { document.getElementById(id).classList.add('active'); }
+    function closeM(e, id) { if(e.target.id === id) document.getElementById(id).classList.remove('active'); }
+    function scrollX(id, dir) { document.getElementById(id).scrollBy({ left: dir * 400, behavior: 'smooth' }); }
 
     async function init() {
         try {
@@ -86,12 +95,14 @@
             document.getElementById("buyBtn").href = p.affiliateLink;
 
             const container = document.getElementById("productRowsContainer");
+            // Note #4: Strict Category Filtering
             const similar = all.filter(x => x.category === p.category && x.id !== p.id);
 
             if (similar.length > 0) {
                 const rowId = "row-similar";
                 const wrap = document.createElement("div");
                 wrap.className = "row-wrapper";
+                // Note #6: Both arrows forced in HTML
                 wrap.innerHTML = `<h2 class="row-title">Similar Discoveries</h2>
                     <div class="row-scroll" id="${rowId}"></div>
                     <button class="arrow-btn l" onclick="scrollX('${rowId}', -1)">❮</button>

@@ -196,7 +196,8 @@ html, body {
     background: rgba(0, 0, 0, 0.85);
     justify-content: center;
     align-items: center;
-    z-index: 99999 !important; /* Sits above everything */
+    z-index: 10000 !important; /* Sits above everything */
+    align-items: center;
     pointer-events: auto;
 }
 
@@ -206,6 +207,7 @@ html, body {
 
 .modal-box {
     background: #fff;
+    color: #000;
     padding: 25px;
     border-radius: 12px;
     width: 85%;
@@ -306,15 +308,26 @@ footer {
    ============================================================= */
 .product-main-layout {
     display: flex;
-       */ justify-content: space-between; */
+    justify-content: space-between;
     gap: 30px;
     padding: 20px 5%;
     align-items: flex-start;
     justify-content: space-between;
+    overflow: hidden; /* Prevent page stretching */
+}
+
+.main-display-area {
+ 
+    flex: 1;
+ 
+    min-width: 0;
+ 
+    max-width: calc(100% - 360px); /* Forces space for sidebar */
+
 }
 
 .master-sidebar {
-    display: flex !important;
+    display: flex !important; visibility: visivble !important; opacity: 1 !important;
     flex-direction: row !important; /* Forces side-by-side */
     gap: 15px;
     width: 330px;
@@ -340,6 +353,18 @@ footer {
    12. IMAGE FIX: PREVENT "ZOOMED" LOOK
    ============================================================= */
 /* Main Hero */
+.hero-display {
+ 
+    background: #fff; border: 1px solid #eee; border-radius: 12px;
+ 
+    height: 450px; width: 100%;
+
+     display: flex; justify-content: center; align-items: center;
+ 
+    overflow: hidden; margin-bottom: 20px;
+ 
+}
+
 .hero-display img {
     max-width: 90%;
     max-height: 90%;
@@ -380,7 +405,7 @@ footer {
 /* =============================================================
    13. BUTTONS & CATEGORY DIMENSIONS
    ============================================================= */
-.t-btn { width: 100%; padding: 12px 0; border: none; border-radius: 4px; font-weight: bold; font-size: 11px; text-align: center; cursor: pointer !important; text-decoration: none; }
+.t-btn { display: block; width: 100%; padding: 12px 0; border: none; border-radius: 4px; font-weight: bold; font-size: 11px; text-align: center; cursor: pointer !important; text-decoration: none; }
 .buy-now { background: red !important; color: #fff; margin-bottom: 8px; }
 .go-back { background: black !important; color: #fff; }
 
@@ -401,12 +426,20 @@ footer {
    14. ARROW POSITIONS & FOOTER
    ============================================================= */
 .row-wrapper { position: relative; padding-bottom: 45px; margin-top: 30px; width: 100%; }
-.row-scroll { display: flex; gap: 15px; overflow-x: auto; scrollbar-width: none; }
-.arrow-btn { position: absolute; bottom: 0; width: 32px; height: 32px; background: red !important; border-radius: 50%; color: #fff; border: none; display: flex; align-items: center; justify-content: center; z-index: 10; cursor: pointer !important; }
+.row-scroll {
+    display: flex; gap: 15px; overflow-x: auto;
+    scrollbar-width: none; -ms-overflow-style: none;
+}
+.row-scroll::-webkit-scrollbar { display: none; }
+
+.arrow-btn { position: absolute; bottom: 0; width: 32px; height: 32px; background: red !important; border-radius: 50%; color: #fff; border: none; display: flex; align-items: center; justify-content: center; z-index: 99; cursor: pointer !important; }
 .arrow-btn.l { left: 0; }
 .arrow-btn.r { right: 0; }
 
 [onclick], a, button { cursor: pointer !important; }
+.home-link { color: #fff !important; text-decoration: none; }
+
+.nav-item { color: #fff; text-transform: lowercase; font-size: 0.85rem; }
 .site-footer { background: #111; color: #fff; padding: 10px 5%; margin-top: 40px; }
 .footer-links-row { display: flex; justify-content: center; gap: 30px; font-size: 12px; margin-bottom: 2px; }
 .copyright-line { padding-left: 2ch; font-size: 12px; opacity: 0.8; }
