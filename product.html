@@ -4,15 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AffilixS | Product View</title>
-    <link rel="stylesheet" href="CSS/styles.css?v=2.6">
+    <link rel="stylesheet" href="CSS/styles.css?v=2.7">
 </head>
 <body class="product-page">
-
-<div id="visionModal" class="text-modal" onclick="closeM(event, 'visionModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('visionModal').classList.remove('active')">&times;</span><h2>Our Vision</h2><p>AffilixS curates refined products for modern living.</p></div></div>
-<div id="insightsModal" class="text-modal" onclick="closeM(event, 'insightsModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('insightsModal').classList.remove('active')">&times;</span><h2>Insights</h2><p>Latest trends and modern insights.</p></div></div>
-<div id="contactModal" class="text-modal" onclick="closeM(event, 'contactModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('contactModal').classList.remove('active')">&times;</span><h2>Contact</h2><p>Contact us at support@affilixs.com</p></div></div>
-<div id="privacyModal" class="text-modal" onclick="closeM(event, 'privacyModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('privacyModal').classList.remove('active')">&times;</span><h2>Privacy Policy</h2><p>Your privacy is our priority.</p></div></div>
-<div id="disclaimerModal" class="text-modal" onclick="closeM(event, 'disclaimerModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('disclaimerModal').classList.remove('active')">&times;</span><h2>Affiliate Disclaimer</h2><p>Links may earn commission.</p></div></div>
 
 <header class="site-header">
     <div class="logo-group">
@@ -21,9 +15,9 @@
     </div>
     <nav class="header-nav">
         <a href="index.html" class="nav-item">home</a>
-        <span class="nav-item" onclick="openM('visionModal')">Vision</span>
-        <span class="nav-item" onclick="openM('insightsModal')">Insights</span>
-        <span class="nav-item" onclick="openM('contactModal')">Contact</span>
+        <span class="nav-item" onclick="openM('visionModal')">vision</span>
+        <span class="nav-item" onclick="openM('insightsModal')">insights</span>
+        <span class="nav-item" onclick="openM('contactModal')">contact</span>
     </nav>
 </header>
 
@@ -49,8 +43,8 @@
                 <p class="price-val">Price: <span id="pPrice">---</span></p>
             </div>
             <div class="sidebar-btns">
-                <a id="buyBtn" href="#" target="_blank" class="t-btn buy-p">BUY NOW</a>
-                <button onclick="window.location.href='index.html'" class="t-btn back-p">GO BACK</button>
+                <a id="buyBtn" href="#" target="_blank" class="t-btn buy-now">BUY NOW</a>
+                <button onclick="window.location.href='index.html'" class="t-btn go-back">GO BACK</button>
             </div>
         </div>
 
@@ -74,10 +68,8 @@
 </footer>
 
 <script>
+    // Escape to go home
     window.addEventListener('keydown', (e) => { if(e.key === "Escape") window.location.href = 'index.html'; });
-    function openM(id) { document.getElementById(id).classList.add('active'); }
-    function closeM(e, id) { if(e.target.id === id) document.getElementById(id).classList.remove('active'); }
-    function scrollX(id, dir) { document.getElementById(id).scrollBy({ left: dir * 300, behavior: 'smooth' }); }
 
     async function init() {
         try {
@@ -99,7 +91,7 @@
                 const rowId = "row-similar";
                 const wrap = document.createElement("div");
                 wrap.className = "row-wrapper";
-                wrap.innerHTML = `<h2 class="row-title">Similar Discoveries</h2>
+                wrap.innerHTML = `<h2 class="row-title" style="font-size:1rem; margin-bottom:10px;">Similar Discoveries</h2>
                     <div class="row-scroll" id="${rowId}"></div>
                     <button class="arrow-btn l" onclick="scrollX('${rowId}', -1)">❮</button>
                     <button class="arrow-btn r" onclick="scrollX('${rowId}', 1)">❯</button>`;
@@ -117,6 +109,7 @@
             }
         } catch (e) { console.error(e); }
     }
+    function scrollX(id, dir) { document.getElementById(id).scrollBy({ left: dir * 300, behavior: 'smooth' }); }
     document.addEventListener("DOMContentLoaded", init);
 </script>
 </body>

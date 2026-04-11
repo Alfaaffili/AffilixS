@@ -331,55 +331,82 @@ footer {
 .hero-display img { max-width: 95%; max-height: 95%; object-fit: contain; }
 
 /* =============================================================
-   12. SIDEBAR TOP-RIGHT LOCK
+   11. TWIN BUTTONS (Note: Red/Black & Symmetrical Style)
    ============================================================= */
-.master-sidebar { 
-    display: flex; 
-    gap: 15px; 
-    width: 330px; 
-    flex-shrink: 0; /* Prevents sidebar from being squished or moved */
+.t-btn { 
+    display: block;
+    width: 100%; 
+    padding: 12px 0; 
+    border: none; 
+    border-radius: 4px; 
+    font-weight: bold; 
+    font-size: 11px; 
+    text-align: center; 
+    text-decoration: none; 
+    cursor: pointer !important;
 }
-
-.sidebar-action-col { flex: 0 0 155px; background: #fff; border: 1px solid #eee; border-radius: 10px; padding: 12px; }
-.tight-stats p { margin: 0 0 8px 0; font-size: 12px; border-bottom: 1px solid #f9f9f9; }
-.price-val { color: red; font-weight: bold; border: none !important; }
-
-.sidebar-cat-col { flex: 0 0 130px; display: flex; flex-direction: column; gap: 4px; }
-.cat-square { width: 130px; height: 130px; background: #fff; border: 1px solid #eee; border-radius: 8px; overflow: hidden; }
+.buy-now { background: red !important; color: #fff; margin-bottom: 8px; }
+.go-back { background: black !important; color: #fff; }
 
 /* =============================================================
-   13. PRODUCT ROW & ARROWS
+   12. CATEGORY SYMMETRY (Strict Square Lock)
    ============================================================= */
-.row-wrapper { position: relative; padding-bottom: 45px; margin-top: 30px; }
-.row-scroll { display: flex; gap: 15px; overflow-x: auto; scrollbar-width: none; }
+.sidebar-cat-col { flex: 0 0 130px; display: flex; flex-direction: column; gap: 4px; }
 
+.cat-square { 
+    width: 130px; 
+    height: 130px; 
+    background: #fff; 
+    border: 1px solid #eee; 
+    border-radius: 8px; 
+    overflow: hidden; 
+    display: flex;
+    flex-direction: column;
+}
+.cat-square img { width: 100%; height: 95px; object-fit: cover; }
+.cat-square p { font-size: 9px; font-weight: bold; text-align: center; margin: auto 0; color: #000; }
+
+/* =============================================================
+   13. PRODUCT ROW & ARROWS (Hugging lower corners)
+   ============================================================= */
+.row-wrapper { 
+    position: relative; 
+    padding-bottom: 40px; /* Space for arrows at the bottom */
+    margin-top: 30px; 
+    width: 100%;
+}
+.row-scroll { display: flex; gap: 15px; overflow-x: auto; scrollbar-width: none; }
+.row-scroll::-webkit-scrollbar { display: none; }
+
+.prod-card-small { flex: 0 0 160px; height: 155px; background: #fff; border: 1px solid #eee; border-radius: 8px; overflow: hidden; }
+
+/* Arrows pinned to the bottom corners of the row container */
 .arrow-btn { 
-    position: absolute; bottom: 0; width: 30px; height: 30px; 
-    background: red !important; border-radius: 50%; color: #fff; border: none; 
+    position: absolute; 
+    bottom: 0; 
+    width: 32px; 
+    height: 32px; 
+    background: red !important; 
+    border-radius: 50%; 
+    color: #fff; 
+    border: none; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    z-index: 10;
 }
 .arrow-btn.l { left: 0; }
 .arrow-btn.r { right: 0; }
 
 /* =============================================================
-   14. FOOTER TIGHTENING (Note #5)
+   14. FOOTER & HERO CENTERING
    ============================================================= */
-.site-footer { 
-    background: #111; 
-    color: #fff; 
-    padding: 10px 5%; /* Tightened height (1 line of padding top/bottom) */
-    margin-top: 40px; 
+.hero-display { 
+    background: #fff; border: 1px solid #eee; border-radius: 12px; height: 45vh; 
+    display: flex; justify-content: center; align-items: center; overflow: hidden; 
 }
-.footer-links-row { 
-    display: flex; 
-    justify-content: center; 
-    gap: 30px; 
-    font-size: 12px; 
-    margin-bottom: 2px; /* Pulls copyright closer */
-}
-.copyright-line { 
-    padding-left: 2ch; /* Exact 2 character indent */
-    font-size: 12px;   /* Unified font size */
-    opacity: 0.8; 
-}
+.hero-display img { max-width: 95%; max-height: 95%; object-fit: contain; }
 
-.nav-item { color: #fff !important; text-decoration: none; font-size: 0.85rem; text-transform: lowercase; }
+.site-footer { background: #111; color: #fff; padding: 10px 5%; margin-top: 40px; }
+.footer-links-row { display: flex; justify-content: center; gap: 30px; font-size: 12px; margin-bottom: 2px; }
+.copyright-line { padding-left: 2ch; font-size: 12px; opacity: 0.8; }
