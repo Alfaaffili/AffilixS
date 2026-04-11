@@ -302,110 +302,98 @@ footer {
 }
 
 /* =============================================================
-   11. LAYOUT & HERO CENTERING
+   11. SIDEBAR: TWO-COLUMN SIDE-BY-SIDE LOCK
    ============================================================= */
-[onclick], a, button, .cat-square, .prod-card-small { cursor: pointer !important; }
-
-.product-main-layout { 
-    display: flex; 
-    gap: 30px; 
-    padding: 20px 5%; 
-    align-items: flex-start; /* Ensures sidebar stays at the TOP */
-    max-width: 1600px;
-    margin: 0 auto;
+.product-main-layout {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    padding: 20px 5%;
+    align-items: flex-start;
 }
 
-.main-display-area { flex: 1; min-width: 0; }
-
-.hero-display { 
-    background: #fff; 
-    border: 1px solid #eee; 
-    border-radius: 12px; 
-    height: 45vh; 
-    display: flex; 
-    justify-content: center; /* Center horizontally */
-    align-items: center;     /* Center vertically */
-    overflow: hidden; 
-    margin-bottom: 20px;
+.master-sidebar {
+    display: flex !important;
+    flex-direction: row !important; /* Forces side-by-side */
+    gap: 15px;
+    width: 330px;
+    flex-shrink: 0;
 }
-.hero-display img { max-width: 95%; max-height: 95%; object-fit: contain; }
+
+.sidebar-action-col {
+    flex: 0 0 160px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 12px;
+}
+
+.sidebar-cat-col {
+    flex: 0 0 130px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
 
 /* =============================================================
-   11. TWIN BUTTONS (Note: Red/Black & Symmetrical Style)
+   12. IMAGE FIX: PREVENT "ZOOMED" LOOK
    ============================================================= */
-.t-btn { 
-    display: block;
-    width: 100%; 
-    padding: 12px 0; 
-    border: none; 
-    border-radius: 4px; 
-    font-weight: bold; 
-    font-size: 11px; 
-    text-align: center; 
-    text-decoration: none; 
-    cursor: pointer !important;
+/* Main Hero */
+.hero-display img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain; /* Shows full product without cropping */
 }
-.buy-now { background: red !important; color: #fff; margin-bottom: 8px; }
-.go-back { background: black !important; color: #fff; }
 
-/* =============================================================
-   12. CATEGORY SYMMETRY (Strict Square Lock)
-   ============================================================= */
-.sidebar-cat-col { flex: 0 0 130px; display: flex; flex-direction: column; gap: 4px; }
-
-.cat-square { 
-    width: 130px; 
-    height: 130px; 
-    background: #fff; 
-    border: 1px solid #eee; 
-    border-radius: 8px; 
-    overflow: hidden; 
+/* Small Cards */
+.prod-card-small {
+    flex: 0 0 160px;
+    height: 165px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
 }
-.cat-square img { width: 100%; height: 95px; object-fit: cover; }
-.cat-square p { font-size: 9px; font-weight: bold; text-align: center; margin: auto 0; color: #000; }
+
+.prod-card-small .img-box {
+    width: 100%;
+    height: 110px;
+    padding: 5px; /* Adds internal border space */
+    box-sizing: border-box;
+}
+
+.prod-card-small img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Prevents zooming/cropping of products */
+}
 
 /* =============================================================
-   13. PRODUCT ROW & ARROWS (Hugging lower corners)
+   13. BUTTONS & CATEGORY DIMENSIONS
    ============================================================= */
-.row-wrapper { 
-    position: relative; 
-    padding-bottom: 40px; /* Space for arrows at the bottom */
-    margin-top: 30px; 
-    width: 100%;
-}
-.row-scroll { display: flex; gap: 15px; overflow-x: auto; scrollbar-width: none; }
-.row-scroll::-webkit-scrollbar { display: none; }
+.t-btn { width: 100%; padding: 12px 0; border: none; border-radius: 4px; font-weight: bold; font-size: 11px; text-align: center; cursor: pointer !important; }
+.buy-now { background: red !important; color: #fff; margin-bottom: 8px; }
+.go-back { background: black !important; color: #fff; }
 
-.prod-card-small { flex: 0 0 160px; height: 155px; background: #fff; border: 1px solid #eee; border-radius: 8px; overflow: hidden; }
-
-/* Arrows pinned to the bottom corners of the row container */
-.arrow-btn { 
-    position: absolute; 
-    bottom: 0; 
-    width: 32px; 
-    height: 32px; 
-    background: red !important; 
-    border-radius: 50%; 
-    color: #fff; 
-    border: none; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    z-index: 10;
+.cat-square {
+    width: 130px;
+    height: 130px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
 }
+.cat-square img { width: 100%; height: 95px; object-fit: cover; } /* Categories stay cover for aesthetic fill */
+
+/* =============================================================
+   14. ARROW POSITIONS & FOOTER
+   ============================================================= */
+.row-wrapper { position: relative; padding-bottom: 45px; margin-top: 30px; }
+.arrow-btn { position: absolute; bottom: 0; width: 32px; height: 32px; background: red !important; border-radius: 50%; color: #fff; border: none; display: flex; align-items: center; justify-content: center; }
 .arrow-btn.l { left: 0; }
 .arrow-btn.r { right: 0; }
-
-/* =============================================================
-   14. FOOTER & HERO CENTERING
-   ============================================================= */
-.hero-display { 
-    background: #fff; border: 1px solid #eee; border-radius: 12px; height: 45vh; 
-    display: flex; justify-content: center; align-items: center; overflow: hidden; 
-}
-.hero-display img { max-width: 95%; max-height: 95%; object-fit: contain; }
 
 .site-footer { background: #111; color: #fff; padding: 10px 5%; margin-top: 40px; }
 .footer-links-row { display: flex; justify-content: center; gap: 30px; font-size: 12px; margin-bottom: 2px; }

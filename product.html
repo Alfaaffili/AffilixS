@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AffilixS | Product View</title>
-    <link rel="stylesheet" href="CSS/styles.css?v=2.7">
+    <link rel="stylesheet" href="CSS/styles.css?v=2.8">
 </head>
 <body class="product-page">
 
@@ -68,8 +68,8 @@
 </footer>
 
 <script>
-    // Escape to go home
     window.addEventListener('keydown', (e) => { if(e.key === "Escape") window.location.href = 'index.html'; });
+    function scrollX(id, dir) { document.getElementById(id).scrollBy({ left: dir * 300, behavior: 'smooth' }); }
 
     async function init() {
         try {
@@ -102,14 +102,13 @@
                     card.className = "prod-card-small";
                     let name = item.shortName;
                     if(name.length > 17) name = name.substring(0, 14) + "...";
-                    card.innerHTML = `<img src="${item.image}"><p>${name}</p>`;
+                    card.innerHTML = `<div class="img-box"><img src="${item.image}"></div><p>${name}</p>`;
                     card.onclick = () => { window.location.href = `product.html?id=${item.id}`; };
                     row.appendChild(card);
                 });
             }
         } catch (e) { console.error(e); }
     }
-    function scrollX(id, dir) { document.getElementById(id).scrollBy({ left: dir * 300, behavior: 'smooth' }); }
     document.addEventListener("DOMContentLoaded", init);
 </script>
 </body>
