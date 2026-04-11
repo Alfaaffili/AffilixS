@@ -357,7 +357,7 @@ footer {
  
     background: #fff; border: 1px solid #eee; border-radius: 12px;
  
-    height: 350px; width: 100%;
+    height: 320px; width: 100%;
 
      display: flex; justify-content: center; align-items: center;
  
@@ -445,66 +445,71 @@ footer {
 .copyright-line { padding-left: 2ch; font-size: 12px; opacity: 0.8; }
 
 /* =============================================================
-   SECTION 15. TABLET REFINEMENTS (iPad / Large Tablets)
+   SECTION 15. TABLET LOCK (Screens between 769px and 1024px)
    ============================================================= */
-@media (max-width: 1024px) {
+@media screen and (min-width: 769px) and (max-width: 1024px) {
     .product-main-layout { flex-direction: column; align-items: center; }
-    .main-display-area { max-width: 100%; width: 100%; }
-    
-    /* On tablets, sidebar moves below but stays side-by-side */
-    .master-sidebar { width: 100%; justify-content: center; margin-top: 20px; }
+    .main-display-area { width: 100%; max-width: 100%; }
+    .master-sidebar { width: 100%; justify-content: center; margin-top: 30px; }
 }
 
 /* =============================================================
-   SECTION 16. MOBILE: HUAWEI PURA 70 / SAMSUNG S20 ULTRA
+   SECTION 16. MOBILE LOCK (Huawei Pura 70 / Samsung S20 Ultra)
+   Everything inside here ONLY affects screens smaller than 768px.
    ============================================================= */
-@media (max-width: 480px) {
-    /* 16a. Header Fix: Prevent Crowding */
-    .header-nav { gap: 10px; }
-    .nav-item { font-size: 0.75rem; }
+@media screen and (max-width: 768px) {
+    /* 16a. Header Reset: Stop the vertical stack & Guessing */
+    .site-header { flex-direction: row !important; height: 60px; padding: 0 15px; display: flex; align-items: center; justify-content: space-between; }
+    .logo-group { flex-direction: row !important; align-items: center; gap: 8px; }
+    .logo img { width: 35px !important; height: 35px !important; } /* Stop logo enlargement */
+    .logo-group h1 { font-size: 1.2rem !important; }
+    .header-nav { display: flex !important; flex-direction: row !important; gap: 10px; margin: 0; }
     
-    /* 16b. Hero Fix: Responsive height for tall screens */
-    .hero-display { height: 300px; }
+    /* 16b. Main Layout Fix */
+    .product-main-layout { flex-direction: column !important; padding: 10px; gap: 15px; }
+    .main-display-area { width: 100% !important; max-width: 100% !important; }
     
-    /* 16c. Sidebar Fix: Stack vertically on very narrow screens */
+    /* 16c. Hero Centering Fix */
+    .hero-display { height: 280px !important; width: 100% !important; margin-bottom: 15px; }
+    
+    /* 16d. Sidebar Transformation */
     .master-sidebar { 
         flex-direction: column !important; 
-        width: 100%; 
-        align-items: center; 
+        width: 100% !important; 
+        gap: 20px !important; 
+        display: flex !important;
+        visibility: visible !important;
     }
-    .sidebar-action-col, .sidebar-cat-col { 
-        width: 90%; 
-        flex: none; 
-    }
+    .sidebar-action-col { width: 100% !important; flex: none !important; box-sizing: border-box; }
     
-    /* 16d. Category Row: Change to Horizontal Scroll on Mobile */
+    /* Category Row: Force Horizontal Swipe to save vertical space */
     .sidebar-cat-col { 
         flex-direction: row !important; 
-        overflow-x: auto; 
-        width: 100%; 
-        padding: 10px 0;
-        gap: 10px;
+        overflow-x: auto !important; 
+        width: 100% !important; 
+        gap: 12px !important;
+        padding: 5px 0;
         scrollbar-width: none;
     }
     .cat-square { 
-        flex: 0 0 110px; /* Smaller for mobile screens */
-        height: 110px; 
+        flex: 0 0 100px !important; /* Unified symmetrical size */
+        width: 100px !important; 
+        height: 100px !important; 
     }
+    .cat-square img { height: 70px !important; }
 
-    /* 16e. Product Row Fix: Ensure arrows are reachable */
-    .prod-card-small { flex: 0 0 140px; height: 150px; }
-    .arrow-btn { width: 28px; height: 28px; }
+    /* 16e. Product Row & Arrows */
+    .prod-card-small { flex: 0 0 130px !important; height: 140px !important; }
+    .arrow-btn { width: 28px !important; height: 28px !important; }
     
-    /* 16f. Footer Fix: 1-line Indent and smaller font */
-    .site-footer { padding: 15px 5%; text-align: left; }
-    .footer-links-row { justify-content: flex-start; gap: 15px; }
-    .copyright-line { padding-left: 1ch; font-size: 11px; }
+    /* 16f. Footer: Restore Visibility */
+    .site-footer { display: block !important; padding: 20px 5% !important; }
+    .footer-links-row { justify-content: center !important; }
 }
 
 /* =============================================================
-   SECTION 17. BROWSER SPECIFIC (Samsung/Chrome Mobile)
+   SECTION 17. BROWSER COMPATIBILITY (Samsung/Chrome Mobile)
    ============================================================= */
-/* Fix for bottom address bars covering the footer */
-@supports (-webkit-touch-callout: none) {
-    .site-footer { padding-bottom: 30px; }
+@media screen and (max-width: 480px) {
+    .copyright-line { font-size: 11px; padding-left: 1ch; }
 }
