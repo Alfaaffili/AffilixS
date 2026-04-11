@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AffilixS | Product View</title>
-    <link rel="stylesheet" href="CSS/styles.css?v=2.8">
+    <link rel="stylesheet" href="CSS/styles.css?v=2.9">
 </head>
 <body class="product-page">
 
@@ -29,7 +29,7 @@
 
         <section class="info-horizontal-bar">
             <div style="font-size:13px; font-weight:bold;">FULL NAME: <span id="pName" style="font-weight:normal;">---</span></div>
-            <div id="pDesc" style="font-size:12px; color:#555; margin-top:8px; line-height:1.6;">---</div>
+            <div id="pDesc" style="font-size:12px; color:#555; margin-top:10px; line-height:1.6;">---</div>
         </section>
 
         <div id="productRowsContainer"></div>
@@ -68,6 +68,7 @@
 </footer>
 
 <script>
+    // System Handlers
     window.addEventListener('keydown', (e) => { if(e.key === "Escape") window.location.href = 'index.html'; });
     function scrollX(id, dir) { document.getElementById(id).scrollBy({ left: dir * 300, behavior: 'smooth' }); }
 
@@ -91,7 +92,7 @@
                 const rowId = "row-similar";
                 const wrap = document.createElement("div");
                 wrap.className = "row-wrapper";
-                wrap.innerHTML = `<h2 class="row-title" style="font-size:1rem; margin-bottom:10px;">Similar Discoveries</h2>
+                wrap.innerHTML = `<h2 class="row-title">Similar Discoveries</h2>
                     <div class="row-scroll" id="${rowId}"></div>
                     <button class="arrow-btn l" onclick="scrollX('${rowId}', -1)">❮</button>
                     <button class="arrow-btn r" onclick="scrollX('${rowId}', 1)">❯</button>`;
@@ -102,7 +103,7 @@
                     card.className = "prod-card-small";
                     let name = item.shortName;
                     if(name.length > 17) name = name.substring(0, 14) + "...";
-                    card.innerHTML = `<div class="img-box"><img src="${item.image}"></div><p>${name}</p>`;
+                    card.innerHTML = `<div class="img-container"><img src="${item.image}"></div><p>${name}</p>`;
                     card.onclick = () => { window.location.href = `product.html?id=${item.id}`; };
                     row.appendChild(card);
                 });
