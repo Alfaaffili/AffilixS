@@ -445,73 +445,72 @@ footer {
 .copyright-line { padding-left: 2ch; font-size: 12px; opacity: 0.8; }
 
 /* =============================================================
-   SECTION 15. DESKTOP & DATA FIX (Ensures visibility)
+   SECTION 15. TABLET LOCK (769px to 1024px)
    ============================================================= */
-.hero-display img { width: auto; height: auto; max-width: 95%; max-height: 95%; display: block; }
-.text-modal.active { display: flex !important; }
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .product-main-layout { flex-direction: column !important; align-items: center !important; }
+    .master-sidebar { width: 100% !important; flex-direction: row !important; justify-content: center; }
+}
 
 /* =============================================================
-   SECTION 16. MOBILE & TABLET: THE "HORIZONTAL BELT" STRATEGY
+   SECTION 16. MOBILE BELT REFINEMENTS (Huawei / Samsung)
    ============================================================= */
-@media screen and (max-width: 1024px) {
-    /* Stack components vertically as wide belts */
-    .product-main-layout { flex-direction: column !important; padding: 10px !important; }
-    .main-display-area { width: 100% !important; max-width: 100% !important; }
-    .master-sidebar { width: 100% !important; flex-direction: column !important; margin-top: 20px; }
-
-    /* BELT 1: Stats & Buttons */
-    .sidebar-action-col { 
-        width: 100% !important; 
-        display: flex !important; 
-        flex-direction: row !important; /* Stats left, Buttons right */
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px !important;
-        background: #fff; border: 1px solid #eee; border-radius: 12px;
-        margin-bottom: 15px;
+@media screen and (max-width: 768px) {
+    /* 16a. Header: Nav to 2nd Line (Breathing Room) */
+    .site-header { flex-direction: column !important; height: auto !important; padding: 10px 0 !important; }
+    .header-nav { 
+        width: 100%; justify-content: center !important; 
+        background: rgba(0,0,0,0.03); padding: 10px 0; margin-top: 5px; 
     }
-    .tight-stats p { margin: 2px 0; font-size: 11px; }
-    .sidebar-btns { width: 150px; }
-    .t-btn { margin: 4px 0 !important; font-size: 10px !important; }
+    .nav-item { font-size: 11px !important; white-space: nowrap; margin: 0 5px; }
 
-    /* BELT 2: Category Swipe Row */
-    .sidebar-cat-col { 
-        width: 100% !important; 
-        flex-direction: row !important; 
-        overflow-x: auto !important; 
-        gap: 12px !important;
-        padding-bottom: 35px !important; /* Space for arrows */
-        position: relative !important;
-        scrollbar-width: none;
-    }
-    .cat-square { flex: 0 0 100px !important; height: 100px !important; }
+    /* 16b. Stats Belt: Large Fonts, 1-Line Layout */
+    .sidebar-action-col { width: 100% !important; padding: 15px !important; margin-bottom: 15px; border-radius: 12px; }
+    .tight-stats { display: flex; justify-content: space-around; width: 100%; margin-bottom: 12px; }
+    .tight-stats p { font-size: 14px !important; font-weight: bold; margin: 0; }
+
+    /* 16c. Buttons: Large Font, Side-by-Side */
+    .sidebar-btns { width: 100% !important; display: flex !important; flex-direction: row !important; gap: 10px; justify-content: center; }
+    .t-btn { flex: 1; max-width: 160px; font-size: 14px !important; padding: 12px 0 !important; }
+
+    /* 16d. Category Belt: Scroll Track Logic */
+    #catOuterWrap { position: relative !important; padding: 0 40px !important; overflow: visible !important; }
+    .cat-scroll-track { display: flex !important; overflow-x: auto !important; gap: 12px; scrollbar-width: none; padding: 10px 0; }
+    .cat-scroll-track::-webkit-scrollbar { display: none; }
+    
+    .cat-square { flex: 0 0 110px !important; height: 110px !important; border-radius: 8px; background: #fff; border: 1px solid #eee; }
+    .cat-square img { width: 100%; height: 75px; object-fit: cover; }
+    .cat-square p { display: block !important; text-align: center; font-size: 11px; font-weight: bold; margin-top: 5px; }
 }
 
 /* =============================================================
-   SECTION 17. UPRIGHT MOBILE (Huawei/Samsung Portrait)
+   SECTION 17. BROWSER COMPATIBILITY & CLICK GUARD
    ============================================================= */
-@media screen and (max-width: 480px) {
-    .header-nav { flex-wrap: nowrap !important; overflow-x: auto; gap: 10px; }
-    .nav-item { font-size: 10px !important; white-space: nowrap; }
-    
-    .hero-display { height: 250px !important; }
-    
-    /* In portrait, stack stats and buttons for width */
-    .sidebar-action-col { flex-direction: column !important; text-align: center; }
-    .sidebar-btns { width: 100%; margin-top: 10px; }
-    .t-btn { width: 160px !important; margin: 5px auto !important; }
-}
-
-/* =============================================================
-   SECTION 18. THE ARROW & CLICK GUARD
-   ============================================================= */
-.cat-arrow {
-    position: absolute; bottom: 0; width: 30px; height: 30px;
-    background: red !important; border-radius: 50%; color: #fff;
-    border: none; display: flex; align-items: center; justify-content: center; z-index: 100;
-}
-.cat-arrow.l { left: 0; }
-.cat-arrow.r { right: 0; }
-
 .site-header, .site-footer { z-index: 1000 !important; position: relative; }
 .nav-item, .footer-links-row span { cursor: pointer !important; pointer-events: auto !important; }
+.copyright-line { font-size: 11px !important; text-align: center; padding: 10px 0; }
+
+/* =============================================================
+   SECTION 18. STATIONARY ARROWS (Pinned to Edges)
+   ============================================================= */
+@media screen and (max-width: 1024px) {
+    .cat-arrow {
+        position: absolute; 
+        top: 50%; 
+        transform: translateY(-50%);
+        width: 34px; 
+        height: 34px; 
+        background: red !important;
+        border-radius: 50%; 
+        color: #fff; 
+        border: none;
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        z-index: 101; /* Above the scrolling cards */
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        cursor: pointer;
+    }
+    .cat-arrow.l { left: 5px; }
+    .cat-arrow.r { right: 5px; }
+}
