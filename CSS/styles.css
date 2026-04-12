@@ -445,140 +445,65 @@ footer {
 .copyright-line { padding-left: 2ch; font-size: 12px; opacity: 0.8; }
 
 /* =============================================================
-   SECTION 15. TABLET LOCK (Screens between 769px and 1024px)
+   SECTION 15. TABLET & LANDSCAPE LOCK (769px to 1100px)
    ============================================================= */
-@media screen and (min-width: 769px) and (max-width: 1024px) {
-    .product-main-layout { flex-direction: column; align-items: center; }
-    .main-display-area { width: 100%; max-width: 100%; }
-    .master-sidebar { width: 100%; justify-content: center; margin-top: 30px; }
+@media screen and (max-width: 1100px) {
+    .product-main-layout { flex-direction: column !important; align-items: center !important; gap: 20px; }
+    .main-display-area { width: 100% !important; max-width: 100% !important; }
+    .master-sidebar { width: 100% !important; flex-direction: row !important; justify-content: center; }
 }
 
 /* =============================================================
-   SECTION 16. MOBILE LOCK (Huawei Pura 70 / Samsung S20 Ultra)
-   ============================================================= */
-@media screen and (max-width: 768px) {
-    /* 16a. Header: Fix Modal Overflow & Nav wrapping */
-    .header-nav { 
-        gap: 8px !important; 
-        flex-wrap: nowrap !important; 
-        justify-content: flex-end !important;
-    }
-    .nav-item { font-size: 0.7rem !important; white-space: nowrap !important; }
-
-    .product-main-layout { flex-direction: column !important; padding: 5px 10px !important; }
-
-    .main-display-area { width: 100% !important; }
-
-    /* 16aa. SIDEBAR AS HORIZONTAL BAR: Stats (Left) | Categories (Right) */
-
-    .master-sidebar {
- 
-        display: flex !important;
- 
-        flex-direction: row !important;
- 
-        width: 100% !important;
- 
-        gap: 10px !important;
-
-        margin-top: 10px !important;
-
-    }
-
-    /* 16b. Hero: Tighten Samsung/Huawei Vertical Space */
-    .hero-display { 
-        height: 210px !important; 
-        margin-top: 5px !important;
-        margin-bottom: 10px !important;
-    }
-    .hero-display img { max-height: 85% !important; }
-
-    /* 16c. Similar Discoveries Font & Row */
-    .row-title { font-size: 11px !important; margin: 5px !important; }
-
-    /* 16d. Stats: Removing the "2-line" gaps */
-    .tight-stats p { 
-        margin: 0 !important; 
-        font-size: 10px !important;
-         /*  padding: 1px 0 !important; */ 
-        font-size: 10px !important;
-        line-height: 1.2 !important;
-    }
-    .sidebar-action-col {
-       flex: 1 !important;
-        padding: 8px !important;
-        background: #fff;
-
-        border-radius: 8px;
- }
-
-    /* 16e. Buttons: Elegant Shortened Width */
-    .sidebar-btns { 
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        margin-top: 8px !important;
-    }
-    /* 16e.1 Button Elegance */
-    .t-btn { 
-        width: 100% !important; /* Shortened for elegance */
-        max-width: 110px;
-        padding: 8px 0 !important;
-        margin: 4px auto !important;
-        font-size: 9px !important;
-    }
-
-    /* 16f. Category Row: Prepare for Arrows */
-    .sidebar-cat-col { 
-        flex: 1.3 !important;
-
-        flex-direction: row !important;
-
-        overflow-x: auto !important;
-
-        gap: 8px !important;
-        position: relative !important;
-        padding-bottom: 30px !important; 
-        scrollbar-width: none;
-        /* margin-top: 15px !important; */
-    }
-    
-    /* 16g. Footer: Remove top line space */
-    .site-footer { padding: 5px 5% !important; border-top: 1px solid #333; }
-    .footer-links-row { margin-bottom: 2px !important; }
-}
-    /* 16h. cat image 
-    .cat-square { flex: 0 0 85px !important; height: 85px !important; }
-
-    .cat-square img { height: 60px !important; }
-
-/* =============================================================
-   SECTION 17. BROWSER COMPATIBILITY (Samsung/Chrome Mobile)
+   SECTION 16. MOBILE UPRIGHT (Huawei/Samsung Portrait)
    ============================================================= */
 @media screen and (max-width: 480px) {
-    .copyright-line { font-size: 11px !important; padding-left: 1ch !important; }
+    /* Header Modal 1-Line Fix */
+    .header-nav { display: flex !important; flex-wrap: nowrap !important; gap: 5px !important; overflow-x: auto; }
+    .nav-item { font-size: 10px !important; white-space: nowrap !important; padding: 5px 2px; }
+
+    /* Fix Hero Invisibility */
+    .hero-display { display: flex !important; height: 230px !important; width: 100% !important; visibility: visible !important; }
+    .hero-display img { max-width: 90% !important; max-height: 90% !important; object-fit: contain; }
+
+    /* Stop Squeezing: Change Sidebar to Vertical Stack for Portrait */
+    .master-sidebar { flex-direction: column !important; align-items: center !important; }
+    .sidebar-action-col { width: 100% !important; padding: 15px !important; }
+    .sidebar-cat-col { width: 100% !important; padding-bottom: 40px !important; overflow-x: auto !important; }
+    
+    /* Shorten Buttons */
+    .t-btn { width: 160px !important; margin: 5px auto !important; }
+
+    /* Row/Arrow Fix */
+    .row-wrapper { width: 100% !important; position: relative !important; overflow: visible !important; }
+    .row-scroll { display: flex !important; gap: 10px; width: 100%; }
+    .arrow-btn { z-index: 50 !important; }
 }
 
 /* =============================================================
-   SECTION 18. CATEGORY ARROWS (Mobile Lower-Corner Pin)
+   SECTION 17. MODAL & LINK FUNCTIONALITY (The "Clickable" Guard)
    ============================================================= */
-@media screen and (max-width: 768px) {
+.site-header, .site-footer { position: relative; z-index: 9999 !important; }
+.text-modal { z-index: 100000 !important; }
+.nav-item, .footer-links-row span { cursor: pointer !important; pointer-events: auto !important; }
+
+/* =============================================================
+   SECTION 18. CATEGORY ARROWS
+   ============================================================= */
+@media screen and (max-width: 1100px) {
     .cat-arrow {
-        position: absolute;
-        bottom: 0;
-        width: 26px;
-        height: 26px;
-        background: red !important;
-        border-radius: 50%;
-        color: #fff;
-        border: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 25;
-        cursor: pointer !important;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        position: absolute; bottom: 0; width: 30px; height: 30px;
+        background: red !important; border-radius: 50%; color: #fff;
+        border: none; display: flex; align-items: center; justify-content: center; z-index: 99;
     }
-    .cat-arrow.l { left: 0px; }
-    .cat-arrow.r { right: 0px; }
+    .cat-arrow.l { left: 10px; }
+    .cat-arrow.r { right: 10px; }
+}
+
+/* =============================================================
+   SECTION 19. TILTED/LANDSCAPE SPECIFIC FIX
+   ============================================================= */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .hero-display { height: 180px !important; }
+    .product-main-layout { padding: 5px 2% !important; }
+    .header-nav { gap: 15px !important; }
 }

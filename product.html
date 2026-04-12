@@ -121,6 +121,79 @@
         } catch (e) { console.error(e); }
     }
     document.addEventListener("DOMContentLoaded", init);
+
+<script>
+    // Global Modal Functions (Ensures header/footer links always work)
+    function openM(id) { 
+        const m = document.getElementById(id);
+        if(m) m.classList.add('active'); 
+    }
+    function closeM(e, id) { 
+        if(e.target.id === id || e.target.className === 'close-modal') {
+            document.getElementById(id).classList.remove('active');
+        }
+    }
+    
+    window.addEventListener('keydown', (e) => { if(e.key === "Escape") window.location.href = 'index.html'; });
+
+    async function init() {
+        try {
+            const res = await fetch("Data/products.json");
+            const all = await res.json();
+            const pId = new URLSearchParams(window.location.search).get('id');
+            const p = all.find(x => x.id == pId) || all[0];
+
+            document.getElementById("heroImage").src = p.image;
+            document.getElementById("pName").innerText = p.name;
+            document.getElementById("pDesc").innerText = p.fullDescription;
+            document.getElementById("pPrice").innerText = (p.currency || "$") + p.price;
+            document.getElementById("buyBtn").href = p.affiliateLink;
+
+            const container = document.getElementById("productRowsContainer");
+            const similar = all.filter(x => x.category === p.category && x.id !== p.id);
+
+            if (similar.length > 0) {
+                const rowId = "row-similar";
+                const wrap = document.createElement("div");
+                wrap.className = "row-wrapper";
+                wrap.innerHTML = `<h2 class="row-title">Similar Discoveries</h2>
+                    <div class="row-scroll" id="${rowId}"></div>
+                    <button class="arrow-btn l" onclick="event.stopPropagation(); scrollX('${rowId}', -1)">❮</button>
+                    <button class="arrow-btn r" onclick="event.stopPropagation(); scrollX('${rowId}', 1)">❯</button>`;
+                container.appendChild(wrap);
+                const row = document.getElementById(rowId);
+                similar.forEach(item => {
+                    const card = document.createElement("div");
+                    card.className = "prod-card-small";
+                    let shortN = item.shortName.length > 17 ? item.shortName.substring(0, 14) + "..." : item.shortName;
+                    card.innerHTML = `<div class="img-container"><img src="${item.image}"></div><p>${shortN}</p>`;
+                    card.onclick = () => { window.location.href = `product.html?id=${item.id}`; };
+                    row.appendChild(card);
+                });
+            }
+
+            // Category Scroll Logic
+            const catCol = document.querySelector('.sidebar-cat-col');
+            if (catCol) {
+                catCol.id = "catScrollContainer";
+                // Inject Category Arrows for Mobile/Tablet
+                if(window.innerWidth < 1025) {
+                    const lBtn = document.createElement('button'); lBtn.className="cat-arrow l"; lBtn.innerHTML="❮";
+                    lBtn.onclick = (e) => { e.stopPropagation(); scrollX('catScrollContainer', -1); };
+                    const rBtn = document.createElement('button'); rBtn.className="cat-arrow r"; rBtn.innerHTML="❯";
+                    rBtn.onclick = (e) => { e.stopPropagation(); scrollX('catScrollContainer', 1); };
+                    catCol.appendChild(lBtn); catCol.appendChild(rBtn);
+                }
+            }
+        } catch (e) { console.error(e); }
+    }
+    function scrollX(id, dir) { 
+        const el = document.getElementById(id);
+        if(el) el.scrollBy({ left: dir * 250, behavior: 'smooth' }); 
+    }
+    document.addEventListener("DOMContentLoaded", init);
+
+</script>
 </script>
 </body>
 </html>
