@@ -4,16 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AffilixS | Product View</title>
-    <link rel="stylesheet" href="CSS/styles.css?v=3.1">
+    <link rel="stylesheet" href="CSS/styles.css?v=3.2">
 </head>
 <body class="product-page">
 
 <div id="visionModal" class="text-modal" onclick="closeM(event, 'visionModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('visionModal').classList.remove('active')">&times;</span><h2>Our Vision</h2><p>AffilixS curates refined products for modern living.</p></div></div>
-<div id="insightsModal" class="text-modal" onclick="closeM(event, 'insightsModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('insightsModal').classList.remove('active')">&times;</span><h2>Insights</h2><p>Latest trends and modern insights.</p></div></div>
-<div id="contactModal" class="text-modal" onclick="closeM(event, 'contactModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('contactModal').classList.remove('active')">&times;</span><h2>Contact</h2><p>Contact us at support@affilixs.com</p></div></div>
-<div id="privacyModal" class="text-modal" onclick="closeM(event, 'privacyModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('privacyModal').classList.remove('active')">&times;</span><h2>Privacy Policy</h2><p>Your privacy is our priority.</p></div></div>
-<div id="disclaimerModal" class="text-modal" onclick="closeM(event, 'disclaimerModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('disclaimerModal').classList.remove('active')">&times;</span><h2>Affiliate Disclaimer</h2><p>Links may earn commission.</p></div></div>
-
 <header class="site-header">
     <div class="logo-group">
         <div class="logo"><img src="images/logo.jpg" alt="Logo"></div>
@@ -32,12 +27,10 @@
         <section class="hero-display">
             <img id="heroImage" src="" alt="Product Hero">
         </section>
-
         <section class="info-horizontal-bar">
             <div style="font-size:13px; font-weight:bold;">FULL NAME: <span id="pName" style="font-weight:normal;">---</span></div>
-            <div id="pDesc" style="font-size:12px; color:#555; margin-top:10px; line-height:1.6;">---</div>
+            <div id="pDesc" style="font-size:12px; color:#555; margin-top:8px; line-height:1.6;">---</div>
         </section>
-
         <div id="productRowsContainer"></div>
     </div>
 
@@ -53,7 +46,6 @@
                 <button onclick="window.location.href='index.html'" class="t-btn go-back">GO BACK</button>
             </div>
         </div>
-
         <div class="sidebar-cat-col">
             <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/cat-tech.jpg"><p>TECH</p></div>
             <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/Home.jpg"><p>HOME</p></div>
@@ -93,6 +85,7 @@
             document.getElementById("buyBtn").href = p.affiliateLink;
 
             const container = document.getElementById("productRowsContainer");
+            // STRICT FILTERING: Same Category only
             const similar = all.filter(x => x.category === p.category && x.id !== p.id);
 
             if (similar.length > 0) {
@@ -108,12 +101,22 @@
                 similar.forEach(item => {
                     const card = document.createElement("div");
                     card.className = "prod-card-small";
-                    let name = item.shortName;
-                    if(name.length > 17) name = name.substring(0, 14) + "...";
+                    let name = item.shortName.length > 17 ? item.shortName.substring(0, 14) + "..." : item.shortName;
                     card.innerHTML = `<div class="img-container"><img src="${item.image}"></div><p>${name}</p>`;
                     card.onclick = () => { window.location.href = `product.html?id=${item.id}`; };
                     row.appendChild(card);
                 });
+            }
+
+            // MOBILE CATEGORY ARROWS INJECTION
+            const catCol = document.querySelector('.sidebar-cat-col');
+            if (window.innerWidth <= 768 && catCol) {
+                catCol.id = "catRowMobile";
+                const lBtn = document.createElement('button'); lBtn.className="cat-arrow l"; lBtn.innerHTML="❮";
+                lBtn.onclick = () => scrollX('catRowMobile', -1);
+                const rBtn = document.createElement('button'); rBtn.className="cat-arrow r"; rBtn.innerHTML="❯";
+                rBtn.onclick = () => scrollX('catRowMobile', 1);
+                catCol.appendChild(lBtn); catCol.appendChild(rBtn);
             }
         } catch (e) { console.error(e); }
     }
