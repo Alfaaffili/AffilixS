@@ -242,4 +242,40 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Force show on Minimized Desktop
         catArrows.forEach(a => a.style.display = "flex");
     }
+
+// ... existing init code ...
+
+// Note #4: Strict Filtering (Same Type Only)
+const similar = all.filter(x => x.category === p.category && x.id !== p.id);
+
+if (similar.length > 0) {
+    const rowId = "row-similar";
+    const wrap = document.createElement("div");
+    wrap.className = "row-wrapper";
+    wrap.innerHTML = `
+        <h2 class="row-title">Similar Discoveries</h2>
+        <div class="row-scroll" id="${rowId}"></div>
+        <button class="arrow-btn l" onclick="scrollX('${rowId}', -1)">❮</button>
+        <button class="arrow-btn r" onclick="scrollX('${rowId}', 1)">❯</button>`;
+    container.appendChild(wrap);
+    
+    // ... item rendering logic ...
+}
+
+// SECTION: Add Arrows to Category Row for Mobile
+// We target the existing .sidebar-cat-col and inject arrows
+const catCol = document.querySelector('.sidebar-cat-col');
+if (window.innerWidth <= 768 && catCol) {
+    catCol.id = "catRowMobile"; // Assign ID for scroll function
+    const lBtn = document.createElement('button');
+    lBtn.className = "cat-arrow l"; lBtn.innerHTML = "❮";
+    lBtn.onclick = () => scrollX('catRowMobile', -1);
+    
+    const rBtn = document.createElement('button');
+    rBtn.className = "cat-arrow r"; rBtn.innerHTML = "❯";
+    rBtn.onclick = () => scrollX('catRowMobile', 1);
+    
+    catCol.appendChild(lBtn);
+    catCol.appendChild(rBtn);
+}
 });
