@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AffilixS | Product View</title>
-    <link rel="stylesheet" href="CSS/styles.css?v=4.1">
+    <link rel="stylesheet" href="CSS/styles.css?v=4.2">
 </head>
 <body class="product-page">
 
@@ -32,10 +32,12 @@
         <section class="hero-display">
             <img id="heroImage" src="" alt="Product Hero">
         </section>
+
         <section class="info-horizontal-bar">
             <div class="full-name-row"><b>FULL NAME:</b> <span id="pName">---</span></div>
             <div id="pDesc" class="description-text">---</div>
         </section>
+
         <div id="productRowsContainer"></div>
     </div>
 
@@ -44,7 +46,7 @@
             <div class="tight-stats">
                 <p><b>Rate:</b> ★★★★★</p>
                 <p><b>Rank:</b> #1 Trend</p>
-                <p class="price-val"><b>Price:</b> <span id="pPrice">---</span></p>
+                <p><b>Price:</b> <span id="pPrice">---</span></p>
             </div>
             <div class="sidebar-btns">
                 <a id="buyBtn" href="#" target="_blank" class="t-btn buy-now">BUY NOW</a>
@@ -52,7 +54,7 @@
             </div>
         </div>
 
-        <div class="sidebar-cat-col" id="catOuterWrap">
+        <div id="catOuterWrap">
             <div class="cat-scroll-track" id="catScrollInternal">
                 <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/cat-tech.jpg"><p>TECH</p></div>
                 <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/Home.jpg"><p>HOME</p></div>
@@ -76,7 +78,11 @@
 <script>
     function openM(id) { document.getElementById(id).classList.add('active'); }
     function closeM(e, id) { if(e.target.id === id) document.getElementById(id).classList.remove('active'); }
-    function scrollX(id, dir) { document.getElementById(id).scrollBy({ left: dir * 300, behavior: 'smooth' }); }
+    
+    function scrollX(id, dir) { 
+        const el = document.getElementById(id);
+        if(el) el.scrollBy({ left: dir * 300, behavior: 'smooth' }); 
+    }
 
     async function init() {
         try {
@@ -85,6 +91,7 @@
             const pId = new URLSearchParams(window.location.search).get('id');
             const p = all.find(x => x.id == pId) || all[0];
 
+            // Primary Data Injection
             document.getElementById("heroImage").src = p.image;
             document.getElementById("pName").innerText = p.name;
             document.getElementById("pDesc").innerText = p.fullDescription;
@@ -92,7 +99,8 @@
             document.getElementById("buyBtn").href = p.affiliateLink;
 
             const container = document.getElementById("productRowsContainer");
-            // Desktop/Mobile Sync: Same category only
+            
+            // STRICT FILTERING: Same category only
             const similar = all.filter(x => x.category === p.category && x.id !== p.id);
 
             if (similar.length > 0) {
@@ -104,6 +112,7 @@
                     <button class="arrow-btn l" onclick="scrollX('${rowId}', -1)">❮</button>
                     <button class="arrow-btn r" onclick="scrollX('${rowId}', 1)">❯</button>`;
                 container.appendChild(wrap);
+                
                 const row = document.getElementById(rowId);
                 similar.forEach(item => {
                     const card = document.createElement("div");
@@ -115,16 +124,21 @@
                 });
             }
 
-            // Stationary Arrow Injection for Mobile
+            // Mobile/Tablet Stationary Arrow Logic
             if (window.innerWidth <= 1024) {
                 const outer = document.getElementById('catOuterWrap');
-                const lb = document.createElement('button'); lb.className="cat-arrow l"; lb.innerHTML="❮";
-                lb.onclick = () => scrollX('catScrollInternal', -1);
-                const rb = document.createElement('button'); rb.className="cat-arrow r"; rb.innerHTML="❯";
-                rb.onclick = () => scrollX('catScrollInternal', 1);
+                
+                const lb = document.createElement('button'); 
+                lb.className="cat-arrow l"; lb.innerHTML="❮";
+                lb.onclick = (e) => { e.stopPropagation(); scrollX('catScrollInternal', -1); };
+                
+                const rb = document.createElement('button'); 
+                rb.className="cat-arrow r"; rb.innerHTML="❯";
+                rb.onclick = (e) => { e.stopPropagation(); scrollX('catScrollInternal', 1); };
+                
                 outer.appendChild(lb); outer.appendChild(rb);
             }
-        } catch (e) { console.error(e); }
+        } catch (e) { console.error("Init failed:", e); }
     }
     document.addEventListener("DOMContentLoaded", init);
 </script>
