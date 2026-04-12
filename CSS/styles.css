@@ -445,65 +445,73 @@ footer {
 .copyright-line { padding-left: 2ch; font-size: 12px; opacity: 0.8; }
 
 /* =============================================================
-   SECTION 15. TABLET & LANDSCAPE LOCK (769px to 1100px)
+   SECTION 15. DESKTOP & DATA FIX (Ensures visibility)
    ============================================================= */
-@media screen and (max-width: 1100px) {
-    .product-main-layout { flex-direction: column !important; align-items: center !important; gap: 20px; }
+.hero-display img { width: auto; height: auto; max-width: 95%; max-height: 95%; display: block; }
+.text-modal.active { display: flex !important; }
+
+/* =============================================================
+   SECTION 16. MOBILE & TABLET: THE "HORIZONTAL BELT" STRATEGY
+   ============================================================= */
+@media screen and (max-width: 1024px) {
+    /* Stack components vertically as wide belts */
+    .product-main-layout { flex-direction: column !important; padding: 10px !important; }
     .main-display-area { width: 100% !important; max-width: 100% !important; }
-    .master-sidebar { width: 100% !important; flex-direction: row !important; justify-content: center; }
+    .master-sidebar { width: 100% !important; flex-direction: column !important; margin-top: 20px; }
+
+    /* BELT 1: Stats & Buttons */
+    .sidebar-action-col { 
+        width: 100% !important; 
+        display: flex !important; 
+        flex-direction: row !important; /* Stats left, Buttons right */
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px !important;
+        background: #fff; border: 1px solid #eee; border-radius: 12px;
+        margin-bottom: 15px;
+    }
+    .tight-stats p { margin: 2px 0; font-size: 11px; }
+    .sidebar-btns { width: 150px; }
+    .t-btn { margin: 4px 0 !important; font-size: 10px !important; }
+
+    /* BELT 2: Category Swipe Row */
+    .sidebar-cat-col { 
+        width: 100% !important; 
+        flex-direction: row !important; 
+        overflow-x: auto !important; 
+        gap: 12px !important;
+        padding-bottom: 35px !important; /* Space for arrows */
+        position: relative !important;
+        scrollbar-width: none;
+    }
+    .cat-square { flex: 0 0 100px !important; height: 100px !important; }
 }
 
 /* =============================================================
-   SECTION 16. MOBILE UPRIGHT (Huawei/Samsung Portrait)
+   SECTION 17. UPRIGHT MOBILE (Huawei/Samsung Portrait)
    ============================================================= */
 @media screen and (max-width: 480px) {
-    /* Header Modal 1-Line Fix */
-    .header-nav { display: flex !important; flex-wrap: nowrap !important; gap: 5px !important; overflow-x: auto; }
-    .nav-item { font-size: 10px !important; white-space: nowrap !important; padding: 5px 2px; }
-
-    /* Fix Hero Invisibility */
-    .hero-display { display: flex !important; height: 230px !important; width: 100% !important; visibility: visible !important; }
-    .hero-display img { max-width: 90% !important; max-height: 90% !important; object-fit: contain; }
-
-    /* Stop Squeezing: Change Sidebar to Vertical Stack for Portrait */
-    .master-sidebar { flex-direction: column !important; align-items: center !important; }
-    .sidebar-action-col { width: 100% !important; padding: 15px !important; }
-    .sidebar-cat-col { width: 100% !important; padding-bottom: 40px !important; overflow-x: auto !important; }
+    .header-nav { flex-wrap: nowrap !important; overflow-x: auto; gap: 10px; }
+    .nav-item { font-size: 10px !important; white-space: nowrap; }
     
-    /* Shorten Buttons */
+    .hero-display { height: 250px !important; }
+    
+    /* In portrait, stack stats and buttons for width */
+    .sidebar-action-col { flex-direction: column !important; text-align: center; }
+    .sidebar-btns { width: 100%; margin-top: 10px; }
     .t-btn { width: 160px !important; margin: 5px auto !important; }
-
-    /* Row/Arrow Fix */
-    .row-wrapper { width: 100% !important; position: relative !important; overflow: visible !important; }
-    .row-scroll { display: flex !important; gap: 10px; width: 100%; }
-    .arrow-btn { z-index: 50 !important; }
 }
 
 /* =============================================================
-   SECTION 17. MODAL & LINK FUNCTIONALITY (The "Clickable" Guard)
+   SECTION 18. THE ARROW & CLICK GUARD
    ============================================================= */
-.site-header, .site-footer { position: relative; z-index: 9999 !important; }
-.text-modal { z-index: 100000 !important; }
+.cat-arrow {
+    position: absolute; bottom: 0; width: 30px; height: 30px;
+    background: red !important; border-radius: 50%; color: #fff;
+    border: none; display: flex; align-items: center; justify-content: center; z-index: 100;
+}
+.cat-arrow.l { left: 0; }
+.cat-arrow.r { right: 0; }
+
+.site-header, .site-footer { z-index: 1000 !important; position: relative; }
 .nav-item, .footer-links-row span { cursor: pointer !important; pointer-events: auto !important; }
-
-/* =============================================================
-   SECTION 18. CATEGORY ARROWS
-   ============================================================= */
-@media screen and (max-width: 1100px) {
-    .cat-arrow {
-        position: absolute; bottom: 0; width: 30px; height: 30px;
-        background: red !important; border-radius: 50%; color: #fff;
-        border: none; display: flex; align-items: center; justify-content: center; z-index: 99;
-    }
-    .cat-arrow.l { left: 10px; }
-    .cat-arrow.r { right: 10px; }
-}
-
-/* =============================================================
-   SECTION 19. TILTED/LANDSCAPE SPECIFIC FIX
-   ============================================================= */
-@media screen and (max-height: 500px) and (orientation: landscape) {
-    .hero-display { height: 180px !important; }
-    .product-main-layout { padding: 5px 2% !important; }
-    .header-nav { gap: 15px !important; }
-}

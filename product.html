@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AffilixS | Product View</title>
-    <link rel="stylesheet" href="CSS/styles.css?v=3.2">
+    <link rel="stylesheet" href="CSS/styles.css?v=4.0">
 </head>
 <body class="product-page">
 
-<div id="visionModal" class="text-modal" onclick="closeM(event, 'visionModal')"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-modal" onclick="document.getElementById('visionModal').classList.remove('active')">&times;</span><h2>Our Vision</h2><p>AffilixS curates refined products for modern living.</p></div></div>
+<div id="visionModal" class="text-modal" onclick="closeM(event, 'visionModal')"><div class="modal-box"><h2>Our Vision</h2><p>Refined products for modern living.</p></div></div>
+<div id="insightsModal" class="text-modal" onclick="closeM(event, 'insightsModal')"><div class="modal-box"><h2>Insights</h2><p>Latest trends and analysis.</p></div></div>
+<div id="contactModal" class="text-modal" onclick="closeM(event, 'contactModal')"><div class="modal-box"><h2>Contact</h2><p>support@affilixs.com</p></div></div>
+<div id="privacyModal" class="text-modal" onclick="closeM(event, 'privacyModal')"><div class="modal-box"><h2>Privacy Policy</h2><p>Your data is safe with us.</p></div></div>
+<div id="disclaimerModal" class="text-modal" onclick="closeM(event, 'disclaimerModal')"><div class="modal-box"><h2>Disclaimer</h2><p>Affiliate links included.</p></div></div>
+
 <header class="site-header">
     <div class="logo-group">
         <div class="logo"><img src="images/logo.jpg" alt="Logo"></div>
@@ -27,10 +32,12 @@
         <section class="hero-display">
             <img id="heroImage" src="" alt="Product Hero">
         </section>
+
         <section class="info-horizontal-bar">
-            <div style="font-size:13px; font-weight:bold;">FULL NAME: <span id="pName" style="font-weight:normal;">---</span></div>
-            <div id="pDesc" style="font-size:12px; color:#555; margin-top:8px; line-height:1.6;">---</div>
+            <div class="full-name-row"><b>FULL NAME:</b> <span id="pName">---</span></div>
+            <div id="pDesc" class="description-text">---</div>
         </section>
+
         <div id="productRowsContainer"></div>
     </div>
 
@@ -46,13 +53,14 @@
                 <button onclick="window.location.href='index.html'" class="t-btn go-back">GO BACK</button>
             </div>
         </div>
-        <div class="sidebar-cat-col">
+
+        <div class="sidebar-cat-col" id="catRowContainer">
             <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/cat-tech.jpg"><p>TECH</p></div>
             <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/Home.jpg"><p>HOME</p></div>
             <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/Fittness.jpg"><p>FITNESS</p></div>
             <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/Style.jpg"><p>STYLE</p></div>
             <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/BeautyPersonnalCare.jpg"><p>BEAUTY</p></div>
-        </div>
+            </div>
     </aside>
 </main>
 
@@ -66,11 +74,14 @@
 </footer>
 
 <script>
-    window.addEventListener('keydown', (e) => { if(e.key === "Escape") window.location.href = 'index.html'; });
+    // 1. MODAL LOGIC (Global Scope)
     function openM(id) { document.getElementById(id).classList.add('active'); }
     function closeM(e, id) { if(e.target.id === id) document.getElementById(id).classList.remove('active'); }
+    
+    // 2. SCROLL LOGIC
     function scrollX(id, dir) { document.getElementById(id).scrollBy({ left: dir * 300, behavior: 'smooth' }); }
 
+    // 3. DATA INITIALIZATION
     async function init() {
         try {
             const res = await fetch("Data/products.json");
@@ -78,14 +89,15 @@
             const pId = new URLSearchParams(window.location.search).get('id');
             const p = all.find(x => x.id == pId) || all[0];
 
+            // Primary Data
             document.getElementById("heroImage").src = p.image;
             document.getElementById("pName").innerText = p.name;
             document.getElementById("pDesc").innerText = p.fullDescription;
             document.getElementById("pPrice").innerText = (p.currency || "$") + p.price;
             document.getElementById("buyBtn").href = p.affiliateLink;
 
+            // Similar Products Logic
             const container = document.getElementById("productRowsContainer");
-            // STRICT FILTERING: Same Category only
             const similar = all.filter(x => x.category === p.category && x.id !== p.id);
 
             if (similar.length > 0) {
@@ -101,99 +113,25 @@
                 similar.forEach(item => {
                     const card = document.createElement("div");
                     card.className = "prod-card-small";
-                    let name = item.shortName.length > 17 ? item.shortName.substring(0, 14) + "..." : item.shortName;
-                    card.innerHTML = `<div class="img-container"><img src="${item.image}"></div><p>${name}</p>`;
+                    let shortName = item.shortName.length > 17 ? item.shortName.substring(0, 14) + "..." : item.shortName;
+                    card.innerHTML = `<div class="img-container"><img src="${item.image}"></div><p>${shortName}</p>`;
                     card.onclick = () => { window.location.href = `product.html?id=${item.id}`; };
                     row.appendChild(card);
                 });
             }
 
-            // MOBILE CATEGORY ARROWS INJECTION
-            const catCol = document.querySelector('.sidebar-cat-col');
-            if (window.innerWidth <= 768 && catCol) {
-                catCol.id = "catRowMobile";
-                const lBtn = document.createElement('button'); lBtn.className="cat-arrow l"; lBtn.innerHTML="❮";
-                lBtn.onclick = () => scrollX('catRowMobile', -1);
-                const rBtn = document.createElement('button'); rBtn.className="cat-arrow r"; rBtn.innerHTML="❯";
-                rBtn.onclick = () => scrollX('catRowMobile', 1);
-                catCol.appendChild(lBtn); catCol.appendChild(rBtn);
+            // Category Arrows (For all mobile/tablet views)
+            if (window.innerWidth <= 1024) {
+                const catRow = document.getElementById('catRowContainer');
+                const lB = document.createElement('button'); lB.className="cat-arrow l"; lB.innerHTML="❮";
+                lB.onclick = () => scrollX('catRowContainer', -1);
+                const rB = document.createElement('button'); rB.className="cat-arrow r"; rB.innerHTML="❯";
+                rB.onclick = () => scrollX('catRowContainer', 1);
+                catRow.appendChild(lB); catRow.appendChild(rB);
             }
-        } catch (e) { console.error(e); }
+        } catch (e) { console.error("Init Error:", e); }
     }
     document.addEventListener("DOMContentLoaded", init);
-
-<script>
-    // Global Modal Functions (Ensures header/footer links always work)
-    function openM(id) { 
-        const m = document.getElementById(id);
-        if(m) m.classList.add('active'); 
-    }
-    function closeM(e, id) { 
-        if(e.target.id === id || e.target.className === 'close-modal') {
-            document.getElementById(id).classList.remove('active');
-        }
-    }
-    
-    window.addEventListener('keydown', (e) => { if(e.key === "Escape") window.location.href = 'index.html'; });
-
-    async function init() {
-        try {
-            const res = await fetch("Data/products.json");
-            const all = await res.json();
-            const pId = new URLSearchParams(window.location.search).get('id');
-            const p = all.find(x => x.id == pId) || all[0];
-
-            document.getElementById("heroImage").src = p.image;
-            document.getElementById("pName").innerText = p.name;
-            document.getElementById("pDesc").innerText = p.fullDescription;
-            document.getElementById("pPrice").innerText = (p.currency || "$") + p.price;
-            document.getElementById("buyBtn").href = p.affiliateLink;
-
-            const container = document.getElementById("productRowsContainer");
-            const similar = all.filter(x => x.category === p.category && x.id !== p.id);
-
-            if (similar.length > 0) {
-                const rowId = "row-similar";
-                const wrap = document.createElement("div");
-                wrap.className = "row-wrapper";
-                wrap.innerHTML = `<h2 class="row-title">Similar Discoveries</h2>
-                    <div class="row-scroll" id="${rowId}"></div>
-                    <button class="arrow-btn l" onclick="event.stopPropagation(); scrollX('${rowId}', -1)">❮</button>
-                    <button class="arrow-btn r" onclick="event.stopPropagation(); scrollX('${rowId}', 1)">❯</button>`;
-                container.appendChild(wrap);
-                const row = document.getElementById(rowId);
-                similar.forEach(item => {
-                    const card = document.createElement("div");
-                    card.className = "prod-card-small";
-                    let shortN = item.shortName.length > 17 ? item.shortName.substring(0, 14) + "..." : item.shortName;
-                    card.innerHTML = `<div class="img-container"><img src="${item.image}"></div><p>${shortN}</p>`;
-                    card.onclick = () => { window.location.href = `product.html?id=${item.id}`; };
-                    row.appendChild(card);
-                });
-            }
-
-            // Category Scroll Logic
-            const catCol = document.querySelector('.sidebar-cat-col');
-            if (catCol) {
-                catCol.id = "catScrollContainer";
-                // Inject Category Arrows for Mobile/Tablet
-                if(window.innerWidth < 1025) {
-                    const lBtn = document.createElement('button'); lBtn.className="cat-arrow l"; lBtn.innerHTML="❮";
-                    lBtn.onclick = (e) => { e.stopPropagation(); scrollX('catScrollContainer', -1); };
-                    const rBtn = document.createElement('button'); rBtn.className="cat-arrow r"; rBtn.innerHTML="❯";
-                    rBtn.onclick = (e) => { e.stopPropagation(); scrollX('catScrollContainer', 1); };
-                    catCol.appendChild(lBtn); catCol.appendChild(rBtn);
-                }
-            }
-        } catch (e) { console.error(e); }
-    }
-    function scrollX(id, dir) { 
-        const el = document.getElementById(id);
-        if(el) el.scrollBy({ left: dir * 250, behavior: 'smooth' }); 
-    }
-    document.addEventListener("DOMContentLoaded", init);
-
-</script>
 </script>
 </body>
 </html>
