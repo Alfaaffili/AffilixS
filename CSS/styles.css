@@ -1,92 +1,157 @@
 ﻿/* =============================================================
-   01. GLOBAL STYLES (Applies to ALL Pages)
+   01. GLOBAL & HEADER (Mobile-Responsive for Samsung/Huawei)
    ============================================================= */
-* { box-sizing: border-box; }
-html, body { width: 100%; margin: 0; padding: 0; overflow-x: hidden; background: #f5f2ed; font-family: Arial, sans-serif; color: #1f1f1f; line-height: 1.6; }
+.home-page .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    background: #111;
+    color: #fff;
+    height: 60px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
 
-.site-header { display: flex; align-items: center; justify-content: space-between; padding: 0 5%; background: #111; color: #fff; height: 60px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
-.logo-group { display: flex; align-items: center; gap: 12px; }
-.logo img { height: 35px; border-radius: 4px; }
-.logo-group h1 { font-size: 1.2rem; margin: 0; letter-spacing: 1px; }
-
-/* FIX: Prevent Header Link Splitting */
-.header-nav { display: flex; align-items: center; white-space: nowrap; }
-.header-nav span, .header-nav a { margin-left: 20px; cursor: pointer; font-size: 0.9rem; transition: color 0.3s; color: #fff; text-decoration: none; }
-.header-nav span:hover { color: #c6a96b; }
-
-.site-footer { background: #111; color: #fff; padding: 20px 5% 40px 5% !important; margin-top: 40px; }
-.footer-links-row { display: flex; justify-content: center; gap: 30px; font-size: 12px; margin-bottom: 2px; }
-.copyright-line { padding-left: 2ch; font-size: 12px; opacity: 0.8; color: #fff; }
-
-/* Modal Engine */
-.modal, .text-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.85); justify-content: center; align-items: center; z-index: 10000; }
-.modal.active, .text-modal.active { display: flex !important; }
-.modal-box { background: #fff; padding: 25px; border-radius: 12px; width: 85%; max-width: 400px; }
-
-/* =============================================================
-   02. HOME PAGE ONLY (.home-page)
-   ============================================================= */
-.home-page .top-section { width: 100%; position: relative; margin-bottom: 60px; }
-.home-page .identity-panel { width: 100%; height: 300px; background: url("../images/hero8888.jpg") center/cover no-repeat; border-bottom: 4px solid #111; }
-.home-page .identity-text { position: absolute; bottom: -15px; left: 40px; background: rgba(255, 0, 0, 0.9); padding: 4px 25px; border-radius: 4px; color: #fff; font-size: 20px; z-index: 10; }
-
-.home-page .product-card { min-width: 220px; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 15px rgba(0,0,0,0.08); transition: transform 0.3s; cursor: pointer; }
-.home-page .product-card:hover { transform: translateY(-8px); }
-.home-page .product-card img { width: 100%; height: 180px; object-fit: cover; }
-
-/* Home Row Scrolling */
-.home-page .product-row-wrapper { position: relative; width: 95%; margin: 0 auto 50px; padding: 0 40px; }
-.home-page .product-row { display: flex; gap: 20px; overflow-x: auto; scrollbar-width: none; }
-
-/* =============================================================
-   03. PRODUCT PAGE ONLY (.product-page)
-   ============================================================= */
-/* Desktop Layout */
-.product-page .product-main-layout { display: flex; justify-content: space-between; gap: 30px; padding: 20px 5%; align-items: flex-start; }
-.product-page .main-display-area { flex: 1; min-width: 0; max-width: calc(100% - 360px); }
-.product-page .master-sidebar { display: flex; flex-direction: row; gap: 15px; width: 330px; flex-shrink: 0; }
-
-.product-page .hero-display { background: #fff; border: 1px solid #eee; border-radius: 12px; height: 320px; width: 100%; display: flex; justify-content: center; align-items: center; overflow: hidden; margin-bottom: 20px; }
-.product-page .hero-display img { max-width: 90%; max-height: 90%; object-fit: contain; }
-
-.product-page .sidebar-action-col { flex: 0 0 160px; background: #fff; border: 1px solid #eee; border-radius: 10px; padding: 12px; }
-.product-page .sidebar-cat-col { flex: 0 0 130px; display: flex; flex-direction: column; gap: 10px; }
-
-/* Buttons & Small Cards */
-.t-btn { display: block; width: 100%; padding: 12px 0; border: none; border-radius: 4px; font-weight: bold; font-size: 11px; text-align: center; cursor: pointer; text-decoration: none; }
-.buy-now { background: red !important; color: #fff; margin-bottom: 8px; }
-.go-back { background: black !important; color: #fff; }
-
-.product-page .prod-card-small { flex: 0 0 160px; height: 165px; background: #fff; border: 1px solid #eee; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; }
-.product-page .img-container { width: 100%; height: 115px; padding: 8px; }
-.product-page .img-container img { width: 100%; height: 100%; object-fit: contain; }
-
-/* Mobile logic for Product Page ONLY */
-@media screen and (max-width: 1024px) {
-    .product-page .product-main-layout { display: block !important; padding: 10px !important; }
-    .product-page .main-display-area, 
-    .product-page .master-sidebar { width: 100% !important; display: block !important; }
-    
-    .product-page .hero-display { height: 280px !important; }
-    .product-page .tight-stats { display: flex !important; flex-direction: column !important; align-items: center; gap: 8px; margin-bottom: 15px; }
-    
-    .product-page .sidebar-btns { display: flex !important; flex-direction: row !important; gap: 10px; justify-content: center; }
-    .product-page .sidebar-btns .t-btn { flex: 1; height: 45px; display: flex; align-items: center; justify-content: center; padding: 0; }
-
-    #catOuterWrap { position: relative !important; width: 100% !important; padding: 0 40px !important; margin-top: 25px; }
-    .cat-scroll-track { display: flex !important; flex-direction: row !important; overflow-x: auto !important; gap: 12px; }
+/* Force 2-line Header for Mobile Browsers */
+@media screen and (max-width: 768px) {
+    .home-page .site-header {
+        height: auto !important; /* Expansion for two lines */
+        flex-direction: column !important;
+        padding: 12px 5% !important;
+        align-items: flex-start !important;
+    }
+    .home-page .header-nav {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end; /* Links to the right */
+        margin-top: 8px;
+    }
+    .home-page .header-nav a, .home-page .header-nav span {
+        margin-left: 15px;
+        font-size: 0.8rem;
+        white-space: nowrap;
+    }
 }
 
 /* =============================================================
-   04. SHARED UTILITIES (Arrows, Headings, Categories)
+   02. HERO & HEADINGS (Precise Indents & Underlines)
    ============================================================= */
-.cat-square { width: 130px; height: 130px; background: #fff; border: 1px solid #eee; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; }
-.cat-square img { width: 100%; height: 95px; object-fit: cover; }
-.cat-square p { font-size: 9px; font-weight: bold; text-align: center; margin: auto 0; }
+/* Reduce space above hero */
+.home-page .top-section { 
+    width: 100%; 
+    position: relative; 
+    margin-top: 10px; /* One-line space under header */
+    margin-bottom: 50px; 
+}
 
-.arrow-btn, .row-arrow { position: absolute; width: 32px; height: 32px; background: red !important; border-radius: 50%; color: #fff; border: none; display: flex; align-items: center; justify-content: center; z-index: 99; cursor: pointer; }
-.arrow-btn.l, .row-arrow.left { left: 0; }
-.arrow-btn.r, .row-arrow.right { right: 0; }
+.home-page .identity-panel {
+    width: 100%;
+    height: 300px;
+    background: url("../images/hero8888.jpg") center/cover no-repeat;
+    border-bottom: 4px solid #111;
+}
+
+/* Mobile Hero Fixes */
+@media screen and (max-width: 768px) {
+    .home-page .identity-panel {
+        background-size: contain !important; /* No stretching off-edge */
+        height: 180px !important;
+    }
+}
+
+/* Hero Title on one line */
+.home-page .identity-text {
+    white-space: nowrap; 
+    position: absolute;
+    bottom: -15px;
+    left: 40px;
+    background: rgba(255, 0, 0, 0.9);
+    padding: 4px 20px;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 18px;
+}
+
+/* Golden underline under FIRST WORD only */
+.home-page .products-section h2, 
+.home-page .categories-section h2 {
+    margin-left: 5ch !important;
+    margin-top: 40px;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    position: relative;
+    display: inline-block;
+}
+
+.home-page .products-section h2::after {
+    content: "";
+    display: block;
+    width: 4.5ch; /* Targets the first word only */
+    height: 3px;
+    background: #c6a96b;
+    margin-top: 6px;
+}
+
+/* =============================================================
+   03. PRODUCT CARDS & SYMMETRY
+   ============================================================= */
+.home-page .product-card {
+    min-width: 220px;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+@media screen and (max-width: 768px) {
+    .home-page .product-card {
+        min-width: 176px !important; /* 20% reduction from 220px */
+    }
+    .home-page .product-card img {
+        height: 140px !important;
+        object-fit: contain !important; /* No zooming/trimming */
+        padding: 5px;
+    }
+}
+
+/* =============================================================
+   04. RED ARROWS (Professional Bottom-Corner Pin)
+   ============================================================= */
+.home-page .row-arrow, 
+.home-page .arrow-btn,
+.home-page .cat-arrow {
+    position: absolute;
+    top: auto !important; /* Remove middle-centering */
+    bottom: -15px !important; /* Pinned to bottom */
+    width: 32px !important;
+    height: 32px !important;
+    background: red !important;
+    border-radius: 50%;
+    color: #fff;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    z-index: 99;
+    cursor: pointer;
+    transform: none !important;
+}
+
+/* Spacing arrows out to corners */
+.home-page .row-arrow.left, .home-page .arrow-btn.l, .home-page .cat-arrow.l { 
+    left: 45px !important; 
+}
+.home-page .row-arrow.right, .home-page .arrow-btn.r, .home-page .cat-arrow.r { 
+    right: 45px !important; 
+}
+
+/* Align category title indent */
+.home-page .categories-section h2 {
+    margin-left: 5ch !important;
+}
 
 .products-section h2 { margin-left: 5ch !important; margin-top: 50px; margin-bottom: 25px; text-transform: uppercase; font-size: 1.1rem; letter-spacing: 1.8px; }
 /* =============================================================
