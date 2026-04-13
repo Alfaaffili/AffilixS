@@ -1,5 +1,5 @@
 ﻿/* =============================================================
-   01. GLOBAL & HEADER (Mobile-Responsive for Samsung/Huawei)
+   01. GLOBAL & HEADER (Desktop Spacing & Logo Fix)
    ============================================================= */
 .home-page .site-header {
     display: flex;
@@ -14,37 +14,38 @@
     z-index: 1000;
 }
 
-/* Force 2-line Header for Mobile Browsers */
+.home-page .logo-group { display: flex; align-items: center; gap: 12px; }
+.home-page .logo img { height: 35px; border-radius: 4px; }
+
+/* Spacing out Nav Links */
+.home-page .header-nav a, 
+.home-page .header-nav span {
+    margin-left: 35px; 
+    font-size: 0.9rem;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Mobile Header: Logo Top / Links Bottom */
 @media screen and (max-width: 768px) {
     .home-page .site-header {
-        height: auto !important; /* Expansion for two lines */
+        height: auto !important;
         flex-direction: column !important;
-        padding: 12px 5% !important;
-        align-items: flex-start !important;
+        padding: 10px 5% !important;
     }
+    .home-page .logo img { height: 28px !important; }
     .home-page .header-nav {
         width: 100%;
         display: flex;
-        justify-content: flex-end; /* Links to the right */
+        justify-content: flex-end;
         margin-top: 8px;
-    }
-    .home-page .header-nav a, .home-page .header-nav span {
-        margin-left: 15px;
-        font-size: 0.8rem;
-        white-space: nowrap;
     }
 }
 
 /* =============================================================
-   02. HERO & HEADINGS (Precise Indents & Underlines)
+   02. HERO & HEADINGS (Centering & Gold Underline)
    ============================================================= */
-/* Reduce space above hero */
-.home-page .top-section { 
-    width: 100%; 
-    position: relative; 
-    margin-top: 10px; /* One-line space under header */
-    margin-bottom: 50px; 
-}
+.home-page .top-section { width: 100%; position: relative; margin-top: 10px; margin-bottom: 50px; }
 
 .home-page .identity-panel {
     width: 100%;
@@ -53,15 +54,7 @@
     border-bottom: 4px solid #111;
 }
 
-/* Mobile Hero Fixes */
-@media screen and (max-width: 768px) {
-    .home-page .identity-panel {
-        background-size: contain !important; /* No stretching off-edge */
-        height: 180px !important;
-    }
-}
-
-/* Hero Title on one line */
+/* Center Hero Title on Mobile */
 .home-page .identity-text {
     white-space: nowrap; 
     position: absolute;
@@ -71,130 +64,83 @@
     padding: 4px 20px;
     border-radius: 4px;
     color: #fff;
-    font-size: 18px;
 }
 
-/* Golden underline under FIRST WORD only */
+@media screen and (max-width: 768px) {
+    .home-page .identity-panel { height: 200px !important; background-size: cover !important; }
+    .home-page .identity-text { left: 50% !important; transform: translateX(-50%); }
+}
+
+/* Golden underline: First Word Only */
 .home-page .products-section h2, 
 .home-page .categories-section h2 {
     margin-left: 5ch !important;
-    margin-top: 40px;
-    text-transform: uppercase;
-    font-size: 1.1rem;
     position: relative;
     display: inline-block;
 }
-
-.home-page .products-section h2::after {
+.home-page .products-section h2::after,
+.home-page .categories-section h2::after {
     content: "";
     display: block;
-    width: 4.5ch; /* Targets the first word only */
+    width: 4.5ch;
     height: 3px;
     background: #c6a96b;
     margin-top: 6px;
 }
 
 /* =============================================================
-   03. PRODUCT CARDS & SYMMETRY
+   03. PRODUCT & CATEGORY ROWS (Cards & Arrows)
    ============================================================= */
-.home-page .product-card {
-    min-width: 220px;
-    background: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    transition: transform 0.3s;
-}
+.home-page .product-card { min-width: 220px; background: #fff; border-radius: 12px; overflow: hidden; }
 
 @media screen and (max-width: 768px) {
-    .home-page .product-card {
-        min-width: 176px !important; /* 20% reduction from 220px */
-    }
-    .home-page .product-card img {
-        height: 140px !important;
-        object-fit: contain !important; /* No zooming/trimming */
-        padding: 5px;
-    }
+    .home-page .product-card { min-width: 176px !important; }
+    .home-page .product-card img { height: 140px !important; object-fit: contain !important; }
 }
 
-/* =============================================================
-   04. RED ARROWS (Professional Bottom-Corner Pin)
-   ============================================================= */
-.home-page .row-arrow, 
-.home-page .arrow-btn,
-.home-page .cat-arrow {
+/* Professional Arrow Pinning */
+.home-page .row-arrow, .home-page .cat-arrow {
     position: absolute;
-    top: auto !important; /* Remove middle-centering */
-    bottom: -15px !important; /* Pinned to bottom */
-    width: 32px !important;
-    height: 32px !important;
+    top: auto !important;
+    bottom: -15px !important;
+    width: 32px;
+    height: 32px;
     background: red !important;
     border-radius: 50%;
     color: #fff;
-    border: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
     z-index: 99;
-    cursor: pointer;
     transform: none !important;
 }
+.home-page .row-arrow.left, .home-page .cat-arrow.l { left: 45px !important; }
+.home-page .row-arrow.right, .home-page .cat-arrow.r { right: 45px !important; }
 
-/* Spacing arrows out to corners */
-.home-page .row-arrow.left, .home-page .arrow-btn.l, .home-page .cat-arrow.l { 
-    left: 45px !important; 
-}
-.home-page .row-arrow.right, .home-page .arrow-btn.r, .home-page .cat-arrow.r { 
-    right: 45px !important; 
-}
-
-/* Align category title indent */
-.home-page .categories-section h2 {
-    margin-left: 5ch !important;
-}
-
-.products-section h2 { margin-left: 5ch !important; margin-top: 50px; margin-bottom: 25px; text-transform: uppercase; font-size: 1.1rem; letter-spacing: 1.8px; }
 /* =============================================================
-   05. PRODUCT ROW ENGINE (Wrappers & Arrows)
+   04. FOOTER (Centered Layout)
    ============================================================= */
-.product-row-wrapper {
-    position: relative;
-    width: 95%;
-    margin: 0 auto 50px;
-    padding: 0 40px; /* Space for absolute arrows */
-}
-
-.product-row {
+.home-page .site-footer {
+    background: #111;
+    padding: 30px 5% !important;
     display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    padding: 20px 0;
-    scroll-behavior: smooth;
-    scrollbar-width: none; /* Firefox */
+    flex-direction: column;
+    align-items: center; 
+    text-align: center;
+    margin-top: 60px;
 }
-.product-row::-webkit-scrollbar { display: none; } /* Chrome/Safari */
-
-.row-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 45px;
-    height: 45px;
-    background: rgba(255, 0, 0, 0.9) !important;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 100;
-    font-size: 20px;
-    transition: all 0.3s ease;
+.home-page .footer-links-row {
     display: flex;
-    align-items: center;
     justify-content: center;
+    gap: 30px;
+    margin-bottom: 12px;
 }
-.row-arrow:hover { background: #cc0000 !important; scale: 1.1; }
-.row-arrow.left { left: -10px; }
-.row-arrow.right { right: -10px; }
+.home-page .copyright-line {
+    padding-left: 0 !important;
+    font-size: 11px;
+    opacity: 0.7;
+    color: #fff;
+}
 
 /* =============================================================
    06. PRODUCT CARD ENGINE (Visual Styling)
