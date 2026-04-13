@@ -15,15 +15,42 @@ html, body { width: 100%; margin: 0; padding: 0; overflow-x: hidden; background:
 .products-section h2 { margin-left: 5ch !important; margin-top: 50px; margin-bottom: 25px; text-transform: uppercase; font-size: 1.1rem; letter-spacing: 1.8px; }
 
 /* =============================================================
-   11-14. PRODUCT PAGE STRUCTURE (Desktop Side-by-Side)
+   11. HEADER FIX: STOP LINK SPLITTING
    ============================================================= */
-.product-main-layout { display: flex; justify-content: space-between; gap: 30px; padding: 20px 5%; align-items: flex-start; }
-.main-display-area { flex: 1; min-width: 0; max-width: calc(100% - 360px); }
+.header-nav { 
+    display: flex; 
+    white-space: nowrap; 
+    align-items: center;
+}
 
-.hero-display { background: #fff; border: 1px solid #eee; border-radius: 12px; height: 320px; width: 100%; display: flex; justify-content: center; align-items: center; overflow: hidden; margin-bottom: 20px; }
+/* =============================================================
+   12-14. PRODUCT PAGE VISUALS (Desktop & Similar Rows)
+   ============================================================= */
+.product-page .product-main-layout { 
+    display: flex; 
+    justify-content: space-between; 
+    gap: 30px; 
+    padding: 20px 5%; 
+    align-items: flex-start;
+}
+
+.product-page .main-display-area { 
+    flex: 1; 
+    min-width: 0; 
+    max-width: calc(100% - 360px); 
+}
+
+.hero-display { 
+    background: #fff; border: 1px solid #eee; border-radius: 12px; 
+    height: 320px; width: 100%; display: flex; justify-content: center; 
+    align-items: center; overflow: hidden; margin-bottom: 20px; 
+}
 .hero-display img { max-width: 90%; max-height: 90%; object-fit: contain; }
 
-.master-sidebar { width: 330px; flex-shrink: 0; display: flex; flex-direction: row; gap: 15px; }
+.master-sidebar { 
+    width: 330px; flex-shrink: 0; display: flex; 
+    flex-direction: row !important; gap: 15px; 
+}
 .sidebar-action-col { flex: 0 0 160px; background: #fff; border: 1px solid #eee; border-radius: 10px; padding: 12px; }
 .sidebar-cat-col { flex: 0 0 130px; display: flex; flex-direction: column; gap: 10px; }
 
@@ -35,53 +62,43 @@ html, body { width: 100%; margin: 0; padding: 0; overflow-x: hidden; background:
 .cat-square img { width: 100%; height: 95px; object-fit: cover; }
 .cat-square p { font-size: 9px; font-weight: bold; text-align: center; margin: auto 0;}
 
-/* Row & Similar Products */
-.row-wrapper { position: relative; padding-bottom: 45px; margin-top: 30px; width: 100%; }
-.row-scroll { display: flex; gap: 15px; overflow-x: auto; scrollbar-width: none; }
-.row-scroll::-webkit-scrollbar { display: none; }
-.arrow-btn { position: absolute; bottom: 0; width: 32px; height: 32px; background: red !important; border-radius: 50%; color: #fff; border: none; z-index: 99; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-.arrow-btn.l { left: 0; }
-.arrow-btn.r { right: 0; }
-
-.prod-card-small { flex: 0 0 160px; height: 165px; background: #fff; border: 1px solid #eee; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; cursor: pointer; }
+/* Small Product Cards for "Similar Discoveries" */
+.prod-card-small { flex: 0 0 160px; height: 165px; background: #fff; border: 1px solid #eee; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; }
 .img-container { width: 100%; height: 115px; padding: 8px; }
 .img-container img { width: 100%; height: 100%; object-fit: contain; }
 .prod-card-small p { font-size: 10px; font-weight: bold; text-align: center; margin: 0; padding: 0 5px; }
 
 /* =============================================================
-   15-18. MOBILE & TABLET (Responsive Logic)
+   15-17. MOBILE SCOPED FIXES (Strictly for Product Page)
    ============================================================= */
 @media screen and (max-width: 1024px) {
-    .product-main-layout { display: block !important; padding: 10px !important; }
-    .main-display-area, .master-sidebar { width: 100% !important; display: block !important; max-width: 100% !important; }
+    .product-page .product-main-layout { display: block !important; padding: 10px !important; }
+    .product-page .main-display-area, 
+    .product-page .master-sidebar { width: 100% !important; display: block !important; max-width: 100% !important; }
     
-    .hero-display { height: 280px !important; background: #fff !important; }
-    .full-name-row { white-space: normal !important; display: block !important; line-height: 1.4; }
+    .product-page .hero-display { height: 280px !important; }
+    .product-page .tight-stats { display: flex !important; flex-direction: column !important; align-items: center; margin-bottom: 15px; }
+    .product-page .sidebar-btns { display: flex !important; flex-direction: row !important; gap: 10px; justify-content: center; }
+    .product-page .sidebar-btns .t-btn { flex: 1; height: 45px; display: flex; align-items: center; justify-content: center; margin-bottom: 0; }
 
-    /* Stats: Stack Vertically as requested */
-    .tight-stats { display: flex !important; flex-direction: column !important; align-items: center; gap: 8px; margin-bottom: 15px; }
-    .tight-stats p { margin: 0 !important; font-size: 14px !important; font-weight: bold; }
-
-    /* Buttons: Side by Side & Unified height */
-    .sidebar-btns { display: flex !important; flex-direction: row !important; gap: 10px; justify-content: center; }
-    .sidebar-btns .t-btn { flex: 1; max-width: 150px; height: 45px; display: flex; align-items: center; justify-content: center; padding: 0; margin-bottom: 0; }
-
-    /* Category Slider for Mobile */
+    /* Category Belt Mobile Logic */
     #catOuterWrap { position: relative !important; width: 100% !important; padding: 0 40px !important; margin-top: 25px; }
-    .cat-scroll-track { display: flex !important; flex-direction: row !important; overflow-x: auto !important; gap: 12px; scrollbar-width: none; }
-    .cat-scroll-track::-webkit-scrollbar { display: none; }
+    .cat-scroll-track { display: flex !important; flex-direction: row !important; overflow-x: auto !important; gap: 12px; }
     .cat-square { flex: 0 0 125px !important; }
-
-    .cat-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; background: red !important; border-radius: 50%; color: #fff; border: none; z-index: 100; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .cat-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; background: red !important; border-radius: 50%; color: #fff; border: none; z-index: 100; display: flex; align-items: center; justify-content: center; }
     .cat-arrow.l { left: 0; }
     .cat-arrow.r { right: 0; }
 }
 
-/* Modals & Footer */
-.text-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; justify-content: center; align-items: center; }
-.text-modal.active { display: flex; }
-.modal-box { background: #fff; padding: 25px; border-radius: 12px; max-width: 400px; width: 85%; }
-
-.site-footer { background: #111; color: #fff; padding: 20px 5% 40px 5% !important; margin-top: 40px; }
-.footer-links-row { display: flex; justify-content: center; gap: 30px; font-size: 12px; margin-bottom: 10px; }
-.copyright-line { padding-left: 2ch; font-size: 11px; opacity: 0.6; }
+/* =============================================================
+   18. FOOTER REPAIR
+   ============================================================= */
+.site-footer { 
+    background: #111 !important; 
+    color: #fff !important; 
+    padding: 20px 5% 40px !important; 
+    display: block !important;
+    margin-top: 40px;
+}
+.footer-links-row { display: flex; justify-content: center; gap: 30px; margin-bottom: 10px; }
+.copyright-line { padding-left: 2ch; font-size: 11px; opacity: 0.6; text-align: center; }
