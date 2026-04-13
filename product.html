@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AffilixS | Product View</title>
-    <link rel="stylesheet" href="CSS/styles.css?v=4.2">
+    <link rel="stylesheet" href="CSS/styles.css?v=4.1">
 </head>
 <body class="product-page">
 
@@ -35,7 +35,7 @@
 
         <section class="info-horizontal-bar">
             <div class="full-name-row"><b>FULL NAME:</b> <span id="pName">---</span></div>
-            <div id="pDesc" class="description-text" style="margin-top:10px;">---</div>
+            <div id="pDesc" class="description-text">---</div>
         </section>
 
         <div id="productRowsContainer"></div>
@@ -44,9 +44,9 @@
     <aside class="master-sidebar">
         <div class="sidebar-action-col">
             <div class="tight-stats">
-                <p>Rate: ★★★★★</p>
-                <p>Rank: #1 Trend</p>
-                <p>Price: <span id="pPrice">---</span></p>
+                <p><b>Rate:</b> ★★★★★</p>
+                <p><b>Rank:</b> #1 Trend</p>
+                <p><b>Price:</b> <span id="pPrice">---</span></p>
             </div>
             <div class="sidebar-btns">
                 <a id="buyBtn" href="#" target="_blank" class="t-btn buy-now">BUY NOW</a>
@@ -76,9 +76,11 @@
 </footer>
 
 <script>
+    // Global Modal Control
     function openM(id) { document.getElementById(id).classList.add('active'); }
     function closeM(e, id) { if(e.target.id === id) document.getElementById(id).classList.remove('active'); }
     
+    // Smooth Scroll Control
     function scrollX(id, dir) { 
         const el = document.getElementById(id);
         if(el) el.scrollBy({ left: dir * 300, behavior: 'smooth' }); 
@@ -91,6 +93,7 @@
             const pId = new URLSearchParams(window.location.search).get('id');
             const p = all.find(x => x.id == pId) || all[0];
 
+            // Load Hero Data
             document.getElementById("heroImage").src = p.image;
             document.getElementById("pName").innerText = p.name;
             document.getElementById("pDesc").innerText = p.fullDescription;
@@ -98,6 +101,8 @@
             document.getElementById("buyBtn").href = p.affiliateLink;
 
             const container = document.getElementById("productRowsContainer");
+            
+            // STRICT FILTERING: Only show same category
             const similar = all.filter(x => x.category === p.category && x.id !== p.id);
 
             if (similar.length > 0) {
@@ -109,26 +114,30 @@
                     <button class="arrow-btn l" onclick="scrollX('${rowId}', -1)">❮</button>
                     <button class="arrow-btn r" onclick="scrollX('${rowId}', 1)">❯</button>`;
                 container.appendChild(wrap);
+                
                 const row = document.getElementById(rowId);
                 similar.forEach(item => {
                     const card = document.createElement("div");
                     card.className = "prod-card-small";
-                    card.innerHTML = `<div class="img-container"><img src="${item.image}"></div><p>${item.shortName}</p>`;
+                    let sn = item.shortName.length > 17 ? item.shortName.substring(0, 14) + "..." : item.shortName;
+                    card.innerHTML = `<div class="img-container"><img src="${item.image}"></div><p>${sn}</p>`;
                     card.onclick = () => { window.location.href = `product.html?id=${item.id}`; };
                     row.appendChild(card);
                 });
             }
 
-            // Arrow Injection for Mobile
+            // Stationary Category Arrow Injection (Mobile/Tablet Only)
             if (window.innerWidth <= 1024) {
                 const outer = document.getElementById('catOuterWrap');
                 const lb = document.createElement('button'); lb.className="cat-arrow l"; lb.innerHTML="❮";
-                lb.onclick = () => scrollX('catScrollInternal', -1);
+                lb.onclick = (e) => { e.stopPropagation(); scrollX('catScrollInternal', -1); };
+                
                 const rb = document.createElement('button'); rb.className="cat-arrow r"; rb.innerHTML="❯";
-                rb.onclick = () => scrollX('catScrollInternal', 1);
+                rb.onclick = (e) => { e.stopPropagation(); scrollX('catScrollInternal', 1); };
+                
                 outer.appendChild(lb); outer.appendChild(rb);
             }
-        } catch (e) { console.error(e); }
+        } catch (e) { console.error("Initialization Error:", e); }
     }
     document.addEventListener("DOMContentLoaded", init);
 </script>
