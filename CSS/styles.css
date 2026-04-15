@@ -1,16 +1,5 @@
 ﻿/* =============================================================
-   01. GLOBAL STABILITY (Fixes Sideways Slide)
-   ============================================================= */
-html, body.home-page {
-    width: 100% !important;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden !important; /* Forces layout to stay within screen */
-    position: relative;
-}
-
-/* =============================================================
-   02. HEADER ENGINE (Logo & Title Side-by-Side)
+   01. HEADER & GLOBAL (Logo Alignment)
    ============================================================= */
 .home-page .site-header {
     display: flex;
@@ -19,119 +8,138 @@ html, body.home-page {
     padding: 0 5%;
     background: #111;
     color: #fff;
-    height: 70px; /* Slightly taller to fit logo perfectly */
+    height: 70px;
     position: sticky;
     top: 0;
     z-index: 2000;
 }
 
-/* Fix: Keeps Logo and AffilixS on one line inside header */
-.home-page .logo-group { 
-    display: flex; 
-    align-items: center; 
-    gap: 10px;
-    height: 100%; 
-}
-.home-page .logo img { height: 40px; width: auto; border-radius: 4px; object-fit: contain; }
-.home-page .logo-group h1 { font-size: 1.2rem; margin: 0; white-space: nowrap; color: #fff; }
-
-/* Desktop Nav Spacing */
-.home-page .header-nav { display: flex; gap: 30px; }
-.home-page .header-nav a, .home-page .header-nav span { cursor: pointer; font-size: 0.9rem; text-decoration: none; color: #fff; }
-
+/* Mobile Header: Logo Left / Links Right */
 @media screen and (max-width: 768px) {
-    .home-page .site-header { height: auto !important; flex-direction: column !important; padding: 10px 5% !important; }
-    .home-page .logo img { height: 30px !important; }
-    .home-page .header-nav { width: 100%; justify-content: flex-end; margin-top: 10px; }
+    .home-page .site-header {
+        height: auto !important;
+        flex-direction: column !important;
+        padding: 10px 5% !important;
+        align-items: flex-start !important; /* Forces logo to the Left */
+    }
+    .home-page .header-nav {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end; /* Nav links to the Right */
+        margin-top: 5px;
+    }
 }
 
 /* =============================================================
-   03. HERO ENGINE (Restoring Disappeared Hero)
+   02. HERO ENGINE (Closing the Gap)
    ============================================================= */
 .home-page .top-section { 
     width: 100%; 
     position: relative; 
-    display: block !important; /* Ensures it doesn't collapse */
-    min-height: 300px; 
-    margin-bottom: 60px;
+    margin-top: -5px; /* Pulls hero up to close white space */
+    margin-bottom: 50px;
 }
 
 .home-page .identity-panel {
     width: 100%;
-    height: 300px;
+    height: 320px; /* Widened slightly for desktop */
     background: url("../images/hero8888.jpg") center/cover no-repeat;
-    display: block !important;
     border-bottom: 4px solid #111;
 }
 
-/* Fix: Hero title anchored strictly to the Panel */
-.home-page .identity-text {
-    position: absolute;
-    bottom: -15px;
-    left: 40px;
-    background: rgba(255, 0, 0, 0.95);
-    padding: 6px 20px;
-    border-radius: 4px;
-    color: #fff;
-    white-space: nowrap;
-    z-index: 100;
-}
-
 @media screen and (max-width: 768px) {
-    .home-page .top-section, .home-page .identity-panel { min-height: 200px !important; height: 200px !important; }
-    .home-page .identity-text { left: 50% !important; transform: translateX(-50%); font-size: 14px; }
+    .home-page .identity-panel { height: 240px !important; } /* Widen mobile hero */
 }
 
 /* =============================================================
-   04. PRODUCT CARDS (19-Char Lock & Spacing)
+   03. HEADINGS (5ch Indent & Golden First Word)
    ============================================================= */
-.home-page .product-row-wrapper { position: relative; width: 100%; overflow: hidden; }
+.home-page .products-section h2, 
+.home-page .categories-section h2 {
+    margin-left: 5ch !important;
+    position: relative;
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+}
 
+.home-page .products-section h2::after, 
+.home-page .categories-section h2::after {
+    content: "";
+    display: block;
+    width: 4.5ch; /* Underlines first word only */
+    height: 3px;
+    background: #c6a96b;
+    margin-top: 6px;
+}
+
+/* =============================================================
+   04. CARDS & ARROWS (Red Highlights & 19-Char Lock)
+   ============================================================= */
 .home-page .product-card {
-    flex: 0 0 200px; /* Reduced from 220px to increase gap */
-    margin-right: 25px; /* Increased space between cards */
+    flex: 0 0 200px;
+    margin-right: 20px;
     background: #fff;
     border-radius: 12px;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
 }
 
-/* Fix: Character Limit Logic (Truncates text at ~19 chars) */
+/* Fix: 19-Character Constraint */
 .home-page .product-card p, 
 .home-page .product-card .short-name {
-    max-width: 19ch; 
+    max-width: 19ch;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    display: block;
     padding: 0 10px;
-    font-size: 13px;
 }
 
+/* Mobile: Reduce Card Size by 15% */
 @media screen and (max-width: 768px) {
-    .home-page .product-card { flex: 0 0 145px !important; margin-right: 15px !important; } /* 10% reduction */
+    .home-page .product-card { flex: 0 0 140px !important; } 
 }
+
+/* Unified Red Highlighted Arrows */
+.home-page .row-arrow, 
+.home-page .cat-arrow {
+    position: absolute;
+    background: rgba(255, 0, 0, 0.95) !important; /* Identity Red */
+    color: #fff !important;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Arrow Pinning */
+.home-page .row-arrow.left, .home-page .cat-arrow.l { left: 10px !important; }
+.home-page .row-arrow.right, .home-page .cat-arrow.r { right: 10px !important; }
 
 /* =============================================================
-   05. FOOTER (Centered Layout)
+   05. FOOTER (Centered Navigation)
    ============================================================= */
 .home-page .site-footer {
-    width: 100% !important;
     background: #111;
-    color: #fff;
     padding: 30px 5%;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centers links and copyright */
+    align-items: center; /* Center everything */
     text-align: center;
 }
 
 .home-page .footer-links-row {
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Center links */
     gap: 25px;
     width: 100%;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .home-page .copyright-line {
@@ -140,10 +148,6 @@ html, body.home-page {
     font-size: 11px;
     opacity: 0.6;
 }
-
-/* Hide scrollbars but allow swiping */
-.home-page .product-row::-webkit-scrollbar { display: none; }
-.home-page .product-row { scrollbar-width: none; display: flex; overflow-x: auto; }
 
 /* =============================================================
    06. PRODUCT CARD ENGINE (Visual Styling)
