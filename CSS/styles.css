@@ -1,10 +1,10 @@
 ﻿/* =============================================================
-   01. GLOBAL & HEADER (Stacked Mobile, Logo Left)
+   01. GLOBAL & HEADER (Logo Left / Nav Right / One-Line Logo)
    ============================================================= */
 body.home-page { 
-    overflow-x: hidden; 
-    width: 100%; 
-    position: relative; 
+    overflow-x: hidden !important; 
+    width: 100% !important; 
+    margin: 0; 
 }
 
 .home-page .site-header {
@@ -13,11 +13,17 @@ body.home-page {
     justify-content: space-between;
     padding: 0 5%;
     background: #111;
-    color: #fff;
     height: 70px;
     position: sticky;
     top: 0;
     z-index: 2000;
+}
+
+/* Ensure Logo and Title stay side-by-side */
+.home-page .logo-group { 
+    display: flex; 
+    align-items: center; 
+    gap: 12px; 
 }
 
 @media screen and (max-width: 768px) {
@@ -25,25 +31,24 @@ body.home-page {
         height: auto !important;
         flex-direction: column !important;
         padding: 10px 5% !important;
-        align-items: flex-start !important; /* Logo Left */
+        align-items: flex-start !important; /* Logo stays Left */
     }
     .home-page .header-nav {
         width: 100%;
         display: flex;
-        justify-content: flex-end; /* Nav Right */
+        justify-content: flex-end; /* Nav stays Right */
         margin-top: 5px;
     }
 }
 
 /* =============================================================
-   02. HERO ENGINE (Zero-Gap & Height Fix)
-   ============================================================= */
+   02. HERO ENGINE (Closure of White Space & Red Highlight)
+   ============================================================ */
 .home-page .top-section { 
     width: 100%; 
     position: relative; 
-    margin-top: -2px; /* Pulls Hero up to touch Header */
+    margin-top: -5px; /* Snap Hero to Header */
     margin-bottom: 50px;
-    min-height: 300px;
 }
 
 .home-page .identity-panel {
@@ -53,42 +58,50 @@ body.home-page {
     border-bottom: 4px solid #111;
 }
 
+.home-page .identity-text {
+    position: absolute;
+    bottom: -15px;
+    left: 40px;
+    background: #ff0000 !important; /* Identity Red */
+    padding: 6px 20px;
+    border-radius: 4px;
+    color: #fff;
+    white-space: nowrap;
+}
+
 @media screen and (max-width: 768px) {
-    .home-page .identity-panel, .home-page .top-section { 
-        height: 240px !important; 
-        min-height: 240px !important; 
-    }
+    .home-page .identity-panel { height: 220px !important; }
+    .home-page .identity-text { left: 50% !important; transform: translateX(-50%); }
 }
 
 /* =============================================================
-   03. ROW ENGINE (STRATEGIC LOCK: Prevents Stacking)
+   03. ROW ENGINE (THE STRATEGIC LOCK - PREVENTS STACKING)
    ============================================================= */
+/* This specific block forces the horizontal swipe and kills stacking */
 .home-page .product-row, 
 .home-page .categories {
-    display: flex !important;           /* FORCES HORIZONTAL */
-    flex-direction: row !important;     /* FORCES HORIZONTAL */
-    flex-wrap: nowrap !important;       /* PREVENTS STACKING */
-    overflow-x: auto !important;        /* ENABLES SWIPE */
+    display: flex !important;
+    flex-wrap: nowrap !important; /* CRITICAL: Prevents cards falling to next line */
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
     -webkit-overflow-scrolling: touch;
-    gap: 20px;
-    padding: 10px 20px 50px 20px;
-    scrollbar-width: none;              /* Hides scrollbar Firefox */
+    gap: 25px;
+    padding: 10px 20px 60px 20px;
+    scrollbar-width: none; /* Hide scrollbar */
 }
-.home-page .product-row::-webkit-scrollbar { 
-    display: none; 
-} /* Hides scrollbar Chrome */
+.home-page .product-row::-webkit-scrollbar { display: none; }
 
-/* Card Sizing & 19-Char Lock */
+/* Product Card - 19 Char Lock & 15% Mobile Reduction */
 .home-page .product-card {
-    flex: 0 0 200px; /* Locked width on Desktop */
+    flex: 0 0 200px; /* Locked width to prevent stretching */
     background: #fff;
     border-radius: 12px;
-    overflow: hidden;
 }
 
 .home-page .product-card p, 
 .home-page .product-card .short-name {
-    max-width: 19ch;
+    max-width: 19ch; /* Forced character limit */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -97,18 +110,28 @@ body.home-page {
 }
 
 @media screen and (max-width: 768px) {
-    .home-page .product-card { 
-        flex: 0 0 140px !important; /* 15% Reduction from 165px */
-    } 
+    .home-page .product-card { flex: 0 0 145px !important; } /* 15% Reduction */
 }
 
 /* =============================================================
-   04. ARROWS & HEADINGS (Red Highlight & Indents)
+   04. TITLES & RED ARROWS (Indents & Unified Identity)
    ============================================================= */
+.home-page .products-section h2, 
+.home-page .categories-section h2 {
+    margin-left: 5ch !important;
+    position: relative;
+    display: inline-block;
+}
+.home-page .products-section h2::after, 
+.home-page .categories-section h2::after {
+    content: ""; display: block; width: 4.5ch; height: 3px; background: #c6a96b; margin-top: 5px;
+}
+
+/* Identity Red Arrows */
 .home-page .row-arrow, 
 .home-page .cat-arrow {
     position: absolute;
-    background: #ff0000 !important; /* Identity Red */
+    background: #ff0000 !important;
     color: #fff !important;
     width: 32px;
     height: 32px;
@@ -119,27 +142,10 @@ body.home-page {
     justify-content: center;
     border: none;
     top: auto !important;
-    bottom: 5px !important;
+    bottom: 10px !important;
 }
-.home-page .row-arrow.left, .home-page .cat-arrow.l { left: 15px !important; }
-.home-page .row-arrow.right, .home-page .cat-arrow.r { right: 15px !important; }
-
-/* Titles: 5ch Indent & Underline */
-.home-page .products-section h2, 
-.home-page .categories-section h2 {
-    margin-left: 5ch !important;
-    position: relative;
-    display: inline-block;
-}
-.home-page .products-section h2::after, 
-.home-page .categories-section h2::after {
-    content: ""; 
-    display: block; 
-    width: 4.5ch; 
-    height: 3px; 
-    background: #c6a96b; 
-    margin-top: 5px;
-}
+.home-page .row-arrow.left, .home-page .cat-arrow.l { left: 20px !important; }
+.home-page .row-arrow.right, .home-page .cat-arrow.r { right: 20px !important; }
 
 /* =============================================================
    05. FOOTER (Centered Navigation)
@@ -150,14 +156,14 @@ body.home-page {
     display: flex;
     flex-direction: column;
     align-items: center; 
-    text-align: center;
 }
 .home-page .footer-links-row {
     display: flex;
     justify-content: center; 
-    gap: 25px;
+    gap: 30px;
     margin-bottom: 10px;
 }
+.home-page .copyright-line { text-align: center; opacity: 0.7; font-size: 11px; }
 
 /* =============================================================
    06. PRODUCT CARD ENGINE (Visual Styling)
