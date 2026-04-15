@@ -9,7 +9,7 @@ body.home-page {
 
 .home-page .site-header {
     display: flex;
-    align-items: center;
+    align-items: center; /* This is what keeps the logo INSIDE the bar vertically-centers the logo group */
     justify-content: space-between;
     padding: 0 5%;
     background: #111;
@@ -17,13 +17,18 @@ body.home-page {
     position: sticky;
     top: 0;
     z-index: 2000;
+    overflow: hidden; /* a safety net == It ensures that if any element inside the header (like a logo or a long link) tries to grow larger than 70px, it will be cut off rather than "spilling out" over Hero section */
 }
 
 /* Ensure Logo and Title stay side-by-side */
 .home-page .logo-group { 
     display: flex; 
-    align-items: center; 
-    gap: 12px; 
+    align-items: center; /* keeps text and logo image aligned */
+    gap: 12px;
+    height: 100%;        /* makes the group fill the 70px header height */
+    margin: 0;           /* removes any margin that pushes it 'out' */ 
+    padding: 0;
+    white-space: nowrap;/* prevents the logo from 'spilling' out */  
 }
 
 @media screen and (max-width: 768px) {
