@@ -54,6 +54,8 @@ body.home-page {
 @media screen and (max-width: 768px) {
     .home-page .site-header {
         width: 100% !important;      /* Fix: Forces header to full screen width */
+        body { margin: 0 !important; }
+        left: 0 !important;
         min-width: 100vm !important; /* Fix: Ensures it covers the entire viewport */
         height: auto !important;
         flex-direction: column !important;
