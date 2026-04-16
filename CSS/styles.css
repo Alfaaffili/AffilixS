@@ -55,13 +55,13 @@ body.home-page {
     .home-page .site-header {
         height: auto !important;
         flex-direction: column !important;
-        padding: 4px 3% !important;
+        padding: 4px 5% !important;
         align-items: flex-start !important; /* Logo stays Left */
     }
 
     /* This makes the logo smaller on phones, which shrinks the header height */
     .home-page .logo img {
-        height: 25px !important; 
+        height: 15px !important; 
     }
 
     .home-page .header-nav {
@@ -69,7 +69,7 @@ body.home-page {
         display: flex;
         justify-content: flex-end; /* Nav stays Right */
         margin-top: 2px;
-        margin-left: 5ch; /* makes 1ch space between nav links */
+        margin-left: .25ch; /* makes 1ch space between nav links */
     }
 }
 
