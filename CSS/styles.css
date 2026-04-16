@@ -28,9 +28,9 @@ body.home-page {
     align-items: center; /* keeps text and logo image aligned */
     gap: 12px;
     height: 100%;        /* makes the group fill the 70px header height */
-    margin: 0;           /* removes any margin that pushes it 'out' */ 
-    cursor: pointer;     /* didn't make finger index; I'm trying it with header-nav span */
-    margin-left: 5ch;    /* makes spacing between nav links */ 
+    margin: 0;           /* removes any margin that pushes it 'out' /* 
+        /* cursor: pointer;      didn't make finger index I'm trying it with header-nav span */
+        /* margin-left: 5ch;     makes spacing between nav links */ 
     padding: 0;
     white-space: nowrap;/* prevents the logo from 'spilling' out */  
 }
@@ -41,7 +41,8 @@ body.home-page {
 .home-page .header-nav span {
     color: #ffffff !important; 
     text-decoration: none;
-    cursor: pointer; 
+    cursor: pointer; /* makes finger index */
+    margin-left: 5ch; /* makes spacing between nav links */
 }
 
 /* This fixes the logo border and height */
