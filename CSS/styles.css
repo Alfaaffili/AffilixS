@@ -28,6 +28,8 @@ body.home-page {
     gap: 12px;
     height: 100%;        /* makes the group fill the 70px header height */
     margin: 0;           /* removes any margin that pushes it 'out' */ 
+    cursor: pointer;     /* makes finger index */
+    margin-left: 1ch;    /* makes spacing between nav links */ 
     padding: 0;
     white-space: nowrap;/* prevents the logo from 'spilling' out */  
 }
@@ -52,7 +54,7 @@ body.home-page {
     .home-page .site-header {
         height: auto !important;
         flex-direction: column !important;
-        padding: 10px 5% !important;
+        padding: 4px 5% !important;
         align-items: flex-start !important; /* Logo stays Left */
     }
 
@@ -65,7 +67,8 @@ body.home-page {
         width: 100%;
         display: flex;
         justify-content: flex-end; /* Nav stays Right */
-        margin-top: 5px;
+        margin-top: 2px;
+        margin-left: 1ch; /* makes 1ch space between nav links */
     }
 }
 
