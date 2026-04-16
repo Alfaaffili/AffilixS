@@ -53,23 +53,52 @@ body.home-page {
 
 @media screen and (max-width: 768px) {
     .home-page .site-header {
+        width: 100% !important;      /* Fix: Forces header to full screen width */
+        min-width: 100vm !important; /* Fix: Ensures it covers the entire viewport */
         height: auto !important;
         flex-direction: column !important;
-        padding: 4px 5% !important;
+        padding: 2px 5% !important;
         align-items: flex-start !important; /* Logo stays Left */
+        box-sizing: border-box !important;
+    }
+
+    .home-page .logo-group {
+
+        margin: 0 !important;          /* Fix: Removes any line above the logo */
+
+        padding: 0 !important;
+
+        height: 30px !important;        /* Forces a slim row for the logo */
+
+        display: flex !important;
+
+        align-items: center !important;
+
     }
 
     /* This makes the logo smaller on phones, which shrinks the header height */
     .home-page .logo img {
-        height: 15px !important; 
+        height: 22px !important;  /* slightly smaller to allow header */ 
+        margin: 0 !imporant;
     }
 
     .home-page .header-nav {
-        width: 100%;
-        display: flex;
-        justify-content: flex-end; /* Nav stays Right */
-        margin-top: 2px;
-        margin-left: .25ch; /* makes 1ch space between nav links */
+        width: 100% !important;
+        display: flex !important;
+        justify-content: flex-end !important; /* Nav stays Right */
+        margin-top: -5px !important; /*  */
+        padding-bottom: 4px !important; /*  */        
+            /* margin-left: .25ch; "slash withn astrisk here" makes 1ch space between nav links */
+    }
+    
+    .home-page .header-nav a,
+ 
+   .home-page .header-nav span {
+
+        margin-left: 12px !important;   /* Tightens spacing for mobile */
+
+        font-size: 0.75rem !important;  /* Slimmer font for a slimmer header */
+
     }
 }
 
