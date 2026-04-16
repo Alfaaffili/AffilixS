@@ -52,55 +52,55 @@ body.home-page {
 }
 
 @media screen and (max-width: 768px) {
+    /* 1. Reset the body FIRST to stop the side-to-side wobble */
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow-x: hidden !important; /* This stops the 'empty column' swipe issue */
+        width: 100% !important;
+    }
+
+    /* 2. Fix the Header Tray */
     .home-page .site-header {
-        width: 100% !important;      /* Fix: Forces header to full screen width */
-        body { margin: 0 !important; }
+        width: 100% !important;
+        min-width: 100vw !important; /* Corrected from vm to vw */
         left: 0 !important;
-        min-width: 100vm !important; /* Fix: Ensures it covers the entire viewport */
+        position: fixed !important; /* Ensures it stays pinned to the top edges */
         height: auto !important;
         flex-direction: column !important;
         padding: 2px 5% !important;
-        align-items: flex-start !important; /* Logo stays Left */
+        align-items: flex-start !important;
         box-sizing: border-box !important;
     }
 
+    /* 3. Logo and Title sizing */
     .home-page .logo-group {
-
-        margin: 0 !important;          /* Fix: Removes any line above the logo */
-
+        margin: 0 !important;
         padding: 0 !important;
-
-        height: 30px !important;        /* Forces a slim row for the logo */
-
+        height: 30px !important;
         display: flex !important;
-
         align-items: center !important;
-
+        font-size: 12px !important; /* As requested: reduced to 12px */
     }
 
-    /* This makes the logo smaller on phones, which shrinks the header height */
     .home-page .logo img {
-        height: 22px !important;  /* slightly smaller to allow header */ 
-        margin: 0 !imporant;
+        height: 23px !important; /* As requested: 5% increase */
+        margin: 0 !important;
     }
 
+    /* 4. Nav Links Spacing */
     .home-page .header-nav {
         width: 100% !important;
         display: flex !important;
-        justify-content: flex-end !important; /* Nav stays Right */
-        margin-top: -5px !important; /*  */
-        padding-bottom: 4px !important; /*  */        
-            /* margin-left: .25ch; "slash withn astrisk here" makes 1ch space between nav links */
+        justify-content: flex-end !important;
+        margin-top: -5px !important;
+        padding-bottom: 4px !important;
     }
-    
+
     .home-page .header-nav a,
- 
-   .home-page .header-nav span {
-
-        margin-left: 12px !important;   /* Tightens spacing for mobile */
-
-        font-size: 0.75rem !important;  /* Slimmer font for a slimmer header */
-
+    .home-page .header-nav span {
+        margin-left: 12px !important;
+        font-size: 0.75rem !important;
     }
 }
 
