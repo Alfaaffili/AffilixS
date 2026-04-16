@@ -30,6 +30,10 @@ body.home-page {
     height: 70px;
     position: sticky;
     top: 0;
+    left: 0 !important; /* forces it to the absolute left */
+    right: 0 !important; /* forces it to the absolute right */
+    width: 100% !important;
+    margin: 0 !important; /* removes any push from the left */
     z-index: 2000;
     overflow: hidden; /* a safety net == It ensures that if any element inside the header (like a logo or a long link) tries to grow larger than 70px, it will be cut off rather than "spilling out" over Hero section */
     color: #ffffff !important; /* Forces the header text to white */
