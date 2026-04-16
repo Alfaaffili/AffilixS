@@ -18,6 +18,7 @@ body.home-page {
     top: 0;
     z-index: 2000;
     overflow: hidden; /* a safety net == It ensures that if any element inside the header (like a logo or a long link) tries to grow larger than 70px, it will be cut off rather than "spilling out" over Hero section */
+    color: #ffffff !important; /* Forces the header text to white */
 }
 
 /* Ensure Logo and Title stay side-by-side */
@@ -31,6 +32,22 @@ body.home-page {
     white-space: nowrap;/* prevents the logo from 'spilling' out */  
 }
 
+/* This ensures all text and links in the header are white */
+.home-page .site-header, 
+.home-page .header-nav a, 
+.home-page .header-nav span {
+    color: #ffffff !important; 
+    text-decoration: none;
+}
+
+/* This fixes the logo border and height */
+.home-page .logo img {
+    height: 40px;
+    border: none !important;
+    outline: none !important;
+    display: block;
+}
+
 @media screen and (max-width: 768px) {
     .home-page .site-header {
         height: auto !important;
@@ -38,6 +55,12 @@ body.home-page {
         padding: 10px 5% !important;
         align-items: flex-start !important; /* Logo stays Left */
     }
+
+    /* This makes the logo smaller on phones, which shrinks the header height */
+    .home-page .logo img {
+        height: 25px !important; 
+    }
+
     .home-page .header-nav {
         width: 100%;
         display: flex;
