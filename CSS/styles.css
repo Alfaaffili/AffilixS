@@ -1,5 +1,6 @@
 ﻿/* =============================================================
-   01. GLOBAL & HEADER (Logo Left / Nav Right / One-Line Logo)
+   01. GLOBAL & HEADER (Logo Left / Navcursor
+ Right / One-Line Logo)
    ============================================================= */
 body.home-page { 
     overflow-x: hidden !important; 
@@ -28,8 +29,8 @@ body.home-page {
     gap: 12px;
     height: 100%;        /* makes the group fill the 70px header height */
     margin: 0;           /* removes any margin that pushes it 'out' */ 
-    cursor: pointer;     /* makes finger index */
-    margin-left: 1ch;    /* makes spacing between nav links */ 
+    cursor: pointer;     /* didn't make finger index; I'm trying it with header-nav span */
+    margin-left: 5ch;    /* makes spacing between nav links */ 
     padding: 0;
     white-space: nowrap;/* prevents the logo from 'spilling' out */  
 }
@@ -40,6 +41,7 @@ body.home-page {
 .home-page .header-nav span {
     color: #ffffff !important; 
     text-decoration: none;
+    cursor: pointer; 
 }
 
 /* This fixes the logo border and height */
