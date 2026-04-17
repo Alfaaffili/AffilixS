@@ -1,4 +1,6 @@
-﻿/* KILL ALL DEFAULT MARGINS GLOBALLY */
+﻿/* =============================================================
+   00. GLOBAL RESET
+   ============================================================= */
 * {
     box-sizing: border-box !important;
 }
@@ -7,845 +9,234 @@ html, body {
     margin: 0 !important;
     padding: 0 !important;
     width: 100% !important;
-    overflow-x: hidden !important; /* Stops the sideways wobble */
+    overflow-x: hidden !important;
     position: relative;
+    font-family: sans-serif;
 }
 
 /* =============================================================
-   01. GLOBAL & HEADER (Logo Left / Navcursor
- Right / One-Line Logo)
+   01. HEADER (Sticky & White-on-Black)
    ============================================================= */
-body.home-page { 
-    overflow-x: hidden !important; 
-    width: 100% !important; 
-    margin: 0; 
-}
-
 .home-page .site-header {
     display: flex;
-    align-items: center; /* This is what keeps the logo INSIDE the bar vertically-centers the logo group */
+    align-items: center;
     justify-content: space-between;
     padding: 0 5%;
     background: #111;
     height: 70px;
     position: sticky;
     top: 0;
-    left: 0 !important; /* forces it to the absolute left */
-    right: 0 !important; /* forces it to the absolute right */
+    left: 0;
+    right: 0;
     width: 100% !important;
-    margin: 0 !important; /* removes any push from the left */
     z-index: 2000;
-    overflow: hidden; /* a safety net == It ensures that if any element inside the header (like a logo or a long link) tries to grow larger than 70px, it will be cut off rather than "spilling out" over Hero section */
-    color: #ffffff !important; /* Forces the header text to white */
+    color: #ffffff !important;
 }
 
-/* Ensure Logo and Title stay side-by-side */
 .home-page .logo-group { 
     display: flex; 
-    align-items: center; /* keeps text and logo image aligned */
+    align-items: center; 
     gap: 12px;
-    height: 100%;        /* makes the group fill the 70px header height */
-    margin: 0;           /* removes any margin that pushes it 'out' /* 
-    padding: 0;
-    white-space: nowrap;/* prevents the logo from 'spilling' out */  
+    height: 100%; 
+    white-space: nowrap;
 }
 
-/* This ensures all text and links in the header are white */
-.home-page .site-header, 
+.home-page .logo img {
+    height: 40px;
+    border: none !important;
+    display: block;
+}
+
 .home-page .header-nav a, 
 .home-page .header-nav span {
     color: #ffffff !important; 
     text-decoration: none;
-    cursor: pointer; /* makes finger index */
-    margin-left: 5ch; /* makes spacing between nav links */
-}
-
-/* This fixes the logo border and height */
-.home-page .logo img {
-    height: 40px;
-    border: none !important;
-    outline: none !important;
-    display: block;
-}
-
-@media screen and (max-width: 768px) {
-    /* 1. Reset the body FIRST to stop the side-to-side wobble */
-    body {
-        margin: 0 !important;
-        padding: 0 !important;
-        overflow-x: hidden !important; /* This stops the 'empty column' swipe issue */
-        width: 100% !important;
-    }
-
-    /* 2. Fix the Header Tray */
-    .home-page .site-header {
-        width: 100% !important;
-        min-width: 100vw !important; /* Corrected from vm to vw */
-        left: 0 !important;
-        position: fixed !important; /* Ensures it stays pinned to the top edges */
-        height: auto !important;
-        flex-direction: column !important;
-        padding: 2px 5% !important;
-        align-items: flex-start !important;
-        box-sizing: border-box !important;
-    }
-
-    /* 3. Logo and Title sizing */
-    .home-page .logo-group {
-        margin: 0 !important;
-        padding: 0 !important;
-        height: 30px !important;
-        display: flex !important;
-        align-items: center !important;
-        font-size: 8px !important; /* As requested: reduced to 12px */
-    }
-
-    .home-page .logo img {
-        height: 23px !important; /* As requested: 5% increase */
-        margin: 0 !important;
-    }
-
-    /* 4. Nav Links Spacing */
-    .home-page .header-nav {
-        width: 100% !important;
-        display: flex !important;
-        justify-content: flex-end !important;
-        margin-top: -5px !important;
-        padding-bottom: 4px !important;
-    }
-
-    .home-page .header-nav a,
-    .home-page .header-nav span {
-        margin-left: 12px !important;
-        font-size: 0.75rem !important;
-    }
+    cursor: pointer;
+    margin-left: 5ch;
+    font-size: 0.9rem;
 }
 
 /* =============================================================
-   02. HERO ENGINE (Closure of White Space & Red Highlight)
-   ============================================================ */
+   02. HERO ENGINE (Zero Gap)
+   ============================================================= */
 .home-page .top-section { 
     width: 100%; 
     position: relative; 
-    margin-top: -10px; /* Snap Hero to Header */
-    margin-bottom: 50px;
+    margin-top: 0;
+    margin-bottom: 25px;
 }
 
 .home-page .identity-panel {
     width: 100%;
-    height: 300px;   /* it was 320px */
+    height: 300px;
     background: url("../images/hero8888.jpg") center/cover no-repeat;
     border-bottom: 4px solid #111;
 }
 
 .home-page .identity-text {
     position: absolute;
-    bottom: -15px;
-    left: 40px;
-    background: #ff0000 !important; /* Identity Red */
-    padding: 6px 20px;
+    bottom: 20px;
+    left: 5ch;
+    background: #ff0000 !important;
+    padding: 8px 20px;
     border-radius: 4px;
     color: #fff;
-    white-space: nowrap;
-}
-
-@media screen and (max-width: 768px) {
-    .home-page .identity-panel { height: 200px !important; }
-    .home-page .identity-text { left: 50% !important; transform: translateX(-50%); }
+    font-weight: bold;
+    z-index: 10;
 }
 
 /* =============================================================
-   03. ROW ENGINE (THE STRATEGIC LOCK - PREVENTS STACKING)
+   03. PRODUCT ROW ENGINE (Gap Fix & Card Shrink)
    ============================================================= */
-.home-page .products-section {
-
-    position: relative; /* This is the "Anchor" for your red arrows */
-
-    padding-bottom: 20px;
-
-}
-
-/* This reduces the gap between the Product section and Categories section */
-
 .home-page .products-section,
- 
 .home-page .categories-section {
-
-    margin-bottom: 10px !important; /* Reduced from default large gaps */
-
+    margin-bottom: 5px !important;
     padding: 0 !important;
-
 }
 
-/* This is the container that holds ONE row and its TWO arrows */
-
+/* This container ensures arrows stay with their specific row */
 .home-page .product-row-container {
-
-    position: relative; /* This pins the arrows to THIS row only */
-
+    position: relative;
     width: 100%;
-
-    margin-bottom: 20px !important; /* Reduced space between row 1 and row 2 */
-
+    margin-bottom: 10px !important; /* Tightens space between Row 1 & Row 2 */
 }
 
-/* This ensures any arrow inside a 'product-row-container' stays at the bottom corners */
-
-.home-page .product-row-container .row-arrow {
-
-    position: absolute;
-
-    bottom: 5px !important; /* Pinned to the very bottom of the row container */
-
-    background: #ff0000 !important;
-
-    color: #fff !important;
-
-    width: 32px;
-
-    height: 32px;
-
-    border-radius: 50%;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    z-index: 10;
-
-    cursor: pointer;
-
-    border: none;
-
-}
-
-
-/* Left Arrow pinned to left corner of the row */
-
-.home-page .product-row-container .row-arrow.left {
-
-    left: 20px !important;
-
-}
-
-
-/* Right Arrow pinned to right corner of the row */
-
-.home-page .product-row-container .row-arrow.right {
-
-    right: 20px !important;
-
-}
-
-/* This specific block forces the horizontal swipe and kills stacking */
-.home-page .product-row, 
-.home-page .categories {
+.home-page .product-row {
     display: flex !important;
-    flex-wrap: nowrap !important; /* CRITICAL: Prevents cards falling to next line */
-    flex-direction: row !important;
+    flex-wrap: nowrap !important;
     overflow-x: auto !important;
-    overflow-y: hidden !important;
-    -webkit-overflow-scrolling: touch;
     gap: 25px;
-    padding: 10px 20px 45px 20px;
-    scrollbar-width: none; /* Hide scrollbar */
+    padding: 10px 20px 45px 20px; /* Space for arrows at bottom */
+    scrollbar-width: none;
 }
 .home-page .product-row::-webkit-scrollbar { display: none; }
 
-/* Product Card - 19 Char Lock & 15% Mobile Reduction */
+/* FIX: Shorter card height kills the 40% empty space */
 .home-page .product-card {
-    flex: 0 0 200px; /* Locked width to prevent stretching */
+    flex: 0 0 200px;
+    height: 230px !important; /* Reduced to hug content tightly */
     background: #fff;
     border-radius: 12px;
     display: flex;
-
     flex-direction: column;
-
-    justify-content: space-between; /* Pushes the name to the bottom */
-
-    height: 280px; /* Fixed height for Desktop symmetry */
-
+    justify-content: space-between;
     overflow: hidden;
-
     position: relative;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
 }
 
-.home-page .product-card p, 
+.home-page .product-card img {
+    width: 100%;
+    height: 165px !important; 
+    object-fit: contain !important; /* Normal zoom, no cropping */
+    background: #f9f9f9;
+    padding: 10px;
+}
+
 .home-page .product-card .short-name {
-    max-width: 19ch; /* Forced character limit */
+    max-width: 19ch;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-     /* display: block; */
-     /* margin: 5px 10px; */
-    margin: auto 10px 10px 10px !important; /* "auto" top margin pushes it down - pinned to bottom edge */
-    font-size: 0.9rem;
+    margin: auto 10px 10px 10px !important; /* Pins name to bottom edge */
+    font-size: 0.85rem;
     color: #333;
     font-weight: bold;
     text-align: center;
 }
 
-@media screen and (max-width: 768px) {
-    .home-page .product-card { flex: 0 0 145px !important; } /* 15% Reduction */
-}
-
 /* =============================================================
-   04. TITLES & RED ARROWS (Indents & Unified Identity)
+   04. PINNED ARROWS (Visible on All Rows)
    ============================================================= */
-.home-page .products-section h2, 
-.home-page .categories-section h2 {
+.home-page .products-section h2 {
     margin-left: 5ch !important;
     position: relative;
-    display: inline-block;
 }
-.home-page .products-section h2::after, 
-.home-page .categories-section h2::after {
-    content: ""; display: block; width: 4.5ch; height: 3px; background: #c6a96b; margin-top: 7px;
-}
-
-.home-page .preview-panel {
-    pointer-events: none; /* Prevents the panel from flickering when cursor touches it */
-
-    margin-left: 80px;    /* Forces a 80px 'safety gap' from the cursor tip */
-
-    translateX(60px);
-    z-index: 5000;
-
-}
-
-/* Identity Red Arrows */
-.home-page .row-arrow, 
-.home-page .cat-arrow {
-    position: absolute;
-    background: #ff0000 !important;
-    color: #fff !important;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    top: auto !important;
-    bottom: 10px !important;
-}
- /* .home-page .row-arrow.left, .home-page .cat-arrow.l { left: 20px !important; } */
-.home-page .cat-arrow.l { left: 20px !important; }
- /* .home-page .row-arrow.right, .home-page .cat-arrow.r { right: 20px !important; } */
-.home-page .cat-arrow.r { right: 20px !important; }
-
-/* =============================================================
-   05. FOOTER (Centered Navigation)
-   ============================================================= */
-.home-page .site-footer {
-    background: #111;
-    padding: 30px 5%;
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-}
-.home-page .footer-links-row {
-    display: flex;
-    justify-content: center; 
-    gap: 30px;
-    margin-bottom: 10px;
-}
-.home-page .copyright-line { text-align: center; opacity: 0.7; font-size: 11px; }
-
-/* =============================================================
-
-   05.1 MOBILE REFINEMENT (Arrows & Card Size)
-
-   ============================================================= */
-
-@media screen and (max-width: 768px) {
-
-    .home-page .product-card {
-
-        flex: 0 0 138px !important; /* 5% reduction from your current 145px */
-
-        height: 210px !important;   /* Keeps them symmetrical */
-
-    }
-
-
-    .home-page .product-row {
-
-        gap: 15px; /* Enough spacing between cards */
-
-        padding-bottom: 70px !important;
-
-    }
-
-
-    /* Pinned Arrows Fix for Mobile */
-
-    .home-page .row-arrow {
-
-        bottom: 15px !important; /* Positions them clearly below the cards */
-
-        width: 28px;
-
-        height: 28px;
-
-    }
-
-}
-
-/* =============================================================
-   06. PRODUCT CARD ENGINE (Visual Styling)
-   ============================================================= */
-.product-card {
-    min-width: 220px;
-    background: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-    transition: transform 0.3s ease;
-    cursor: pointer;
-}
-.product-card:hover { transform: translateY(-8px); }
-
-.product-card img {
-    width: 100%;
-    height: 180px;
-    object-fit: contain; /* Ensure image isn't cropped or weirdly zoomed */
-    padding: 10px;
-    background: #f9f9f9;
+.home-page .products-section h2::after {
+    content: ""; display: block; width: 4.5ch; height: 3px; background: #c6a96b; margin-top: 5px;
 }
 
 .home-page .row-arrow {
-
     position: absolute;
-
+    bottom: 5px !important; 
     background: #ff0000 !important;
-
     color: #fff !important;
-
     width: 32px;
-
     height: 32px;
-
     border-radius: 50%;
-
-    z-index: 100;
-
-    display: flex;
-
+    display: flex !important; /* Forces visibility */
     align-items: center;
-
     justify-content: center;
-
-    border: none;
-
+    z-index: 100;
     cursor: pointer;
-
-    /* Pinned to lower corners of the SECTION, not the card */
-
-    bottom: 30px;
- 
+    border: none;
 }
-
-
 .home-page .row-arrow.left { left: 20px !important; }
-
 .home-page .row-arrow.right { right: 20px !important; }
 
 /* =============================================================
-   07. CATEGORY ENGINE (Grid System)
+   05. MOBILE REFINEMENT
    ============================================================= */
-.categories-wrapper {
-    position: relative;
-    width: 95%;
-    margin: 0 auto;
-    padding: 0 40px;
-}
-.categories {
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    padding-bottom: 40px;
-}
-.category {
-    min-width: 150px;
-    text-align: center;
-}
-.category img {
-    width: 120px;
-    height: 120px;
-    border-radius: 12px; /* changed from 50% */
-    object-fit: cover;
-    border: 3px solid #fff;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+@media screen and (max-width: 768px) {
+    .home-page .site-header {
+        position: fixed !important;
+        height: auto !important;
+        flex-direction: column !important;
+        padding: 5px 5% !important;
+        align-items: flex-start !important;
+    }
+
+    .home-page .logo-group { font-size: 11px !important; height: 30px !important; }
+    .home-page .logo img { height: 22px !important; }
+    
+    .home-page .header-nav { 
+        width: 100%; 
+        justify-content: flex-end; 
+        margin-top: -5px !important; 
+    }
+    .home-page .header-nav a { margin-left: 12px !important; font-size: 11px !important; }
+
+    .home-page .identity-panel { height: 200px !important; }
+    .home-page .identity-text { left: 20px; bottom: 15px; font-size: 12px; }
+
+    .home-page .product-card {
+        flex: 0 0 138px !important;
+        height: 195px !important; 
+    }
+    .home-page .product-card img { height: 140px !important; }
+    .home-page .product-row { padding-bottom: 60px !important; }
 }
 
 /* =============================================================
-   08. MODAL ENGINE (Fixed Layering)
+   06. PREVIEW & MODALS (Triple Distance Fix)
    ============================================================= */
+.home-page .preview-panel {
+    pointer-events: none !important;
+    /* Pushes the preview box 80px away from the cursor tip */
+    transform: translateX(80px) translateY(-20px) !important; 
+    z-index: 9999;
+}
+
 .modal, .text-modal {
-    display: none; /* Controlled by JS .active */
-    position: fixed !important; /* Forces it to stay on screen */
-    top: 0 !important;
-    left: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    background: rgba(0, 0, 0, 0.85);
+    display: none;
+    position: fixed !important;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.85);
+    z-index: 10000 !important;
     justify-content: center;
     align-items: center;
-    z-index: 10000 !important; /* Sits above everything */
-    align-items: center;
-    pointer-events: auto;
 }
-
-.modal.active, .text-modal.active {
-    display: flex !important;
-}
-
-.modal-box {
-    background: #fff;
-    color: #000;
-    padding: 25px;
-    border-radius: 12px;
-    width: 85%;
-    max-width: 400px;
-    max-height: 80vh;
-    overflow-y: auto;
-    position: relative;
-    z-index: 100000;
-}
+.modal.active { display: flex !important; }
 
 /* =============================================================
-   09. SYSTEM TOOLTIP & PREVIEW (Fox-tail)
+   07. FOOTER
    ============================================================= */
-#floatingPreview {
-    position: fixed;
-    top: 80px;
-    right: 40px;
-    width: 280px;
-    height: 350px;
-    background: #111;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-    z-index: 5000;
-    display: none; /* Hidden until Hover */
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-#floatingPreview.active {
-    display: block !important;
-    opacity: 1;
-}
-
-#floatingPreview img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.preview-label {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background: rgba(0,0,0,0.7);
-    color: #fff;
-    font-size: 11px;
-    text-align: center;
-    padding: 5px 0;
-    text-transform: uppercase;
-}
-
-#cursorTooltip {
-    position: fixed;
-    pointer-events: none;
-    background: rgba(17, 17, 17, 0.95);
-    color: white;
-    padding: 6px 12px;
-    border-radius: 4px;
-    font-size: 12px;
-    z-index: 10000;
-    display: none;
-    white-space: nowrap;
-}
-
-/* =============================================================
-   10. FOOTER ENGINE (Clean 2-Line Architecture)
-   ============================================================= */
-footer {
+.site-footer {
     background: #111;
     color: #fff;
-    height: 60px; /* Locked height */
-    display: flex;
-    flex-direction: column;
-    justify-content: center
-    margin-top: 80px;
-    padding-left: 3ch; /* 3-character indent from left */
-                       /*  text-align: center; */
-}
-
-.footer-links { margin-bottom: 5px; }
-.footer-links span {
-      /* margin: 0 15px; */
-    margin-right: 20px;
-    font-size: 13px;
-    cursor: pointer;
-    opacity: 0.8;
-}
-.copyright-text {
-    margin: 0;
-    font-size: 11px;
-    opacity: 0.5;
-    letter-spacing: 1px;
-}
-
-/* =============================================================
-   11. SIDEBAR: TWO-COLUMN SIDE-BY-SIDE LOCK
-   ============================================================= */
-.product-main-layout {
-    display: flex;
-    justify-content: space-between;
-    gap: 30px;
     padding: 20px 5%;
-    align-items: flex-start;
-    justify-content: space-between;
-    overflow: hidden; /* Prevent page stretching */
+    margin-top: 40px;
 }
-
-.main-display-area {
- 
-    flex: 1;
- 
-    min-width: 0;
- 
-    max-width: calc(100% - 360px); /* Forces space for sidebar */
-
-}
-
-.master-sidebar {
-    display: flex !important; visibility: visivble !important; opacity: 1 !important;
-    flex-direction: row !important; /* Forces side-by-side */
-    gap: 15px;
-    width: 330px;
-    flex-shrink: 0;
-}
-
-.sidebar-action-col {
-    flex: 0 0 160px;
-    background: #fff;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    padding: 12px;
-}
-
-.sidebar-cat-col {
-    flex: 0 0 130px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-/* =============================================================
-   12. IMAGE FIX: PREVENT "ZOOMED" LOOK
-   ============================================================= */
-/* Main Hero */
-.hero-display {
- 
-    background: #fff; border: 1px solid #eee; border-radius: 12px;
- 
-    height: 320px; width: 100%;
-
-     display: flex; justify-content: center; align-items: center;
- 
-    overflow: hidden; margin-bottom: 20px;
- 
-}
-
-.hero-display img {
-    max-width: 90%;
-    max-height: 90%;
-    object-fit: contain; /* Shows full product without cropping */
-}
-
-/* Small Cards */
-.prod-card-small {
-    flex: 0 0 160px;
-    height: 165px;
-    background: #fff;
-    border: 1px solid #eee;
-    border-radius: 8px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
-.img-container { width: 100%; height: 115px; padding: 8px; box-sizing: border-box; }
-
-.img-container img { width: 100%; height: 100%; object-fit: contain; }
-
-.prod-card-small p { font-size: 10px; font-weight: bold; text-align: center; margin-bottom: 5px; }
-
-/* .prod-card-small .img-box { */
-/*    width: 100%; */
-/*    height: 110px; */
-/*    padding: 5px; == Adds internal border space */
-/*    box-sizing: border-box; */
-/* } */
-
-
-.prod-card-small img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* Prevents zooming/cropping of products */
-}
-
-/* =============================================================
-   13. BUTTONS & CATEGORY DIMENSIONS
-   ============================================================= */
-.t-btn { display: block; width: 100%; padding: 12px 0; border: none; border-radius: 4px; font-weight: bold; font-size: 11px; text-align: center; cursor: pointer !important; text-decoration: none; }
-.buy-now { background: red !important; color: #fff; margin-bottom: 8px; }
-.go-back { background: black !important; color: #fff; }
-
-.cat-square {
-    width: 130px;
-    height: 130px;
-    background: #fff;
-    border: 1px solid #eee;
-    border-radius: 8px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
-.cat-square img { width: 100%; height: 95px; object-fit: cover; } /* Categories stay cover for aesthetic fill */
-.cat-square p { font-size: 9px; font-weight: bold; text-align: center; margin: auto 0;}
-
-/* =============================================================
-   14. ARROW POSITIONS & FOOTER
-   ============================================================= */
-.row-wrapper { position: relative; padding-bottom: 45px; margin-top: 30px; width: 100%; }
-.row-scroll {
-    display: flex; gap: 15px; overflow-x: auto;
-    scrollbar-width: none; -ms-overflow-style: none;
-}
-.row-scroll::-webkit-scrollbar { display: none; }
-
-.arrow-btn { position: absolute; bottom: 0; width: 32px; height: 32px; background: red !important; border-radius: 50%; color: #fff; border: none; display: flex; align-items: center; justify-content: center; z-index: 99; cursor: pointer !important; }
-.arrow-btn.l { left: 0; }
-.arrow-btn.r { right: 0; }
-
-[onclick], a, button { cursor: pointer !important; }
-.home-link { color: #fff !important; text-decoration: none; }
-
-.nav-item { color: #fff; text-transform: lowercase; font-size: 0.85rem; }
-.site-footer { background: #111; color: #fff; padding: 10px 5%; margin-top: 40px; }
-.footer-links-row { display: flex; justify-content: center; gap: 30px; font-size: 12px; margin-bottom: 2px; }
-.copyright-line { padding-left: 2ch; font-size: 12px; opacity: 0.8; }
-
-/* =============================================================
-   SECTION 15. GLOBAL MOBILE/TABLET RESET (Up to 1024px)
-   ============================================================= */
-@media screen and (max-width: 1024px) {
-    /* Kill the 2-column Desktop layout and force a single column */
-    .product-main-layout { 
-        display: block !important; 
-        width: 100% !important; 
-        padding: 10px !important; 
-    }
-    .main-display-area, .master-sidebar { 
-        width: 100% !important; 
-        display: block !important; 
-        float: none !important; 
-        clear: both;
-    }
-
-    /* Fix Squeezed Description & Split Titles */
-    .info-horizontal-bar { width: 100% !important; padding: 10px 0 !important; }
-    .full-name-row { display: block !important; width: 100% !important; white-space: normal !important; font-size: 16px !important; }
-
-    /* Force Hero Image to be Visible and Centered */
-    .hero-display { 
-        display: flex !important; 
-        justify-content: center; 
-        align-items: center;
-        height: 280px !important; 
-        width: 100% !important; 
-        background: #f9f9f9; 
-        margin-bottom: 20px;
-    }
-    .hero-display img { max-width: 90% !important; max-height: 95% !important; object-fit: contain; }
-}
-
-/* =============================================================
-   SECTION 16. MOBILE PORTRAIT SPECIFIC (Upright)
-   ============================================================= */
-@media screen and (max-width: 480px) {
-    /* Force Stats to Stack Vertically */
-    .tight-stats { 
-        display: flex !important; 
-        flex-direction: column !important; 
-        align-items: center !important; 
-        gap: 8px; 
-        margin-bottom: 15px; 
-    }
-    .tight-stats p { margin: 0 !important; font-size: 14px !important; font-weight: bold; }
-
-    /* Fix Buttons: Unified Size & One Line */
-    .sidebar-btns { 
-        display: flex !important; 
-        flex-direction: row !important; 
-        justify-content: center !important; 
-        gap: 10px; 
-        width: 100%; 
-    }
-    .t-btn { 
-        flex: 1 !important; 
-        max-width: 150px !important; 
-        height: 45px !important; /* Unified background size */
-        display: flex !important;
-        align-items: center;
-        justify-content: center;
-        font-size: 14px !important;
-        padding: 0 !important; 
-    }
-}
-
-/* =============================================================
-   SECTION 17. LANDSCAPE SPECIFIC (Tilted)
-   ============================================================= */
-@media screen and (max-height: 500px) and (orientation: landscape) {
-    /* Prevent columns in landscape - stay stacked for beauty */
-    .main-display-area, .master-sidebar { width: 100% !important; }
-    .hero-display { height: 200px !important; }
-    
-    /* In landscape, buttons should still be on one line */
-    .sidebar-btns { flex-direction: row !important; }
-}
-
-/* =============================================================
-   SECTION 18. CATEGORY & FOOTER FINAL POLISH
-   ============================================================= */
-#catOuterWrap { position: relative !important; width: 100% !important; padding: 0 40px !important; margin-top: 25px; }
-
-/* Fix Category Cards Stacking in Landscape */
-.cat-scroll-track { 
-    display: flex !important; 
-    flex-direction: row !important; 
-    flex-wrap: nowrap !important; 
-    overflow-x: auto !important; 
-}
-
-/* Fix Sunk Copyright */
-.site-footer { padding: 20px 5% 40px 5% !important; }
-.copyright-line { padding-left: 2ch !important; text-align: left !important; display: block; margin-top: 15px; }
-
-/* Pinned Arrows */
-.cat-arrow {
-    position: absolute; top: 50%; transform: translateY(-50%);
-    width: 36px; height: 36px; background: red !important;
-    border-radius: 50%; color: #fff; z-index: 999; border: none;
-}
-.cat-arrow.l { left: 5px; }
-.cat-arrow.r { right: 5px; }
+.footer-links-row { display: flex; justify-content: center; gap: 30px; margin-bottom: 5px; }
+.copyright-line { padding-left: 2ch; font-size: 11px; opacity: 0.6; }
