@@ -97,7 +97,7 @@ body.home-page {
         height: 30px !important;
         display: flex !important;
         align-items: center !important;
-        font-size: 12px !important; /* As requested: reduced to 12px */
+        font-size: 8px !important; /* As requested: reduced to 12px */
     }
 
     .home-page .logo img {
