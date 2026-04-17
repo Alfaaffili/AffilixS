@@ -157,6 +157,14 @@ body.home-page {
 /* =============================================================
    03. ROW ENGINE (THE STRATEGIC LOCK - PREVENTS STACKING)
    ============================================================= */
+.home-page .products-section {
+
+    position: relative; /* This is the "Anchor" for your red arrows */
+
+    padding-bottom: 20px;
+
+}
+
 /* This specific block forces the horizontal swipe and kills stacking */
 .home-page .product-row, 
 .home-page .categories {
@@ -177,6 +185,17 @@ body.home-page {
     flex: 0 0 200px; /* Locked width to prevent stretching */
     background: #fff;
     border-radius: 12px;
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between; /* Pushes the name to the bottom */
+
+    height: 280px; /* Fixed height for Desktop symmetry */
+
+    overflow: hidden;
+
+    position: relative;
 }
 
 .home-page .product-card p, 
@@ -185,8 +204,11 @@ body.home-page {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    display: block;
-    margin: 5px 10px;
+     /* display: block; */
+     /* margin: 5px 10px; */
+    margin: auto 10px 10px 10px !important; /* "auto" top margin pushes it down */
+    font-weight: bold;
+    text-align: center;
 }
 
 @media screen and (max-width: 768px) {
@@ -207,6 +229,15 @@ body.home-page {
     content: ""; display: block; width: 4.5ch; height: 3px; background: #c6a96b; margin-top: 5px;
 }
 
+.home-page .preview-panel {
+    pointer-events: none; /* Prevents the panel from flickering when cursor touches it */
+
+    margin-left: 50px;    /* Forces a 50px 'safety gap' from the cursor tip */
+
+    z-index: 5000;
+
+}
+
 /* Identity Red Arrows */
 .home-page .row-arrow, 
 .home-page .cat-arrow {
@@ -224,8 +255,10 @@ body.home-page {
     top: auto !important;
     bottom: 10px !important;
 }
-.home-page .row-arrow.left, .home-page .cat-arrow.l { left: 20px !important; }
-.home-page .row-arrow.right, .home-page .cat-arrow.r { right: 20px !important; }
+ /* .home-page .row-arrow.left, .home-page .cat-arrow.l { left: 20px !important; } */
+.home-page .cat-arrow.l { left: 20px !important; }
+ /* .home-page .row-arrow.right, .home-page .cat-arrow.r { right: 20px !important; } */
+.home-page .cat-arrow.r { right: 20px !important; }
 
 /* =============================================================
    05. FOOTER (Centered Navigation)
@@ -246,6 +279,46 @@ body.home-page {
 .home-page .copyright-line { text-align: center; opacity: 0.7; font-size: 11px; }
 
 /* =============================================================
+
+   05.1 MOBILE REFINEMENT (Arrows & Card Size)
+
+   ============================================================= */
+
+@media screen and (max-width: 768px) {
+
+    .home-page .product-card {
+
+        flex: 0 0 138px !important; /* 5% reduction from your current 145px */
+
+        height: 210px !important;   /* Keeps them symmetrical */
+
+    }
+
+
+    .home-page .product-row {
+
+        gap: 15px; /* Enough spacing between cards */
+
+        padding-bottom: 70px !important;
+
+    }
+
+
+    /* Pinned Arrows Fix for Mobile */
+
+    .home-page .row-arrow {
+
+        bottom: 15px !important; /* Positions them clearly below the cards */
+
+        width: 28px;
+
+        height: 28px;
+
+    }
+
+}
+
+/* =============================================================
    06. PRODUCT CARD ENGINE (Visual Styling)
    ============================================================= */
 .product-card {
@@ -262,8 +335,46 @@ body.home-page {
 .product-card img {
     width: 100%;
     height: 180px;
-    object-fit: cover;
+    object-fit: contain; /* Ensure image isn't cropped or weirdly zoomed */
+    background: #f9f9f9; /* jus added now, it's now */
 }
+
+.home-page .row-arrow {
+
+    position: absolute;
+
+    background: #ff0000 !important;
+
+    color: #fff !important;
+
+    width: 32px;
+
+    height: 32px;
+
+    border-radius: 50%;
+
+    z-index: 100;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: none;
+
+    cursor: pointer;
+
+    /* Pinned to lower corners of the SECTION, not the card */
+
+    bottom: 30px;
+ 
+}
+
+
+.home-page .row-arrow.left { left: 20px !important; }
+
+.home-page .row-arrow.right { right: 20px !important; }
 
 /* =============================================================
    07. CATEGORY ENGINE (Grid System)
