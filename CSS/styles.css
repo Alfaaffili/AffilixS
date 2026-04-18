@@ -1,9 +1,7 @@
 ﻿/* =============================================================
-   00. GLOBAL RESET
+   01. GLOBAL RESET & BODY (Edge-to-Edge Lock)
    ============================================================= */
-* {
-    box-sizing: border-box !important;
-}
+* { box-sizing: border-box !important; }
 
 html, body {
     margin: 0 !important;
@@ -15,7 +13,7 @@ html, body {
 }
 
 /* =============================================================
-   01. HEADER (Sticky & White-on-Black)
+   02. HEADER (Fixed Sticky & White-on-Black)
    ============================================================= */
 .home-page .site-header {
     display: flex;
@@ -30,7 +28,6 @@ html, body {
     right: 0;
     width: 100% !important;
     z-index: 2000;
-    color: #ffffff !important;
 }
 
 .home-page .logo-group { 
@@ -38,32 +35,27 @@ html, body {
     align-items: center; 
     gap: 12px;
     height: 100%; 
-    white-space: nowrap;
 }
 
-.home-page .logo img {
-    height: 40px;
-    border: none !important;
-    display: block;
-}
+.home-page .logo img { height: 40px; display: block; border: none; }
 
 .home-page .header-nav a, 
 .home-page .header-nav span {
     color: #ffffff !important; 
     text-decoration: none;
-    cursor: pointer;
     margin-left: 5ch;
     font-size: 0.9rem;
+    cursor: pointer;
 }
 
 /* =============================================================
-   02. HERO ENGINE (Zero Gap)
+   03. HERO ENGINE (Zero Gap & Pinned Title)
    ============================================================= */
 .home-page .top-section { 
     width: 100%; 
     position: relative; 
     margin-top: 0;
-    margin-bottom: 25px;
+    margin-bottom: 0 !important; /* Pulls products up */
 }
 
 .home-page .identity-panel {
@@ -71,34 +63,31 @@ html, body {
     height: 300px;
     background: url("../images/hero8888.jpg") center/cover no-repeat;
     border-bottom: 4px solid #111;
+    position: relative;
 }
 
 .home-page .identity-text {
     position: absolute;
-    bottom: 20px;
+    bottom: -15px !important; /* Pinned exactly to the bottom edge */
     left: 5ch;
     background: #ff0000 !important;
     padding: 8px 20px;
     border-radius: 4px;
     color: #fff;
     font-weight: bold;
-    z-index: 10;
+    z-index: 100;
+    white-space: nowrap;
 }
 
 /* =============================================================
-   03. PRODUCT ROW ENGINE (Gap Fix & Card Shrink)
+   04. PRODUCT ROW ENGINE (Tight Gaps & Fixed Arrows)
    ============================================================= */
-.home-page .products-section,
-.home-page .categories-section {
-    margin-bottom: 5px !important;
-    padding: 0 !important;
-}
+.home-page .products-section { margin-top: 15px !important; }
 
-/* This container ensures arrows stay with their specific row */
 .home-page .product-row-container {
     position: relative;
     width: 100%;
-    margin-bottom: 10px !important; /* Tightens space between Row 1 & Row 2 */
+    margin-bottom: 5px !important; /* Fixes the '4-line gap' between rows */
 }
 
 .home-page .product-row {
@@ -106,15 +95,15 @@ html, body {
     flex-wrap: nowrap !important;
     overflow-x: auto !important;
     gap: 25px;
-    padding: 10px 20px 45px 20px; /* Space for arrows at bottom */
+    padding: 10px 20px 45px 20px;
     scrollbar-width: none;
 }
 .home-page .product-row::-webkit-scrollbar { display: none; }
 
-/* FIX: Shorter card height kills the 40% empty space */
+/* Product Card - Clean hug, no white space */
 .home-page .product-card {
     flex: 0 0 200px;
-    height: 230px !important; /* Reduced to hug content tightly */
+    height: 225px !important;
     background: #fff;
     border-radius: 12px;
     display: flex;
@@ -122,61 +111,113 @@ html, body {
     justify-content: space-between;
     overflow: hidden;
     position: relative;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
 }
 
 .home-page .product-card img {
     width: 100%;
-    height: 165px !important; 
-    object-fit: contain !important; /* Normal zoom, no cropping */
+    height: 165px !important;
+    object-fit: contain !important;
     background: #f9f9f9;
-    padding: 10px;
+    padding: 5px;
 }
 
 .home-page .product-card .short-name {
-    max-width: 19ch;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    margin: auto 10px 10px 10px !important; /* Pins name to bottom edge */
+    margin: auto 10px 8px 10px !important;
     font-size: 0.85rem;
-    color: #333;
     font-weight: bold;
     text-align: center;
 }
 
-/* =============================================================
-   04. PINNED ARROWS (Visible on All Rows)
-   ============================================================= */
-.home-page .products-section h2 {
-    margin-left: 5ch !important;
-    position: relative;
-}
-.home-page .products-section h2::after {
-    content: ""; display: block; width: 4.5ch; height: 3px; background: #c6a96b; margin-top: 5px;
-}
-
+/* Arrows - Pinned to Row Container */
 .home-page .row-arrow {
     position: absolute;
     bottom: 5px !important; 
     background: #ff0000 !important;
     color: #fff !important;
-    width: 32px;
-    height: 32px;
+    width: 32px; height: 32px;
     border-radius: 50%;
-    display: flex !important; /* Forces visibility */
-    align-items: center;
-    justify-content: center;
+    display: flex !important;
+    align-items: center; justify-content: center;
     z-index: 100;
-    cursor: pointer;
     border: none;
+    cursor: pointer;
 }
 .home-page .row-arrow.left { left: 20px !important; }
 .home-page .row-arrow.right { right: 20px !important; }
 
 /* =============================================================
-   05. MOBILE REFINEMENT
+   05. CATEGORY ENGINE (Restore Swipe & Uniformity)
    ============================================================= */
+.home-page .categories {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 20px;
+    scrollbar-width: none;
+}
+
+.home-page .category {
+    flex: 0 0 150px !important;
+    text-align: center;
+}
+
+.home-page .category img {
+    width: 120px; height: 120px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+/* =============================================================
+   06. PREVIEW & MODALS (Fixing the Float)
+   ============================================================= */
+/* FIXED: Position fixed ensures it doesn't push the header down */
+.home-page .preview-panel, #floatingPreview {
+    position: fixed !important; 
+    top: 100px !important;
+    right: 50px !important;
+    width: 280px; height: 350px;
+    background: #111;
+    z-index: 5000 !important;
+    pointer-events: none;
+    border: 2px solid #ff0000;
+    display: none; /* Controlled by active class */
+}
+
+#floatingPreview.active { display: block !important; opacity: 1; }
+
+/* Modals Restoration */
+.modal, .text-modal {
+    display: none;
+    position: fixed !important;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.85);
+    z-index: 10000 !important;
+    justify-content: center; align-items: center;
+}
+.modal.active, .text-modal.active { display: flex !important; }
+
+/* =============================================================
+   07. FOOTER & MOBILE REFINEMENT
+   ============================================================= */
+.site-footer {
+    background: #111 !important;
+    color: #fff;
+    padding: 40px 5% !important;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center !important;
+    margin-top: 50px;
+}
+
+.footer-links-row {
+    display: flex;
+    justify-content: center !important;
+    gap: 30px;
+    margin-bottom: 10px;
+}
+
 @media screen and (max-width: 768px) {
     .home-page .site-header {
         position: fixed !important;
@@ -185,58 +226,11 @@ html, body {
         padding: 5px 5% !important;
         align-items: flex-start !important;
     }
-
     .home-page .logo-group { font-size: 11px !important; height: 30px !important; }
     .home-page .logo img { height: 22px !important; }
-    
-    .home-page .header-nav { 
-        width: 100%; 
-        justify-content: flex-end; 
-        margin-top: -5px !important; 
-    }
+    .home-page .header-nav { width: 100%; justify-content: flex-end; margin-top: -5px !important; }
     .home-page .header-nav a { margin-left: 12px !important; font-size: 11px !important; }
-
     .home-page .identity-panel { height: 200px !important; }
-    .home-page .identity-text { left: 20px; bottom: 15px; font-size: 12px; }
-
-    .home-page .product-card {
-        flex: 0 0 138px !important;
-        height: 195px !important; 
-    }
-    .home-page .product-card img { height: 140px !important; }
-    .home-page .product-row { padding-bottom: 60px !important; }
+    .home-page .product-card { flex: 0 0 138px !important; height: 190px !important; }
+    .home-page .product-card img { height: 135px !important; }
 }
-
-/* =============================================================
-   06. PREVIEW & MODALS (Triple Distance Fix)
-   ============================================================= */
-.home-page .preview-panel {
-    pointer-events: none !important;
-    /* Pushes the preview box 80px away from the cursor tip */
-    transform: translateX(80px) translateY(-20px) !important; 
-    z-index: 9999;
-}
-
-.modal, .text-modal {
-    display: none;
-    position: fixed !important;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    background: rgba(0,0,0,0.85);
-    z-index: 10000 !important;
-    justify-content: center;
-    align-items: center;
-}
-.modal.active { display: flex !important; }
-
-/* =============================================================
-   07. FOOTER
-   ============================================================= */
-.site-footer {
-    background: #111;
-    color: #fff;
-    padding: 20px 5%;
-    margin-top: 40px;
-}
-.footer-links-row { display: flex; justify-content: center; gap: 30px; margin-bottom: 5px; }
-.copyright-line { padding-left: 2ch; font-size: 11px; opacity: 0.6; }
