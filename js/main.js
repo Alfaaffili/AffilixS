@@ -6,19 +6,17 @@ const IS_TOUCH = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 /* =============================================================
    02. DATA INGESTION (The Engine)
    ============================================================= */
+// Replace the old fetch line with this dynamic one:
 async function loadProducts() {
     try {
-        const res = await fetch("Data/products.json?v=1.4");
+        const autoVersion = new Date().getTime();
+        const res = await fetch("Data/products.json?v=" + autoVersion);
         const data = await res.json();
         
-        // Render the product rows
         renderProducts(data);
-        
-        // Set up the category arrows
         setupCategoryArrows(); 
-
     } catch (e) { 
-        console.error("Critical: Data Load Failed", e); 
+        console.error("Data fail", e); 
     }
 }
 
@@ -26,12 +24,25 @@ async function loadProducts() {
    03. PRODUCT RENDERING (Fixes Ghost Arrows)
    ============================================================= */
 function renderProducts(products) {
+    /* main.js */
+
+function renderProducts(products) {
     const container = document.querySelector("#productsContainer");
     if (!container) return;
     
-    // Clear container and add the gold-underline-ready title
+    // THE GHOST KILLER: 
+    // This finds ANY button with the arrow class on the entire page and deletes it 
+    // before we build the new rows. This prevents duplication.
+    document.querySelectorAll('.row-arrow').forEach(arrow => arrow.remove());
+
+    // Reset the container content to just the title
     container.innerHTML = '<h2 class="section-title"><span>Featured</span> Products</h2>';
 
+    // ... The rest of your code (the for loop that creates rows) follows here ...
+    for (let i = 0; i < 5; i++) {
+        // ... (existing slice and row creation logic)
+    }
+}
     // Loop through 5 rows max
     for (let i = 0; i < 5; i++) {
         const slice = products.slice(i * 20, (i + 1) * 20);
