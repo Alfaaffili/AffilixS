@@ -137,9 +137,12 @@ html, body {
     text-align: center;
  }
 
+/* Fix 2: Copyright to the Left */
 .footer-row-2 {
-    padding: 5px 5% 1px 5%;
-    text-align: center; /* Centered copyright */
+    padding: 10px 5%;
+    display: flex;
+    justify-content: flex-start; /* Aligns content to the left */
+    width: 100%
  }
 
 .footer-links span {
@@ -152,6 +155,7 @@ html, body {
     margin: 0;
     font-size: 0.8rem;
     opacity: 0.8;
+    text-align: left; /* Ensures text itself is left-aligned */
  }
 
 /* MODALS - Fix 8: Upper Middle & Centered */
