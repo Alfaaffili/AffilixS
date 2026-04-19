@@ -1,282 +1,86 @@
-﻿/* =============================================================
-   01. HELPERS & SELECTORS
-   ============================================================= */
-const qs = s => document.querySelector(s);
-const qsa = s => document.querySelectorAll(s);
+﻿const IS_TOUCH = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
-const productSection = qs("#productsContainer");
-const productModal = qs("#productModal");
-const tooltip = qs("#cursorTooltip");
-
-/* =============================================================
-   02. CONFIGURATION (B04 Rules)
-   ============================================================= */
-const PRODUCTS_PER_ROW = 20;
-const MAX_ROWS = 5;
-const IS_TOUCH = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-
-/* =============================================================
-   03. DATA INGESTION ENGINE
-   ============================================================= */
 async function loadProducts() {
     try {
-        const res = await fetch("Data/products.json?v=1.3.1");
+        const res = await fetch("Data/products.json?v=1.4");
         const data = await res.json();
-        // Sorting by Priority (High to Low)
-        data.sort((a, b) => (b.priority || 0) - (a.priority || 0));
         renderProducts(data);
-    } catch (e) {
-        console.error("Critical: Product Data Load Failed", e);
-    }
+        setupTitles(); // Apply gold highlight
+    } catch (e) { console.error("Data fail", e); }
 }
 
-/* =============================================================
-   04. ROW DISTRIBUTION LOGIC (Clean 20-20-20 Loop)
-   ============================================================= */
-function renderProducts(products) {
-    if (!productSection) return;
-    productSection.innerHTML = "<h2>Featured Products</h2>";
-
-    for (let i = 0; i < MAX_ROWS; i++) {
-        // Precise inline slicing for better performance
-        const slice = products.slice(i * PRODUCTS_PER_ROW, (i + 1) * PRODUCTS_PER_ROW);
-        
-        if (slice.length > 0) {
-            const { wrapper, row } = createRow();
-            slice.forEach(p => row.appendChild(createCard(p)));
-            productSection.appendChild(wrapper);
+function setupTitles() {
+    document.querySelectorAll(".section-title").forEach(title => {
+        const words = title.innerText.split(" ");
+        if (words.length > 0) {
+            const first = words.shift();
+            title.innerHTML = `<span>${first}</span> ${words.join(" ")}`;
         }
-    }
-    
-    // Re-trigger mobile adjustments after content is ready
-    if (typeof updateMobileState === "function") updateMobileState();
-}
-
-/* =============================================================
-   05. SCROLL ENGINE (Arrows)
-   ============================================================= */
-function createRow() {
-    const wrapper = document.createElement("div");
-    wrapper.className = "product-row-wrapper";
-    
-    const row = document.createElement("div");
-    row.className = "product-row";
-
-    const btnL = document.createElement("button");
-    btnL.className = "row-arrow left";
-    btnL.innerHTML = "❮";
-    btnL.onclick = () => row.scrollBy({ left: -400, behavior: "smooth" });
-
-    const btnR = document.createElement("button");
-    btnR.className = "row-arrow right";
-    btnR.innerHTML = "❯";
-    btnR.onclick = () => row.scrollBy({ left: 400, behavior: "smooth" });
-
-    wrapper.append(btnL, row, btnR);
-    return { wrapper, row };
-}
-
-/* =============================================================
-   06. CARD BUILDER ENGINE
-   ============================================================= */
-function createCard(p) {
-    const card = document.createElement("div");
-    card.className = "product-card";
-    
-    // Minimalist Tooltip Data
-    card.setAttribute('data-shortname', p.shortName || "Product");
-    card.setAttribute('data-price', `${p.currency}${p.price}`);
-
-    const img = document.createElement("img");
-    img.src = p.image;
-    img.alt = p.name;
-      /* img.loading = "lazy"; */
-    card.appendChild(img);
-
-
-    // HOVER COMMANDS  (Preserved Desktop Logic)
-    card.onmouseenter = () => {
-        const prev = document.querySelector("#floatingPreview");
-        const prevImg = document.querySelector("#previewImage");
-        // only run if we aren't on a touch device and the element exists
-         if(!is_touch && prev && prevImg) {
-            prevImg.src = p.image;
-            prev.classList.add("active");
-        }
-    };
-    card.onmouseleave = () => {
-        const prev = document.querySelector("#floatingPreview");
-        if(prev) prev.classList.remove("active");
-    };
-
-    // --- UPDATED CLICK COMMAND ---
-
-    // Instead of opening a modal, we redirect to the new premium page.
-
- // card.onclick = () => {
-
- //     window.location.href = `product.html?id=${p.id}`;
-
- // };
-
-
-
-    return card;
-
- }
-
-/* =============================================================
-   07. PRODUCT MODAL ENGINE (Opening Logic)
-   ============================================================= */
-function openProductModal(p) {
-    // ADD THIS LINE: It stops the modal from opening and lets Section 06 handle the page jump
-
-    return;
-
-    const modal = document.querySelector("#productModal");
-    if (!modal) return;
-
-    // Reset internal scroll of the box to the top
-    const modalBox = document.querySelector(".modal-box");
-    if (modalBox) modalBox.scrollTop = 0;
-
-    // Inject Data
-    document.querySelector("#modalImage").src = p.image;
-    document.querySelector("#modalTitle").textContent = p.name;
-    document.querySelector("#modalPrice").textContent = `${p.currency}${p.price}`;
-    document.querySelector("#buyButton").href = p.affiliateLink;
-    
-    // Activate
-    modal.classList.add("active");
-    document.body.style.overflow = "hidden"; // Prevent background scroll
-}
-
-/* =============================================================
-   08. GLOBAL MODAL CONTROLLER (Stabilized)
-   ============================================================= */
-document.addEventListener("click", (e) => {
-    // 1. OPENING Logic
-    const trigger = e.target.closest("[data-modal]");
-    if (trigger) {
-        const target = document.getElementById(trigger.dataset.modal);
-        if (target) {
-            target.classList.add("active");
-            document.body.style.overflow = "hidden";
-        }
-    }
-
-    // 2. CLOSING Logic (X button OR background)
-    if (e.target.classList.contains("close-modal") || e.target.classList.contains("modal") || e.target.classList.contains("text-modal")) {
-        const activeModal = document.querySelector(".modal.active, .text-modal.active");
-        if (activeModal) {
-            activeModal.classList.remove("active");
-            document.body.style.overflow = "auto";
-        }
-    }
-});
-
-/* =============================================================
-   09. SCROLL ARROW ENGINE (Setup)
-   ============================================================= */
-function setupArrows() {
-    document.querySelectorAll(".row-arrow").forEach(btn => {
-        btn.onclick = (e) => {
-            e.stopPropagation(); // CRITICAL: Stop tap arrow click from hitting or opening a product card behind arrow
-            const row = btn.parentElement.querySelector(".product-row, .categories");
-            const direction = btn.classList.contains("left") ? -300 : 300;
-            if (row) row.scrollBy({ left: direction, behavior: "smooth" });
-        };
     });
 }
 
-/* =============================================================
-   10. INITIALIZATION (v2.0 Hardware Precision)
-   ============================================================= */
-document.addEventListener("DOMContentLoaded", async () => {
-    await loadProducts();
-    setupArrows();
+function renderProducts(products) {
+    const container = document.querySelector("#productsContainer");
+    if (!container) return;
 
-    const screenWidth = window.innerWidth;
-    const isMobile = screenWidth <= 1024 || ('ontouchstart' in window);
-    const preview = document.querySelector("#floatingPreview");
+    for (let i = 0; i < 5; i++) {
+        const slice = products.slice(i * 20, (i + 1) * 20);
+        if (slice.length > 0) {
+            const wrapper = document.createElement("div");
+            wrapper.className = "product-row-wrapper";
+            
+            const row = document.createElement("div");
+            row.className = "product-row";
+            
+            const btnL = document.createElement("button");
+            btnL.className = "row-arrow left"; btnL.innerHTML = "❮";
+            btnL.onclick = () => row.scrollBy({left: -300, behavior: 'smooth'});
 
-    if (isMobile) {
-        if (preview) preview.remove(); 
+            const btnR = document.createElement("button");
+            btnR.className = "row-arrow right"; btnR.innerHTML = "❯";
+            btnR.onclick = () => row.scrollBy({left: 300, behavior: 'smooth'});
 
-        // SMART TAP: Prevent Scrolling from opening products
-        let startX, startY;
-        document.querySelectorAll('.product-card').forEach(card => {
-            card.addEventListener('touchstart', (e) => {
-                startX = e.touches[0].clientX;
-                startY = e.touches[0].clientY;
-            }, {passive: true});
-
-            card.addEventListener('touchend', (e) => {
-                const diffX = Math.abs(e.changedTouches[0].clientX - startX);
-                const diffY = Math.abs(e.changedTouches[0].clientY - startY);
-                if (diffX < 10 && diffY < 10) { card.click(); }
-            }, false);
-        });
-    } else {
-        // DESKTOP: Hover Follow-Preview (Up & Right)
-        const cards = document.querySelectorAll('.product-card');
-        cards.forEach(card => {
-            card.addEventListener('mouseenter', () => { if(preview) preview.style.display = 'block'; });
-            card.addEventListener('mouseleave', () => { if(preview) preview.style.display = 'none'; });
-            card.addEventListener('mousemove', (e) => {
-                if(preview) {
-                    preview.style.left = (e.clientX + 20) + 'px';
-                    preview.style.top = (e.clientY - 220) + 'px'; 
-                }
+            slice.forEach(p => {
+                const card = document.createElement("div");
+                card.className = "product-card";
+                card.innerHTML = `<img src="${p.image}" alt="${p.name}"><div class="short-name">${p.shortName}</div>`;
+                
+                // Preview Logic
+                card.onmouseenter = () => {
+                    const prev = document.querySelector("#floatingPreview");
+                    const pImg = document.querySelector("#previewImage");
+                    if(!IS_TOUCH && prev && pImg) {
+                        pImg.src = p.image;
+                        prev.classList.add("active");
+                    }
+                };
+                card.onmouseleave = () => document.querySelector("#floatingPreview").classList.remove("active");
+                card.onmousemove = (e) => {
+                    const prev = document.querySelector("#floatingPreview");
+                    if(prev) {
+                        prev.style.left = (e.clientX + 15) + "px";
+                        prev.style.top = (e.clientY - 200) + "px";
+                    }
+                };
+                card.onclick = () => window.location.href = `product.html?id=${p.id}`;
+                row.appendChild(card);
             });
-        });
+
+            wrapper.append(btnL, row, btnR);
+            container.appendChild(wrapper);
+        }
     }
-
-    // --- CATEGORY ARROW TOGGLE (Minimized Desktop) ---
-    const catArrows = document.querySelectorAll(".categories-wrapper .row-arrow");
-    const catCount = document.querySelectorAll(".category").length;
-    
-    if (screenWidth > 1150 && catCount <= 5) {
-        // Hide on Maximized if few categories
-        catArrows.forEach(a => a.style.display = "none");
-    } else if (screenWidth <= 1150 && screenWidth > 767) {
-        // Force show on Minimized Desktop
-        catArrows.forEach(a => a.style.display = "flex");
-    }
-
-// ... existing init code ...
-
-// Note #4: Strict Filtering (Same Type Only)
-const similar = all.filter(x => x.category === p.category && x.id !== p.id);
-
-if (similar.length > 0) {
-    const rowId = "row-similar";
-    const wrap = document.createElement("div");
-    wrap.className = "row-wrapper";
-    wrap.innerHTML = `
-        <h2 class="row-title">Similar Discoveries</h2>
-        <div class="row-scroll" id="${rowId}"></div>
-        <button class="arrow-btn l" onclick="scrollX('${rowId}', -1)">❮</button>
-        <button class="arrow-btn r" onclick="scrollX('${rowId}', 1)">❯</button>`;
-    container.appendChild(wrap);
-    
-    // ... item rendering logic ...
 }
 
-// SECTION: Add Arrows to Category Row for Mobile
-// We target the existing .sidebar-cat-col and inject arrows
-const catCol = document.querySelector('.sidebar-cat-col');
-if (window.innerWidth <= 768 && catCol) {
-    catCol.id = "catRowMobile"; // Assign ID for scroll function
-    const lBtn = document.createElement('button');
-    lBtn.className = "cat-arrow l"; lBtn.innerHTML = "❮";
-    lBtn.onclick = () => scrollX('catRowMobile', -1);
-    
-    const rBtn = document.createElement('button');
-    rBtn.className = "cat-arrow r"; rBtn.innerHTML = "❯";
-    rBtn.onclick = () => scrollX('catRowMobile', 1);
-    
-    catCol.appendChild(lBtn);
-    catCol.appendChild(rBtn);
-}
+// Modal Global Listener
+document.addEventListener("click", (e) => {
+    const trigger = e.target.closest("[data-modal]");
+    if (trigger) {
+        document.getElementById(trigger.dataset.modal).classList.add("active");
+    }
+    if (e.target.classList.contains("text-modal") || e.target.classList.contains("close-modal")) {
+        document.querySelectorAll(".text-modal").forEach(m => m.classList.remove("active"));
+    }
 });
+
+document.addEventListener("DOMContentLoaded", loadProducts);
