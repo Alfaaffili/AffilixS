@@ -98,7 +98,8 @@ function createCard(p) {
     card.onmouseenter = () => {
         const prev = document.querySelector("#floatingPreview");
         const prevImg = document.querySelector("#previewImage");
-        if(prev && prevImg) {
+        // only run if we aren't on a touch device and the element exists
+         if(!is_touch && prev && prevImg) {
             prevImg.src = p.image;
             prev.classList.add("active");
         }
@@ -112,11 +113,11 @@ function createCard(p) {
 
     // Instead of opening a modal, we redirect to the new premium page.
 
-    card.onclick = () => {
+ // card.onclick = () => {
 
-        window.location.href = `product.html?id=${p.id}`;
+ //     window.location.href = `product.html?id=${p.id}`;
 
-    };
+ // };
 
 
 

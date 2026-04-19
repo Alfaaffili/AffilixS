@@ -68,9 +68,10 @@ html, body {
 
 .home-page .identity-text {
     position: absolute;
-    bottom: -15px !important; /* Pinned exactly to the bottom edge */
-    left: 5ch;
-    background: #ff0000 !important;
+    bottom: 0px; /* was 10px to Pin it exactly to the bottom edge */
+    transform: translateY(50%); /* Centers the box over the border line safely */
+    left: 40px;
+    background: #ff0000;
     padding: 8px 20px;
     border-radius: 4px;
     color: #fff;
@@ -221,10 +222,13 @@ html, body {
 @media screen and (max-width: 768px) {
     .home-page .site-header {
         position: fixed !important;
-        height: auto !important;
+        height: 80px !important;
         flex-direction: column !important;
         padding: 5px 5% !important;
         align-items: flex-start !important;
+    }
+    .home-page .top-section {
+        margin-top: 80px !important; /* Prevents hero from hiding under header */
     }
     .home-page .logo-group { font-size: 11px !important; height: 30px !important; }
     .home-page .logo img { height: 22px !important; }
