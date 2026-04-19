@@ -1,12 +1,37 @@
 ﻿const IS_TOUCH = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
+/* REPLACE your old function with this one */
+
 async function loadProducts() {
+
     try {
+
         const res = await fetch("Data/products.json?v=1.4");
+
         const data = await res.json();
-        renderProducts(data);
-        setupTitles(); // Apply gold highlight
-    } catch (e) { console.error("Data fail", e); }
+
+        
+        // 1. Render the products
+
+                renderProducts(data);
+
+        
+        // 2. Apply the golden underline to titles
+
+                setupTitles();
+ 
+        
+        // 3. NEW: Setup the category arrows
+
+                 setupCategoryArrows();
+ 
+
+    } catch (e) {
+ 
+        console.error("Data fail", e);
+ 
+    }
+
 }
 
 function setupTitles() {
@@ -84,3 +109,42 @@ document.addEventListener("click", (e) => {
 });
 
 document.addEventListener("DOMContentLoaded", loadProducts);
+
+/* ADD this helper function below or above the others */
+
+function setupCategoryArrows() {
+
+    const wrap = document.querySelector(".categories-wrapper");
+
+    const row = document.querySelector("#categoriesRow");
+
+   
+
+    if (wrap && row && !wrap.querySelector(".row-arrow")) {
+
+        const btnL = document.createElement("button");
+
+        btnL.className = "row-arrow left";
+
+        btnL.innerHTML = "❮";
+
+        btnL.onclick = () => row.scrollBy({left: -300, behavior: 'smooth'});
+
+
+
+        const btnR = document.createElement("button");
+
+        btnR.className = "row-arrow right";
+        btnR.innerHTML = "❯";
+
+        btnR.onclick = () => row.scrollBy({left: 300, behavior: 'smooth'});
+
+
+
+        wrap.appendChild(btnL);
+
+        wrap.appendChild(btnR);
+
+    }
+
+}
