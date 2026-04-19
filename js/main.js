@@ -6,20 +6,36 @@ const IS_TOUCH = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 /* =============================================================
    02. DATA INGESTION (The Engine)
    ============================================================= */
-// Replace the old fetch line with this dynamic one:
+// Replace the old fetch line with this dynamic one It uses a single dataVersion variable which is cleaner:
 async function loadProducts() {
     try {
-        const autoVersion = new Date().getTime();
-        const res = await fetch("Data/products.json?v=" + autoVersion);
+        // Create the timestamp once
+        const dataVersion = new Date().getTime();
+        
+        // Fetch the data with the cache-buster
+        const res = await fetch("Data/products.json?v=" + dataVersion);
+        
+        if (!res.ok) throw new Error("Network response was not ok");
+        
         const data = await res.json();
         
+        // Run the visual functions
         renderProducts(data);
         setupCategoryArrows(); 
+        
     } catch (e) { 
-        console.error("Data fail", e); 
+        console.error("AffilixS Load Error:", e);
+        
+        // Fallback: Try loading without the timestamp if the first one fails
+        try {
+            const res = await fetch("Data/products.json");
+            const data = await res.json();
+            renderProducts(data);
+        } catch (innerError) {
+            console.error("Total failure to load JSON", innerError);
+        }
     }
 }
-
 /* =============================================================
    03. PRODUCT RENDERING (Fixes Ghost Arrows)
    ============================================================= */

@@ -98,11 +98,16 @@
     
     // Attach the timestamp as a version query
     script.src = "js/main.js?v=" + version;
+
+// This ensures the script is fully loaded before the page tries to use it
+
+    script.onload = function() {
+
+        // We removed the console.log line to keep it clean.
+    };    
     
     // Inject it into the page
     document.body.appendChild(script);
-    
-    console.log("AffilixS: main.js loaded with auto-version: " + version);
   })();
 </script>
 
