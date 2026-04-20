@@ -207,37 +207,69 @@ html, body {
 }
 
 /* =============================================================
-   MOBILE REFINEMENTS (GUARDED - Max-width 768px)
+   REFINED MOBILE FIREWALL (Guarded - Max-width 768px)
    ============================================================= */
 @media (max-width: 768px) {
-    /* 1. Identity Title Adjustment */
-    .identity-text {
-        margin-left: 20px; /* Appropriate distance for smaller screens */
-        font-size: 1.2rem;
-        margin-top: 10px;
+    /* 1. Header: Logo smaller, Nav links horizontal on 2nd line */
+    header { height: auto !important; padding: 10px 0; }
+    .logo-container { transform: scale(0.85); margin-left: 10px; }
+    
+    nav { 
+        display: flex !important; 
+        flex-direction: row !important; /* Force horizontal */
+        justify-content: flex-end; 
+        padding-right: 15px;
+        margin-top: 5px; /* Pushes to "2nd line" visual */
     }
+    nav a { font-size: 0.85rem; margin-left: 10px; }
 
-    /* 2. Rule: 2 Cards per view on Mobile */
-    .product-card, .category {
-        flex: 0 0 calc(50% - 15px) !important; /* Forces 2 cards per row width */
-        min-width: calc(50% - 15px) !important;
-    }
-
-    /* 3. Footer Alignment Consistency */
-    .footer-row-2 {
-        justify-content: flex-start !important;
-        padding-left: 5%;
-    }
-
-    /* 4. Arrows: Ensure they are visible and appropriately sized */
-    .row-arrow {
-        width: 30px;
-        height: 30px;
-        font-size: 14px;
-        background: rgba(255, 0, 0, 0.7); /* Red circled arrows per request */
-        border-radius: 50%;
-        display: flex !important; /* Force display on mobile */
-        align-items: center;
+    /* 2 & 3. Hero Fix: Remove empty space and fix overflow */
+    #heroSection { 
+        margin-top: 5px !important; /* One line space */
+        width: 100vw;
+        overflow: hidden;
+        display: flex;
         justify-content: center;
     }
+    #heroSection img { 
+        width: 100%; 
+        height: auto; 
+        object-fit: cover; /* Ensures image fits without hiding edges */
+    }
+
+    /* 4. Identity Title: One line, centered, smaller font */
+    .identity-text {
+        width: 100%;
+        text-align: center;
+        margin-left: 0 !important;
+        font-size: 1rem !important; /* Smaller to fit one line */
+        white-space: nowrap; /* Prevents splitting into two lines */
+    }
+
+    /* 5. Section Titles: Move left slightly */
+    .section-title {
+        margin-left: 15px !important; /* Moved left by ~3 characters */
+        text-align: left;
+    }
+
+    /* 6 & 7. Product & Category Cards: Spacing for Samsung */
+    .product-card, .category {
+        flex: 0 0 calc(50% - 20px) !important; /* Slightly smaller to prevent touching */
+        margin: 10px; /* Provides the gap Samsung needs */
+    }
+
+    /* 8. Footer: Re-arrange into 2 lines */
+    footer { height: auto !important; padding: 15px 0; }
+    .footer-row-1 { 
+        display: flex; 
+        justify-content: center; 
+        gap: 15px; 
+        flex-wrap: nowrap !important; /* Forces one line for links */
+    }
+    .footer-row-2 {
+        margin-top: 10px;
+        justify-content: flex-start !important;
+        padding-left: 15px;
+    }
+    .copyright-text { font-size: 0.75rem; }
 }
