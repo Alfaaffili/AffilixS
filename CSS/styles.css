@@ -65,6 +65,18 @@ html, body {
 }
 .product-row::-webkit-scrollbar { display: none; }
 
+/* Ensure ghost arrows in the middle of rows are killed */
+.product-row-wrapper .row-arrow {
+    top: auto !important;
+    bottom: 5px !important; /* Forces them to the bottom corners always */
+    transform: none !important;
+}
+
+/* If arrows appear in categories when they shouldn't */
+.categories-wrapper:not(:has(.category:nth-child(6))) .row-arrow {
+    display: none !important;
+}
+
 .product-card {
     flex: 0 0 200px; height: 225px; background: #fff; border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.06); cursor: pointer; overflow: hidden;

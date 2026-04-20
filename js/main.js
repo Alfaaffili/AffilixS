@@ -108,21 +108,34 @@ function setupTitles() {
 function setupCategoryArrows() {
     const wrap = document.querySelector(".categories-wrapper");
     const row = document.querySelector("#categoriesRow");
-    // Ensure category arrows appear only if they don't exist yet
-    if (wrap && row && !wrap.querySelector(".row-arrow")) {
-        const btnL = document.createElement("button");
-        btnL.className = "row-arrow left"; btnL.innerHTML = "❮";
-        btnL.onclick = () => row.scrollBy({left: -300, behavior: 'smooth'});
+    
+    if (!wrap || !row) return;
 
-        const btnR = document.createElement("button");
-        btnR.className = "row-arrow right"; btnR.innerHTML = "❯";
-        btnR.onclick = () => row.scrollBy({left: 300, behavior: 'smooth'});
+    // COUNT THE CATEGORIES
+    const categoryCount = row.querySelectorAll(".category").length;
 
-        wrap.appendChild(btnL);
-        wrap.appendChild(btnR);
+    // ONLY PROCEED IF GREATER THAN 5
+    if (categoryCount > 5) {
+        // Double check we don't already have arrows there
+        if (!wrap.querySelector(".row-arrow")) {
+            const btnL = document.createElement("button");
+            btnL.className = "row-arrow left"; 
+            btnL.innerHTML = "❮";
+            btnL.onclick = () => row.scrollBy({left: -300, behavior: 'smooth'});
+
+            const btnR = document.createElement("button");
+            btnR.className = "row-arrow right"; 
+            btnR.innerHTML = "❯";
+            btnR.onclick = () => row.scrollBy({left: 300, behavior: 'smooth'});
+
+            wrap.appendChild(btnL);
+            wrap.appendChild(btnR);
+        }
+    } else {
+        // If 5 or fewer, make sure NO arrows exist in the category wrap
+        wrap.querySelectorAll(".row-arrow").forEach(a => a.remove());
     }
 }
-
 // MODAL CONTROLLER: Centered and handles background scroll
 document.addEventListener("click", (e) => {
     const trigger = e.target.closest("[data-modal]");
