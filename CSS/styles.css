@@ -207,69 +207,88 @@ html, body {
 }
 
 /* =============================================================
-   REFINED MOBILE FIREWALL (Guarded - Max-width 768px)
+   REFINED STRICT MOBILE FIREWALL (Guarded - Version 2.0 - Forced Layout)
    ============================================================= */
 @media (max-width: 768px) {
-    /* 1. Header: Logo smaller, Nav links horizontal on 2nd line */
-    header { height: auto !important; padding: 10px 0; }
-    .logo-container { transform: scale(0.85); margin-left: 10px; }
-    
+    /* 1 & 2. Header: Shrink Logo & Force Nav to 2nd Line */
+    header { 
+        height: auto !important; 
+        padding: 5px 0 !important; 
+        display: block !important; /* Stack elements vertically */
+    }
+    .logo-container { 
+        width: 100%; 
+        text-align: left; 
+        padding-left: 10px;
+    }
+    .logo-container h1 { 
+        font-size: 1.1rem !important; /* Smaller logo title */
+    }
     nav { 
         display: flex !important; 
-        flex-direction: row !important; /* Force horizontal */
-        justify-content: flex-end; 
-        padding-right: 15px;
-        margin-top: 5px; /* Pushes to "2nd line" visual */
+        width: 100% !important;
+        justify-content: center !important; /* Center links on line 2 */
+        margin-top: 5px !important; 
+        padding: 0 !important;
     }
-    nav a { font-size: 0.85rem; margin-left: 10px; }
+    nav a { font-size: 0.75rem !important; margin: 0 8px; }
 
-    /* 2 & 3. Hero Fix: Remove empty space and fix overflow */
+    /* 3 & 4. Hero & Gap: Eliminate the ghost space and overflow */
     #heroSection { 
-        margin-top: 5px !important; /* One line space */
-        width: 100vw;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
+        margin-top: 5px !important; /* Strict 1-line gap */
+        padding: 0 !important;
+        width: 100vw !important;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        overflow: hidden !important;
     }
     #heroSection img { 
-        width: 100%; 
-        height: auto; 
-        object-fit: cover; /* Ensures image fits without hiding edges */
+        width: 100% !important; 
+        display: block;
+        height: auto !important; 
     }
 
-    /* 4. Identity Title: One line, centered, smaller font */
+    /* 5. Identity Title: Absolute Center */
     .identity-text {
-        width: 100%;
-        text-align: center;
-        margin-left: 0 !important;
-        font-size: 1rem !important; /* Smaller to fit one line */
-        white-space: nowrap; /* Prevents splitting into two lines */
+        display: block !important;
+        width: 100% !important;
+        text-align: center !important;
+        margin: 10px 0 !important;
+        font-size: 0.9rem !important;
+        white-space: nowrap;
+        background: red; /* Ensuring the highlight is visible */
+        padding: 5px 0;
     }
 
-    /* 5. Section Titles: Move left slightly */
-    .section-title {
-        margin-left: 15px !important; /* Moved left by ~3 characters */
-        text-align: left;
+    /* 6. Category Cards: Smaller & Tighter Spacing */
+    .category {
+        flex: 0 0 calc(45% - 10px) !important; /* Smaller size for Samsung */
+        margin: 5px !important; /* Reduced space between cards */
     }
+    #categoriesRow { gap: 5px !important; }
 
-    /* 6 & 7. Product & Category Cards: Spacing for Samsung */
-    .product-card, .category {
-        flex: 0 0 calc(50% - 20px) !important; /* Slightly smaller to prevent touching */
-        margin: 10px; /* Provides the gap Samsung needs */
+    /* 7. Footer: Forced 2-Line Structure */
+    footer { 
+        height: auto !important; 
+        padding: 10px 0 !important; 
+        display: block !important; 
     }
-
-    /* 8. Footer: Re-arrange into 2 lines */
-    footer { height: auto !important; padding: 15px 0; }
     .footer-row-1 { 
-        display: flex; 
-        justify-content: center; 
-        gap: 15px; 
-        flex-wrap: nowrap !important; /* Forces one line for links */
+        display: flex !important;
+        justify-content: center !important;
+        width: 100%;
+        margin-bottom: 5px;
     }
+    .footer-row-1 a { font-size: 0.75rem; margin: 0 10px; }
+    
     .footer-row-2 {
-        margin-top: 10px;
-        justify-content: flex-start !important;
-        padding-left: 15px;
+        display: block !important;
+        width: 100%;
+        padding-left: 10px !important;
+        text-align: left !important;
     }
-    .copyright-text { font-size: 0.75rem; }
+    .copyright-text { font-size: 0.7rem; display: block; }
 }
