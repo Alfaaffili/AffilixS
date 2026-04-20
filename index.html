@@ -89,25 +89,14 @@
 <div id="disclaimerModal" class="text-modal"><div class="modal-box"><span class="close-modal">&times;</span><h2>Affiliate Disclaimer</h2><p>Commission may be earned via links.</p></div></div>
 
 <script>
-  (function() {
-    // Generate a unique timestamp (e.g., 1713554000000)
-    const version = new Date().getTime();
-    
-    // Create the script element dynamically
-    const script = document.createElement('script');
-    
-    // Attach the timestamp as a version query
-    script.src = "js/main.js?v=" + version;
+    (function() {
 
-// This ensures the script is fully loaded before the page tries to use it
+    // Force a fresh version based on the exact millisecond of the visit
 
-    script.onload = function() {
+    var version = new Date().getTime();
 
-        // We removed the console.log line to keep it clean.
-    };    
-    
-    // Inject it into the page
-    document.body.appendChild(script);
+    document.write('<script src="js/main.js?v=' + version + '"><\/script>');
+
   })();
 </script>
 
