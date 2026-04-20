@@ -108,34 +108,33 @@ function setupTitles() {
 function setupCategoryArrows() {
     const wrap = document.querySelector(".categories-wrapper");
     const row = document.querySelector("#categoriesRow");
-    
     if (!wrap || !row) return;
 
-    // COUNT THE CATEGORIES
     const categoryCount = row.querySelectorAll(".category").length;
+    const isMobile = window.innerWidth <= 768;
 
-    // ONLY PROCEED IF GREATER THAN 5
-    if (categoryCount > 5) {
-        // Double check we don't already have arrows there
+    // RULE: Show if > 5 on Desktop OR show ALWAYS on Mobile
+    if (categoryCount > 5 || isMobile) {
         if (!wrap.querySelector(".row-arrow")) {
             const btnL = document.createElement("button");
             btnL.className = "row-arrow left"; 
             btnL.innerHTML = "❮";
-            btnL.onclick = () => row.scrollBy({left: -300, behavior: 'smooth'});
+            btnL.onclick = () => row.scrollBy({left: -200, behavior: 'smooth'});
 
             const btnR = document.createElement("button");
             btnR.className = "row-arrow right"; 
             btnR.innerHTML = "❯";
-            btnR.onclick = () => row.scrollBy({left: 300, behavior: 'smooth'});
+            btnR.onclick = () => row.scrollBy({left: 200, behavior: 'smooth'});
 
             wrap.appendChild(btnL);
             wrap.appendChild(btnR);
         }
     } else {
-        // If 5 or fewer, make sure NO arrows exist in the category wrap
+        // Only remove if it's Desktop and count is low
         wrap.querySelectorAll(".row-arrow").forEach(a => a.remove());
     }
 }
+
 // MODAL CONTROLLER: Centered and handles background scroll
 document.addEventListener("click", (e) => {
     const trigger = e.target.closest("[data-modal]");
