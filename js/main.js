@@ -110,11 +110,13 @@ function setupCategoryArrows() {
     const row = document.querySelector("#categoriesRow");
     if (!wrap || !row) return;
 
-    const categoryCount = row.querySelectorAll(".category").length;
+    // Detect if we are on a small screen
     const isMobile = window.innerWidth <= 768;
+    const categoryCount = row.querySelectorAll(".category").length;
 
-    // RULE: Show if > 5 on Desktop OR show ALWAYS on Mobile
-    if (categoryCount > 5 || isMobile) {
+    // RULE: Show arrows if on Mobile OR if Desktop has more than 5 categories
+    if (isMobile || categoryCount > 5) {
+        // Only create arrows if they don't already exist
         if (!wrap.querySelector(".row-arrow")) {
             const btnL = document.createElement("button");
             btnL.className = "row-arrow left"; 
@@ -130,7 +132,7 @@ function setupCategoryArrows() {
             wrap.appendChild(btnR);
         }
     } else {
-        // Only remove if it's Desktop and count is low
+        // Guard for Desktop: If screen is large and categories <= 5, remove any arrows
         wrap.querySelectorAll(".row-arrow").forEach(a => a.remove());
     }
 }

@@ -207,88 +207,53 @@ html, body {
 }
 
 /* =============================================================
-   REFINED STRICT MOBILE FIREWALL (Guarded - Version 2.0 - Forced Layout)
+   STRICT MOBILE FIREWALL (Version 2.1 - Tightened)
    ============================================================= */
 @media (max-width: 768px) {
-    /* 1 & 2. Header: Shrink Logo & Force Nav to 2nd Line */
+    /* 1. Tighten Header: Remove the middle gap */
     header { 
-        height: auto !important; 
-        padding: 5px 0 !important; 
-        display: block !important; /* Stack elements vertically */
+        padding: 2px 0 !important; /* Extremely tight padding */
     }
-    .logo-container { 
-        width: 100%; 
-        text-align: left; 
-        padding-left: 10px;
-    }
-    .logo-container h1 { 
-        font-size: 1.1rem !important; /* Smaller logo title */
-    }
-    nav { 
-        display: flex !important; 
-        width: 100% !important;
-        justify-content: center !important; /* Center links on line 2 */
-        margin-top: 5px !important; 
-        padding: 0 !important;
-    }
-    nav a { font-size: 0.75rem !important; margin: 0 8px; }
+    .logo-container { margin-bottom: -5px !important; }
+    nav { margin-top: 0 !important; }
 
-    /* 3 & 4. Hero & Gap: Eliminate the ghost space and overflow */
+    /* 2. The Hero Fix: Forcing the "Paint Canvas" to hide */
     #heroSection { 
-        margin-top: 5px !important; /* Strict 1-line gap */
-        padding: 0 !important;
-        width: 100vw !important;
-        position: relative;
-        left: 50%;
-        right: 50%;
-        margin-left: -50vw;
-        margin-right: -50vw;
+        margin-top: 0 !important; 
+        max-height: 250px; /* Adjust this to your image height to crop white space */
         overflow: hidden !important;
+        background: none !important;
     }
     #heroSection img { 
-        width: 100% !important; 
-        display: block;
-        height: auto !important; 
+        margin-top: -2px; /* Pulls image up to close any tiny gaps */
     }
 
-    /* 5. Identity Title: Absolute Center */
+    /* 3. Identity Title: Centered with tight red highlight */
     .identity-text {
-        display: block !important;
-        width: 100% !important;
-        text-align: center !important;
-        margin: 10px 0 !important;
+        display: table !important; /* This makes the background wrap the text tightly */
+        margin: 10px auto !important; /* This centers a 'table' display element */
+        width: auto !important;
+        padding: 2px 1ch !important; /* 1 character padding on sides */
+        background: red !important;
+        color: white;
         font-size: 0.9rem !important;
         white-space: nowrap;
-        background: red; /* Ensuring the highlight is visible */
-        padding: 5px 0;
+        text-align: center;
     }
 
-    /* 6. Category Cards: Smaller & Tighter Spacing */
-    .category {
-        flex: 0 0 calc(45% - 10px) !important; /* Smaller size for Samsung */
-        margin: 5px !important; /* Reduced space between cards */
+    /* 4. Section Titles: Move closer to left edge */
+    .section-title {
+        margin-left: 8px !important; /* Approximately 1-2 characters from edge */
     }
-    #categoriesRow { gap: 5px !important; }
 
-    /* 7. Footer: Forced 2-Line Structure */
-    footer { 
-        height: auto !important; 
-        padding: 10px 0 !important; 
-        display: block !important; 
+    /* 5. Category Arrows: Ensure they are pinned to lower corners */
+    .categories-wrapper {
+        position: relative;
+        padding-bottom: 25px; /* Space for the pinned arrows */
     }
-    .footer-row-1 { 
-        display: flex !important;
-        justify-content: center !important;
-        width: 100%;
-        margin-bottom: 5px;
+    .categories-wrapper .row-arrow {
+        top: auto !important;
+        bottom: 0 !important;
+        transform: none !important;
     }
-    .footer-row-1 a { font-size: 0.75rem; margin: 0 10px; }
-    
-    .footer-row-2 {
-        display: block !important;
-        width: 100%;
-        padding-left: 10px !important;
-        text-align: left !important;
-    }
-    .copyright-text { font-size: 0.7rem; display: block; }
 }
