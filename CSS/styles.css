@@ -207,23 +207,51 @@ html, body {
 }
 
 /* =============================================================
-   STRICT MOBILE FIREWALL (Version 2.1 - Tightened)
+   MOBILE FIREWALL 3.0 - GRANULAR BREAKPOINTS
    ============================================================= */
+
+/* TABLETS & LARGE PHONES (HUAWEI / PIXEL) */
 @media (max-width: 768px) {
-    /* Tighten Header Modals */
-    nav { flex-wrap: nowrap !important; justify-content: space-around !important; }
-    nav a { font-size: 0.7rem !important; white-space: nowrap; margin: 0 4px; }
+    header { height: auto !important; padding: 5px 0 !important; }
+    nav { display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important; justify-content: center !important; }
+    nav a { font-size: 0.75rem !important; margin: 0 8px !important; white-space: nowrap; }
 
-    /* Identity Title centered with highlight */
-    .identity-text { display: table !important; margin: 10px auto !important; padding: 2px 1ch !important; width: auto !important; }
+    /* Force 2 Cards with 20px gap safety */
+    .product-card, .category {
+        flex: 0 0 calc(50% - 20px) !important;
+        max-width: calc(50% - 20px) !important;
+    }
 
-    /* Section Titles: Positioned 2 chars from left */
-    .section-title { margin-left: 10px !important; text-align: left !important; }
+    .section-title { margin-left: 10px !important; }
 
-    /* Footer: Force ONE line for links to prevent wide stacking */
-    .footer-row-1 { display: flex !important; flex-wrap: nowrap !important; justify-content: center !important; gap: 5px !important; }
-    .footer-row-1 a { font-size: 0.65rem !important; white-space: nowrap; }
+    /* Footer: Strict 2-line rule */
+    .footer-row-1 { display: flex !important; flex-wrap: nowrap !important; justify-content: center !important; gap: 10px; }
+    .footer-row-2 { text-align: left !important; padding-left: 10px; }
+}
+
+/* SMALLER/HIGH-DPI PHONES (SAMSUNG INTERNET FIX) */
+@media (max-width: 480px) {
+    /* Shrink the logo further to make room for nav links on line 2 */
+    .logo-container h1 { font-size: 0.95rem !important; }
+    nav a { font-size: 0.65rem !important; margin: 0 4px !important; }
+
+    /* Force 2 cards even if font tries to stretch them */
+    .product-card, .category {
+        flex: 0 0 calc(50% - 15px) !important;
+        max-width: calc(50% - 15px) !important;
+    }
     
-    /* Category Arrows Pinned to bottom */
-    .categories-wrapper .row-arrow { bottom: 5px !important; top: auto !important; transform: none !important; display: flex !important; }
+    /* Shrink images slightly for Samsung so they don't look "Tall" */
+    .product-card img, .category img {
+        height: 140px !important; 
+        object-fit: cover;
+    }
+
+    /* Category Arrows: Pinned & Forced Visible */
+    .categories-wrapper .row-arrow {
+        display: flex !important;
+        bottom: 0 !important;
+        top: auto !important;
+        transform: scale(0.8); /* Slightly smaller arrows for tiny screens */
+    }
 }

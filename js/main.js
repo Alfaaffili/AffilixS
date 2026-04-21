@@ -1,5 +1,6 @@
 ﻿/**
  * AffilixS Master Logic - Verified Solid State
+ * Includes: 19-char limit, Samsung Arrow Force, and Symbol Preservation
  */
 
 const IS_TOUCH = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
@@ -20,7 +21,7 @@ async function loadProducts() {
         
         renderProducts(data);
         
-        // Wait for DOM then trigger category arrows
+        // Timeout helps mobile browsers render categories before drawing arrows
         setTimeout(setupCategoryArrows, 150);
          
     } catch (e) { 
@@ -113,22 +114,27 @@ function setupCategoryArrows() {
     const isMobile = window.innerWidth <= 768;
     const categoryCount = row.querySelectorAll(".category").length;
 
+    // RULE: Show arrows if on Mobile OR if Desktop has > 5 categories
     if (isMobile || categoryCount > 5) {
         if (!wrap.querySelector(".row-arrow")) {
             const btnL = document.createElement("button");
             btnL.className = "row-arrow left"; 
-            btnL.innerHTML = "❮";
+            btnL.innerHTML = "❮"; // The symbol you asked about
             btnL.onclick = () => row.scrollBy({left: -200, behavior: 'smooth'});
 
             const btnR = document.createElement("button");
             btnR.className = "row-arrow right"; 
-            btnR.innerHTML = "❯";
+            btnR.innerHTML = "❯"; // The symbol you asked about
             btnR.onclick = () => row.scrollBy({left: 200, behavior: 'smooth'});
 
             wrap.appendChild(btnL);
             wrap.appendChild(btnR);
+            
+            // Force relative position for pinned arrows
+            wrap.style.position = "relative";
         }
     } else {
+        // The Guardrail to keep Desktop clean
         wrap.querySelectorAll(".row-arrow").forEach(a => a.remove());
     }
 }
