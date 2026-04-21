@@ -120,11 +120,13 @@ function setupCategoryArrows() {
             const btnL = document.createElement("button");
             btnL.className = "row-arrow left"; 
             btnL.innerHTML = "❮"; // The symbol you asked about
+            btnL.style.zIndex = "99999";
             btnL.onclick = () => row.scrollBy({left: -150, behavior: 'smooth'});
 
             const btnR = document.createElement("button");
             btnR.className = "row-arrow right"; 
             btnR.innerHTML = "❯"; // The symbol you asked about
+            btnR.style.zIndex = "99999";
             btnR.onclick = () => row.scrollBy({left: 150, behavior: 'smooth'});
 
             wrap.appendChild(btnL);
@@ -138,6 +140,12 @@ btnR.style.zIndex = "9999";
 
             // Force relative position for pinned arrows
             wrap.style.position = "relative";
+            
+            // Force the wrapper to behave as a coordinate container
+
+            wrap.style.position = "relative";
+
+            wrap.style.overflow = "visible";
         }
     } else {
         // The Guardrail to keep Desktop clean
