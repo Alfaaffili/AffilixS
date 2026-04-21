@@ -120,12 +120,12 @@ function setupCategoryArrows() {
             const btnL = document.createElement("button");
             btnL.className = "row-arrow left"; 
             btnL.innerHTML = "❮"; // The symbol you asked about
-            btnL.onclick = () => row.scrollBy({left: -200, behavior: 'smooth'});
+            btnL.onclick = () => row.scrollBy({left: -150, behavior: 'smooth'});
 
             const btnR = document.createElement("button");
             btnR.className = "row-arrow right"; 
             btnR.innerHTML = "❯"; // The symbol you asked about
-            btnR.onclick = () => row.scrollBy({left: 200, behavior: 'smooth'});
+            btnR.onclick = () => row.scrollBy({left: 150, behavior: 'smooth'});
 
             wrap.appendChild(btnL);
             wrap.appendChild(btnR);
