@@ -1,4 +1,5 @@
-﻿/**
+﻿/
+**
  * AffilixS Master Logic
  * Combined Fixes: Golden Underline, Pinned Arrows, Left Footer, Auto-Refresh
  */
@@ -22,7 +23,10 @@ async function loadProducts() {
         const data = await res.json();
         
         renderProducts(data);
-        setupCategoryArrows(); 
+        // Wait 100ms for the DOM to settle before drawing category arrows
+
+        setTimeout(setupCategoryArrows, 100);
+         
     } catch (e) { 
         console.error("AffilixS Load Error:", e);
     }
@@ -59,7 +63,11 @@ function renderProducts(products) {
             slice.forEach(p => {
                 const card = document.createElement("div");
                 card.className = "product-card";
-                card.innerHTML = `<img src="${p.image}" alt="${p.name}"><div class="short-name">${p.shortName || "Product"}</div>`;
+                // NEW LOGIC: Limit to 19 characters
+                const cleanName = p.shortName || "Product";
+                const displayName = cleanName.length > 19 ? cleanName.substring(0, 16) + "..." : cleanName;
+                
+                card.innerHTML = `<img src="${p.image}" alt="${p.name}"><div class="short-name">${displayName}</div>`;
                 
                 // PREVIEW LOGIC: Fixed size handled by CSS, logic here
                 card.onmouseenter = () => {

@@ -210,50 +210,38 @@ html, body {
    STRICT MOBILE FIREWALL (Version 2.1 - Tightened)
    ============================================================= */
 @media (max-width: 768px) {
-    /* 1. Tighten Header: Remove the middle gap */
-    header { 
-        padding: 2px 0 !important; /* Extremely tight padding */
+    /* 1. Header: Force Nav links to one line below logo */
+    header { height: auto !important; padding: 5px 0 !important; display: block !important; }
+    nav { 
+        display: flex !important; 
+        flex-wrap: nowrap !important; /* Forces one line */
+        justify-content: center !important; 
+        width: 100% !important;
     }
-    .logo-container { margin-bottom: -5px !important; }
-    nav { margin-top: 0 !important; }
+    nav a { font-size: 0.7rem !important; margin: 0 5px; white-space: nowrap; }
 
-    /* 2. The Hero Fix: Forcing the "Paint Canvas" to hide */
-    #heroSection { 
-        margin-top: 0 !important; 
-        max-height: 250px; /* Adjust this to your image height to crop white space */
-        overflow: hidden !important;
-        background: none !important;
-    }
-    #heroSection img { 
-        margin-top: -2px; /* Pulls image up to close any tiny gaps */
-    }
+    /* 2. Identity Title: Ensure centering */
+    .identity-text { display: table !important; margin: 10px auto !important; }
 
-    /* 3. Identity Title: Centered with tight red highlight */
-    .identity-text {
-        display: table !important; /* This makes the background wrap the text tightly */
-        margin: 10px auto !important; /* This centers a 'table' display element */
-        width: auto !important;
-        padding: 2px 1ch !important; /* 1 character padding on sides */
-        background: red !important;
-        color: white;
-        font-size: 0.9rem !important;
-        white-space: nowrap;
-        text-align: center;
-    }
-
-    /* 4. Section Titles: Move closer to left edge */
-    .section-title {
-        margin-left: 8px !important; /* Approximately 1-2 characters from edge */
-    }
-
-    /* 5. Category Arrows: Ensure they are pinned to lower corners */
-    .categories-wrapper {
-        position: relative;
-        padding-bottom: 25px; /* Space for the pinned arrows */
-    }
+    /* 3. Category Arrows: Force visibility */
     .categories-wrapper .row-arrow {
+        display: flex !important; /* Force browser to show them */
+        opacity: 1 !important;
+        visibility: visible !important;
+        z-index: 10;
+        bottom: 5px !important;
         top: auto !important;
-        bottom: 0 !important;
-        transform: none !important;
     }
+
+    /* 4. Footer: The Samsung "One-Line" Fix */
+    .footer-row-1 { 
+        display: flex !important; 
+        flex-wrap: nowrap !important; /* Stop Samsung from splitting links */
+        justify-content: center !important; 
+        gap: 8px !important; 
+    }
+    .footer-row-1 a { font-size: 0.65rem !important; white-space: nowrap; }
+    
+    .footer-row-2 { text-align: left !important; padding-left: 10px !important; }
+    .copyright-text { font-size: 0.7rem; }
 }
