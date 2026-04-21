@@ -130,6 +130,12 @@ function setupCategoryArrows() {
             wrap.appendChild(btnL);
             wrap.appendChild(btnR);
             
+            // ADD THESE TWO LINES FOR INSURANCE:
+
+            btnL.style.zIndex = "9999";
+            
+btnR.style.zIndex = "9999";
+
             // Force relative position for pinned arrows
             wrap.style.position = "relative";
         }

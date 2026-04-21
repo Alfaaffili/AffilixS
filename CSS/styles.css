@@ -207,55 +207,72 @@ html, body {
 }
 
 /* =============================================================
-   MOBILE FIREWALL 4.0 - DUAL STRATEGY
+   MOBILE FIREWALL 5.0 - THE CELEBRATION VERSION
    ============================================================= */
 
 /* BLOCK A: General Mobile/Tablet (HUAWEI, etc.) */
 @media (max-width: 768px) {
     header { 
         height: auto !important; 
-        padding: 5px 0 !important; 
+        padding: 8px 10px !important; /* Side padding for left alignment */
         display: flex !important;
-        flex-direction: column !important; /* Force 2-line header */
-        align-items: center !important;
+        flex-direction: column !important;
+        align-items: flex-start !important; /* FORCES LOGO TO LEFT */
     }
-    .logo-container h1 { font-size: 12px !important; }
-    nav { width: 100% !important; justify-content: center !important; }
-    nav a { font-size: 11px !important; margin: 0 8px; white-space: nowrap; }
+    .logo-container { width: 100% !important; text-align: left !important; }
+    .logo-container h1 { 
+        font-size: 11px !important; /* Reduced further as requested */
+        margin-left: 0 !important;
+    }
+    nav { 
+        width: 100% !important; 
+        justify-content: center !important; /* Links stay centered on line 2 */
+        margin-top: 5px !important;
+    }
+    nav a { font-size: 10px !important; margin: 0 6px; }
 
-    /* Category Spacing */
+    /* Section Titles: Forced back to Left Indent */
+    .section-title { 
+        text-align: left !important; 
+        margin-left: 15px !important; /* ~2 characters from edge */
+        width: 100%;
+    }
+
+    /* Category Spacing: Huawei */
     .category {
-        flex: 0 0 calc(48% - 10px) !important;
-        margin: 0 5px !important;
+        flex: 0 0 calc(46% - 10px) !important;
+        margin: 5px !important;
     }
-
-    /* Footer General */
-    .footer-row-1 { display: flex !important; flex-wrap: nowrap !important; justify-content: center !important; gap: 10px; }
-    .footer-row-1 a { font-size: 11px !important; }
 }
 
-/* BLOCK B: Samsung & Small Phone Specific (Surgical Fixes) */
+/* BLOCK B: Samsung & High-DPI Specific */
 @media (max-width: 480px) {
-    .logo-container h1 { font-size: 10px !important; } /* Even smaller logo */
-    nav a { font-size: 10px !important; margin: 0 5px !important; }
+    .logo-container h1 { font-size: 9px !important; } /* Ultra-small for Samsung */
 
-    /* The "2.10 card" Fix: Shrink width to 45% for Samsung */
+    /* The "Samsung Squeeze": Shrink width to 44% to stop them touching */
     .product-card, .category {
-        flex: 0 0 calc(45% - 10px) !important;
-        max-width: calc(45% - 10px) !important;
+        flex: 0 0 44% !important;
+        max-width: 44% !important;
+        margin: 3% !important; /* Uses percentage margin to force space */
     }
-    
-    /* Force Category Arrows to show on small screens */
+
+    /* Category Arrows: The Forced Visibility Hack */
+    .categories-wrapper { overflow: visible !important; min-height: 200px; }
     .categories-wrapper .row-arrow {
         display: flex !important;
         opacity: 1 !important;
         visibility: visible !important;
-        bottom: -5px !important;
+        bottom: -25px !important; /* Move even lower to clear the cards */
         top: auto !important;
-        z-index: 999;
+        background: red !important; /* Ensure the red circle is vivid */
     }
 
-    /* Footer: Strict Font Shrink for Samsung 1-line links */
+    /* Footer Samsung: Strict Line Control */
+    .footer-row-1 { 
+        display: flex !important; 
+        flex-wrap: nowrap !important; /* Forced one line */
+        justify-content: center !important; 
+        gap: 6px !important; 
+    }
     .footer-row-1 a { font-size: 9px !important; }
-    .copyright-text { font-size: 8px !important; }
 }
