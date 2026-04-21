@@ -210,38 +210,20 @@ html, body {
    STRICT MOBILE FIREWALL (Version 2.1 - Tightened)
    ============================================================= */
 @media (max-width: 768px) {
-    /* 1. Header: Force Nav links to one line below logo */
-    header { height: auto !important; padding: 5px 0 !important; display: block !important; }
-    nav { 
-        display: flex !important; 
-        flex-wrap: nowrap !important; /* Forces one line */
-        justify-content: center !important; 
-        width: 100% !important;
-    }
-    nav a { font-size: 0.7rem !important; margin: 0 5px; white-space: nowrap; }
+    /* Tighten Header Modals */
+    nav { flex-wrap: nowrap !important; justify-content: space-around !important; }
+    nav a { font-size: 0.7rem !important; white-space: nowrap; margin: 0 4px; }
 
-    /* 2. Identity Title: Ensure centering */
-    .identity-text { display: table !important; margin: 10px auto !important; }
+    /* Identity Title centered with highlight */
+    .identity-text { display: table !important; margin: 10px auto !important; padding: 2px 1ch !important; width: auto !important; }
 
-    /* 3. Category Arrows: Force visibility */
-    .categories-wrapper .row-arrow {
-        display: flex !important; /* Force browser to show them */
-        opacity: 1 !important;
-        visibility: visible !important;
-        z-index: 10;
-        bottom: 5px !important;
-        top: auto !important;
-    }
+    /* Section Titles: Positioned 2 chars from left */
+    .section-title { margin-left: 10px !important; text-align: left !important; }
 
-    /* 4. Footer: The Samsung "One-Line" Fix */
-    .footer-row-1 { 
-        display: flex !important; 
-        flex-wrap: nowrap !important; /* Stop Samsung from splitting links */
-        justify-content: center !important; 
-        gap: 8px !important; 
-    }
+    /* Footer: Force ONE line for links to prevent wide stacking */
+    .footer-row-1 { display: flex !important; flex-wrap: nowrap !important; justify-content: center !important; gap: 5px !important; }
     .footer-row-1 a { font-size: 0.65rem !important; white-space: nowrap; }
     
-    .footer-row-2 { text-align: left !important; padding-left: 10px !important; }
-    .copyright-text { font-size: 0.7rem; }
+    /* Category Arrows Pinned to bottom */
+    .categories-wrapper .row-arrow { bottom: 5px !important; top: auto !important; transform: none !important; display: flex !important; }
 }

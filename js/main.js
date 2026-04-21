@@ -1,7 +1,5 @@
-﻿/
-**
- * AffilixS Master Logic
- * Combined Fixes: Golden Underline, Pinned Arrows, Left Footer, Auto-Refresh
+﻿/**
+ * AffilixS Master Logic - Verified Solid State
  */
 
 const IS_TOUCH = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
@@ -9,23 +7,21 @@ const IS_TOUCH = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 async function loadProducts() {
     const container = document.querySelector("#productsContainer");
     
-    // SAFETY RETRY: If the HTML isn't ready, wait 100ms and try again.
     if (!container) {
         setTimeout(loadProducts, 100);
         return;
     }
 
     try {
-        // Cache-buster for the JSON data
         const v = new Date().getTime();
         const res = await fetch("Data/products.json?v=" + v);
         if (!res.ok) throw new Error("JSON file not found");
         const data = await res.json();
         
         renderProducts(data);
-        // Wait 100ms for the DOM to settle before drawing category arrows
-
-        setTimeout(setupCategoryArrows, 100);
+        
+        // Wait for DOM then trigger category arrows
+        setTimeout(setupCategoryArrows, 150);
          
     } catch (e) { 
         console.error("AffilixS Load Error:", e);
@@ -35,13 +31,11 @@ async function loadProducts() {
 function renderProducts(products) {
     const container = document.querySelector("#productsContainer");
     
-    // GHOST KILLER: Remove any old arrows before building new ones
+    // GHOST KILLER
     document.querySelectorAll('.row-arrow').forEach(a => a.remove());
 
-    // CLEAR & REBUILD: Re-add the title with the golden underline span
     container.innerHTML = '<h2 class="section-title"><span>Featured</span> Products</h2>';
 
-    // Loop through up to 5 rows
     for (let i = 0; i < 5; i++) {
         const slice = products.slice(i * 20, (i + 1) * 20);
         if (slice.length > 0) {
@@ -51,7 +45,6 @@ function renderProducts(products) {
             const row = document.createElement("div");
             row.className = "product-row";
 
-            // PINNED ARROWS: Only one pair per row, pinned to corners
             const btnL = document.createElement("button");
             btnL.className = "row-arrow left"; btnL.innerHTML = "❮";
             btnL.onclick = (e) => { e.stopPropagation(); row.scrollBy({left: -400, behavior: "smooth"}); };
@@ -63,13 +56,13 @@ function renderProducts(products) {
             slice.forEach(p => {
                 const card = document.createElement("div");
                 card.className = "product-card";
-                // NEW LOGIC: Limit to 19 characters
+                
+                // 19-Character Limit Logic
                 const cleanName = p.shortName || "Product";
                 const displayName = cleanName.length > 19 ? cleanName.substring(0, 16) + "..." : cleanName;
                 
                 card.innerHTML = `<img src="${p.image}" alt="${p.name}"><div class="short-name">${displayName}</div>`;
                 
-                // PREVIEW LOGIC: Fixed size handled by CSS, logic here
                 card.onmouseenter = () => {
                     const prev = document.querySelector("#floatingPreview");
                     const pImg = document.querySelector("#previewImage");
@@ -98,7 +91,6 @@ function renderProducts(products) {
             container.appendChild(wrapper);
         }
     }
-    // RE-APPLY GOLDEN UNDERLINES: To all section titles
     setupTitles(); 
 }
 
@@ -118,13 +110,10 @@ function setupCategoryArrows() {
     const row = document.querySelector("#categoriesRow");
     if (!wrap || !row) return;
 
-    // Detect if we are on a small screen
     const isMobile = window.innerWidth <= 768;
     const categoryCount = row.querySelectorAll(".category").length;
 
-    // RULE: Show arrows if on Mobile OR if Desktop has more than 5 categories
     if (isMobile || categoryCount > 5) {
-        // Only create arrows if they don't already exist
         if (!wrap.querySelector(".row-arrow")) {
             const btnL = document.createElement("button");
             btnL.className = "row-arrow left"; 
@@ -140,12 +129,10 @@ function setupCategoryArrows() {
             wrap.appendChild(btnR);
         }
     } else {
-        // Guard for Desktop: If screen is large and categories <= 5, remove any arrows
         wrap.querySelectorAll(".row-arrow").forEach(a => a.remove());
     }
 }
 
-// MODAL CONTROLLER: Centered and handles background scroll
 document.addEventListener("click", (e) => {
     const trigger = e.target.closest("[data-modal]");
     if (trigger) {
@@ -161,7 +148,6 @@ document.addEventListener("click", (e) => {
     }
 });
 
-// STARTUP: Double-check that it fires regardless of how fast the page loads
 if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", loadProducts);
 } else {
