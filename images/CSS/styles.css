@@ -1,0 +1,206 @@
+﻿/* =============================================================
+   AFFILIXS MASTER STYLES - CLEAN SOLID STATE
+   ============================================================= */
+
+* { box-sizing: border-box !important; }
+
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    overflow-x: hidden !important;
+    font-family: sans-serif;
+    background: #fff;
+}
+
+/* HEADER */
+.site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    background: #111;
+    height: 70px;
+    position: sticky;
+    top: 0; z-index: 2000;
+}
+.logo-group { display: flex; align-items: center; gap: 12px; color: #fff; }
+.logo img { height: 40px; }
+.header-nav span { color: #fff; margin-left: 5ch; font-size: 0.9rem; cursor: pointer; }
+
+/* HERO SECTION */
+.top-section { margin-top: 25px !important; position: relative; width: 100%; }
+.identity-panel { width: 100%; height: 300px; background: url("../images/hero8888.jpg") center/cover no-repeat; border-bottom: 4px solid #111; }
+
+.identity-text {
+    position: absolute;
+    bottom: -15px;
+    left: 5ch;
+    background: #ff0000;
+    padding: 8px 20px;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.2rem;
+    z-index: 100;
+}
+
+/* SECTION TITLES */
+.section-title {
+    margin: 50px 0 20px 5ch; 
+    font-size: 1.5rem;
+}
+.section-title span {
+    color: inherit;
+    font-weight: bold;
+    border-bottom: 3px solid #FFD700;
+    padding-bottom: 2px;
+}
+
+/* PRODUCT ROWS */
+.product-row-wrapper { position: relative; width: 100%; margin-bottom: 20px; }
+.product-row {
+    display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 25px;
+    padding: 10px 20px 45px 20px; scrollbar-width: none;
+}
+.product-row::-webkit-scrollbar { display: none; }
+
+.product-card {
+    flex: 0 0 200px; height: 225px; background: #fff; border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06); cursor: pointer; overflow: hidden;
+}
+.product-card img { width: 100%; height: 165px; object-fit: contain; background: #f9f9f9; }
+
+/* ARROWS - UNIVERSAL */
+.row-arrow {
+    position: absolute; bottom: 5px; background: #ff0000 !important;
+    color: #fff; width: 32px; height: 32px; border-radius: 50%;
+    border: none; cursor: pointer; z-index: 100; display: flex; align-items: center; justify-content: center;
+}
+.row-arrow.left { left: 20px; }
+.row-arrow.right { right: 20px; }
+
+/* CATEGORIES */
+.categories-wrapper { position: relative; width: 100%; }
+.categories {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 20px;
+    scrollbar-width: none;
+}
+.categories::-webkit-scrollbar { display: none; }
+
+.category {
+    flex: 0 0 160px !important;
+    text-align: center;
+}
+.category img {
+    width: 140px;
+    height: 140px;
+    border-radius: 12px;
+    object-fit: cover;
+    background: #f9f9f9;
+}
+
+/* FOOTER */
+.site-footer { background: #111; color: #fff; width: 100%; margin-top: 20px; }
+.footer-row-1 { padding: 15px 20px 5px 20px; text-align: center; }
+.footer-row-2 { padding: 10px 5%; display: flex; justify-content: flex-start; width: 100% }
+.footer-links span { margin: 0 15px; cursor: pointer; font-size: 0.85rem; }
+.copyright-text { margin: 0; font-size: 0.8rem; opacity: 0.8; text-align: left; }
+
+/* MODALS & PREVIEW */
+.text-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 5000; }
+.text-modal.active { display: flex; align-items: flex-start; justify-content: center; }
+.modal-box { background: #fff; color: #111; padding: 30px; border-radius: 8px; width: 90%; max-width: 500px; margin-top: 10vh; position: relative; }
+.close-modal { position: absolute; top: 10px; right: 15px; font-size: 1.5rem; cursor: pointer; }
+
+#floatingPreview { position: fixed; pointer-events: none; display: none; width: 320px; height: 450px; background: #111; border: 2px solid #ff0000; z-index: 6000; overflow: hidden; }
+#floatingPreview img { width: 100%; display: block; height: 100%; object-fit: contain; }
+#floatingPreview.active { display: block; }
+
+[data-modal], .product-card, .row-arrow, .category, .header-nav span { cursor: pointer !important; }
+
+/* =============================================================
+   MOBILE FIREWALL 9.0 - THE POLISHING PHASE (FINAL)
+   ============================================================= */
+
+@media (max-width: 768px) {
+    /* 1. Header: Expanded 2-Line Control */
+    .site-header { 
+        height: auto !important; 
+        min-height: 65px !important;
+        flex-direction: column !important; 
+        align-items: flex-start !important; 
+        padding: 8px 15px !important; 
+    }
+    .logo-group { width: 100% !important; justify-content: flex-start !important; }
+    .logo img { height: 30px !important; } /* Slightly larger logo */
+    
+    /* Logo Title: Increased to 10px-11px range */
+    .logo-group h1 { 
+        font-size: 11px !important; 
+        margin: 0 !important; 
+        letter-spacing: 0.5px;
+    }
+
+    /* 2. Nav Rescue: Re-centering on 2nd line, Font 8px-9px */
+    .header-nav { 
+        width: 100% !important; 
+        display: flex !important; 
+        justify-content: center !important; 
+        margin-top: 6px !important; 
+        margin-left: 0 !important;
+    }
+    .header-nav span { 
+        font-size: 9px !important; 
+        margin: 0 12px !important;
+        white-space: nowrap !important;
+    }
+
+    /* 3. Title Left Alignment Protection */
+    .section-title { 
+        text-align: left !important; 
+        margin-left: 15px !important; 
+        width: 100% !important;
+        display: block !important;
+    }
+
+    /* 4. Category Arrow Tightening (Hug the cards) */
+    .categories-wrapper { 
+        padding-bottom: 25px !important; /* Reduced space */
+        overflow: visible !important; 
+    }
+    .categories-wrapper .row-arrow {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        bottom: 0px !important; /* Pinned closer to card bottom */
+        z-index: 5000 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    /* 5. Relaxed Squeeze (Samsung Protection) */
+    .product-card, .category {
+        flex: 0 0 40% !important;
+        max-width: 40% !important;
+        margin: 5% !important;
+    }
+
+    /* 6. Footer Polish: Font Increase to ~9px */
+    .footer-row-1 { 
+        display: flex !important; 
+        flex-wrap: nowrap !important; 
+        justify-content: center !important; 
+        gap: 6px !important; 
+    }
+    .footer-links span { 
+        font-size: 9px !important; 
+        margin: 0 4px !important; 
+        white-space: nowrap !important;
+        display: inline-block !important;
+    }
+}
