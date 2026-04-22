@@ -207,44 +207,74 @@ html, body {
 }
 
 /* =============================================================
-   MOBILE FIREWALL 6.0 - THE FINAL PUSH
+   MOBILE FIREWALL 7.0 - THE "NO-SURRENDER" VERSION
    ============================================================= */
 
+/* BLOCK A: General Mobile/Tablet (HUAWEI) */
 @media (max-width: 768px) {
-    header { align-items: flex-start !important; padding: 8px 15px !important; }
-    .logo-container h1 { font-size: 11px !important; text-align: left !important; width: 100%; }
-    nav { justify-content: center !important; width: 100% !important; margin-top: 5px !important; }
-    nav a { font-size: 10px !important; }
-
-    /* The "Category Arrow" Rescue: Ensure the container allows overflow */
-    .categories-wrapper { 
-        position: relative !important; 
-        padding-bottom: 45px !important; /* Extra room for arrows */
-        overflow: visible !important; 
-        display: block !important;
+    header { 
+        display: flex !important; 
+        flex-direction: column !important; /* Force Logo above Nav */
+        align-items: flex-start !important; /* Align everything to left */
+        padding: 10px 15px !important; 
+    }
+    .logo-container { 
+        text-align: left !important; 
+        width: 100% !important; 
+    }
+    .logo-container h1 { 
+        font-size: 10px !important; /* Reduced for Samsung safety */
+        margin: 0 !important; 
+        text-align: left !important;
+    }
+    nav { 
+        display: flex !important; 
+        flex-direction: row !important; 
+        flex-wrap: nowrap !important; /* Block stacking */
+        justify-content: center !important; 
+        width: 100% !important; 
+        margin-top: 8px !important; 
+    }
+    nav a { 
+        font-size: 9.5px !important; 
+        margin: 0 6px !important; 
+        white-space: nowrap !important; 
     }
 
-    /* Standard Category Sizing (Huawei/Tablets) */
+    /* Section Titles: Forced Left */
+    .section-title { 
+        text-align: left !important; 
+        margin-left: 15px !important; /* ~2 chars indent */
+        display: block !important; 
+        width: 100% !important; 
+    }
+
+    /* Standard Category Sizing */
+    .categories-wrapper { 
+        position: relative !important; 
+        padding-bottom: 50px !important; /* Space for Arrows */
+        overflow: visible !important; 
+    }
     .category { flex: 0 0 calc(46% - 10px) !important; margin: 5px !important; }
 }
 
+/* BLOCK B: Samsung Specific (The "Hard Limit") */
 @media (max-width: 480px) {
-    /* Samsung Category Squeeze: Slightly smaller to guarantee gap */
-    .category {
-        flex: 0 0 42% !important; 
-        max-width: 42% !important;
-        margin: 4% !important;
+    /* Relaxed Card Fix: 40% width creates visible air between cards */
+    .product-card, .category {
+        flex: 0 0 40% !important;
+        max-width: 40% !important;
+        margin: 5% !important; 
     }
 
-    /* FORCED CATEGORY ARROWS: Absolute positioning insurance */
+    /* FORCED CATEGORY ARROWS: Floating on Top */
     .categories-wrapper .row-arrow {
         display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
         position: absolute !important; 
         bottom: 5px !important;
-        top: auto !important;
-        z-index: 99999 !important; 
+        z-index: 999999 !important; 
     }
 
     /* THE FOOTER STUBBORN FIX: Extreme Shrink for Samsung */
@@ -253,11 +283,10 @@ html, body {
         flex-wrap: nowrap !important; 
         justify-content: center !important; 
         width: 100% !important;
-        gap: 5px !important; 
+        gap: 4px !important; 
     }
     .footer-row-1 a { 
-        font-size: 8.5px !important; 
+        font-size: 8px !important; /* Final shrink for contact link */
         white-space: nowrap !important; 
-        display: inline-block !important;
     }
 }

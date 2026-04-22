@@ -114,42 +114,32 @@ function setupCategoryArrows() {
     const isMobile = window.innerWidth <= 768;
     const categoryCount = row.querySelectorAll(".category").length;
 
-    // RULE: Show arrows if on Mobile OR if Desktop has > 5 categories
     if (isMobile || categoryCount > 5) {
         if (!wrap.querySelector(".row-arrow")) {
             const btnL = document.createElement("button");
             btnL.className = "row-arrow left"; 
-            btnL.innerHTML = "❮"; // The symbol you asked about
-            btnL.style.zIndex = "99999";
+            btnL.innerHTML = "❮";
+            btnL.style.zIndex = "99999"; // High priority
             btnL.onclick = () => row.scrollBy({left: -150, behavior: 'smooth'});
 
             const btnR = document.createElement("button");
             btnR.className = "row-arrow right"; 
-            btnR.innerHTML = "❯"; // The symbol you asked about
-            btnR.style.zIndex = "99999";
+            btnR.innerHTML = "❯";
+            btnR.style.zIndex = "99999"; // High priority
             btnR.onclick = () => row.scrollBy({left: 150, behavior: 'smooth'});
 
             wrap.appendChild(btnL);
             wrap.appendChild(btnR);
             
-            // ADD THESE TWO LINES FOR INSURANCE:
-
-            btnL.style.zIndex = "9999";
-            
-btnR.style.zIndex = "9999";
-
-            // Force relative position for pinned arrows
-            wrap.style.position = "relative";
-            
-            // Force the wrapper to behave as a coordinate container
-
-            wrap.style.position = "relative";
-
-            wrap.style.overflow = "visible";
+            // THE NEW FORCE LINES
+            row.style.marginBottom = "40px"; // Space for arrows
+            wrap.style.position = "relative"; // Anchor for absolute buttons
+            wrap.style.overflow = "visible";  // Prevent clipping
         }
     } else {
-        // The Guardrail to keep Desktop clean
+        // The Guardrail: Reset for Desktop
         wrap.querySelectorAll(".row-arrow").forEach(a => a.remove());
+        row.style.marginBottom = "0px"; 
     }
 }
 
