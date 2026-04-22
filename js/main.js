@@ -130,7 +130,7 @@ function setupCategoryArrows() {
             wrap.appendChild(btnR);
             
             // THE FORCE BLOCK: Fixed for White Space
-            row.style.marginBottom = "10px"; // Minimized gap
+            row.style.marginBottom = "5px"; // Minimized gap; Reduced from 10px to 5px to pull arrows even closer
             wrap.style.position = "relative"; 
             wrap.style.overflow = "visible";
             btnL.style.zIndex = "99999";

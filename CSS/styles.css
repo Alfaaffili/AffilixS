@@ -124,11 +124,11 @@ html, body {
 [data-modal], .product-card, .row-arrow, .category, .header-nav span { cursor: pointer !important; }
 
 /* =============================================================
-   MOBILE FIREWALL 8.0 - SURGICAL REPAIR
+   MOBILE FIREWALL 9.0 - THE POLISHING PHASE (FINAL)
    ============================================================= */
 
 @media (max-width: 768px) {
-    /* 1. Header Repair: Expand to fit 2 lines */
+    /* 1. Header: Expanded 2-Line Control */
     .site-header { 
         height: auto !important; 
         min-height: 65px !important;
@@ -137,25 +137,30 @@ html, body {
         padding: 8px 15px !important; 
     }
     .logo-group { width: 100% !important; justify-content: flex-start !important; }
-    .logo img { height: 28px !important; }
-    .logo-group h1 { font-size: 10px !important; margin: 0 !important; }
+    .logo img { height: 30px !important; } /* Slightly larger logo */
+    
+    /* Logo Title: Increased to 10px-11px range */
+    .logo-group h1 { 
+        font-size: 11px !important; 
+        margin: 0 !important; 
+        letter-spacing: 0.5px;
+    }
 
-    /* 2. Nav Rescue: Re-centering on 2nd line */
+    /* 2. Nav Rescue: Re-centering on 2nd line, Font 8px-9px */
     .header-nav { 
         width: 100% !important; 
         display: flex !important; 
         justify-content: center !important; 
-        margin-top: 5px !important; 
+        margin-top: 6px !important; 
         margin-left: 0 !important;
     }
     .header-nav span { 
         font-size: 9px !important; 
-        margin-left: 10px !important; 
-        margin-right: 10px !important;
+        margin: 0 12px !important;
         white-space: nowrap !important;
     }
 
-    /* 3. Title Left Alignment */
+    /* 3. Title Left Alignment Protection */
     .section-title { 
         text-align: left !important; 
         margin-left: 15px !important; 
@@ -163,38 +168,38 @@ html, body {
         display: block !important;
     }
 
-    /* 4. Category Arrow Pining */
+    /* 4. Category Arrow Tightening (Hug the cards) */
     .categories-wrapper { 
-        padding-bottom: 40px !important; 
+        padding-bottom: 25px !important; /* Reduced space */
         overflow: visible !important; 
     }
     .categories-wrapper .row-arrow {
         display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
-        bottom: 10px !important; /* Raised into view */
+        bottom: 0px !important; /* Pinned closer to card bottom */
         z-index: 5000 !important;
     }
 }
 
 @media (max-width: 480px) {
-    /* 5. Relaxed Squeeze (Samsung) */
+    /* 5. Relaxed Squeeze (Samsung Protection) */
     .product-card, .category {
         flex: 0 0 40% !important;
         max-width: 40% !important;
         margin: 5% !important;
     }
 
-    /* 6. Footer Samsung Force-One-Line */
+    /* 6. Footer Polish: Font Increase to ~9px */
     .footer-row-1 { 
         display: flex !important; 
         flex-wrap: nowrap !important; 
         justify-content: center !important; 
-        gap: 5px !important; 
+        gap: 6px !important; 
     }
     .footer-links span { 
-        font-size: 8px !important; 
-        margin: 0 2px !important; 
+        font-size: 9px !important; 
+        margin: 0 4px !important; 
         white-space: nowrap !important;
         display: inline-block !important;
     }
