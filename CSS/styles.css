@@ -1,4 +1,8 @@
-﻿* { box-sizing: border-box !important; }
+﻿/* =============================================================
+   AFFILIXS MASTER STYLES - CLEAN SOLID STATE
+   ============================================================= */
+
+* { box-sizing: border-box !important; }
 
 html, body {
     margin: 0 !important;
@@ -24,12 +28,10 @@ html, body {
 .logo img { height: 40px; }
 .header-nav span { color: #fff; margin-left: 5ch; font-size: 0.9rem; cursor: pointer; }
 
-/* HERO SECTION - Fix 1: Space from Header */
+/* HERO SECTION */
 .top-section { margin-top: 25px !important; position: relative; width: 100%; }
 .identity-panel { width: 100%; height: 300px; background: url("../images/hero8888.jpg") center/cover no-repeat; border-bottom: 4px solid #111; }
 
-/* Fix 1: Pinned outside bottom border */
-/* Fix 2: Identity Text Font Increase */
 .identity-text {
     position: absolute;
     bottom: -15px;
@@ -39,25 +41,23 @@ html, body {
     border-radius: 4px;
     color: #fff;
     font-weight: bold;
-    font-size: 1.2rem; /* increased font size */
+    font-size: 1.2rem;
     z-index: 100;
 }
 
-/* SECTION TITLES - Fix 2 & 3: Gold Highlight & Breathing Space */
+/* SECTION TITLES */
 .section-title {
     margin: 50px 0 20px 5ch; 
     font-size: 1.5rem;
 }
-
-/* Fix 3: Golden Underline (Not Color) */
 .section-title span {
-    color: inherit; /* back to normal color */
+    color: inherit;
     font-weight: bold;
-    border-bottom: 3px solid #FFD700; /* Golden Underline */
+    border-bottom: 3px solid #FFD700;
     padding-bottom: 2px;
- }
+}
 
-/* PRODUCT ROWS - Fix 4 & 6: Tight Gaps & Pinned Arrows */
+/* PRODUCT ROWS */
 .product-row-wrapper { position: relative; width: 100%; margin-bottom: 20px; }
 .product-row {
     display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 25px;
@@ -65,25 +65,13 @@ html, body {
 }
 .product-row::-webkit-scrollbar { display: none; }
 
-/* Ensure ghost arrows in the middle of rows are killed */
-.product-row-wrapper .row-arrow {
-    top: auto !important;
-    bottom: 5px !important; /* Forces them to the bottom corners always */
-    transform: none !important;
-}
-
-/* If arrows appear in categories when they shouldn't */
-.categories-wrapper:not(:has(.category:nth-child(6))) .row-arrow {
-    display: none !important;
-}
-
 .product-card {
     flex: 0 0 200px; height: 225px; background: #fff; border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.06); cursor: pointer; overflow: hidden;
 }
 .product-card img { width: 100%; height: 165px; object-fit: contain; background: #f9f9f9; }
 
-/* ARROWS */
+/* ARROWS - UNIVERSAL */
 .row-arrow {
     position: absolute; bottom: 5px; background: #ff0000 !important;
     color: #fff; width: 32px; height: 32px; border-radius: 50%;
@@ -92,201 +80,122 @@ html, body {
 .row-arrow.left { left: 20px; }
 .row-arrow.right { right: 20px; }
 
-/* Fix 1: Category Uniformity & Row Lock */
-
+/* CATEGORIES */
+.categories-wrapper { position: relative; width: 100%; }
 .categories {
-
     display: flex !important;
-
-    flex-wrap: nowrap !important; /* Force horizontal */
-
+    flex-wrap: nowrap !important;
     gap: 20px;
-
     overflow-x: auto;
-
     padding: 20px;
-
     scrollbar-width: none;
-
 }
-
 .categories::-webkit-scrollbar { display: none; }
 
-
 .category {
-
-    flex: 0 0 160px !important; /* Fixed uniform width */
-
+    flex: 0 0 160px !important;
     text-align: center;
-
 }
-
 .category img {
-
     width: 140px;
- 
     height: 140px;
-
     border-radius: 12px;
-
     object-fit: cover;
-
     background: #f9f9f9;
-
 }
 
-/* FOOTER - Fix 7: Two Black Bars */
-.site-footer {
-    background: #111;
-    color: #fff;
-    width: 100%;
-    margin-top: 20px;
- }
+/* FOOTER */
+.site-footer { background: #111; color: #fff; width: 100%; margin-top: 20px; }
+.footer-row-1 { padding: 15px 20px 5px 20px; text-align: center; }
+.footer-row-2 { padding: 10px 5%; display: flex; justify-content: flex-start; width: 100% }
+.footer-links span { margin: 0 15px; cursor: pointer; font-size: 0.85rem; }
+.copyright-text { margin: 0; font-size: 0.8rem; opacity: 0.8; text-align: left; }
 
-.footer-row-1 {
-    padding: 15px 20px 5px 20px;
-    border-bottom: none; /* Removed the thin line */
-    text-align: center;
- }
-
-/* Fix 2: Copyright to the Left */
-.footer-row-2 {
-    padding: 10px 5%;
-    display: flex;
-    justify-content: flex-start; /* Aligns content to the left */
-    width: 100%
- }
-
-.footer-links span {
-    margin: 0 15px;
-    cursor: pointer;
-    font-size: 0.85rem;
- }
-
-.copyright-text {
-    margin: 0;
-    font-size: 0.8rem;
-    opacity: 0.8;
-    text-align: left; /* Ensures text itself is left-aligned */
- }
-
-/* MODALS - Fix 8: Upper Middle & Centered */
-.text-modal {
-    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.8); z-index: 5000;
-}
+/* MODALS & PREVIEW */
+.text-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 5000; }
 .text-modal.active { display: flex; align-items: flex-start; justify-content: center; }
 .modal-box { background: #fff; color: #111; padding: 30px; border-radius: 8px; width: 90%; max-width: 500px; margin-top: 10vh; position: relative; }
 .close-modal { position: absolute; top: 10px; right: 15px; font-size: 1.5rem; cursor: pointer; }
 
-/* PREVIEW - Fix 5: Tooltip */
-#floatingPreview {
-    position: fixed; pointer-events: none; display: none;
-    width: 320px; /*Fixed Width*/
-    height: 450px; /* Fixed Height (roughly 2x card height) */
-    background: #111;
-    border: 2px solid #ff0000;
-    z-index: 6000;
-    overflow: hidden;
-}
-
-#floatingPreview img {
-    width: 100%;
-    display: block;
-    height: 100%;
-    object-fit: contain; /* keeps image proportional inside the fixed box */
- }
+#floatingPreview { position: fixed; pointer-events: none; display: none; width: 320px; height: 450px; background: #111; border: 2px solid #ff0000; z-index: 6000; overflow: hidden; }
+#floatingPreview img { width: 100%; display: block; height: 100%; object-fit: contain; }
 #floatingPreview.active { display: block; }
 
-/* Ensure hand index for all interactive elements */
-
-[data-modal], .product-card, .row-arrow, .category, .header-nav span {
-
-    cursor: pointer !important;
-
-}
+[data-modal], .product-card, .row-arrow, .category, .header-nav span { cursor: pointer !important; }
 
 /* =============================================================
-   MOBILE FIREWALL 7.0 - THE "NO-SURRENDER" VERSION
+   MOBILE FIREWALL 8.0 - SURGICAL REPAIR
    ============================================================= */
 
-/* BLOCK A: General Mobile/Tablet (HUAWEI) */
 @media (max-width: 768px) {
-    header { 
-        display: flex !important; 
-        flex-direction: column !important; /* Force Logo above Nav */
-        align-items: flex-start !important; /* Align everything to left */
-        padding: 10px 15px !important; 
+    /* 1. Header Repair: Expand to fit 2 lines */
+    .site-header { 
+        height: auto !important; 
+        min-height: 65px !important;
+        flex-direction: column !important; 
+        align-items: flex-start !important; 
+        padding: 8px 15px !important; 
     }
-    .logo-container { 
-        text-align: left !important; 
+    .logo-group { width: 100% !important; justify-content: flex-start !important; }
+    .logo img { height: 28px !important; }
+    .logo-group h1 { font-size: 10px !important; margin: 0 !important; }
+
+    /* 2. Nav Rescue: Re-centering on 2nd line */
+    .header-nav { 
         width: 100% !important; 
-    }
-    .logo-container h1 { 
-        font-size: 10px !important; /* Reduced for Samsung safety */
-        margin: 0 !important; 
-        text-align: left !important;
-    }
-    nav { 
         display: flex !important; 
-        flex-direction: row !important; 
-        flex-wrap: nowrap !important; /* Block stacking */
         justify-content: center !important; 
-        width: 100% !important; 
-        margin-top: 8px !important; 
+        margin-top: 5px !important; 
+        margin-left: 0 !important;
     }
-    nav a { 
-        font-size: 9.5px !important; 
-        margin: 0 6px !important; 
-        white-space: nowrap !important; 
+    .header-nav span { 
+        font-size: 9px !important; 
+        margin-left: 10px !important; 
+        margin-right: 10px !important;
+        white-space: nowrap !important;
     }
 
-    /* Section Titles: Forced Left */
+    /* 3. Title Left Alignment */
     .section-title { 
         text-align: left !important; 
-        margin-left: 15px !important; /* ~2 chars indent */
-        display: block !important; 
-        width: 100% !important; 
+        margin-left: 15px !important; 
+        width: 100% !important;
+        display: block !important;
     }
 
-    /* Standard Category Sizing */
+    /* 4. Category Arrow Pining */
     .categories-wrapper { 
-        position: relative !important; 
-        padding-bottom: 50px !important; /* Space for Arrows */
+        padding-bottom: 40px !important; 
         overflow: visible !important; 
     }
-    .category { flex: 0 0 calc(46% - 10px) !important; margin: 5px !important; }
-}
-
-/* BLOCK B: Samsung Specific (The "Hard Limit") */
-@media (max-width: 480px) {
-    /* Relaxed Card Fix: 40% width creates visible air between cards */
-    .product-card, .category {
-        flex: 0 0 40% !important;
-        max-width: 40% !important;
-        margin: 5% !important; 
-    }
-
-    /* FORCED CATEGORY ARROWS: Floating on Top */
     .categories-wrapper .row-arrow {
         display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
-        position: absolute !important; 
-        bottom: 5px !important;
-        z-index: 999999 !important; 
+        bottom: 10px !important; /* Raised into view */
+        z-index: 5000 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    /* 5. Relaxed Squeeze (Samsung) */
+    .product-card, .category {
+        flex: 0 0 40% !important;
+        max-width: 40% !important;
+        margin: 5% !important;
     }
 
-    /* THE FOOTER STUBBORN FIX: Extreme Shrink for Samsung */
+    /* 6. Footer Samsung Force-One-Line */
     .footer-row-1 { 
         display: flex !important; 
         flex-wrap: nowrap !important; 
         justify-content: center !important; 
-        width: 100% !important;
-        gap: 4px !important; 
+        gap: 5px !important; 
     }
-    .footer-row-1 a { 
-        font-size: 8px !important; /* Final shrink for contact link */
-        white-space: nowrap !important; 
+    .footer-links span { 
+        font-size: 8px !important; 
+        margin: 0 2px !important; 
+        white-space: nowrap !important;
+        display: inline-block !important;
     }
 }

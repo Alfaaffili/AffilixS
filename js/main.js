@@ -1,6 +1,6 @@
 ﻿/**
  * AffilixS Master Logic - Verified Solid State
- * Includes: 19-char limit, Samsung Arrow Force, and Symbol Preservation
+ * Includes: 19-char limit, Samsung Arrow Force, and White-Space Fix
  */
 
 const IS_TOUCH = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
@@ -21,8 +21,8 @@ async function loadProducts() {
         
         renderProducts(data);
         
-        // Timeout helps mobile browsers render categories before drawing arrows
-        setTimeout(setupCategoryArrows, 150);
+        // Slight delay ensures the DOM is ready for the arrow calculations
+        setTimeout(setupCategoryArrows, 200);
          
     } catch (e) { 
         console.error("AffilixS Load Error:", e);
@@ -32,7 +32,7 @@ async function loadProducts() {
 function renderProducts(products) {
     const container = document.querySelector("#productsContainer");
     
-    // GHOST KILLER
+    // GHOST KILLER: Clean start for arrows
     document.querySelectorAll('.row-arrow').forEach(a => a.remove());
 
     container.innerHTML = '<h2 class="section-title"><span>Featured</span> Products</h2>';
@@ -58,7 +58,6 @@ function renderProducts(products) {
                 const card = document.createElement("div");
                 card.className = "product-card";
                 
-                // 19-Character Limit Logic
                 const cleanName = p.shortName || "Product";
                 const displayName = cleanName.length > 19 ? cleanName.substring(0, 16) + "..." : cleanName;
                 
@@ -119,25 +118,25 @@ function setupCategoryArrows() {
             const btnL = document.createElement("button");
             btnL.className = "row-arrow left"; 
             btnL.innerHTML = "❮";
-            btnL.style.zIndex = "99999"; // High priority
-            btnL.onclick = () => row.scrollBy({left: -150, behavior: 'smooth'});
 
             const btnR = document.createElement("button");
             btnR.className = "row-arrow right"; 
             btnR.innerHTML = "❯";
-            btnR.style.zIndex = "99999"; // High priority
-            btnR.onclick = () => row.scrollBy({left: 150, behavior: 'smooth'});
+
+            btnL.onclick = () => row.scrollBy({left: -200, behavior: 'smooth'});
+            btnR.onclick = () => row.scrollBy({left: 200, behavior: 'smooth'});
 
             wrap.appendChild(btnL);
             wrap.appendChild(btnR);
             
-            // THE NEW FORCE LINES
-            row.style.marginBottom = "40px"; // Space for arrows
-            wrap.style.position = "relative"; // Anchor for absolute buttons
-            wrap.style.overflow = "visible";  // Prevent clipping
+            // THE FORCE BLOCK: Fixed for White Space
+            row.style.marginBottom = "10px"; // Minimized gap
+            wrap.style.position = "relative"; 
+            wrap.style.overflow = "visible";
+            btnL.style.zIndex = "99999";
+            btnR.style.zIndex = "99999";
         }
     } else {
-        // The Guardrail: Reset for Desktop
         wrap.querySelectorAll(".row-arrow").forEach(a => a.remove());
         row.style.marginBottom = "0px"; 
     }
