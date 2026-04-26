@@ -144,7 +144,7 @@ html, body {
 
     .identity-panel {
 
-        width: 100vw !important;
+        width: 80vw !important;
         height: 200px !important;
 
         background-size: cover !important; /* Re-asserting cover for mobile */
