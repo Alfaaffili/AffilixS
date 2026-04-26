@@ -37,7 +37,7 @@ html, body {
     background: url("../images/hero8888.jpg") no-repeat;
     background-size: cover !important; /* Forces the image to stretch until no gaps remain */
 
-    background-position: 48% 48%; /* This targets your 'Line 130-400' vertical band */
+    background-position: 45% 45%; /* This targets your 'Line 130-400' vertical band */
     border-bottom: 4px solid #111;
  }
 
@@ -148,7 +148,7 @@ html, body {
         height: 70px !important;
 
         background-size: cover !important; /* Re-asserting cover for mobile */
-        background-position: 48% 48% !important; /* Centers the focus for tablets */
+        background-position: 40% 40% !important; /* Centers the focus for tablets */
 
     }
 
@@ -224,7 +224,7 @@ html, body {
         /* Adjust the first % to fix the 'slide to the left' */
 
         /* If it's too far left, move this toward 50% */
-        background-position: 48% 48% !important;
+        background-position: 40% 40% !important;
  
     }
 
