@@ -37,7 +37,7 @@ html, body {
     background: url("../images/hero8888.jpg") no-repeat;
     background-size: cover !important; /* Forces the image to stretch until no gaps remain */
 
-    background-position: 50% 50%; /* This targets your 'Line 130-400' vertical band */
+    background-position: 100% 50%; /* This targets your 'Line 130-400' vertical band */
     border-bottom: 4px solid #111;
  }
 
