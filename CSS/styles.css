@@ -37,7 +37,7 @@ html, body {
     background: url("../images/hero8888.jpg") no-repeat;
     background-size: cover !important; /* Forces the image to stretch until no gaps remain */
 
-    background-position: 45% 45%; /* This targets your 'Line 130-400' vertical band */
+    background-position: 40% 40%; /* This targets your 'Line 130-400' vertical band */
     border-bottom: 4px solid #111;
  }
 
@@ -145,7 +145,7 @@ html, body {
     .identity-panel {
 
         width: 100% !important;
-        height: 70px !important;
+        height: 200px !important;
 
         background-size: cover !important; /* Re-asserting cover for mobile */
         background-position: 40% 40% !important; /* Centers the focus for tablets */
@@ -216,7 +216,7 @@ html, body {
     .identity-panel {
 
         width: 100% !important;
-        height: 70px !important;
+        height: 200px !important;
 
         /* Shifting the horizontal focus to capture your 400-850px Paintbrush range */
 
