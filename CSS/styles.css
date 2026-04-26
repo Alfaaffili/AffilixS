@@ -148,7 +148,7 @@ html, body {
         height: 390px !important;
 
         background-size: cover !important; /* Re-asserting cover for mobile */
-        background-position: 150% 150% !important; /* Centers the focus for tablets */
+        background-position: 110% 150% !important; /* Centers the focus for tablets */
 
     }
 
@@ -224,7 +224,7 @@ html, body {
         /* Adjust the first % to fix the 'slide to the left' */
 
         /* If it's too far left, move this toward 50% */
-        background-position: 150% 150% !important;
+        background-position: 110% 150% !important;
  
     }
 
