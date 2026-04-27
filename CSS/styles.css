@@ -141,7 +141,7 @@ html, body {
 @media (max-width: 768px) {
     .top-section {
      
-    margin-top: -10px !important; /* Reduces the gap from 25px to 5px */
+    margin-top: -20px !important; /* Reduces the gap from 25px to 5px */
          margin-bottom: 50px !important; /* This ensures the space for the identity-text diesn't overlap products */
 
          padding-top: 0 !important;
@@ -153,7 +153,7 @@ html, body {
     .identity-panel {
 
         width: 100vw !important;
-        height: 250px !important; /* Increased from 130px */
+        height: 230px !important; /* Increased from 130px */
 
         margin-top: 0 !important;
         border-top: none !important; /* Ensure no border is adding a 'fake' gap */
@@ -234,7 +234,7 @@ html, body {
 @media (max-width: 480px) {
      .top-section {
      
-    margin-top: -10px !important; /* Reduces the gap from 25px to 5px */
+    margin-top: -20px !important; /* Reduces the gap from 25px to 5px */
          marging-bottm: 50px !important; /* This ensures the space for the identity-text doesn't overlap products */
 
          padding-top: 0 !important;
@@ -246,7 +246,7 @@ html, body {
     .identity-panel {
 
         width: 100vw !important;
-        height: 250px !important; /* Increased from 130px */
+        height: 230px !important; /* Increased from 130px */
 
         margin-top: 0 !important:
         border-top: none !important: /* Ensure no border is adding a 'fake' gap */
