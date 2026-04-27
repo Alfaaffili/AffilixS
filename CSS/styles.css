@@ -145,7 +145,7 @@ html, body {
     .identity-panel {
 
         width: 100% !important;
-        height: 180px !important; /* Increased from 130px */
+        height: 200px !important; /* Increased from 130px */
 
         background-size: cover !important; /* Re-asserting cover for mobile */
         background-position: 50% 50% !important; /* Centers the focus for tablets */
@@ -235,7 +235,7 @@ html, body {
     .identity-panel {
 
         width: 100% !important;
-        height: 180px !important; /* Increased from 130px */
+        height: 200px !important; /* Increased from 130px */
 
         /* Shifting the horizontal focus to capture your 400-850px Paintbrush range */
 
