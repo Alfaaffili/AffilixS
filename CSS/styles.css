@@ -145,12 +145,31 @@ html, body {
     .identity-panel {
 
         width: 100% !important;
-        height: 130px !important;
+        height: 180px !important; /* Increased from 130px */
 
         background-size: cover !important; /* Re-asserting cover for mobile */
         background-position: 50% 50% !important; /* Centers the focus for tablets */
 
     }
+     
+     .top-section {
+     
+    margin-top: 5px !important; /* Reduces the gap from 25px to 5px */
+         margin-bottom: 40px !important; /* This ensures the space for the identity-text diesn't overlap products */
+
+  }
+
+    .identity-text {
+        position: absolute;
+        bottom: -20px; /* Moves it lower so it doesn't block the hero view */
+        left: 50% !important; /* Part 1 of centering */
+        transform: translateX(-50%); /* Part 2 of centering: pulls it back by half its width */
+        width: 90%; /* Prevents it from touching the screen edges */
+        text-align: center;
+        font-size: 0.9rem !important; /* Slightly smaller to prevent splitting into 2 lines */
+        white-space: nowrap; /* Forces it to stay on one line */
+        padding: 6px 10px !important;
+ }
 
     /* 1.1 Header: Expanded 2-Line Control */
     .site-header { 
@@ -216,7 +235,7 @@ html, body {
     .identity-panel {
 
         width: 100% !important;
-        height: 130px !important;
+        height: 180px !important; /* Increased from 130px */
 
         /* Shifting the horizontal focus to capture your 400-850px Paintbrush range */
 
@@ -227,6 +246,25 @@ html, body {
         background-position: 50% 50% !important;
  
     }
+     
+     .top-section {
+     
+    margin-top: 5px !important; /* Reduces the gap from 25px to 5px */
+         marging-bottm: 40px !important; /* This ensures the space for the identity-text doesn't overlap products */
+
+ }
+
+    .identity-text {
+        position: absolute;
+        bottom: -20px; /* Moves it lower so it doesn't block the hero view */
+        left: 50% !important; /* Part 1 of centering */
+        transform: translateX(-50%); /* Part 2 of centering: pulls it back by half its width */
+        width: 90%; /* Prevents it from touching the screen edges */
+        text-align: center;
+        font-size: 0.9rem !important; /* Slightly smaller to prevent splitting into 2 lines */
+        white-space: nowrap; /* Forces it to stay on one line */
+        padding: 6px 10px !important;
+ }
 
     /* 5. Relaxed Squeeze (Samsung Protection) */
     .product-card, .category {
