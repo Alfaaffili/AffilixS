@@ -153,12 +153,12 @@ html, body {
     .identity-panel {
 
         width: 100vw !important;
-        height: 180px !important; /* Increased from 130px */
+        height: 190px !important; /* Increased from 130px */
 
         margin-top: 0 !important;
         border-top: none !important; /* Ensure no border is adding a 'fake' gap */
         background-size: cover !important; /* Re-asserting cover for mobile */
-        background-position: 20% 40% !important; /* Centers the focus for tablets */
+        background-position: 30% 40% !important; /* Centers the focus for tablets */
 
     }
 
@@ -246,7 +246,7 @@ html, body {
     .identity-panel {
 
         width: 100vw !important;
-        height: 180px !important; /* Increased from 130px */
+        height: 190px !important; /* Increased from 130px */
 
         margin-top: 0 !important:
         border-top: none !important: /* Ensure no border is adding a 'fake' gap */
