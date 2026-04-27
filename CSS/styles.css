@@ -142,7 +142,7 @@ html, body {
     .top-section {
      
     margin-top: -40px !important; /* Reduces the gap from 25px to 5px */
-         margin-bottom: 30px !important; /* This ensures the space for the identity-text diesn't overlap products */
+         margin-bottom: 30px !important; /* This ensures the space for the identity-text doesn't overlap products */
 
          padding-top: 0 !important;
   }    
@@ -158,7 +158,7 @@ html, body {
         margin-top: 0 !important;
         border-top: none !important; /* Ensure no border is adding a 'fake' gap */
         background-size: cover !important; /* Re-asserting cover for mobile */
-        background-position: 60% 40% !important; /* Centers the focus for tablets */
+        background-position: 100% 40% !important; /* Centers the focus for tablets */
 
     }
 
