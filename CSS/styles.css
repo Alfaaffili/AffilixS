@@ -141,9 +141,10 @@ html, body {
 @media (max-width: 768px) {
     .top-section {
      
-    margin-top: 2px !important; /* Reduces the gap from 25px to 5px */
-         margin-bottom: 40px !important; /* This ensures the space for the identity-text diesn't overlap products */
+    margin-top: -5px !important; /* Reduces the gap from 25px to 5px */
+         margin-bottom: 50px !important; /* This ensures the space for the identity-text diesn't overlap products */
 
+         padding-top: 0 !important;
   }    
 
     /* 1.0 ... existing header/nav code ... */
@@ -152,8 +153,10 @@ html, body {
     .identity-panel {
 
         width: 100% !important;
-        height: 200px !important; /* Increased from 130px */
+        height: 250px !important; /* Increased from 130px */
 
+        margin-top: 0 !important;
+        border-top: none !important; /* Ensure no border is adding a 'fake' gap */
         background-size: cover !important; /* Re-asserting cover for mobile */
         background-position: 50% 50% !important; /* Centers the focus for tablets */
 
@@ -231,9 +234,10 @@ html, body {
 @media (max-width: 480px) {
      .top-section {
      
-    margin-top: 2px !important; /* Reduces the gap from 25px to 5px */
-         marging-bottm: 40px !important; /* This ensures the space for the identity-text doesn't overlap products */
+    margin-top: -5px !important; /* Reduces the gap from 25px to 5px */
+         marging-bottm: 50px !important; /* This ensures the space for the identity-text doesn't overlap products */
 
+         padding-top: 0 !important;
  }    
 
     /* ... existing card squeeze code ... */
@@ -242,8 +246,10 @@ html, body {
     .identity-panel {
 
         width: 100% !important;
-        height: 200px !important; /* Increased from 130px */
+        height: 250px !important; /* Increased from 130px */
 
+        margin-top: 0 !important:
+        border-top: none !important: /* Ensure no border is adding a 'fake' gap */
         /* Shifting the horizontal focus to capture your 400-850px Paintbrush range */
 
         background-size: cover !important;
