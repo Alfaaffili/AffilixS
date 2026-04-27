@@ -141,7 +141,7 @@ html, body {
 @media (max-width: 768px) {
     .top-section {
      
-    margin-top: 5px !important; /* Reduces the gap from 25px to 5px */
+    margin-top: 2px !important; /* Reduces the gap from 25px to 5px */
          margin-bottom: 40px !important; /* This ensures the space for the identity-text diesn't overlap products */
 
   }    
@@ -152,7 +152,7 @@ html, body {
     .identity-panel {
 
         width: 100% !important;
-        height: 180px !important; /* Increased from 130px */
+        height: 300px !important; /* Increased from 130px */
 
         background-size: cover !important; /* Re-asserting cover for mobile */
         background-position: 50% 50% !important; /* Centers the focus for tablets */
@@ -231,7 +231,7 @@ html, body {
 @media (max-width: 480px) {
      .top-section {
      
-    margin-top: 5px !important; /* Reduces the gap from 25px to 5px */
+    margin-top: 2px !important; /* Reduces the gap from 25px to 5px */
          marging-bottm: 40px !important; /* This ensures the space for the identity-text doesn't overlap products */
 
  }    
@@ -242,7 +242,7 @@ html, body {
     .identity-panel {
 
         width: 100% !important;
-        height: 180px !important; /* Increased from 130px */
+        height: 300px !important; /* Increased from 130px */
 
         /* Shifting the horizontal focus to capture your 400-850px Paintbrush range */
 
