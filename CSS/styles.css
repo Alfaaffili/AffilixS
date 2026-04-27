@@ -157,8 +157,8 @@ html, body {
 
         margin-top: 0 !important;
         border-top: none !important; /* Ensure no border is adding a 'fake' gap */
-        background-size: 140% auto !important; /* Re-asserting cover for mobile */
-        background-position: 100% 100% !important; /* Centers the focus for tablets */
+        background-size: 130% auto !important; /* Re-asserting cover for mobile */
+        background-position: 50% 10% !important; /* Centers the focus for tablets */
 
     }
 
@@ -252,11 +252,11 @@ html, body {
         border-top: none !important: /* Ensure no border is adding a 'fake' gap */
         /* Shifting the horizontal focus to capture your 400-850px Paintbrush range */
 
-        background-size: 140% auto !important;
+        background-size: 130% auto !important;
         /* Adjust the first % to fix the 'slide to the left' */
 
         /* If it's too far left, move this toward 50% */
-        background-position: 100% 100% !important;
+        background-position: 50% 10% !important;
  
     }
      
