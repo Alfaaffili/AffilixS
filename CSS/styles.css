@@ -153,7 +153,7 @@ html, body {
     .identity-panel {
 
         width: 100vw !important;
-        height: 225px !important; /* Increased from 130px */
+        height: 200px !important; /* Increased from 130px */
 
         margin-top: 0 !important;
         border-top: none !important; /* Ensure no border is adding a 'fake' gap */
@@ -246,7 +246,7 @@ html, body {
     .identity-panel {
 
         width: 100vw !important;
-        height: 225px !important; /* Increased from 130px */
+        height: 200px !important; /* Increased from 130px */
 
         margin-top: 0 !important:
         border-top: none !important: /* Ensure no border is adding a 'fake' gap */
