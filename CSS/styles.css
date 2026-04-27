@@ -158,7 +158,7 @@ html, body {
         margin-top: 0 !important;
         border-top: none !important; /* Ensure no border is adding a 'fake' gap */
         background-size: cover !important; /* Re-asserting cover for mobile */
-        background-position: 10% 10% !important; /* Centers the focus for tablets */
+        background-position: 10% 100% !important; /* Centers the focus for tablets */
 
     }
 
@@ -256,7 +256,7 @@ html, body {
         /* Adjust the first % to fix the 'slide to the left' */
 
         /* If it's too far left, move this toward 50% */
-        background-position: 10% 10% !important;
+        background-position: 10% 100% !important;
  
     }
      
