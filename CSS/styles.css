@@ -153,11 +153,11 @@ html, body {
     .identity-panel {
 
         width: 100vw !important;
-        height: 230px !important; /* Increased from 130px */
+        height: 250px !important; /* Increased from 130px */
 
         margin-top: 0 !important;
         border-top: none !important; /* Ensure no border is adding a 'fake' gap */
-        background-size: 110% auto !important; /* Re-asserting cover for mobile */
+        background-size: 90% auto !important; /* Re-asserting cover for mobile */
         background-position: 50% 10% !important; /* Centers the focus for tablets */
 
     }
@@ -246,13 +246,13 @@ html, body {
     .identity-panel {
 
         width: 100vw !important;
-        height: 230px !important; /* Increased from 130px */
+        height: 250px !important; /* Increased from 130px */
 
         margin-top: 0 !important:
         border-top: none !important: /* Ensure no border is adding a 'fake' gap */
         /* Shifting the horizontal focus to capture your 400-850px Paintbrush range */
 
-        background-size: 110% auto !important;
+        background-size: 90% auto !important;
         /* Adjust the first % to fix the 'slide to the left' */
 
         /* If it's too far left, move this toward 50% */
