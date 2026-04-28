@@ -157,7 +157,7 @@ html, body {
 
         margin-top: 0 !important;
         border-top: none !important; /* Ensure no border is adding a 'fake' gap */
-        background-size: 100% auto !important; /* Re-asserting cover for mobile */
+        background-size: 90% auto !important; /* Re-asserting cover for mobile */
         background-position: 50% 10% !important; /* Centers the focus for tablets */
 
     }
