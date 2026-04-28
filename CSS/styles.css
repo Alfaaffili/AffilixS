@@ -156,6 +156,7 @@ html, body {
         height: 550px !important; /* Increased from 130px */
 
         margin-top: 0 !important;
+       margin-bottom: 2px; /* I just added it */
         border-top: none !important; /* Ensure no border is adding a 'fake' gap */
         background-size: 100% auto !important; /* Re-asserting cover for mobile */
         background-position: 80% 10% !important; /* Centers the focus for tablets */
@@ -249,6 +250,7 @@ html, body {
         height: 250px !important; /* Increased from 130px */
 
         margin-top: 0 !important:
+        margin-bottom: 10px; /* I just added it */
         border-top: none !important: /* Ensure no border is adding a 'fake' gap */
         /* Shifting the horizontal focus to capture your 400-850px Paintbrush range */
 
