@@ -152,11 +152,11 @@ html, body {
 
     .identity-panel {
 
-        width: 100% !important;
-        height: 550px !important; /* Increased from 130px */
+        width: 100vw !important;
+        height: 250px !important; /* Increased from 130px */
 
         margin-top: 0 !important;
-       margin-bottom: 2px; /* I just added it */
+          /* margin-bottom: 2px; === I just added it */
         border-top: none !important; /* Ensure no border is adding a 'fake' gap */
         background-size: 100% auto !important; /* Re-asserting cover for mobile */
         background-position: 80% 10% !important; /* Centers the focus for tablets */
