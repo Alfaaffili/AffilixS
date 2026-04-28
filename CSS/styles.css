@@ -153,7 +153,7 @@ html, body {
     .identity-panel {
 
         width: 100vw !important;
-        height: 250px !important; /* Increased from 130px */
+        height: 50px !important; /* Increased from 130px */
 
         margin-top: 0 !important;
           /* margin-bottom: 2px; === I just added it */
@@ -247,14 +247,14 @@ html, body {
     .identity-panel {
 
         width: 100vw !important;
-        height: 250px !important; /* Increased from 130px */
+        height: 50px !important; /* Increased from 130px */
 
         margin-top: 0 !important:
-        margin-bottom: 10px; /* I just added it */
+      /* margin-bottom: 10px; === I just added it */
         border-top: none !important: /* Ensure no border is adding a 'fake' gap */
         /* Shifting the horizontal focus to capture your 400-850px Paintbrush range */
 
-        background-size: 90% auto !important;
+        background-size: 100% auto !important;
         /* Adjust the first % to fix the 'slide to the left' */
 
         /* If it's too far left, move this toward 50% */
