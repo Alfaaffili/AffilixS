@@ -153,10 +153,10 @@ html, body {
     .identity-panel {
 
         width: 100vw !important;
-        height: 50px !important; /* Increased from 130px */
+        height: 1000px !important; /* Increased from 130px */
 
         margin-top: 0 !important;
-          /* margin-bottom: 2px; === I just added it */
+         margin-bottom: 2px; /* I just added it */
         border-top: none !important; /* Ensure no border is adding a 'fake' gap */
         background-size: 100% auto !important; /* Re-asserting cover for mobile */
         background-position: 80% 10% !important; /* Centers the focus for tablets */
@@ -236,7 +236,7 @@ html, body {
      .top-section {
      
     margin-top: -40px !important; /* Reduces the gap from 25px to 5px */
-         marging-bottm: 100px !important; /* This ensures the space for the identity-text doesn't overlap products */
+         marging-bottm: 2px !important; /* This ensures the space for the identity-text doesn't overlap products */
 
          padding-top: 0 !important;
  }    
@@ -247,7 +247,7 @@ html, body {
     .identity-panel {
 
         width: 100vw !important;
-        height: 50px !important; /* Increased from 130px */
+        height: 1000px !important; /* Increased from 130px */
 
         margin-top: 0 !important:
       /* margin-bottom: 10px; === I just added it */
