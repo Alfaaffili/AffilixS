@@ -256,7 +256,7 @@ html, body {
         /* Adjust the first % to fix the 'slide to the left' */
 
         /* If it's too far left, move this toward 50% */
-        background-position: 10% 10% !important;
+        background-position: 100% 10% !important;
  
     }
      
