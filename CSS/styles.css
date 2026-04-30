@@ -152,7 +152,7 @@ html, body {
 
     .identity-panel {
 
-        width: 100vw !important;
+        width: 100% !important;
         height: 230px !important; /* Increased from 130px */
 
         margin-top: 0 !important;
