@@ -153,13 +153,18 @@ html, body {
     .identity-panel {
 
         width: 100% !important;
-        height: 230px !important; /* Increased from 130px */
+        height: 250px !important; /* Increased from 130px */
 
         margin-top: 0 !important;
         border-top: none !important; /* Ensure no border is adding a 'fake' gap */
-        background-size: 180% auto !important; /* Re-asserting cover for mobile */
-        background-position: 50% 50% !important; /* Centers the focus for tablets */
+        /* This tells the image: Be exactly as wide as the screen.
+ 
+          The second value 'auto' lets the image height fall where it may. */
+        background-size: 100% auto !important; /* Re-asserting cover for mobile */
+        background-position: center !important; /* Centers the focus for tablets */
 
+        background-repeat: no-repeat !important;
+        background-color: #111;
     }
 
     .identity-text {
