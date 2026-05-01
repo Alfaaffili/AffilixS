@@ -141,7 +141,7 @@ html, body {
 @media (max-width: 768px) {
     .top-section {
      
-    margin-top: -40px !important; /* Reduces the gap from 25px to 5px */
+    margin-top: -45px !important; /* Reduces the gap from 25px to 5px */
          margin-bottom: 4px !important; /* This ensures the space for the identity-text doesn't overlap products */
 
          padding-top: 0 !important;
