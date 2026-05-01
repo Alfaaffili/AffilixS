@@ -161,7 +161,7 @@ html, body {
  
           The second value 'auto' lets the image height fall where it may. */
         background-size: 200px 100% !important; /* Re-asserting cover for mobile */
-        background-position: cover !important; /* Centers the focus for tablets */
+        background-position: contain !important; /* Centers the focus for tablets */
 
         background-repeat: no-repeat !important;
         background-color: #111;
