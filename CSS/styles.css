@@ -160,7 +160,7 @@ html, body {
         /* This tells the image: Be exactly as wide as the screen.
  
           The second value 'auto' lets the image height fall where it may. */
-        background-size: auto auto !important; /* Re-asserting cover for mobile */
+        background-size: auto 100% !important; /* Re-asserting cover for mobile */
         background-position: center !important; /* Centers the focus for tablets */
 
         background-repeat: no-repeat !important;
