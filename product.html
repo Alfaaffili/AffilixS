@@ -4,23 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AffilixS | Product View</title>
-    <link rel="stylesheet" href="CSS/styles.css?v=4.1">
+    <!-- Preservation Rule: Load main first, then product overrides -->
+    <link rel="stylesheet" href="CSS/styles.css?v=1.4">
+    <link rel="stylesheet" href="CSS/product-styles.css?v=1.0">
 </head>
 <body class="product-page">
 
+<!-- [BLOCK: MODALS] -->
 <div id="visionModal" class="text-modal" onclick="closeM(event, 'visionModal')"><div class="modal-box"><h2>Our Vision</h2><p>Refined products for modern living.</p></div></div>
 <div id="insightsModal" class="text-modal" onclick="closeM(event, 'insightsModal')"><div class="modal-box"><h2>Insights</h2><p>Latest trends and analysis.</p></div></div>
 <div id="contactModal" class="text-modal" onclick="closeM(event, 'contactModal')"><div class="modal-box"><h2>Contact</h2><p>support@affilixs.com</p></div></div>
 <div id="privacyModal" class="text-modal" onclick="closeM(event, 'privacyModal')"><div class="modal-box"><h2>Privacy Policy</h2><p>Your data is safe with us.</p></div></div>
 <div id="disclaimerModal" class="text-modal" onclick="closeM(event, 'disclaimerModal')"><div class="modal-box"><h2>Disclaimer</h2><p>Affiliate links included.</p></div></div>
 
+<!-- [BLOCK: HEADER - RULE 6] -->
 <header class="site-header">
-    <div class="logo-group">
+    <div class="logo-group" onclick="window.location.href='index.html'" style="cursor:pointer">
         <div class="logo"><img src="images/logo.jpg" alt="Logo"></div>
         <h1>AffilixS</h1>
     </div>
     <nav class="header-nav">
-        <a href="index.html" class="nav-item home-link">home</a>
+        <a href="index.html" class="nav-item">home</a>
         <span class="nav-item" onclick="openM('visionModal')">vision</span>
         <span class="nav-item" onclick="openM('insightsModal')">insights</span>
         <span class="nav-item" onclick="openM('contactModal')">contact</span>
@@ -28,6 +32,7 @@
 </header>
 
 <main class="product-main-layout">
+    <!-- [BLOCK: LEFT_DISPLAY - Section 1 & 2] -->
     <div class="main-display-area">
         <section class="hero-display">
             <img id="heroImage" src="" alt="Product Hero">
@@ -38,14 +43,16 @@
             <div id="pDesc" class="description-text">---</div>
         </section>
 
+        <!-- Container for Related Product Row (Section 3) -->
         <div id="productRowsContainer"></div>
     </div>
 
+    <!-- [BLOCK: RIGHT_SIDEBAR - Section 2.2 & 4] -->
     <aside class="master-sidebar">
         <div class="sidebar-action-col">
             <div class="tight-stats">
-                <p><b>Rate:</b> ★★★★★</p>
-                <p><b>Rank:</b> #1 Trend</p>
+                <p><b>Rating:</b> <span id="pRating">★★★★★</span></p>
+                <p><b>Rank:</b> <span id="pRank">#--</span></p>
                 <p><b>Price:</b> <span id="pPrice">---</span></p>
             </div>
             <div class="sidebar-btns">
@@ -56,88 +63,68 @@
 
         <div id="catOuterWrap">
             <div class="cat-scroll-track" id="catScrollInternal">
+                <!-- Static or Dynamic Categories -->
                 <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/cat-tech.jpg"><p>TECH</p></div>
                 <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/Home.jpg"><p>HOME</p></div>
-                <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/Fittness.jpg"><p>FITNESS</p></div>
                 <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/Style.jpg"><p>STYLE</p></div>
-                <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/BeautyPersonnalCare.jpg"><p>BEAUTY</p></div>
             </div>
         </div>
     </aside>
 </main>
 
-<footer class="site-footer">
-    <div class="footer-links-row">
-        <span onclick="openM('privacyModal')">Privacy</span>
-        <span onclick="openM('disclaimerModal')">Disclaimer</span>
-        <span onclick="openM('contactModal')">Contact</span>
-    </div>
-    <div class="copyright-line">&copy; 2026 AffilixS</div>
-</footer>
+<!-- Notice: Rule 6 - No Footer on Product Page per your instruction -->
 
 <script>
-    // Global Modal Control
+    // [BLOCK: MODAL_LOGIC]
     function openM(id) { document.getElementById(id).classList.add('active'); }
     function closeM(e, id) { if(e.target.id === id) document.getElementById(id).classList.remove('active'); }
     
-    // Smooth Scroll Control
-    function scrollX(id, dir) { 
-        const el = document.getElementById(id);
-        if(el) el.scrollBy({ left: dir * 300, behavior: 'smooth' }); 
+    // [BLOCK: SWAP_LOGIC - RULE 3.1]
+    function updateHero(product) {
+        document.getElementById("heroImage").src = product.image;
+        document.getElementById("pName").innerText = product.name;
+        document.getElementById("pDesc").innerText = product.fullDescription;
+        document.getElementById("pPrice").innerText = (product.currency || "$") + product.price;
+        document.getElementById("pRank").innerText = "#" + (product.priority || "--");
+        document.getElementById("buyBtn").href = product.affiliateLink;
+        // Update URL without reload
+        const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?id=' + product.id;
+        window.history.pushState({path:newUrl},'',newUrl);
     }
 
     async function init() {
         try {
-            const res = await fetch("Data/products.json");
+            const res = await fetch("Data/products.json?v=" + new Date().getTime());
             const all = await res.json();
             const pId = new URLSearchParams(window.location.search).get('id');
-            const p = all.find(x => x.id == pId) || all[0];
+            let currentProduct = all.find(x => x.id == pId) || all[0];
 
-            // Load Hero Data
-            document.getElementById("heroImage").src = p.image;
-            document.getElementById("pName").innerText = p.name;
-            document.getElementById("pDesc").innerText = p.fullDescription;
-            document.getElementById("pPrice").innerText = (p.currency || "$") + p.price;
-            document.getElementById("buyBtn").href = p.affiliateLink;
+            updateHero(currentProduct);
 
+            // Render Related Row (Rule 3.1)
             const container = document.getElementById("productRowsContainer");
-            
-            // STRICT FILTERING: Only show same category
-            const similar = all.filter(x => x.category === p.category && x.id !== p.id);
+            const similar = all.filter(x => x.category === currentProduct.category && x.id !== currentProduct.id);
 
             if (similar.length > 0) {
-                const rowId = "row-similar";
                 const wrap = document.createElement("div");
-                wrap.className = "row-wrapper";
-                wrap.innerHTML = `<h2 class="row-title">Similar Discoveries</h2>
-                    <div class="row-scroll" id="${rowId}"></div>
-                    <button class="arrow-btn l" onclick="scrollX('${rowId}', -1)">❮</button>
-                    <button class="arrow-btn r" onclick="scrollX('${rowId}', 1)">❯</button>`;
+                wrap.className = "product-row-wrapper"; // Reusing Home Page Class
+                wrap.innerHTML = `<h2 class="section-title"><span>Similar</span> Discoveries</h2>
+                                  <div class="product-row" id="relRow"></div>`;
                 container.appendChild(wrap);
                 
-                const row = document.getElementById(rowId);
+                const row = document.getElementById("relRow");
                 similar.forEach(item => {
                     const card = document.createElement("div");
-                    card.className = "prod-card-small";
-                    let sn = item.shortName.length > 17 ? item.shortName.substring(0, 14) + "..." : item.shortName;
-                    card.innerHTML = `<div class="img-container"><img src="${item.image}"></div><p>${sn}</p>`;
-                    card.onclick = () => { window.location.href = `product.html?id=${item.id}`; };
+                    card.className = "product-card"; // Reusing Home Page Class
+                    let sn = item.shortName.length > 19 ? item.shortName.substring(0, 16) + "..." : item.shortName;
+                    card.innerHTML = `<img src="${item.image}"><div class="short-name">${sn}</div>`;
+                    
+                    // RULE 3.1: SWAP INSTEAD OF RELOAD
+                    card.onclick = () => updateHero(item);
                     row.appendChild(card);
                 });
             }
-
-            // Stationary Category Arrow Injection (Mobile/Tablet Only)
-            if (window.innerWidth <= 1024) {
-                const outer = document.getElementById('catOuterWrap');
-                const lb = document.createElement('button'); lb.className="cat-arrow l"; lb.innerHTML="❮";
-                lb.onclick = (e) => { e.stopPropagation(); scrollX('catScrollInternal', -1); };
-                
-                const rb = document.createElement('button'); rb.className="cat-arrow r"; rb.innerHTML="❯";
-                rb.onclick = (e) => { e.stopPropagation(); scrollX('catScrollInternal', 1); };
-                
-                outer.appendChild(lb); outer.appendChild(rb);
-            }
-        } catch (e) { console.error("Initialization Error:", e); }
+        } catch (e) { console.error("AffilixS Error:", e); }
     }
     document.addEventListener("DOMContentLoaded", init);
 </script>

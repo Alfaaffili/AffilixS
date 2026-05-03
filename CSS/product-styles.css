@@ -1,0 +1,79 @@
+﻿/* =============================================================
+   AFFILIXS PRODUCT-SPECIFIC STYLES (Rule #1 Preservation)
+   ============================================================= */
+
+/* Main layout grid for Desktop */
+.product-main-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px; /* Section 1+2 | Sidebar */
+    gap: 30px;
+    padding: 20px 5%;
+    align-items: start;
+}
+
+/* Section 1: Hero Display */
+.hero-display {
+    width: 100%;
+    height: 450px;
+    background: #f9f9f9;
+    border-radius: 12px;
+    overflow: hidden;
+    border-bottom: 4px solid #111;
+    display: flex;
+    justify-content: center;
+}
+#heroImage { height: 100%; object-fit: contain; }
+
+/* Section 2: Info Bar */
+.info-horizontal-bar {
+    margin-top: 20px;
+    background: #fff;
+}
+.full-name-row { font-size: 1.1rem; margin-bottom: 10px; color: #111; }
+.description-text { 
+    max-height: 180px; 
+    overflow-y: auto; 
+    line-height: 1.6;
+    color: #444;
+    padding-right: 10px;
+}
+
+/* Section 2.2: Stats & Sidebar Action */
+.master-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.sidebar-action-col {
+    background: #f4f4f4;
+    padding: 20px;
+    border-radius: 12px;
+}
+.tight-stats p { margin: 10px 0; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
+
+.sidebar-btns { display: flex; gap: 10px; margin-top: 15px; }
+.t-btn { 
+    flex: 1; padding: 12px; border: none; border-radius: 4px; 
+    font-weight: bold; cursor: pointer; text-decoration: none; text-align: center;
+}
+.buy-now { background: #ff0000; color: #fff; }
+.go-back { background: #111; color: #fff; }
+
+/* Rule #4: Category Cards (Vertical) */
+.cat-scroll-track { display: flex; flex-direction: column; gap: 15px; }
+.cat-square { width: 100%; cursor: pointer; text-align: center; }
+.cat-square img { width: 100%; border-radius: 8px; }
+
+/* =============================================================
+   MOBILE FIREWALL (Rule #3 - Samsung/Huawei/Tablet)
+   ============================================================= */
+@media (max-width: 1024px) {
+    .product-main-layout { grid-template-columns: 1fr; }
+    .master-sidebar { flex-direction: column-reverse; } /* Move categories above stats on mobile if desired */
+    .cat-scroll-track { 
+        flex-direction: row; 
+        overflow-x: auto; 
+        padding-bottom: 15px;
+    }
+    .cat-square { flex: 0 0 140px; }
+}

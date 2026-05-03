@@ -240,7 +240,7 @@ html, body {
      .top-section {
      
     margin-top: -40px !important; /* Reduces the gap from 25px to 5px */
-         marging-bottm: 2px !important; /* This ensures the space for the identity-text doesn't overlap products */
+         margin-bottm: 2px !important; /* This ensures the space for the identity-text doesn't overlap products */
 
          padding-top: 0 !important;
  }    
@@ -253,7 +253,7 @@ html, body {
         width: 100vw !important;
         height: 230px !important; /* Increased from 130px */
 
-        margin-top: 0 !important:
+        margin-top: 0 !important;
         border-top: none !important: /* Ensure no border is adding a 'fake' gap */
         /* Shifting the horizontal focus to capture your 400-850px Paintbrush range */
 
