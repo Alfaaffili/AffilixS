@@ -23,6 +23,16 @@
     min-width: 0; /* Prevents flex items from breaking grid */
 }
 
+/* Trimmed Description (Point #3) */
+
+.info-horizontal-bar {
+
+    max-width: 100%;
+ 
+   overflow: hidden;
+
+}
+
 .description-text {
 
     max-height: 150px;
@@ -55,8 +65,8 @@
 .master-sidebar {
     grid-area: side;
     display: flex;
-    /* flex-direction: column; */
-    /* gap: 25px; */
+    flex-direction: column;
+    gap: 25px;
 }
 
 /* Section 2: The Middle (Stats & Buttons) */
