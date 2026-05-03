@@ -1,28 +1,33 @@
-﻿/* [BLOCK: DESKTOP_STRUCTURE] */
+﻿/* =============================================================
+   AFFILIXS PRODUCT-SPECIFIC STYLES (Rule #1 Preservation)
+   ============================================================= */
+
 .product-main-layout {
     display: grid;
-    grid-template-columns: 1fr 280px; /* Forces Sidebar to the right */
-    grid-template-rows: auto auto;
-    gap: 20px;
+    grid-template-columns: 1fr 300px; /* Left column flexible, Right fixed */
+    grid-template-areas: "main sidebar"; /* Defined zones */
+    gap: 30px;
     padding: 20px 5%;
     max-width: 1400px;
     margin: 0 auto;
+    align-items: start;
 }
 
-/* [BLOCK: LEFT_SIDE] */
+/* LEFT ZONE */
 .main-display-area {
+    grid-area: main;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    min-width: 0; /* Prevents horizontal overflow */
+    min-width: 0; /* Prevents flex items from breaking grid */
 }
 
 .hero-display {
     width: 100%;
-    height: 400px; /* Fixed height to stop overflow */
+    height: 450px;
     background: #fff;
-    border-radius: 8px;
-    border: 1px solid #ddd;
+    border-radius: 12px;
+    border: 1px solid #eee;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,67 +35,89 @@
 }
 
 #heroImage {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain; /* Fixes Point #1 */
+    max-width: 95%;
+    max-height: 95%;
+    object-fit: contain;
 }
 
-/* [BLOCK: INFO_BAR_AND_STATS] */
-/* This aligns Stats/Buttons to the right of the description */
-.info-horizontal-bar-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 220px; 
-    gap: 20px;
-}
-
-.description-text {
-    max-height: 200px;
-    overflow-y: auto;
-    background: #fafafa;
-    padding: 15px;
-    border-radius: 5px;
-}
-
-/* [BLOCK: STATS_STACK] */
-.sidebar-action-col {
+/* RIGHT ZONE (Sidebar) */
+.master-sidebar {
+    grid-area: sidebar;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 25px;
+}
+
+.sidebar-action-col {
+    background: #f8f8f8;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 4px solid #111;
+}
+
+.tight-stats p {
+    margin: 10px 0;
+    font-size: 0.95rem;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 5px;
 }
 
 .sidebar-btns {
     display: flex;
-    gap: 8px;
+    gap: 10px;
+    margin-top: 15px;
 }
 
-/* [BLOCK: PRODUCT_ROW_FIX - Fixes Point #4 & #6] */
+/* CATEGORY CARDS (Vertical on Desktop) */
+.cat-scroll-track {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.cat-square {
+    width: 100%;
+    cursor: pointer;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.cat-square:hover { transform: translateY(-3px); }
+.cat-square img { width: 100%; height: 120px; object-fit: cover; }
+.cat-square p { padding: 8px; font-weight: bold; font-size: 0.8rem; text-align: center; margin: 0; }
+
+/* PRODUCT ROW (Inside Main Area) */
+#productRowsContainer {
+    width: 100%;
+    margin-top: 30px;
+}
+
 .product-row {
     display: flex;
     gap: 15px;
+    padding: 10px 0;
     overflow-x: auto;
-    padding: 20px 0;
     scrollbar-width: none;
 }
 
 .product-card {
-    flex: 0 0 calc(20% - 12px); /* Forces exactly 5 cards (Rule 3.1) */
-    min-width: 180px;
-    height: auto;
+    flex: 0 0 calc(20% - 12px); /* 5 Cards exactly */
+    min-width: 160px;
 }
 
-/* Red Arrows Fix */
-.row-wrapper { position: relative; }
-.arrow-btn {
-    position: absolute;
-    bottom: 0;
-    background: red;
-    color: white;
+/* BUTTON STYLES */
+.t-btn {
+    flex: 1;
+    padding: 12px;
     border: none;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    border-radius: 4px;
+    font-weight: bold;
     cursor: pointer;
-    z-index: 10;
+    text-decoration: none;
+    text-align: center;
 }
-.arrow-btn.l { right: 40px; }
-.arrow-btn.r { right: 0; }
+.buy-now { background: #ff0000; color: #fff; }
+.go-back { background: #111; color: #fff; }
