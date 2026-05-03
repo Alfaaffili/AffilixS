@@ -77,8 +77,8 @@
     gap: 5px
     justify-content: flex-start;
     background: #f8f8f8;
-    padding: 100px; /* Aligns it under the hero image bottom corner */
-    width: 190px;
+    padding: 5px; /* Aligns it under the hero image bottom corner */
+    width: 90px;
      /* border-radius: 10px; */
      /* border-left: 4px solid #111; */
 }
