@@ -81,6 +81,10 @@
         document.getElementById("pPrice").innerText = (product.currency || "$") + product.price;
         document.getElementById("buyBtn").href = product.affiliateLink;
         
+        // RULE: Follow the action (when product selected scroll window up)
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
         const newUrl = window.location.pathname + '?id=' + product.id;
         window.history.pushState({path:newUrl},'',newUrl);
     }
