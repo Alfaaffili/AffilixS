@@ -1,79 +1,96 @@
-﻿/* =============================================================
-   AFFILIXS PRODUCT-SPECIFIC STYLES (Rule #1 Preservation)
-   ============================================================= */
-
-/* Main layout grid for Desktop */
+﻿/* [BLOCK: DESKTOP_STRUCTURE] */
 .product-main-layout {
     display: grid;
-    grid-template-columns: 1fr 300px; /* Section 1+2 | Sidebar */
-    gap: 30px;
+    grid-template-columns: 1fr 280px; /* Forces Sidebar to the right */
+    grid-template-rows: auto auto;
+    gap: 20px;
     padding: 20px 5%;
-    align-items: start;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
-/* Section 1: Hero Display */
-.hero-display {
-    width: 100%;
-    height: 450px;
-    background: #f9f9f9;
-    border-radius: 12px;
-    overflow: hidden;
-    border-bottom: 4px solid #111;
-    display: flex;
-    justify-content: center;
-}
-#heroImage { height: 100%; object-fit: contain; }
-
-/* Section 2: Info Bar */
-.info-horizontal-bar {
-    margin-top: 20px;
-    background: #fff;
-}
-.full-name-row { font-size: 1.1rem; margin-bottom: 10px; color: #111; }
-.description-text { 
-    max-height: 180px; 
-    overflow-y: auto; 
-    line-height: 1.6;
-    color: #444;
-    padding-right: 10px;
-}
-
-/* Section 2.2: Stats & Sidebar Action */
-.master-sidebar {
+/* [BLOCK: LEFT_SIDE] */
+.main-display-area {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
+    min-width: 0; /* Prevents horizontal overflow */
 }
+
+.hero-display {
+    width: 100%;
+    height: 400px; /* Fixed height to stop overflow */
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#heroImage {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Fixes Point #1 */
+}
+
+/* [BLOCK: INFO_BAR_AND_STATS] */
+/* This aligns Stats/Buttons to the right of the description */
+.info-horizontal-bar-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 220px; 
+    gap: 20px;
+}
+
+.description-text {
+    max-height: 200px;
+    overflow-y: auto;
+    background: #fafafa;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+/* [BLOCK: STATS_STACK] */
 .sidebar-action-col {
-    background: #f4f4f4;
-    padding: 20px;
-    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
-.tight-stats p { margin: 10px 0; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
 
-.sidebar-btns { display: flex; gap: 10px; margin-top: 15px; }
-.t-btn { 
-    flex: 1; padding: 12px; border: none; border-radius: 4px; 
-    font-weight: bold; cursor: pointer; text-decoration: none; text-align: center;
+.sidebar-btns {
+    display: flex;
+    gap: 8px;
 }
-.buy-now { background: #ff0000; color: #fff; }
-.go-back { background: #111; color: #fff; }
 
-/* Rule #4: Category Cards (Vertical) */
-.cat-scroll-track { display: flex; flex-direction: column; gap: 15px; }
-.cat-square { width: 100%; cursor: pointer; text-align: center; }
-.cat-square img { width: 100%; border-radius: 8px; }
-
-/* =============================================================
-   MOBILE FIREWALL (Rule #3 - Samsung/Huawei/Tablet)
-   ============================================================= */
-@media (max-width: 1024px) {
-    .product-main-layout { grid-template-columns: 1fr; }
-    .master-sidebar { flex-direction: column-reverse; } /* Move categories above stats on mobile if desired */
-    .cat-scroll-track { 
-        flex-direction: row; 
-        overflow-x: auto; 
-        padding-bottom: 15px;
-    }
-    .cat-square { flex: 0 0 140px; }
+/* [BLOCK: PRODUCT_ROW_FIX - Fixes Point #4 & #6] */
+.product-row {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding: 20px 0;
+    scrollbar-width: none;
 }
+
+.product-card {
+    flex: 0 0 calc(20% - 12px); /* Forces exactly 5 cards (Rule 3.1) */
+    min-width: 180px;
+    height: auto;
+}
+
+/* Red Arrows Fix */
+.row-wrapper { position: relative; }
+.arrow-btn {
+    position: absolute;
+    bottom: 0;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 10;
+}
+.arrow-btn.l { right: 40px; }
+.arrow-btn.r { right: 0; }
