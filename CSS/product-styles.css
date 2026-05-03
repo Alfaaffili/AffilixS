@@ -62,12 +62,12 @@
 }
 
 /* RIGHT ZONE (Sidebar) */
-.master-sidebar {
-    grid-area: side;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-}
+   /* .master-sidebar { */
+   /*    grid-area: side; */
+   /*    display: flex; */
+   /*    flex-direction: column; */
+   /*    gap: 25px; */
+/* } */
 
 /* Section 2: The Middle (Stats & Buttons) */
 .sidebar-action-col {
