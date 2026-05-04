@@ -71,13 +71,13 @@
 
 /* Section 2: The Middle (Stats & Buttons) */
 .sidebar-action-col {
-    grid-area: space-around; /* stats; */
+    grid-area: stats;
     display: flex;
     flex-direction: column;
     gap: 3px
-    justify-content: flex-start;
+    justify-content: left; /* flex-start; */
     background: #f8f8f8;
-    padding: 1px; /* Aligns it under the hero image bottom corner */
+    padding: 50px; /* Aligns it under the hero image bottom corner */
     width: 90px;
      /* border-radius: 10px; */
      /* border-left: 4px solid #111; */
