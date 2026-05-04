@@ -4,14 +4,18 @@
 /* Updated grid system */
 .product-main-layout {
     display: grid;
-    /* Col 1: Main Area | Col 2: Stats (90px) | Col 3: Categories (140px) */
-    grid-template-columns: 1fr 100px 140px; /* Left column flexible, Right fixed */
-    grid-template-areas: "main Stats side"; /* Defined zones */
+    /* Col 1: Main Area 70% | Col 2: Stats (90px) | Col 3: Categories (140px) */
+    grid-template-columns: 1fr 90px 140px; /* Left column flexible, Right fixed */
+    grid-template-areas:
+ 
+        "hero   .       sidebar"
+
+         "info   stats   sidebar"; /* Defined zones */
     gap: 20px;
     padding: 20px 5%;
     max-width: 1400px;
     margin: 0 auto;
-    align-items: start;
+    /* align-items: start; */
 }
 
 /* LEFT ZONE - Section 1: (Hero & Description) */
@@ -44,6 +48,7 @@
 }
 
 .hero-display {
+    grid-area: hero;
     width: 100%;
     height: 350px;
     background: #fff;
@@ -55,6 +60,9 @@
     overflow: hidden;
 }
 
+.info-horizontal-bar {grid-area: info;}
+.sidebar-action-cil {grid-area: stats;}
+.master-sidebar { grid-area: sidebar; }
 #heroImage {
     max-width: 95%;
     max-height: 95%;
@@ -71,33 +79,33 @@
 
 /* Section 2: The Middle (Stats & Buttons) */
 .sidebar-action-col {
-    grid-area: stata;
+    /* grid-area: stata; */
     display: flex;
     flex-direction: column;
     gap: 1px
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: flex-end;
     /* height: 100% */
     /* width: 100% */
     background: #f8f8f8;
-    padding: -150px; /* Aligns it under the hero image bottom corner */
+    padding-top: 10px; /* Aligns it under the hero image bottom corner */
     width: 90px;
     /* border-radius: 10px; */
     /* border-left: 4px solid #111; */
 }
 
 .tight-stats p {
-    margin: 5px 0;
+    margin: 3px 0;
     font-size: 0.75rem; /* Smaller font for the 90px column */
     border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 5px;
+    /* padding-bottom: 5px; */
 }
 
 .sidebar-btns {
     flex-direction: column; /* Stack buttons vertically to fit 90px */
     display: flex;
     gap: 5px;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 /* CATEGORY CARDS (Vertical on Desktop) */
@@ -145,14 +153,64 @@
 /* BUTTON STYLES */
 .t-btn {
     flex: 1;
-    padding: 8px 2px;
+    padding: 8px 0;
+    width: 100%;
     border: none;
     border-radius: 4px;
-    font-size: 0.7rem; 
+    font-size: 0.65rem; 
     font-weight: bold;
     cursor: pointer;
     text-decoration: none;
     text-align: center;
 }
+
+/* Red Arrows Fix */
+
+.row-wrapper {
+ 
+    position: relative;
+ 
+    margin-top: 20px;
+ 
+    padding-bottom: 40px; /* Space for arrows */
+
+}
+
+.arrow-btn {
+
+    position: absolute;
+
+    bottom: 5px; /* Pinned to bottom corner */
+
+    width: 25px;
+
+    height: 25px;
+
+    background: red;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 10;
+
+}
+
+.arrow-btn.l { right: 35px; }
+
+.arrow-btn.r { right: 0; }
+
 .buy-now { background: #ff0000; color: #fff; }
 .go-back { background: #111; color: #fff; }
