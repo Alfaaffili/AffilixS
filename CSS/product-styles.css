@@ -66,18 +66,18 @@
     grid-area: side;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 1px;
 }
 
 /* Section 2: The Middle (Stats & Buttons) */
 .sidebar-action-col {
-    grid-area: stats;
+    grid-area: middle; /* stats; */
     display: flex;
     flex-direction: column;
-    gap: 5px
+    gap: 1px
     justify-content: flex-start;
     background: #f8f8f8;
-    padding: 5px; /* Aligns it under the hero image bottom corner */
+    padding: 1px; /* Aligns it under the hero image bottom corner */
     width: 90px;
      /* border-radius: 10px; */
      /* border-left: 4px solid #111; */
