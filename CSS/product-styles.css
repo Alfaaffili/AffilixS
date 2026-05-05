@@ -2,10 +2,24 @@
    AFFILIXS PRODUCT-SPECIFIC STYLES - STABLE DESKTOP GRID
    ============================================================= */
 
+/* Header Nav Color */
+
+.header-nav .nav-item,
+ 
+.header-nav a {
+ 
+    color: #ffffff !important;
+ 
+    text-decoration: none;
+
+}
+
 .product-main-layout {
     display: grid;
     /* Col 1: Hero/Desc (1fr) | Col 2: Stats (100px) | Col 3: Cats (140px) */
     grid-template-columns: 1fr 100px 140px;
+    /* Using 'minmax' prevents the grid from collapsing and "blinking" */
+    grid-template-rows: minmax(380px, auto) auto;
     grid-template-areas: 
         "heroArea .        sidebarArea"
         "infoArea statsArea sidebarArea";
@@ -18,7 +32,7 @@
 
 /* --- AREA ASSIGNMENTS --- */
 .main-display-area { 
-    grid-area: heroArea; 
+    grid-area: heroArea; display: block; 
 }
 .info-horizontal-bar { 
     grid-area: infoArea; 
@@ -131,9 +145,21 @@
 }
 
 .product-card {
-    flex: 0 0 calc(20% - 12px);
-    min-width: 160px;
+    flex: 0 0 180px); /* Fixed width to prevent stratching */
+    min-width: 100px;
     cursor: pointer;
+    overflow: hidden; /* Clips anyting that tries to push it wider */
+    display: flex;
+    flex-direction: column
+}
+
+.short-name {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* if name is too long */
+    font-size: 0.85rem;
+    padding: 5px;
 }
 .product-card img { width: 100%; border-radius: 8px; }
 
