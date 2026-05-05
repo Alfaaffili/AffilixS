@@ -1,59 +1,42 @@
 ﻿/* =============================================================
-   AFFILIXS PRODUCT-SPECIFIC STYLES (Rule #1 Preservation)
+   AFFILIXS PRODUCT-SPECIFIC STYLES - STABLE DESKTOP GRID
    ============================================================= */
-/* Updated grid system */
+
 .product-main-layout {
     display: grid;
-    justify-content: space-between;
-    /* Col 1: Main Area 70% | Col 2: Stats (90px) | Col 3: Categories (140px) */
-    grid-template-columns: 1fr 90px 140px; /* Left column flexible, Right fixed */
-    grid-template-areas:
- 
-        "hero   .       sidebar"
-
-         "info   stats   sidebar"; /* Defined zones */
-    gap: 30px;
+    /* Col 1: Hero/Desc (1fr) | Col 2: Stats (100px) | Col 3: Cats (140px) */
+    grid-template-columns: 1fr 100px 140px;
+    grid-template-areas: 
+        "heroArea .        sidebarArea"
+        "infoArea statsArea sidebarArea";
+    gap: 25px;
     padding: 20px 5%;
     max-width: 1400px;
     margin: 0 auto;
-    /* align-items: start; */
+    align-items: start;
 }
 
-/* LEFT ZONE - Section 1: (Hero & Description) */
-.main-display-area {
-    grid-area: main;
-    display: flex;
-    flex-direction: column;
-    flex:1;
-    gap: 20px;
-    min-width: 0; /* Prevents flex items from breaking grid */
+/* --- AREA ASSIGNMENTS --- */
+.main-display-area { 
+    grid-area: heroArea; 
+}
+.info-horizontal-bar { 
+    grid-area: infoArea; 
+    margin-top: 20px;
+}
+.sidebar-action-col { 
+    grid-area: statsArea; 
+    /* This aligns stats with the top of the description naturally */
+    padding-top: 20px; 
+}
+.master-sidebar { 
+    grid-area: sidebarArea; 
 }
 
-/* Trimmed Description (Point #3) */
-
-.info-horizontal-bar {
-
-    max-width: 100%;
- 
-   overflow: hidden;
-
-}
-
-.description-text {
-
-    max-height: 150px;
-
-    overflow-y: auto; /* Scrollable if text is long */
-
-    padding-right: 10px;
-    line-height: 1.5;
-
-}
-
+/* --- HERO SECTION --- */
 .hero-display {
-    grid-area: hero;
     width: 100%;
-    height: 350px;
+    height: 380px; 
     background: #fff;
     border-radius: 12px;
     border: 1px solid #eee;
@@ -63,58 +46,57 @@
     overflow: hidden;
 }
 
-.info-horizontal-bar {grid-area: info;}
-.sidebar-action-cil {grid-area: stats;}
-.master-sidebar { grid-area: sidebar; }
 #heroImage {
-    max-width: 95%;
-    max-height: 95%;
+    max-width: 90%;
+    max-height: 90%;
     object-fit: contain;
 }
 
-/* RIGHT ZONE (Sidebar) */
- .master-sidebar { 
-    /* grid-area: side; */
-    display: flex;
-    flex-direction: row; /* Stats and Cateories side-by-side */
-    gap: 15px;
-    align-items-: flex-start;
+/* --- DESCRIPTION --- */
+.description-text {
+    max-height: 150px;
+    overflow-y: auto;
+    line-height: 1.6;
+    padding-right: 15px;
+    font-size: 0.95rem;
 }
 
-/* Section 2: The Middle (Stats & Buttons) */
+/* --- STATS & BUTTONS (The Middle Column) --- */
 .sidebar-action-col {
-    /* grid-area: stata; */
     display: flex;
     flex-direction: column;
-    gap: 1px
-    justify-content: flex-start;
-    align-items: flex-end;
-    /* height: 100% */
-    /* width: 100% */
-    background: #f8f8f8;
-    flex-shrink: 0;
-    padding-top: 400px; /* Pushes it down to line up with description. Aligns it under the hero image bottom corner */
-    width: 90px;
-    /* border-radius: 10px; */
-    /* border-left: 4px solid #111; */
+    gap: 15px;
+    width: 100px;
 }
 
 .tight-stats p {
-    margin: 3px 0;
-    font-size: 0.75rem; /* Smaller font for the 90px column */
-    border-bottom: 1px solid #ee0;
-    /* padding-bottom: 5px; */
+    margin: 5px 0;
+    font-size: 0.75rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 3px;
 }
 
 .sidebar-btns {
-    flex-direction: column; /* Stack buttons vertically to fit 90px */
     display: flex;
-    gap: 5px;
-    margin-top: 10px;
+    flex-direction: column;
+    gap: 8px;
 }
 
-/* CATEGORY CARDS (Vertical on Desktop) */
-.cat-scroll-track {
+.t-btn {
+    padding: 8px 2px;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+}
+.buy-now { background: #ff0000; color: #fff; }
+.go-back { background: #111; color: #fff; }
+
+/* --- CATEGORIES (The Right Column) --- */
+.cat-column {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -123,108 +105,54 @@
 .cat-square {
     width: 140px;
     height: 140px;
-    margin-bottom: 10px;
-    cursor: pointer;
     background: #fff;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    transition: transform 0.2s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    cursor: pointer;
 }
-
-.cat-square:hover { transform: translateY(-3px); }
 .cat-square img { width: 100%; height: 100px; object-fit: cover; }
-.cat-square p { padding: 8px; font-weight: bold; font-size: 0.8rem; text-align: center; margin: 0; }
+.cat-square p { font-size: 0.8rem; font-weight: bold; text-align: center; margin: 5px 0; }
 
-/* PRODUCT ROW (Inside Main Area) */
+/* --- PRODUCT ROW (Spans full width under Hero/Info) --- */
 #productRowsContainer {
-    width: 100%;
+    grid-column: 1 / span 3; /* Forces the row to span across all 3 columns */
     margin-top: 30px;
 }
+
+.row-wrapper { position: relative; padding-bottom: 20px; }
 
 .product-row {
     display: flex;
     gap: 15px;
-    padding: 10px 0;
     overflow-x: auto;
     scrollbar-width: none;
+    padding: 10px 0;
 }
 
 .product-card {
-    flex: 0 0 calc(20% - 12px); /* 5 Cards exactly */
+    flex: 0 0 calc(20% - 12px);
     min-width: 160px;
-}
-
-/* BUTTON STYLES */
-.t-btn {
-    flex: 1;
-    padding: 6px 2px;
-    width: 100%;
-    border: none;
-    border-radius: 4px;
-    font-size: 0.65rem; 
-    font-weight: bold;
     cursor: pointer;
-    text-decoration: none;
-    text-align: center;
 }
+.product-card img { width: 100%; border-radius: 8px; }
 
-/* Category Cards Column (140px) */
-
-.cat-column {
-
-    width: 140px;
-
-    flex-shrink: 0;
-}
-
-/* Red Arrows Fix */
-
-.row-wrapper {
- 
-    position: relative;
- 
-    margin-top: 30px;
- 
-    padding-bottom: 40px; /* Space for arrows */
-   }
-
+/* --- RED ARROWS --- */
 .arrow-btn {
-
     position: absolute;
-
-    bottom: -10px; /* Pinned to bottom corner */
-
-    width: 28px;
-
-    height: 28px;
-
-    background: #ff0000; /* red; */
-
+    bottom: -15px;
+    width: 30px;
+    height: 30px;
+    background: #ff0000;
     color: white;
-
     border: none;
-
     border-radius: 50%;
-
     cursor: pointer;
-
-    font-weight: bold;
-
+    z-index: 10;
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
-    font-weight: bold; 
-   z-index: 10;
-
+    font-weight: bold;
 }
-
-.arrow-btn.l { left: 0; } /* 35px; } */
-
-.arrow-btn.r { right: 0; } /* Pinned to far right */
-
-.buy-now { background: #ff0000; color: #fff; }
-.go-back { background: #111; color: #fff; }
+.arrow-btn.l { left: 0; }
+.arrow-btn.r { right: 0; }
