@@ -72,6 +72,17 @@ function renderSimilarProducts(allProducts, currentProduct) {
         similar.forEach(item => {
             const card = document.createElement("div");
             card.className = "product-card";
+            
+            // Logic to trim name to 19 characters + add "..." if longer
+
+            let displayName = item.shortName;
+        
+    if (displayName.length > 19) {
+        
+        displayName = displayName.substring(0, 16) + "...";
+
+    }
+
             card.innerHTML = `
                 <img src="${item.image}" alt="${item.shortName}">
                 <div class="short-name">${item.shortName}</div>
