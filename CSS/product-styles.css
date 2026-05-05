@@ -81,7 +81,7 @@
     display: flex;
     flex-direction: column;
     /* This aligns stats with the top of the description naturally */
-    padding-top: 0; /* Removed the 20px padding to touch the Hero border */
+    padding-top: -15; /* Removed the 20px padding to touch the Hero border */
     margin-top: -15px; /* Slight nudge to ensure it 'touches' the hero area */
      /* gap: 15px; */
     width: 100px;
@@ -135,7 +135,7 @@
 /* --- PRODUCT ROW (Spans full width under Hero/Info) --- */
 #productRowsContainer {
     grid-area: rowArea; /* Forces the row to span across all 3 columns */
-    margin-top: -10px; /* Reduced from 30px to bring it closer to Description */ 
+    margin-top: -50px; /* Reduced from 30px to bring it closer to Description */ 
     max-width: 80%; /* Shortens the row's physical footprint on screen */
 }
 
