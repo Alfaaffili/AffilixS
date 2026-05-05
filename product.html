@@ -43,7 +43,7 @@
 
     <!-- RIGHT COLUMN -->
     <aside class="master-sidebar">
-        <!-- Stats Box -->
+        <!-- Stats Box & Buttons -->
         <div class="sidebar-action-col">
             <div class="tight-stats">
                 <p><b>Rating:</b> ★★★★★</p>
@@ -51,20 +51,31 @@
                 <p><b>Price:</b> <span id="pPrice">---</span></p>
             </div>
             <div class="sidebar-btns">
-                <a id="buyBtn" href="#" target="_blank" class="t-btn buy-now">BUY NOW</a>
+                <a id="buyBtn" href="#" target="_blank" class="t-btn buy-now">BUY</a>
                 <button onclick="window.location.href='index.html'" class="t-btn go-back">BACK</button>
             </div>
         </div>
 
-        <!-- Categories Box -->
-        <div id="catOuterWrap">
-            <div class="cat-scroll-track" id="catScrollInternal">
-                <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/cat-tech.jpg"><p>TECH</p></div>
-                <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/Home.jpg"><p>HOME</p></div>
-                <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/Fittness.jpg"><p>FITNESS</p></div>
-                <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/Style.jpg"><p>STYLE</p></div>
-                <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/BeautyPersonnalCare.jpg"><p>BEAUTY</p></div>
-            </div>
+        <!-- Column 2: Categories Box -->
+        <!-- <div id="catOuterWrap"> -->
+            <!-- <div class="cat-scroll-track" id="catScrollInternal"> -->
+            <!--    <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/cat-tech.jpg"><p>TECH</p></div> -->
+            <!--    <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/Home.jpg"><p>HOME</p></div> -->
+            <!--    <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/Fittness.jpg"><p>FITNESS</p></div> -->
+            <!--    <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/Style.jpg"><p>STYLE</p></div> -->
+            <!--    <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/BeautyPersonnalCare.jpg"><p>BEAUTY</p></div> -->
+            <!-- </div> -->
+        <div class="cat-column">
+
+            <div class="cat-square"><img src="images/cat-tech.jpg"><p>TECH</p></div>
+
+            <div class="cat-square"><img src="images/Home.jpg"><p>HOME</p></div>
+
+            <div class="cat-square"><img src="images/Style.jpg"><p>STYLE</p></div>
+            <div class="cat-square"><img src="images/Fittness.jpg"><p>FITNESS</p></div>
+
+            <div class="cat-square"><img src="images/BeautyPersonnalCare.jpg"><p>BEAUTY</p></div>
+            
         </div>
     </aside>
 
@@ -126,5 +137,7 @@
     }
     document.addEventListener("DOMContentLoaded", init);
 </script>
+<!-- Linked logic for Product Page only -->
+    <script src="JS/product-logic.js"></script>
 </body>
 </html>
