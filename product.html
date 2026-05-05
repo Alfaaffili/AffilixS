@@ -27,22 +27,22 @@
 
 <main class="product-main-layout">
     
-    <!-- LEFT COLUMN -->
+    <!-- 1. LEFT COLUMN; Hero (Direct Child) -->
     <div class="main-display-area">
         <section class="hero-display">
             <img id="heroImage" src="" alt="Product Hero">
         </section>
 
+        <!-- 2. Description (Direct Child) -->
         <section class="info-horizontal-bar">
             <div class="full-name-row"><b>FULL NAME:</b> <span id="pName">---</span></div>
             <div id="pDesc" class="description-text">---</div>
         </section>
-
-        <div id="productRowsContainer"></div> 
+ 
     </div>
 
-    <!-- RIGHT COLUMN -->
-    <aside class="master-sidebar">
+    <!-- 3. RIGHT COLUMN; STATS (Direct Child) -->
+    <!-- <aside class="master-sidebar"> -->
         <!-- Stats Box & Buttons -->
         <div class="sidebar-action-col">
             <div class="tight-stats">
@@ -65,6 +65,8 @@
             <!--    <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/Style.jpg"><p>STYLE</p></div> -->
             <!--    <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/BeautyPersonnalCare.jpg"><p>BEAUTY</p></div> -->
             <!-- </div> -->
+<!-- 4. SIDEBAR/CATEGORIES (Direct Child) -->
+    <aside class="master-sidebar">
         <div class="cat-column">
 
             <div class="cat-square"><img src="images/cat-tech.jpg"><p>TECH</p></div>
@@ -75,10 +77,11 @@
             <div class="cat-square"><img src="images/Fittness.jpg"><p>FITNESS</p></div>
 
             <div class="cat-square"><img src="images/BeautyPersonnalCare.jpg"><p>BEAUTY</p></div>
-            
         </div>
     </aside>
 
+<!-- 5. PRODUCT ROW (Direct Child - Spans full bottom) -->
+    <div id="productRowsContainer"></div>
 </main>
 
 <script>

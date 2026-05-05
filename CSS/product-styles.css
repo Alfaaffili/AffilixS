@@ -19,10 +19,11 @@
     /* Col 1: Hero/Desc (1fr) | Col 2: Stats (100px) | Col 3: Cats (140px) */
     grid-template-columns: 1fr 100px 140px;
     /* Using 'minmax' prevents the grid from collapsing and "blinking" */
-    grid-template-rows: minmax(380px, auto) auto;
+    /* //grid-template-rows: minmax(380px, auto) auto; */
     grid-template-areas: 
         "heroArea .        sidebarArea"
-        "infoArea statsArea sidebarArea";
+        "infoArea statsArea sidebarArea"
+        "rowArea rowArea rowArea"; /* New area fro the product row */
     gap: 25px;
     padding: 20px 5%;
     max-width: 1400px;
@@ -30,25 +31,19 @@
     align-items: start;
 }
 
-/* --- AREA ASSIGNMENTS --- */
+/* --- AREA ASSIGNMENTS; Ensure these are assigned properly --- */
 .main-display-area { 
     grid-area: heroArea; display: block; 
 }
-.info-horizontal-bar { 
-    grid-area: infoArea; 
-    margin-top: 20px;
-}
-.sidebar-action-col { 
-    grid-area: statsArea; 
-    /* This aligns stats with the top of the description naturally */
-    padding-top: 20px; 
-}
+
 .master-sidebar { 
     grid-area: sidebarArea; 
 }
 
 /* --- HERO SECTION --- */
+/* Assigning the Direct Children */
 .hero-display {
+    grid-area: heroArea;
     width: 100%;
     height: 380px; 
     background: #fff;
@@ -60,10 +55,15 @@
     overflow: hidden;
 }
 
+.info-horizontal-bar { 
+    grid-area: infoArea; 
+     /* margin-top: 20px; */
+}
+
 #heroImage {
     max-width: 90%;
     max-height: 90%;
-    object-fit: contain;
+    object-fit: contain; /* Ensures image fits without disappearing */
 }
 
 /* --- DESCRIPTION --- */
@@ -77,8 +77,11 @@
 
 /* --- STATS & BUTTONS (The Middle Column) --- */
 .sidebar-action-col {
+    grid-area: statsArea;
     display: flex;
     flex-direction: column;
+    /* This aligns stats with the top of the description naturally */
+    padding-top: 20px;
     gap: 15px;
     width: 100px;
 }
@@ -130,7 +133,7 @@
 
 /* --- PRODUCT ROW (Spans full width under Hero/Info) --- */
 #productRowsContainer {
-    grid-column: 1 / span 3; /* Forces the row to span across all 3 columns */
+    grid-area: rowArea; /* Forces the row to span across all 3 columns */
     margin-top: 30px;
 }
 
@@ -144,9 +147,12 @@
     padding: 10px 0;
 }
 
+/* Ant-Stretch Card Logic */
 .product-card {
     flex: 0 0 180px); /* Fixed width to prevent stratching */
+    width: 180px;
     min-width: 100px;
+    max-width: 180px;
     cursor: pointer;
     overflow: hidden; /* Clips anyting that tries to push it wider */
     display: flex;
@@ -157,7 +163,7 @@
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; /* if name is too long */
+    text-overflow: ellipsis; /* Adds "..." if name is too long */
     font-size: 0.85rem;
     padding: 5px;
 }
