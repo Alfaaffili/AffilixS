@@ -19,16 +19,16 @@
     /* Col 1: Hero/Desc (1fr) | Col 2: Stats (100px) | Col 3: Cats (140px) */
     grid-template-columns: 1fr 100px 140px;
     /* Using 'minmax' prevents the grid from collapsing and "blinking" */
-    grid-template-rows: auto auto auto;
+    grid-template-rows: min-content min-content auto;
     grid-template-areas: 
         "heroArea .        sidebarArea"
         "infoArea statsArea sidebarArea"
         "rowArea rowArea rowArea"; /* Sidebar now spans all the way down */
-    gap: 15px; /* Tigtened gap from 25px to 15px */
+    gap: 10px; /* Tigtened gap from 25px to 15px */
     padding: 10px 5%;
     max-width: 1400px;
     margin: 0 auto;
-    align-items: start;
+    align-items: start; /* Forces all children to start at the top of their cell */
 }
 
 /* --- AREA ASSIGNMENTS; Ensure these are assigned properly --- */
@@ -37,7 +37,8 @@
 }
 
 .master-sidebar { 
-    grid-area: sidebarArea; 
+    grid-area: sidebarArea;
+    overflow: hidden; /* Removes the internal scrollbar */ 
 }
 
 /* --- HERO SECTION --- */
@@ -45,7 +46,7 @@
 .hero-display {
     grid-area: heroArea;
     width: 100%;
-    height: 380px; 
+    height: 340px; /* Reduced from 380px to seve 40px of vertical space */ 
     background: #fff;
     border-radius: 12px;
     border: 1px solid #eee;
@@ -81,7 +82,9 @@
     display: flex;
     flex-direction: column;
     /* This aligns stats with the top of the description naturally */
-    padding-top: -15; /* Removed the 20px padding to touch the Hero border */
+    padding-top: -15; /* Pulls it up; Removed the 20px padding to touch the Hero border */
+    align-self: start;
+    background: #f8f8f8; /* Ensures the background color starts exactly at the top */
     margin-top: -15px; /* Slight nudge to ensure it 'touches' the hero area */
      /* gap: 15px; */
     width: 100px;
@@ -117,7 +120,8 @@
 .cat-column {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
+    height: auto; /* Ensures it doesn't try to scroll internally */
 }
 
 .cat-square {
@@ -135,7 +139,8 @@
 /* --- PRODUCT ROW (Spans full width under Hero/Info) --- */
 #productRowsContainer {
     grid-area: rowArea; /* Forces the row to span across all 3 columns */
-    margin-top: -50px; /* Reduced from 30px to bring it closer to Description */ 
+    margin-top: -5px; /* Reduced from 30px to bring it closer to Description */ 
+    padding-top: 0;
     max-width: 80%; /* Shortens the row's physical footprint on screen */
 }
 
