@@ -85,7 +85,7 @@
     padding-top: -15; /* Pulls it up; Removed the 20px padding to touch the Hero border */
     align-self: start;
     background: #f8f8f8; /* Ensures the background color starts exactly at the top */
-    margin-top: -50px; /* Slight nudge to ensure it 'touches' the hero area */
+    margin-top: -100px; /* Slight nudge to ensure it 'touches' the hero area */
      /* gap: 15px; */
     width: 100px;
 }
