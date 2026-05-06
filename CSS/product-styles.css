@@ -85,7 +85,7 @@
     padding-top: -15; /* Pulls it up; Removed the 20px padding to touch the Hero border */
     align-self: start;
     background: #f8f8f8; /* Ensures the background color starts exactly at the top */
-    margin-top: -15px; /* Slight nudge to ensure it 'touches' the hero area */
+    margin-top: -50px; /* Slight nudge to ensure it 'touches' the hero area */
      /* gap: 15px; */
     width: 100px;
 }
@@ -139,7 +139,7 @@
 /* --- PRODUCT ROW (Spans full width under Hero/Info) --- */
 #productRowsContainer {
     grid-area: rowArea; /* Forces the row to span across all 3 columns */
-    margin-top: -5px; /* Reduced from 30px to bring it closer to Description */ 
+    margin-top: -50px; /* Reduced from 30px to bring it closer to Description */ 
     padding-top: 0;
     max-width: 80%; /* Shortens the row's physical footprint on screen */
 }
