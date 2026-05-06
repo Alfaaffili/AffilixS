@@ -82,11 +82,11 @@
     display: flex;
     flex-direction: column;
     /* This aligns stats with the top of the description naturally */
-    padding-top: -50; /* Pulls it up; Removed the 20px padding to touch the Hero border */
+     /* padding-top: -50; /* Pulls it up; Removed the 20px padding to touch the Hero border */*/
     align-self: start;
     background: #f8f8f8; /* Ensures the background color starts exactly at the top */
-    margin-top: -100px; /* Slight nudge to ensure it 'touches' the hero area */
-     /* gap: 15px; */
+     /* margin-top: -100px; /* Slight nudge to ensure it 'touches' the hero area */*/
+    gap: 15px;
     width: 100px;
 }
 
