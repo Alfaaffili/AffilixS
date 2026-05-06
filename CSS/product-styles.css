@@ -2,51 +2,36 @@
    AFFILIXS PRODUCT-SPECIFIC STYLES - STABLE DESKTOP GRID
    ============================================================= */
 
-/* Header Nav Color */
-
+/* 1. Header Nav Fix */
 .header-nav .nav-item,
- 
 .header-nav a {
- 
     color: #ffffff !important;
- 
     text-decoration: none;
-
 }
 
+/* 2. Main Layout Grid */
 .product-main-layout {
     display: grid;
-    /* Col 1: Hero/Desc (1fr) | Col 2: Stats (100px) | Col 3: Cats (140px) */
+    /* Col 1: Main (Flexible) | Col 2: Stats (100px) | Col 3: Cats (140px) */
     grid-template-columns: 1fr 100px 140px;
-    /* Using 'minmax' prevents the grid from collapsing and "blinking" */
-    grid-template-rows: min-content min-content auto;
+    /* Auto-sizing rows to prevent empty vertical gaps */
+    grid-template-rows: auto auto auto;
     grid-template-areas: 
-        "heroArea .        sidebarArea"
-        "infoArea statsArea sidebarArea"
-        "rowArea rowArea rowArea"; /* Sidebar now spans all the way down */
-    gap: 10px; /* Tigtened gap from 25px to 15px */
+        "heroArea   .           sidebarArea"
+        "infoArea   statsArea   sidebarArea"
+        "rowArea    rowArea     sidebarArea";
+    gap: 10px 25px; /* 10px vertical gap / 25px horizontal gap */
     padding: 10px 5%;
     max-width: 1400px;
     margin: 0 auto;
-    align-items: start; /* Forces all children to start at the top of their cell */
+    align-items: start; /* Magnetizes everything to the top of their cells */
 }
 
-/* --- AREA ASSIGNMENTS; Ensure these are assigned properly --- */
-.main-display-area { 
-    grid-area: heroArea; display: block; 
-}
-
-.master-sidebar { 
-    grid-area: sidebarArea;
-    overflow: hidden; /* Removes the internal scrollbar */ 
-}
-
-/* --- HERO SECTION --- */
-/* Assigning the Direct Children */
+/* 3. Hero Section */
 .hero-display {
     grid-area: heroArea;
     width: 100%;
-    height: 340px; /* Reduced from 380px to seve 40px of vertical space */ 
+    height: 350px; 
     background: #fff;
     border-radius: 12px;
     border: 1px solid #eee;
@@ -54,74 +39,65 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
-}
-
-.info-horizontal-bar { 
-    grid-area: infoArea; 
-     /* margin-top: 20px; */
+    margin: 0; /* Ensures no gap below hero */
 }
 
 #heroImage {
     max-width: 90%;
     max-height: 90%;
-    object-fit: contain; /* Ensures image fits without disappearing */
+    object-fit: contain;
 }
 
-/* --- DESCRIPTION --- */
+/* 4. Description Area */
+.info-horizontal-bar { 
+    grid-area: infoArea; 
+    margin-top: 5px; /* Minimal gap from hero */
+}
+
 .description-text {
-    max-height: 150px;
+    max-height: 120px; /* Slightly tightened to pull product row up */
     overflow-y: auto;
-    line-height: 1.6;
+    line-height: 1.5;
     padding-right: 15px;
     font-size: 0.95rem;
 }
 
-/* --- STATS & BUTTONS (The Middle Column) --- */
+/* 5. Stats & Buttons (The Middle Column) */
 .sidebar-action-col {
     grid-area: statsArea;
     display: flex;
     flex-direction: column;
-    /* This aligns stats with the top of the description naturally */
-     /* padding-top: -50; /* Pulls it up; Removed the 20px padding to touch the Hero border */*/
-    align-self: start;
-    background: #f8f8f8; /* Ensures the background color starts exactly at the top */
-     /* margin-top: -100px; /* Slight nudge to ensure it 'touches' the hero area */*/
-    gap: -100px;
     width: 100px;
+    background: #f8f8f8;
+    padding: 10px;
+    border-radius: 0 0 8px 8px; /* Smooth transition from hero border */
+    align-self: start; /* Forces it to stay pinned to the Hero bottom */
+    /* No negative margins needed now; the grid 'statsArea' handles it */
 }
 
 .tight-stats p {
-    margin: 5px 0;
+    margin: 3px 0;
     font-size: 0.75rem;
     border-bottom: 1px solid #eee;
-    padding-bottom: 3px;
 }
 
 .sidebar-btns {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
+    margin-top: 10px;
 }
 
-.t-btn {
-    padding: 8px 2px;
-    border: none;
-    border-radius: 4px;
-    font-size: 0.7rem;
-    font-weight: bold;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
+/* 6. Categories (The Right Column) */
+.master-sidebar { 
+    grid-area: sidebarArea;
+    overflow: visible; /* Hard-kill for internal scrollbars */
 }
-.buy-now { background: #ff0000; color: #fff; }
-.go-back { background: #111; color: #fff; }
 
-/* --- CATEGORIES (The Right Column) --- */
 .cat-column {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    height: auto; /* Ensures it doesn't try to scroll internally */
+    gap: 12px;
 }
 
 .cat-square {
@@ -129,22 +105,21 @@
     height: 140px;
     background: #fff;
     border-radius: 8px;
-    overflow: hidden;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     cursor: pointer;
+    overflow: hidden;
 }
 .cat-square img { width: 100%; height: 100px; object-fit: cover; }
 .cat-square p { font-size: 0.8rem; font-weight: bold; text-align: center; margin: 5px 0; }
 
-/* --- PRODUCT ROW (Spans full width under Hero/Info) --- */
+/* 7. Similar Discoveries Row */
 #productRowsContainer {
-    grid-area: rowArea; /* Forces the row to span across all 3 columns */
-    margin-top: -50px; /* Reduced from 30px to bring it closer to Description */ 
-    padding-top: 0;
-    max-width: 80%; /* Shortens the row's physical footprint on screen */
+    grid-area: rowArea;
+    margin-top: 10px; /* Brings it close to Description */
+    max-width: 85%;
 }
 
-.row-wrapper { position: relative; padding-bottom: 20px; }
+.row-wrapper { position: relative; }
 
 .product-row {
     display: flex;
@@ -154,32 +129,27 @@
     padding: 10px 0;
 }
 
-/* Ant-Stretch Card Logic */
 .product-card {
-    flex: 0 0 calc(16.66% - 12px); /* Mathematically forces 6 cards */
+    flex: 0 0 160px; /* Fixed width for stability */
     width: 160px;
-    min-width: 100px;
-    max-width: 160px;
     cursor: pointer;
-    overflow: hidden; /* Clips anyting that tries to push it wider */
-    display: flex;
-    flex-direction: column
 }
+
+.product-card img { width: 100%; border-radius: 8px; }
 
 .short-name {
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; /* Adds "..." if name is too long */
+    text-overflow: ellipsis;
     font-size: 0.85rem;
-    padding: 5px;
+    padding: 5px 0;
 }
-.product-card img { width: 100%; border-radius: 8px; }
 
-/* --- RED ARROWS --- */
+/* 8. Navigation Arrows */
 .arrow-btn {
     position: absolute;
-    bottom: -15px;
+    bottom: -10px;
     width: 30px;
     height: 30px;
     background: #ff0000;
@@ -193,5 +163,18 @@
     justify-content: center;
     font-weight: bold;
 }
-.arrow-btn.l { left: 0; }
-.arrow-btn.r { right: 0; }
+.arrow-btn.l { left: -15px; }
+.arrow-btn.r { right: -15px; }
+
+/* 9. Button Colors */
+.t-btn {
+    padding: 7px 0;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+}
+.buy-now { background: #ff0000; color: #fff; }
+.go-back { background: #111; color: #fff; }
