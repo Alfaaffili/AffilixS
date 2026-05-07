@@ -63,7 +63,7 @@ function renderSimilarProducts(allProducts, currentProduct) {
         container.innerHTML = `
             <div class="row-wrapper">
                 <h2 class="row-title">Similar Discoveries</h2>
-                <div class="product-row" id="relRow"></div>
+                <div class="product-row" id="productScrollRow"></div>
                 <!-- RED ARROWS - Pinned via CSS -->
                 <button class="arrow-btn l" onclick="scrollRow(-350)">←</button>
                 <button class="arrow-btn r" onclick="scrollRow(350)">→</button>
@@ -95,6 +95,20 @@ function renderSimilarProducts(allProducts, currentProduct) {
     } else {
         container.innerHTML = ""; // Clear if no similar products found
     }
+}
+
+// ADD THIS NEW FUNCTION TO YOUR JS FILE:
+
+function scrollRow(amount) {
+
+    const row = document.getElementById("productScrollRow");
+
+    if (row) {
+
+        row.scrollBy({ left: amount, behavior: 'smooth' });
+
+    }
+
 }
 
 /**

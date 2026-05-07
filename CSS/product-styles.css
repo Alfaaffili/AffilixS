@@ -1,6 +1,11 @@
 ﻿/* =============================================================
    AFFILIXS PRODUCT-SPECIFIC STYLES - STABLE DESKTOP GRID
    ============================================================= */
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Hard-stop for horizontal scrolling */
+}
 
 /* 1. Header Nav Fix */
 .header-nav .nav-item,
@@ -18,7 +23,7 @@
     justify-content: space-between; /* KEEP: Spreads left and right sections */
     max-width: 1400px; /* KEEP: Prevents over-stretching */
     margin: 0 auto; /* KEEP: Centers the whole page */
-    height: 90vh; /* Limits total height to 90% of the screen NEW: Limits height for static look */
+    height: 100vh; /* Limits total height to 90% of the screen NEW: Limits height for static look */
     gap: 20px;
 
     padding: 10px 2%; /* Reduced side padding to use the extra width */
@@ -44,7 +49,7 @@
 /* 3. Hero Section */
 .hero-display {
     width: 100%;
-    height: 350px; 
+    height: 420px; 
     background: #fff;
     border-radius: 12px;
     border: 1px solid #eee;
@@ -70,7 +75,9 @@
 }
 
 .description-text {
-    max-height: 100px; /* Slightly tightened to pull product row up */
+    width: 100%;
+    word-wrap: break-word; /* Forces text to wrap instead of stretching the screen */
+    max-height: 80px; /* Slightly tightened to pull product row up */
     overflow-y: auto; /* Keeps thext inside a tidy box */
     line-height: 1.5;
     padding-right: 10px;
@@ -80,15 +87,16 @@
 
 /* 5. Stats & Buttons (The Middle Column) */
 .sidebar-action-col {
-    width: 100px;
+    width: 110px;
 
     background: #f8f8f8;
 
-    padding: 15px 10px;
+    padding: 12px;
 
     border-radius: 8px;
 
-    margin-top: 360px; /* Aligns exactly under the Hero image corner */
+    /* Remove any large margin-tops here */
+    margin-top: 10px; /* Aligns exactly under the Hero image corner */
 
 }
 
@@ -111,9 +119,9 @@
 
     flex-direction: row; /* Stats and Categories side-by-side */
 
-    gap: 20px;
+    gap: 15px;
 
-    align-items: flex-start;
+    align-items: flex-start; /* Forces children to stay at the VERY top */
     margin-right: -10px; /* Pulls column slightly toward the edge */
 
 
@@ -151,8 +159,9 @@
 
 /* 7. Similar Discoveries Row. [NEW LOGIC] Move the Product Row OUT of the Grid Map */
 #productRowsContainer {
-    width: 100%
-    margin-top: 20px; /* Pulls it up into empty space, only 20px gap between description and row */
+    width: 100%;
+    margin-top: 5px; /* Pulls it up into empty space, only 20px gap between description and row */
+    overflw: hidden; /* Contains the row and the arrow */
 }
 
 .row-wrapper { position: relative; }
@@ -169,15 +178,17 @@
 
 .product-row {
     display: flex;
-    gap: 15px;
-    overflow-x: auto;
+    gap: 10px;
+    overflow-x: hidden; /* we will use the arrows to scroll rather, not a scrollbar */
     scrollbar-width: none;
+    scrill-behavior: smooth;
+    width: 100%
     padding: 10px 0;
 }
 
 .product-card {
     flex: 0 0 160px; /* Fixed width for stability */
-    width: 160px;
+    width: calc(100% / 6);
     cursor: pointer;
 }
 
