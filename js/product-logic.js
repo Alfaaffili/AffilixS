@@ -63,10 +63,10 @@ function renderSimilarProducts(allProducts, currentProduct) {
         container.innerHTML = `
             <div class="row-wrapper">
                 <h2 class="row-title">Similar Discoveries</h2>
-                <div class="product-row" id="productScrollRow"></div>
+                <div class="product-row" id="relRow"></div>
                 <!-- RED ARROWS - Pinned via CSS -->
-                <button class="arrow-btn l" onclick="scrollRow(-350)">←</button>
-                <button class="arrow-btn r" onclick="scrollRow(350)">→</button>
+                <button class="arrow-btn l" onclick="document.getElementById('relRow').scrollBy({left: -350, behavior: 'smooth'})">&lt;</button>
+                <button class="arrow-btn r" onclick="document.getElementById('relRow').scrollBy({left: 350, behavior: 'smooth'})">&gt;</button>
             </div>`;
 
         const row = document.getElementById("relRow");
