@@ -27,22 +27,26 @@
 
 <main class="product-main-layout">
     
-    <!-- 1. LEFT COLUMN; Hero (Direct Child) -->
+    <!-- LEFT SIDE: Stacks Hero, Description, and Row vertically -->
     <div class="main-display-area">
+        
         <section class="hero-display">
             <img id="heroImage" src="" alt="Product Hero">
         </section>
 
-        <!-- 2. Description (Direct Child) -->
         <section class="info-horizontal-bar">
             <div class="full-name-row"><b>FULL NAME:</b> <span id="pName">---</span></div>
             <div id="pDesc" class="description-text">---</div>
         </section>
- 
-    </div>
 
-    <!-- 3. RIGHT COLUMN; STATS (Direct Child) -->
-    <!-- <aside class="master-sidebar"> -->
+        <!-- Fixed ID: productRowsContainer (added the 's') -->
+        <div id="productRowsContainer"></div> 
+        
+    </div> <!-- Close main-display-area -->
+
+    <!-- RIGHT SIDE: Stats and Categories side-by-side -->
+    <aside class="master-sidebar">
+
         <!-- Stats Box & Buttons -->
         <div class="sidebar-action-col">
             <div class="tight-stats">
@@ -56,34 +60,18 @@
             </div>
         </div>
 
-        <!-- Column 2: Categories Box -->
-        <!-- <div id="catOuterWrap"> -->
-            <!-- <div class="cat-scroll-track" id="catScrollInternal"> -->
-            <!--    <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/cat-tech.jpg"><p>TECH</p></div> -->
-            <!--    <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/Home.jpg"><p>HOME</p></div> -->
-            <!--    <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/Fittness.jpg"><p>FITNESS</p></div> -->
-            <!--    <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/Style.jpg"><p>STYLE</p></div> -->
-            <!--    <div class="cat-square" onclick="window.location.href='index.html'"><img src="images/BeautyPersonnalCare.jpg"><p>BEAUTY</p></div> -->
-            <!-- </div> -->
-<!-- 4. SIDEBAR/CATEGORIES (Direct Child) -->
-    <aside class="master-sidebar">
+        <!-- Category Column -->
         <div class="cat-column">
-
             <div class="cat-square"><img src="images/cat-tech.jpg"><p>TECH</p></div>
-
             <div class="cat-square"><img src="images/Home.jpg"><p>HOME</p></div>
-
             <div class="cat-square"><img src="images/Style.jpg"><p>STYLE</p></div>
             <div class="cat-square"><img src="images/Fittness.jpg"><p>FITNESS</p></div>
-
             <div class="cat-square"><img src="images/BeautyPersonnalCare.jpg"><p>BEAUTY</p></div>
         </div>
+
     </aside>
 
-<!-- 5. PRODUCT ROW (Direct Child - Spans full bottom) -->
-    <div id="productRowsContainer"></div>
 </main>
-
 <script>
     function openM(id) { document.getElementById(id).classList.add('active'); }
     function closeM(e, id) { if(e.target.id === id) document.getElementById(id).classList.remove('active'); }
