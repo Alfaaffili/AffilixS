@@ -53,7 +53,8 @@ function updateProductUI(product) {
  */
 function renderSimilarProducts(allProducts, currentProduct) {
     const container = document.getElementById("productRowsContainer");
-    if (!container) return;
+  
+   if (!container) return;
 
     // Filter for same category, excluding the one currently being viewed
     const similar = allProducts.filter(p => p.category === currentProduct.category && p.id !== currentProduct.id);
@@ -84,8 +85,9 @@ function renderSimilarProducts(allProducts, currentProduct) {
     }
 
             card.innerHTML = `
-                <img src="${item.image}" alt="${item.shortName}">
-                <div class="short-name">${item.shortName}</div>
+                <img src="${item.image}" alt="${displayName}">
+
+                <div class="short-name">${displayName}</div> <!-- Change this from item.shortName to displayName -->
             `;
             card.onclick = () => updateProductUI(item);
             row.appendChild(card);

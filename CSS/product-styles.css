@@ -15,17 +15,16 @@
 
     flex-direction: row;
 
-    justify-content: space-between;
+    justify-content: space-between; /* KEEP: Spreads left and right sections */
+    max-width: 1400px; /* KEEP: Prevents over-stretching */
+    margin: 0 auto; /* KEEP: Centers the whole page */
+    height: 90vh; /* Limits total height to 90% of the screen NEW: Limits height for static look */
+    gap: 20px;
 
-    gap: 30px;
+    padding: 10px 2%; /* Reduced side padding to use the extra width */
+    overflow: hidden; /* NEW: Kills the main page scrollbar */
 
-    padding: 20px 5%;
-
-    max-width: 1400px;
-
-    margin: 0 auto;
-
-}
+ }
 
 /* 2.1 LEFT SIDE (Hero, Description, and Product Row) */
 
@@ -37,6 +36,7 @@
 
     flex-direction: column;
 
+    height: 100%
     min-width: 0; /* Critical: prevents text from pushing width */
 
 }
@@ -64,15 +64,17 @@
 /* 4. Description Area */
 .info-horizontal-bar { 
     grid-area: infoArea; 
-    margin-top: 5px; /* Minimal gap from hero */
+    margin-top: 10px; /* Minimal gap from hero */
+    background: #fff;
+    min-height: 100px; /* Ensures space desn't collapse */
 }
 
 .description-text {
-    max-height: 120px; /* Slightly tightened to pull product row up */
-    overflow-y: auto;
+    max-height: 100px; /* Slightly tightened to pull product row up */
+    overflow-y: auto; /* Keeps thext inside a tidy box */
     line-height: 1.5;
-    padding-right: 15px;
-    font-size: 0.95rem;
+    padding-right: 10px;
+    font-size: 0.9rem;
     margin-bottom: 0; /* Kills space below description */
 }
 
@@ -112,31 +114,40 @@
     gap: 20px;
 
     align-items: flex-start;
+    margin-right: -10px; /* Pulls column slightly toward the edge */
+
 
 }
 
 .cat-column {
-    width: 140px;
+    width: 120px;
 
     display: flex;
 
     flex-direction: column;
 
-    gap: 12px;
+    gap: 8px;
+    overflow: auto; /* Allows only the categories to scroll if needede */
+    max-height: 85vh;
 
 }
 
 .cat-square {
-    width: 140px;
-    height: 140px;
+    width: 110px;
+    height: 110px;
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     cursor: pointer;
     overflow: hidden;
 }
-.cat-square img { width: 100%; height: 100px; object-fit: cover; }
-.cat-square p { font-size: 0.8rem; font-weight: bold; text-align: center; margin: 5px 0; }
+.cat-square img {
+    width: 75px; /* Smaller footprint */
+    height: 75px; /* Shrink image to fit to new size */
+    object-fit: cover;
+}
+
+.cat-square p { font-size: 0.7rem; font-weight: bold; text-align: center; margin: 5px 0; }
 
 /* 7. Similar Discoveries Row. [NEW LOGIC] Move the Product Row OUT of the Grid Map */
 #productRowsContainer {
