@@ -99,7 +99,7 @@ body {
     border-radius: 8px;
 
     /* Remove any large margin-tops here */
-    margin-top: 150px; /* Aligns exactly under the Hero image corner */
+    margin-top: 15px; /* Aligns exactly under the Hero image corner */
 
     align-self: start;
 }
