@@ -63,7 +63,7 @@ body {
 }
 
 #heroImage {
-    max-width: 90%;
+    max-width: 95%;
     max-height: 95%;
     object-fit: contain;
 }
@@ -74,7 +74,7 @@ body {
     margin-top: 10px; /* Minimal gap from hero */
     background: #fff;
     min-height: 100px; /* Ensures space desn't collapse */
-    font: 0.5rem;
+    font: 0.8rem;
 }
 
 .description-text {
@@ -84,17 +84,17 @@ body {
     overflow-y: auto; /* Keeps thext inside a tidy box */
     line-height: 1.2;
     padding-right: 10px;
-    font-size: 1.5rem;
+    font-size: 0.8rem;
     margin-bottom: 0; /* Kills space below description */
 }
 
 /* 5. Stats & Buttons (The Middle Column) */
 .sidebar-action-col {
-    width: 100px;
+    width: 120px;
 
     background: #f8f8f8;
 
-    padding: 12px;
+    padding: 22px;
 
     border-radius: 8px;
 
