@@ -23,7 +23,7 @@ body {
     justify-content: space-between; /* KEEP: Spreads left and right sections */
     max-width: 1400px; /* KEEP: Prevents over-stretching */
     margin: 0 auto; /* KEEP: Centers the whole page */
-    height: 98vh; /* Limits total height to 90% of the screen NEW: Limits height for static look */
+    height: 90vh; /* Limits total height to 90% of the screen NEW: Limits height for static look */
     gap: 20px;
 
     padding: 10px 2%; /* Reduced side padding to use the extra width */
@@ -80,7 +80,7 @@ body {
 .description-text {
     width: 95%;
     word-wrap: break-word; /* Forces text to wrap instead of stretching the screen */
-    max-height: 80px; /* Slightly tightened to pull product row up */
+    max-height: 100px; /* Slightly tightened to pull product row up */
     overflow-y: auto; /* Keeps thext inside a tidy box */
     line-height: 1.2;
     padding-right: 10px;
@@ -132,7 +132,7 @@ b/* 6. Categories (The Right Column), [SCROLL FIX] Prevent the Sidebar from stre
 }
 
 .cat-column {
-    width: 130px;
+    width: 120px;
 
     display: flex;
 
@@ -159,7 +159,7 @@ b/* 6. Categories (The Right Column), [SCROLL FIX] Prevent the Sidebar from stre
     object-fit: cover;
 }
 
-.cat-square p { font-size: 0.7rem; font-weight: bold; text-align: left; margin: 3px 0; }
+.cat-square p { font-size: 0.75rem; font-weight: bold; text-align: left; margin: 3px 0; }
 
 /* 7. Similar Discoveries Row. [NEW LOGIC] Move the Product Row OUT of the Grid Map */
 #productRowsContainer {
