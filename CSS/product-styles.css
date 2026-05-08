@@ -84,13 +84,13 @@ body {
     overflow-y: auto; /* Keeps thext inside a tidy box */
     line-height: 1.2;
     padding-right: 10px;
-    font-size: 0.5rem;
+    font-size: 1.5rem;
     margin-bottom: 0; /* Kills space below description */
 }
 
 /* 5. Stats & Buttons (The Middle Column) */
 .sidebar-action-col {
-    width: 115px;
+    width: 100px;
 
     background: #f8f8f8;
 
@@ -126,7 +126,7 @@ b/* 6. Categories (The Right Column), [SCROLL FIX] Prevent the Sidebar from stre
     gap: 15px;
 
     align-items: flex-start; /* Forces children to stay at the VERY top */
-    margin-right: -7px; /* Pulls column slightly toward the edge */
+    margin-right: -20px; /* Pulls column slightly toward the edge */
 
 
 }
