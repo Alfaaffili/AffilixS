@@ -64,7 +64,7 @@ body {
 
 #heroImage {
     max-width: 90%;
-    max-height: 90%;
+    max-height: 95%;
     object-fit: contain;
 }
 
@@ -77,19 +77,19 @@ body {
 }
 
 .description-text {
-    width: 100%;
+    width: 95%;
     word-wrap: break-word; /* Forces text to wrap instead of stretching the screen */
     max-height: 80px; /* Slightly tightened to pull product row up */
     overflow-y: auto; /* Keeps thext inside a tidy box */
-    line-height: 1.5;
+    line-height: 1.2;
     padding-right: 10px;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     margin-bottom: 0; /* Kills space below description */
 }
 
 /* 5. Stats & Buttons (The Middle Column) */
 .sidebar-action-col {
-    width: 120px;
+    width: 110px;
 
     background: #f8f8f8;
 
@@ -98,7 +98,7 @@ body {
     border-radius: 8px;
 
     /* Remove any large margin-tops here */
-    margin-top: 10px; /* Aligns exactly under the Hero image corner */
+    margin-top: 30px; /* Aligns exactly under the Hero image corner */
 
     align-self: start;
 }
@@ -131,7 +131,7 @@ body {
 }
 
 .cat-column {
-    width: 120px;
+    width: 122px;
 
     display: flex;
 
@@ -158,7 +158,7 @@ body {
     object-fit: cover;
 }
 
-.cat-square p { font-size: 0.7rem; font-weight: bold; text-align: center; margin: 5px 0; }
+.cat-square p { font-size: 0.7rem; font-weight: bold; text-align: center; margin: 3px 0; }
 
 /* 7. Similar Discoveries Row. [NEW LOGIC] Move the Product Row OUT of the Grid Map */
 #productRowsContainer {
@@ -177,7 +177,7 @@ body {
 
     padding: 5px 0; /* Tightened to save vertical space */
 
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 
 }
 
@@ -199,14 +199,14 @@ body {
 
 .product-card img { width: 100%; border-radius: 8px; }
 
-.short-name {
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 0.85rem;
-    padding: 5px 0;
-}
+/* .short-name { */
+    /* width: 100%; */
+    /* white-space: nowrap; */
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
+    /* font-size: 0.85rem; */
+    /* padding: 5px 0; */
+/* } */
 
 /* 8. Navigation Arrows */
 .arrow-btn {
