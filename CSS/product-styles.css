@@ -42,7 +42,7 @@ body {
     flex-direction: column;
 
     height: 100%
-    min-width: 0; /* Critical: prevents text from pushing width */
+    min-width: 0; /* Critical- prevents text from pushing width */
 
     overflow: hidden;
 }
@@ -90,16 +90,16 @@ body {
 
 /* 5. Stats & Buttons (The Middle Column) */
 .sidebar-action-col {
-    width: 122px;
+    width: 110px;
 
     background: #f8f8f8;
 
-    padding: 122px;
+    padding: 12px;
 
     border-radius: 8px;
 
     /* Remove any large margin-tops here */
-    margin-top: 15px; /* Aligns exactly under the Hero image corner */
+    margin-top: -15px; /* Aligns exactly under the Hero image corner */
 
     align-self: start;
 }
@@ -123,7 +123,7 @@ b/* 6. Categories (The Right Column), [SCROLL FIX] Prevent the Sidebar from stre
 
     flex-direction: row; /* Stats and Categories side-by-side */
 
-    gap: 8px;
+    gap: 15px;
 
     align-items: flex-start; /* Forces children to stay at the VERY top */
     margin-right: -20px; /* Pulls column slightly toward the edge */
