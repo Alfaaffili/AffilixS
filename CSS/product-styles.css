@@ -74,6 +74,7 @@ body {
     margin-top: 10px; /* Minimal gap from hero */
     background: #fff;
     min-height: 100px; /* Ensures space desn't collapse */
+    font: 0.5rem;
 }
 
 .description-text {
@@ -98,7 +99,7 @@ body {
     border-radius: 8px;
 
     /* Remove any large margin-tops here */
-    margin-top: 50px; /* Aligns exactly under the Hero image corner */
+    margin-top: 10px; /* Aligns exactly under the Hero image corner */
 
     align-self: start;
 }
