@@ -83,13 +83,13 @@ body {
     overflow-y: auto; /* Keeps thext inside a tidy box */
     line-height: 1.2;
     padding-right: 10px;
-    font-size: 0.8rem;
+    font-size: 0.5rem;
     margin-bottom: 0; /* Kills space below description */
 }
 
 /* 5. Stats & Buttons (The Middle Column) */
 .sidebar-action-col {
-    width: 110px;
+    width: 115px;
 
     background: #f8f8f8;
 
@@ -98,7 +98,7 @@ body {
     border-radius: 8px;
 
     /* Remove any large margin-tops here */
-    margin-top: 30px; /* Aligns exactly under the Hero image corner */
+    margin-top: 50px; /* Aligns exactly under the Hero image corner */
 
     align-self: start;
 }
@@ -116,7 +116,7 @@ body {
     margin-top: 10px;
 }
 
-/* 6. Categories (The Right Column), [SCROLL FIX] Prevent the Sidebar from stretching the whole page */
+b/* 6. Categories (The Right Column), [SCROLL FIX] Prevent the Sidebar from stretching the whole page */
 .master-sidebar { 
     display: flex;
 
@@ -125,13 +125,13 @@ body {
     gap: 15px;
 
     align-items: flex-start; /* Forces children to stay at the VERY top */
-    margin-right: -10px; /* Pulls column slightly toward the edge */
+    margin-right: -7px; /* Pulls column slightly toward the edge */
 
 
 }
 
 .cat-column {
-    width: 122px;
+    width: 130px;
 
     display: flex;
 
@@ -177,7 +177,7 @@ body {
 
     padding: 5px 0; /* Tightened to save vertical space */
 
-    font-size: 1.1rem;
+    font-size: 0.9rem;
 
 }
 
@@ -199,14 +199,14 @@ body {
 
 .product-card img { width: 100%; border-radius: 8px; }
 
-/* .short-name { */
-    /* width: 100%; */
-    /* white-space: nowrap; */
-    /* overflow: hidden; */
-    /* text-overflow: ellipsis; */
-    /* font-size: 0.85rem; */
-    /* padding: 5px 0; */
-/* } */
+.short-name { 
+    width: 100%; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    font-size: 0.5rem; 
+    padding: 5px 0; 
+}
 
 /* 8. Navigation Arrows */
 .arrow-btn {
