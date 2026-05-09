@@ -87,7 +87,7 @@ function renderSimilarProducts(allProducts, currentProduct) {
             card.innerHTML = `
                 <img src="${item.image}" alt="${displayName}">
 
-                <div class="short-name">${displayName}</div> <!-- Change this from item.shortName to displayName -->
+                <!-- <div class="short-name">${displayName}</div> --> <!-- Change this from item.shortName to displayName --> <!-- Text div removed for a cleaner, static look -->
             `;
             card.onclick = () => updateProductUI(item);
             row.appendChild(card);
@@ -123,3 +123,55 @@ function scrollRow(distance) {
 
 // Initialize on load
 document.addEventListener("DOMContentLoaded", initProductPage);
+
+const slider = document.getElementById('relRow');
+
+let isDown = false;
+
+let startX;
+
+let scrollLeft;
+
+
+
+if (slider) {
+
+    slider.addEventListener('mousedown', (e) => {
+
+        isDown = true;
+
+        slider.classList.add('active');
+
+        startX = e.pageX - slider.offsetLeft;
+
+        scrollLeft = slider.scrollLeft;
+
+    });
+
+    slider.addEventListener('mouseleave', () => {
+
+        isDown = false;
+
+    });
+
+    slider.addEventListener('mouseup', () => {
+
+        isDown = false;
+
+    });
+
+    slider.addEventListener('mousemove', (e) => {
+
+        if (!isDown) return;
+
+        e.preventDefault();
+
+        const x = e.pageX - slider.offsetLeft;
+
+        const walk = (x - startX) * 2; // Scroll speed
+
+        slider.scrollLeft = scrollLeft - walk;
+
+    });
+
+}
