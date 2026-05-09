@@ -85,9 +85,8 @@ function renderSimilarProducts(allProducts, currentProduct) {
     }
 
             card.innerHTML = `
-                <img src="${item.image}" alt="${displayName}">
-
-                <!-- <div class="short-name">${displayName}</div> --> <!-- Change this from item.shortName to displayName --> <!-- Text div removed for a cleaner, static look -->
+               <!-- <img src="${item.image}" alt="${displayName}"> -->
+               <!-- <div class="short-name">${displayName}</div> --> <!-- Change this from item.shortName to displayName --> <!-- Text div removed for a cleaner, static look -->
             `;
             card.onclick = () => updateProductUI(item);
             row.appendChild(card);
