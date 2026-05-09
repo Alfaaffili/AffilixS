@@ -92,19 +92,14 @@ body {
 
 /* 5. Stats & Buttons (The Middle Column) */
 .sidebar-action-col {
+
+    position: static !important; /* This kills any 'absolute' floating */
     width: 110px;
 
     background: #f8f8f8;
-
     padding: 12px;
-
     border-radius: 8px;
-
-    /* Remove any large margin-tops here */
-    margin-top: 10px; /* Aligns exactly under the Hero image corner */
-
-    align-self: start;
-    /* No absolute positioning to avoid overlap */
+    flex-shrink: 0;
 }
 
 .tight-stats p {
@@ -121,22 +116,22 @@ body {
 }
 
 b/* 6. Categories (The Right Column), [SCROLL FIX] Prevent the Sidebar from stretching the whole page */
+/* The Container: Forces Stat and Cat columns to be side-by-side */
 .master-sidebar { 
-    display: flex;
+    display: flex !important; /* !important ensures old grid rules are ignored */
 
-    flex-direction: row; /* Stats and Categories side-by-side */
+    flex-direction: row !important; /* Stats and Categories side-by-side */
 
     gap: 15px;
-
-    align-items: flex-start; /* Forces children to stay at the VERY top */
-    margin-right: -10px; /* Pulls column slightly toward the edge */
-    align-self: start;
-    margin-top: 10px;    
-
+    align-items: flex-start;
+    position: relative;
+    margin-top: 10px;
 
 }
 
+/* The Category Column: Stays to the right of the stats */
 .cat-column {
+    position: static !important;
     width: 110px;
 
     display: flex;
@@ -144,6 +139,7 @@ b/* 6. Categories (The Right Column), [SCROLL FIX] Prevent the Sidebar from stre
     flex-direction: column;
 
     gap: 8px;
+    flex-shrink: 0;
     overflow: auto; /* Allows only the categories to scroll if needede */
     max-height: 85vh;
 

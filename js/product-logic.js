@@ -123,23 +123,27 @@ function scrollRow(distance) {
 // Initialize on load
 document.addEventListener("DOMContentLoaded", initProductPage);
 
-const slider = document.getElementById('relRow');
+window.addEventListener('load', () => {
 
-let isDown = false;
+    const slider = document.getElementById('relRow');
 
-let startX;
-
-let scrollLeft;
+    if (!slider) return;
 
 
 
-if (slider) {
+    let isDown = false;
+
+    let startX;
+
+    let scrollLeft;
+
+
 
     slider.addEventListener('mousedown', (e) => {
 
         isDown = true;
 
-        slider.classList.add('active');
+        slider.style.cursor = 'grabbing';
 
         startX = e.pageX - slider.offsetLeft;
 
@@ -147,17 +151,27 @@ if (slider) {
 
     });
 
+
+
     slider.addEventListener('mouseleave', () => {
 
         isDown = false;
 
+        slider.style.cursor = 'grab';
+
     });
+
+
 
     slider.addEventListener('mouseup', () => {
 
         isDown = false;
 
+        slider.style.cursor = 'grab';
+
     });
+
+
 
     slider.addEventListener('mousemove', (e) => {
 
@@ -173,4 +187,4 @@ if (slider) {
 
     });
 
-}
+});
