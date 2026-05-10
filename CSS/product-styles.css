@@ -1,58 +1,51 @@
 ﻿/* =============================================================
    AFFILIXS PRODUCT-SPECIFIC STYLES - STABLE DESKTOP GRID
    ============================================================= */
-body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden; /* Hard-stop for horizontal scrolling */
-}
 
-/* 1. Header Nav Fix */
+/* Header Nav Color */
+
 .header-nav .nav-item,
+ 
 .header-nav a {
+ 
     color: #ffffff !important;
+ 
     text-decoration: none;
+
 }
 
-/* 2. Main Layout Grid, THE MAIN CONTAINER - Now using Flex for better vertical control */
 .product-main-layout {
-    display: flex;
-
-    flex-direction: row !important; /* Foreces it to be a Row not a Grid */
-
-    justify-content: space-between; /* KEEP: Spreads left and right sections */
-    max-width: 1400px; /* KEEP: Prevents over-stretching */
-    margin: 0 auto; /* KEEP: Centers the whole page */
-    height: 100vh; /* Limits total height to 90% of the screen NEW: Limits height for static look */
-    max-height: 100vh;
-    gap: 20px;
-
-    padding: 10px 2%; /* Reduced side padding to use the extra width */
-    overflow: hidden; /* NEW: Kills the main page scrollbar */
-    box-sizing: border-box;
- }
-
-/* 2.1 LEFT SIDE (Hero, Description, and Product Row) */
-
-.main-display-area {
-
-    flex: 1; /* Takes all available left space */
-
-    display: flex;
-
-    flex-direction: column;
-
-    height: 100%
-    min-width: 0; /* Critical- prevents text from pushing width */
-
-    overflow: hidden;
+    display: grid;
+    /* Col 1: Hero/Desc (1fr) | Col 2: Stats (100px) | Col 3: Cats (140px) */
+    grid-template-columns: 1fr 100px 140px;
+    /* Using 'minmax' prevents the grid from collapsing and "blinking" */
+    /* //grid-template-rows: minmax(380px, auto) auto; */
+    grid-template-areas: 
+        "heroArea .        sidebarArea"
+        "infoArea statsArea sidebarArea"
+        "rowArea rowArea rowArea"; /* New area fro the product row */
+    gap: 25px;
+    padding: 20px 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: start;
 }
 
-/* 3. Hero Section */
+/* --- AREA ASSIGNMENTS; Ensure these are assigned properly --- */
+.main-display-area { 
+    grid-area: heroArea; display: block; 
+}
+
+.master-sidebar { 
+    grid-area: sidebarArea; 
+}
+
+/* --- HERO SECTION --- */
+/* Assigning the Direct Children */
 .hero-display {
     grid-area: heroArea;
     width: 100%;
-    height: 480px; /* Increased hero size to use that 4-line gap mentioned */ 
+    height: 380px; 
     background: #fff;
     border-radius: 12px;
     border: 1px solid #eee;
@@ -60,182 +53,126 @@ body {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    margin: 0; /* Ensures no gap below hero */
+}
+
+.info-horizontal-bar { 
+    grid-area: infoArea; 
+     /* margin-top: 20px; */
 }
 
 #heroImage {
-    max-width: 95%;
-    max-height: 95%;
-    object-fit: contain;
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain; /* Ensures image fits without disappearing */
 }
 
-/* 4. Description Area */
-.info-horizontal-bar { 
-    grid-area: infoArea; 
-    margin-top: 15px; /* Minimal gap from hero - pushes text down */
-    background: #fff;
-    min-height: 100px; /* Ensures space desn't collapse */
-    font: 0.85rem;
-}
-
+/* --- DESCRIPTION --- */
 .description-text {
-    width: 80px;
-    word-wrap: break-word; /* Forces text to wrap instead of stretching the screen */
-    max-height: 100px; /* Slightly tightened to pull product row up */
-    overflow-y: auto; /* Keeps thext inside a tidy box */
-    line-height: 1.4;
-    color: #444;
-    padding-right: 10px;
-    font-size: 0.8rem;
-    margin-bottom: 0; /* Kills space below description */
+    max-height: 150px;
+    overflow-y: auto;
+    line-height: 1.6;
+    padding-right: 15px;
+    font-size: 0.95rem;
 }
 
-/* 5. Stats & Buttons (The Middle Column) */
+/* --- STATS & BUTTONS (The Middle Column) --- */
 .sidebar-action-col {
-
-    position: static !important; /* This kills any 'absolute' floating */
-    width: 110px;
-
-    background: #f8f8f8;
-    padding: 12px;
-    border-radius: 8px;
-    flex-shrink: 0;
+    grid-area: statsArea;
+    display: flex;
+    flex-direction: column;
+    /* This aligns stats with the top of the description naturally */
+    padding-top: 20px;
+    gap: 15px;
+    width: 100px;
 }
 
 .tight-stats p {
-    margin: 3px 0;
+    margin: 5px 0;
     font-size: 0.75rem;
     border-bottom: 1px solid #eee;
+    padding-bottom: 3px;
 }
 
 .sidebar-btns {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    margin-top: 10px;
+    gap: 8px;
 }
 
-b/* 6. Categories (The Right Column), [SCROLL FIX] Prevent the Sidebar from stretching the whole page */
-/* The Container: Forces Stat and Cat columns to be side-by-side */
-.master-sidebar { 
-    display: flex !important; /* !important ensures old grid rules are ignored */
-
-    flex-direction: row !important; /* Stats and Categories side-by-side */
-
-    min-width: 240px; /* Space for both columns side by side */
-    gap: 15px;
-    align-items: flex-start;
-    position: relative;
-    margin-top: 10px;
-
-    width: auto !important;
-    float: none !important; /* Kills any old flot rules */
-    flex-shrink: 0;
+.t-btn {
+    padding: 8px 2px;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
 }
+.buy-now { background: #ff0000; color: #fff; }
+.go-back { background: #111; color: #fff; }
 
-/* The Category Column: Stays to the right of the stats */
+/* --- CATEGORIES (The Right Column) --- */
 .cat-column {
-    position: relative !important;
-    top: 0 !important;
-    left: 0 !important;
-    /* width: 110px; */
-
-    display: flex !important;
-
-    flex-direction: column !important;
-
-    /* gap: 8px; */
-    /* flex-shrink: 0; */
-    overflow: visible !important; /* Allows only the categories to scroll if needede */
-    max-height: 85vh;
-    /* display: flex; */
-    /* flex-direction: column; */
-
-    /* gap: 8px; */
-
-    /* width: 110px; */
-
-    /* position: relative !important; == Forces it to occupy its own space */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .cat-square {
-    width: 110px;
-    height: 110px;
+    width: 140px;
+    height: 140px;
     background: #fff;
     border-radius: 8px;
+    overflow: hidden;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     cursor: pointer;
-    overflow: hidden;
 }
-.cat-square img {
-    width: 75px; /* Smaller footprint */
-    height: 75px; /* Shrink image to fit to new size */
-    object-fit: cover;
-}
+.cat-square img { width: 100%; height: 100px; object-fit: cover; }
+.cat-square p { font-size: 0.8rem; font-weight: bold; text-align: center; margin: 5px 0; }
 
-.cat-square p { font-size: 0.75rem; font-weight: bold; text-align: left; margin: 3px 0; }
-
-/* 7. Similar Discoveries Row. [NEW LOGIC] Move the Product Row OUT of the Grid Map */
+/* --- PRODUCT ROW (Spans full width under Hero/Info) --- */
 #productRowsContainer {
-    width: 100%;
-    max-width: 100%;
-    margin-top: 5px; /* Pulls it up into empty space, only 20px gap between description and row */
-    overflw: visible !important; /* Contains the row and the arrow, ensures arrows aren't cut off by white sheets */
-    position: relative; /* Necessar for the pinned arrows to work */
+    grid-area: rowArea; /* Forces the row to span across all 3 columns */
+    margin-top: 30px;
 }
 
-.row-wrapper {
-    position: relative;
-    padding: 0 40px; /* Adds 'beathing room' so arrows aren't on the very edge */
- }
-
-.row-title {
-
-    margin: 0; /* Kills the hidden gap above "Similar Discoveries" */
-
-    padding: 5px 0; /* Tightened to save vertical space */
-
-    font-size: 0.75rem;
-
-}
+.row-wrapper { position: relative; padding-bottom: 20px; }
 
 .product-row {
     display: flex;
     gap: 15px;
-    overflow-x: hidden; /* we will use the arrows to scroll rather, not a scrollbar */
-    scrollbar-width: none; /* For Firefox */
-    scrill-behavior: smooth;
-    width: 100%
+    overflow-x: auto;
+    scrollbar-width: none;
     padding: 10px 0;
 }
 
+/* Ant-Stretch Card Logic */
 .product-card {
-    flex: 0 0 140px; /* Fixed width for stability - Slimer width since text is gone */
-    height: 140px; /* Squared cards */
-    border: none; /* Removes the border if it looks too busy without text */
-    bckground: none;
-    width: calc(100% / 6);
+    flex: 0 0 180px); /* Fixed width to prevent stratching */
+    width: 180px;
+    min-width: 100px;
+    max-width: 180px;
     cursor: pointer;
-    transition: transform 0.2s;
+    overflow: hidden; /* Clips anyting that tries to push it wider */
+    display: flex;
+    flex-direction: column
 }
 
-.product-card img { width: 100%; height: 100%; border-radius: 8px; object-fit: cover;}
-
-.short-name { 
-    width: 100%; 
-    white-space: nowrap; 
-    overflow: hidden; 
-    text-overflow: ellipsis; 
-    font-size: 0.75rem; 
-    padding: 5px 0; 
+.short-name {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Adds "..." if name is too long */
+    font-size: 0.85rem;
+    padding: 5px;
 }
+.product-card img { width: 100%; border-radius: 8px; }
 
-/* 8. Navigation Arrows */
+/* --- RED ARROWS --- */
 .arrow-btn {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    bottom: -10px;
+    bottom: -15px;
     width: 30px;
     height: 30px;
     background: #ff0000;
@@ -243,26 +180,11 @@ b/* 6. Categories (The Right Column), [SCROLL FIX] Prevent the Sidebar from stre
     border: none;
     border-radius: 50%;
     cursor: pointer;
-    z-index: 10; /* Puts arrows on top of everything 'above white the background' */
-    opacity: 1 !important;
-    visibility: visible !importnt;
+    z-index: 10;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
 }
-.arrow-btn.l { left: -15px; }
-.arrow-btn.r { right: -15px; }
-
-/* 9. Button Colors */
-.t-btn {
-    padding: 7px 0;
-    border-radius: 4px;
-    font-size: 0.7rem;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: none;
-    border: none;
-}
-.buy-now { background: #ff0000; color: #fff; }
-.go-back { background: #111; color: #fff; }
+.arrow-btn.l { left: 0; }
+.arrow-btn.r { right: 0; }
