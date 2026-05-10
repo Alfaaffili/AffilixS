@@ -20,26 +20,32 @@ async function initProductPage() {
 }
 
 function updateProductUI(product) {
-    // 1. Text Details - Fixed the overwrite bug
-    // Make sure you have separate IDs in your HTML: pShortName and pFullName
-    const shortNameElem = document.getElementById("pShortName");
-    const fullNameElem = document.getElementById("pFullName");
-    
+    if (!product) return;
+
+    // 1. Hero Image Fix
+    const img = document.getElementById("heroImage");
+    if (img) img.src = product.image;
+
+    // 2. Text Details - Matching the HTML IDs we set
+    const shortNameElem = document.getElementById("pShortName"); // ID in HTML
+    const fullNameElem = document.getElementById("pFullName");   // ID in HTML
+    const descElem = document.getElementById("pDesc");
+
     if (shortNameElem) shortNameElem.innerText = product.shortName;
     if (fullNameElem) fullNameElem.innerText = product.name;
+    if (descElem) descElem.innerText = product.fullDescription;
     
-    document.getElementById("heroImage").src = product.image;
-    document.getElementById("pDesc").innerText = product.fullDescription;
-    
-    // 2. Stats & Price
+    // 3. Stats & Price (Checks if elements exist before updating)
     const priceElem = document.getElementById("pPrice");
     if (priceElem) priceElem.innerText = (product.currency || "$") + product.price;
     
     const buyBtn = document.getElementById("buyBtn");
     if (buyBtn) buyBtn.href = product.affiliateLink;
 
+    // 4. Page Behavior
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
+    // 5. URL Update
     const newUrl = window.location.pathname + '?id=' + product.id;
     window.history.pushState({ path: newUrl }, '', newUrl);
 }
