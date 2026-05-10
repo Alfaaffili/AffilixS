@@ -18,7 +18,7 @@ body {
 .product-main-layout {
     display: flex;
 
-    flex-direction: row;
+    flex-direction: row !important; /* Foreces it to be a Row not a Grid */
 
     justify-content: space-between; /* KEEP: Spreads left and right sections */
     max-width: 1400px; /* KEEP: Prevents over-stretching */
@@ -122,35 +122,40 @@ b/* 6. Categories (The Right Column), [SCROLL FIX] Prevent the Sidebar from stre
 
     flex-direction: row !important; /* Stats and Categories side-by-side */
 
+    min-width: 240px; /* Space for both columns side by side */
     gap: 15px;
     align-items: flex-start;
-    /* position: relative; */
-    /* margin-top: 10px; */
+    position: relative;
+    margin-top: 10px;
 
+    width: auto !important;
+    float: none !important; /* Kills any old flot rules */
+    flex-shrink: 0;
 }
 
 /* The Category Column: Stays to the right of the stats */
 .cat-column {
-    /* position: static !important; */
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
     /* width: 110px; */
 
-    /* display: flex; */
+    display: flex !important;
 
-    /* flex-direction: column; */
+    flex-direction: column !important;
 
     /* gap: 8px; */
     /* flex-shrink: 0; */
-    /* overflow: auto; == Allows only the categories to scroll if needede */
-    /* max-height: 85vh; */
-    display: flex;
+    overflow: visible !important; /* Allows only the categories to scroll if needede */
+    max-height: 85vh;
+    /* display: flex; */
+    /* flex-direction: column; */
 
-    flex-direction: column;
+    /* gap: 8px; */
 
-    gap: 8px;
+    /* width: 110px; */
 
-    width: 110px;
-
-    position: relative !important; /* Forces it to occupy its own space */
+    /* position: relative !important; == Forces it to occupy its own space */
 }
 
 .cat-square {
@@ -175,11 +180,14 @@ b/* 6. Categories (The Right Column), [SCROLL FIX] Prevent the Sidebar from stre
     width: 100%;
     max-width: 100%;
     margin-top: 5px; /* Pulls it up into empty space, only 20px gap between description and row */
-    overflw: hidden; /* Contains the row and the arrow */
+    overflw: visible !important; /* Contains the row and the arrow, ensures arrows aren't cut off by white sheets */
     position: relative; /* Necessar for the pinned arrows to work */
 }
 
-.row-wrapper { position: relative; }
+.row-wrapper {
+    position: relative;
+    padding: 0 40px; /* Adds 'beathing room' so arrows aren't on the very edge */
+ }
 
 .row-title {
 
@@ -225,6 +233,8 @@ b/* 6. Categories (The Right Column), [SCROLL FIX] Prevent the Sidebar from stre
 /* 8. Navigation Arrows */
 .arrow-btn {
     position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     bottom: -10px;
     width: 30px;
     height: 30px;
@@ -233,7 +243,9 @@ b/* 6. Categories (The Right Column), [SCROLL FIX] Prevent the Sidebar from stre
     border: none;
     border-radius: 50%;
     cursor: pointer;
-    z-index: 10;
+    z-index: 10; /* Puts arrows on top of everything 'above white the background' */
+    opacity: 1 !important;
+    visibility: visible !importnt;
     display: flex;
     align-items: center;
     justify-content: center;
