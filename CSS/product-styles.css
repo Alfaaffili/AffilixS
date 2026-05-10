@@ -76,14 +76,44 @@ body {
     background: #fff;
     min-height: 100px; /* Ensures space desn't collapse */
     font: 0.85rem;
+    flex: 1; /* This tells the text: "Take all the space the sidebars don't use" */
+
+    min-width: 0; /* Critical for text wrapping in Flexbox */
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    padding: 0 20px;
+}
+
+/* Force each text line to be a full-width block */
+
+.info-horizontal-bar h2,
+ 
+.info-horizontal-bar h3,
+ 
+.info-horizontal-bar p {
+
+    width: 100%;
+
+    margin: 0;
+
+    white-space: normal; /* Ensures text wraps to the next line */
+
+    word-wrap: break-word;
+
 }
 
 .description-text {
     width: 80px;
     word-wrap: break-word; /* Forces text to wrap instead of stretching the screen */
-    max-height: 100px; /* Slightly tightened to pull product row up */
+    max-height: 120px; /* Slightly tightened to pull product row up */
     overflow-y: auto; /* Keeps thext inside a tidy box */
-    line-height: 1.4;
+    line-height: 1.5;
+    text-align: lefyt;
     color: #444;
     padding-right: 10px;
     font-size: 0.8rem;
@@ -180,7 +210,7 @@ b/* 6. Categories (The Right Column), [SCROLL FIX] Prevent the Sidebar from stre
     width: 100%;
     max-width: 100%;
     margin-top: 5px; /* Pulls it up into empty space, only 20px gap between description and row */
-    overflw: visible !important; /* Contains the row and the arrow, ensures arrows aren't cut off by white sheets */
+    overflw: visible !important; /* Contains the row and the arrow, ensures arrows aren't cut off by the white sheets, , this stops the 'clipping' */
     position: relative; /* Necessar for the pinned arrows to work */
 }
 
@@ -197,6 +227,13 @@ b/* 6. Categories (The Right Column), [SCROLL FIX] Prevent the Sidebar from stre
 
     font-size: 0.75rem;
 
+}
+
+.rel-row {
+    overflow-x: hidden; /* keep the cards contained */
+    display: flex;
+    gap: 15px;
+    padding: 10px 0;
 }
 
 .product-row {
@@ -251,8 +288,8 @@ b/* 6. Categories (The Right Column), [SCROLL FIX] Prevent the Sidebar from stre
     justify-content: center;
     font-weight: bold;
 }
-.arrow-btn.l { left: -15px; }
-.arrow-btn.r { right: -15px; }
+.arrow-btn.l { left: -25px; }
+.arrow-btn.r { right: -25px; }
 
 /* 9. Button Colors */
 .t-btn {

@@ -29,6 +29,7 @@ async function initProductPage() {
 function updateProductUI(product) {
     // Basic Details
     document.getElementById("heroImage").src = product.image;
+    document.getElementById("pName").innerText = product.shortName;
     document.getElementById("pName").innerText = product.name;
     document.getElementById("pDesc").innerText = product.fullDescription;
     
