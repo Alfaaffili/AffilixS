@@ -181,7 +181,7 @@ window.addEventListener('load', () => {
 
         const x = e.pageX - slider.offsetLeft;
 
-        const walk = (x - startX) * 2; // Scroll speed
+        const walk = (x - startX) * 3; // Scroll speed
 
         slider.scrollLeft = scrollLeft - walk;
 
