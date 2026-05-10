@@ -4,14 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AffilixS | Product View</title>
+    <!-- Main Stylesheet (Header/Footer) -->
     <link rel="stylesheet" href="CSS/styles.css?v=1.4">
-    <link rel="stylesheet" href="CSS/product-styles.css?v=1.7"> <!-- BUMPED VERSION TO 1.5 -->
+    <!-- Product Specific Stylesheet (Layout) -->
+    <link rel="stylesheet" href="CSS/product-styles.css?v=2.0">
 </head>
 <body class="product-page">
 
 <!-- [BLOCK: MODALS] -->
-<div id="visionModal" class="text-modal" onclick="closeM(event, 'visionModal')"><div class="modal-box"><h2>Our Vision</h2><p>Refined products for modern living.</p></div></div>
-<div id="contactModal" class="text-modal" onclick="closeM(event, 'contactModal')"><div class="modal-box"><h2>Contact</h2><p>support@affilixs.com</p></div></div>
+<div id="visionModal" class="text-modal" onclick="closeM(event, 'visionModal')">
+    <div class="modal-box"><h2>Our Vision</h2><p>Refined products for modern living.</p></div>
+</div>
+<div id="contactModal" class="text-modal" onclick="closeM(event, 'contactModal')">
+    <div class="modal-box"><h2>Contact</h2><p>support@affilixs.com</p></div>
+</div>
 
 <header class="site-header">
     <div class="logo-group" onclick="window.location.href='index.html'" style="cursor:pointer">
@@ -34,21 +40,25 @@
             <img id="heroImage" src="" alt="Product Hero">
         </section>
 
+        <!-- REPAIRED INFO SPACE: 4-Line Strategy -->
         <section class="info-horizontal-bar">
-            <div class="full-name-row"><b>FULL NAME:</b> <span id="pName">---</span></div>
-            <div id="pDesc" class="description-text">---</div>
+            <h2 class="row-title">PRODUCT DETAILS</h2> <!-- Line 1: Static Title -->
+            <h3 id="pShortName" style="margin:0; font-size: 1rem; color: #666;">---</h3> <!-- Line 2: Short Name -->
+            <h1 id="pFullName" style="margin:0; font-size: 1.4rem;">---</h1> <!-- Line 3: Long Name -->
+            <div id="pDesc" class="description-text">---</div> <!-- Line 4: Full Description -->
         </section>
 
-        <!-- Fixed ID: productRowsContainer (added the 's') -->
+        <!-- Container for Similar Discoveries -->
         <div id="productRowsContainer"></div> 
         
-    </div> <!-- Close main-display-area -->
+    </div>
 
     <!-- RIGHT SIDE: Stats and Categories side-by-side -->
     <aside class="master-sidebar">
 
-        <!-- Stats Box & Buttons -->
-        <!-- <div class="sidebar-action-col">
+        <!-- Stats Box & Buttons (Uncomment when ready to restore) -->
+        <!-- 
+        <div class="sidebar-action-col">
             <div class="tight-stats">
                 <p><b>Rating:</b> ★★★★★</p>
                 <p><b>Rank:</b> <span id="pRank">#1 Trend</span></p>
@@ -58,7 +68,8 @@
                 <a id="buyBtn" href="#" target="_blank" class="t-btn buy-now">BUY</a>
                 <button onclick="window.location.href='index.html'" class="t-btn go-back">BACK</button>
             </div>
-        </div> -->
+        </div> 
+        -->
 
         <!-- Category Column -->
         <div class="cat-column">
@@ -72,63 +83,15 @@
     </aside>
 
 </main>
+
+<!-- HELPER SCRIPTS FOR MODALS -->
 <script>
     function openM(id) { document.getElementById(id).classList.add('active'); }
     function closeM(e, id) { if(e.target.id === id) document.getElementById(id).classList.remove('active'); }
-    
-    function updateHero(product) {
-        document.getElementById("heroImage").src = product.image;
-        document.getElementById("pName").innerText = product.name;
-        document.getElementById("pDesc").innerText = product.fullDescription;
-        document.getElementById("pPrice").innerText = (product.currency || "$") + product.price;
-        document.getElementById("buyBtn").href = product.affiliateLink;
-        
-        // RULE: Follow the action (when product selected scroll window up)
-
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-
-        const newUrl = window.location.pathname + '?id=' + product.id;
-        window.history.pushState({path:newUrl},'',newUrl);
-    }
-
-    async function init() {
-        try {
-            const res = await fetch("Data/products.json?v=" + Date.now());
-            const all = await res.json();
-            const pId = new URLSearchParams(window.location.search).get('id');
-            const p = all.find(x => x.id == pId) || all[0];
-
-            updateHero(p);
-
-            const container = document.getElementById("productRowsContainer");
-            const similar = all.filter(x => x.category === p.category && x.id !== p.id);
-
-            if (similar.length > 0) {
-                container.innerHTML = `
-                    <div class="row-wrapper">
-                        <h2 class="row-title">Similar Discoveries</h2>
-                        <div class="product-row" id="relRow"></div>
-                        <!-- RED ARROWS -->
-
-                        <button class="arrow-btn l" onclick="document.getElementById('relRow').scrollBy({left: -200, behavior: 'smooth'})">&lt;</button>
-
-                        <button class="arrow-btn r" onclick="document.getElementById('relRow').scrollBy({left: 200, behavior: 'smooth'})">&gt;</button>
-                    </div>`;
-
-                const row = document.getElementById("relRow");
-                similar.forEach(item => {
-                    const card = document.createElement("div");
-                    card.className = "product-card";
-                    card.innerHTML = `<img src="${item.image}"><div class="short-name">${item.shortName}</div>`;
-                    card.onclick = () => updateHero(item);
-                    row.appendChild(card);
-                });
-            }
-        } catch (e) { console.error(e); }
-    }
-    document.addEventListener("DOMContentLoaded", init);
 </script>
-<!-- Linked logic for Product Page only -->
-    <script src="JS/product-logic.js"></script>
+
+<!-- THE MAIN ENGINE: All data fetching and UI updates happen here -->
+<script src="JS/product-logic.js"></script>
+
 </body>
 </html>

@@ -1,20 +1,16 @@
 ﻿/**
- * AFFILIXS PRODUCT PAGE LOGIC
- * Purpose: Handles hero updates, similar products row, and navigation.
+ * AFFILIXS PRODUCT PAGE LOGIC - REPAIRED
  */
 
 async function initProductPage() {
     try {
-        // 1. Fetch the data with a cache-buster
         const response = await fetch("Data/products.json?v=" + Date.now());
         const allProducts = await response.json();
 
-        // 2. Identify the product from the URL (or default to first product)
         const urlParams = new URLSearchParams(window.location.search);
         const productId = urlParams.get('id');
         const currentProduct = allProducts.find(p => p.id == productId) || allProducts[0];
 
-        // 3. Initial Load
         updateProductUI(currentProduct);
         renderSimilarProducts(allProducts, currentProduct);
 
@@ -23,41 +19,35 @@ async function initProductPage() {
     }
 }
 
-/**
- * Updates the Hero Image, Description, and Stats
- */
 function updateProductUI(product) {
-    // Basic Details
+    // 1. Text Details - Fixed the overwrite bug
+    // Make sure you have separate IDs in your HTML: pShortName and pFullName
+    const shortNameElem = document.getElementById("pShortName");
+    const fullNameElem = document.getElementById("pFullName");
+    
+    if (shortNameElem) shortNameElem.innerText = product.shortName;
+    if (fullNameElem) fullNameElem.innerText = product.name;
+    
     document.getElementById("heroImage").src = product.image;
-    document.getElementById("pName").innerText = product.shortName;
-    document.getElementById("pName").innerText = product.name;
     document.getElementById("pDesc").innerText = product.fullDescription;
     
-    // Stats & Price
-    // Ensure these IDs exist in your HTML sidebar-action-col
+    // 2. Stats & Price
     const priceElem = document.getElementById("pPrice");
     if (priceElem) priceElem.innerText = (product.currency || "$") + product.price;
     
     const buyBtn = document.getElementById("buyBtn");
     if (buyBtn) buyBtn.href = product.affiliateLink;
 
-    // RULE: Follow the action - Smooth scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    // Update URL without reloading page
     const newUrl = window.location.pathname + '?id=' + product.id;
     window.history.pushState({ path: newUrl }, '', newUrl);
 }
 
-/**
- * Renders the "Similar Discoveries" Row
- */
 function renderSimilarProducts(allProducts, currentProduct) {
     const container = document.getElementById("productRowsContainer");
-  
-   if (!container) return;
+    if (!container) return;
 
-    // Filter for same category, excluding the one currently being viewed
     const similar = allProducts.filter(p => p.category === currentProduct.category && p.id !== currentProduct.id);
 
     if (similar.length > 0) {
@@ -65,9 +55,8 @@ function renderSimilarProducts(allProducts, currentProduct) {
             <div class="row-wrapper">
                 <h2 class="row-title">Similar Discoveries</h2>
                 <div class="product-row" id="relRow"></div>
-                <!-- RED ARROWS - Pinned via CSS -->
-                <button class="arrow-btn l" onclick="document.getElementById('relRow').scrollBy({left: -350, behavior: 'smooth'})">&lt;</button>
-                <button class="arrow-btn r" onclick="document.getElementById('relRow').scrollBy({left: 350, behavior: 'smooth'})">&gt;</button>
+                <button class="arrow-btn l" onclick="scrollRow(-350)">&lt;</button>
+                <button class="arrow-btn r" onclick="scrollRow(350)">&gt;</button>
             </div>`;
 
         const row = document.getElementById("relRow");
@@ -75,45 +64,20 @@ function renderSimilarProducts(allProducts, currentProduct) {
             const card = document.createElement("div");
             card.className = "product-card";
             
-            // Logic to trim name to 19 characters + add "..." if longer
-
-            let displayName = item.shortName;
-        
-    if (displayName.length > 19) {
-        
-        displayName = displayName.substring(0, 16) + "...";
-
-    }
-
-            card.innerHTML = `
-               <!-- <img src="${item.image}" alt="${displayName}"> -->
-               <!-- <div class="short-name">${displayName}</div> --> <!-- Change this from item.shortName to displayName --> <!-- Text div removed for a cleaner, static look -->
-            `;
+            // Image is back! Text is removed per your Point 4.
+            card.innerHTML = `<img src="${item.image}" alt="${item.shortName}">`;
+            
             card.onclick = () => updateProductUI(item);
             row.appendChild(card);
         });
+
+        // Initialize Drag-to-Scroll AFTER row is created
+        initDragScroll();
     } else {
-        container.innerHTML = ""; // Clear if no similar products found
+        container.innerHTML = ""; 
     }
 }
 
-// ADD THIS NEW FUNCTION TO YOUR JS FILE:
-
-function scrollRow(amount) {
-
-    const row = document.getElementById("productScrollRow");
-
-    if (row) {
-
-        row.scrollBy({ left: amount, behavior: 'smooth' });
-
-    }
-
-}
-
-/**
- * Helper: Manual Scroll for Red Arrows
- */
 function scrollRow(distance) {
     const row = document.getElementById("relRow");
     if (row) {
@@ -121,71 +85,31 @@ function scrollRow(distance) {
     }
 }
 
-// Initialize on load
-document.addEventListener("DOMContentLoaded", initProductPage);
-
-window.addEventListener('load', () => {
-
+function initDragScroll() {
     const slider = document.getElementById('relRow');
-
     if (!slider) return;
 
-
-
     let isDown = false;
-
     let startX;
-
     let scrollLeft;
 
-
-
     slider.addEventListener('mousedown', (e) => {
-
         isDown = true;
-
         slider.style.cursor = 'grabbing';
-
         startX = e.pageX - slider.offsetLeft;
-
         scrollLeft = slider.scrollLeft;
-
     });
 
-
-
-    slider.addEventListener('mouseleave', () => {
-
-        isDown = false;
-
-        slider.style.cursor = 'grab';
-
-    });
-
-
-
-    slider.addEventListener('mouseup', () => {
-
-        isDown = false;
-
-        slider.style.cursor = 'grab';
-
-    });
-
-
+    slider.addEventListener('mouseleave', () => { isDown = false; slider.style.cursor = 'grab'; });
+    slider.addEventListener('mouseup', () => { isDown = false; slider.style.cursor = 'grab'; });
 
     slider.addEventListener('mousemove', (e) => {
-
         if (!isDown) return;
-
         e.preventDefault();
-
         const x = e.pageX - slider.offsetLeft;
-
-        const walk = (x - startX) * 3; // Scroll speed
-
+        const walk = (x - startX) * 2.5; 
         slider.scrollLeft = scrollLeft - walk;
-
     });
+}
 
-});
+document.addEventListener("DOMContentLoaded", initProductPage);
