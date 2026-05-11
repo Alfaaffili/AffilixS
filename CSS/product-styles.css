@@ -16,36 +16,36 @@ body {
 
 /* 2. Main Layout Container */
 .product-main-layout {
-    display: flex !important;
-    flex-direction: row !important;
-    grid-template-columns: none !important; /* KILLS the styles.css grid */  
-    grid-template-areas: none !important;    /* KILLS the styles.css grid */
-    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    /* grid-template-columns: none !important; == KILLS the styles.css grid */  
+    /* grid-template-areas: none !important;    == KILLS the styles.css grid */
+    /* justify-content: space-between; */
     max-width: 1400px;
     margin: 0 auto;
-    height: 100vh;
-    max-height: 100vh;
-    gap: 20px;
+    height: 90vh; /* Reduced from 100vh for breathing room */
+    /* max-height: 100vh; */
+    gap: 30px;
     padding: 10px 2%;
-    overflow: hidden;
-    box-sizing: border-box;
+    overflow: hidden; /* Keeps the dashboard look */
+    /* box-sizing: border-box; */
 }
 
 /* 2.1 LEFT SIDE (Hero, Description, and Product Row) */
 .main-display-area {
-    flex: 1 !important;
-    display: block !important; /* Block is sfer than flex for vertical stacking */
+    flex: 1;
+    display: flex; /* Back to flex for vertical stacking */
     flex-direction: column;
-    height: 100%;
+    /* height: 100%; */
     min-width: 0; 
-    overflow: hidden;
-    width: 100% !important;
+    /* overflow: hidden; */
+    /* width: 100% !important;*/
 }
 
 /* 3. Hero Section */
 .hero-display {
     width: 100%;
-    height: 480px; 
+    height: 480px; /* Polished height */ 
     background: #fff;
     border-radius: 12px;
     border: 1px solid #eee;
@@ -53,22 +53,22 @@ body {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    margin-bottom: 10px;
+    margin-bottom: 10px; /* the latest polishe requires this to be 20px I kept it as 10px */
 }
 
 #heroImage {
-    width: 100% !importnt;
+    /* width: 100% !importnt; */
     height: auto;
-    max-width: 600% !important;
-    max-height: 480px;
+    max-width: 90%;
+    max-height: 90%;
     object-fit: contain;
-    display: block;
+    /* display: block; */
     margin: 0 auto;
 }
 
 /* 4. Description Area - THE SQUEEZE FIX */
 .info-horizontal-bar { 
-    margin-top: 10px;
+    margin-top: 20px;
     background: #fff;
     min-height: 100px;
     flex: 0 0 auto; /* Prevents it from collapsing */
@@ -77,8 +77,13 @@ body {
     flex-direction: column;
     gap: 5px;
     padding: 0 10px;
-    width 100% !important;
+    width 100%;
 }
+
+#pShortName { color: #888; font-size: 0.9rem; margin-bottom: 2px; }
+
+#pFullName { font-size: 1.5rem; margin-top: 0; margin-bottom: 8px; font-weight: 700;
+ }
 
 .info-horizontal-bar h2,
 .info-horizontal-bar h3,
@@ -91,7 +96,7 @@ body {
 
 .description-text {
     width: 100% !important; /* FIXED: Was 80px, causing the squeeze */
-    max-height: 100px;
+    max-height: 80px;
     overflow-y: auto;
     line-height: 1.4;
     text-align: left; /* FIXED typo: lefyt */
@@ -101,8 +106,8 @@ body {
 
 /* 5. Stats & Sidebars */
 .master-sidebar { 
-    display: flex !important;
-    flex-direction: row !important;
+    display: flex;
+    flex-direction: row;
     width: 240px; 
     gap: 15px;
     align-items: flex-start;
@@ -121,27 +126,34 @@ body {
 
 .cat-column {
     position: relative !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     overflow-y: auto;
     max-height: 90vh;
 }
 
 .cat-square {
-    width: 110px;
-    height: 110px;
+    width: 100px;
+    height: 100px;
     background: #fff;
-    border-radius: 8px;
+    border: 1px solid #eee;
+    border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     cursor: pointer;
     text-align: center;
+}
+
+.cat-square img { width: 60px; height: 60px; object-fit: contain; }
+
+.cat-square p { font-size: 0.7rem; margin-top: 5px; font-weight: bold;
 }
 
 /* 7. Product Row Container - ARROW FIX */
 #productRowsContainer {
     width: 100%;
     margin-top: auto; /* Pushes row to the bottom of the main area */
+    padding: 10px 0;
     padding-bottom: 20px;
     overflow: visible !important; /* FIXED typo: overflw */
     position: relative;
@@ -149,7 +161,7 @@ body {
 
 .row-wrapper {
     position: relative;
-    padding: 0 45px; /* Room for arrows */
+    padding: 0 40px; /* Room for red arrows */
 }
 
 .rel-row {
@@ -161,9 +173,11 @@ body {
 }
 
 .product-card {
-    flex: 0 0 140px;
-    height: 140px;
+    flex: 0 0 130px;
+    height: 130px;
     cursor: pointer;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 .product-card img {
@@ -178,17 +192,18 @@ body {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 35px;
-    height: 35px;
+    width: 32px;
+    height: 32px;
     background: #ff0000;
     color: white;
     border: none;
     border-radius: 50%;
     cursor: pointer;
-    z-index: 100;
+    z-index: 10;
     display: flex;
     align-items: center;
     justify-content: center;
+    /* font-weight: bold; */
     opacity: 1 !important;
     visibility: visible !important; /* FIXED typo: visible !importnt */
 }
