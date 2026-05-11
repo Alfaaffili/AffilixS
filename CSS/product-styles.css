@@ -60,7 +60,7 @@ body {
     /* width: 100% !importnt; */
     height: auto;
     max-width: 90%;
-    max-height: 90%;
+    /* max-height: 90%; */
     object-fit: contain;
     /* display: block; */
     margin: 0 auto;
@@ -82,7 +82,7 @@ body {
 
 #pShortName { color: #888; font-size: 0.9rem; margin-bottom: 2px; }
 
-#pFullName { font-size: 1.5rem; margin-top: 0; margin-bottom: 8px; font-weight: 700;
+#pFullName { font-size: 0.9rem; margin-top: 0; margin-bottom: 8px; font-weight: 100;
  }
 
 .info-horizontal-bar h2,
@@ -144,7 +144,7 @@ body {
     text-align: center;
 }
 
-.cat-square img { width: 60px; height: 60px; object-fit: contain; }
+.cat-square img { width: 90px; height: 90px; object-fit: contain; }
 
 .cat-square p { font-size: 0.7rem; margin-top: 5px; font-weight: bold;
 }
