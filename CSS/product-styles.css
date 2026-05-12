@@ -1,51 +1,31 @@
 ﻿/* =============================================================
-   AFFILIXS PRODUCT-SPECIFIC STYLES - REPAIRED STABLE DESKTOP
+   AFFILIXS PRODUCT VIEW - REFINED DASHBOARD
    ============================================================= */
-body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-}
 
-/* 1. Header Nav Fix */
-.header-nav .nav-item,
-.header-nav a {
-    color: #ffffff !important;
-    text-decoration: none;
-}
-
-/* 2. Main Layout Container */
 .product-main-layout {
     display: flex;
     flex-direction: row;
-    /* grid-template-columns: none !important; == KILLS the styles.css grid */  
-    /* grid-template-areas: none !important;    == KILLS the styles.css grid */
-    /* justify-content: space-between; */
     max-width: 1400px;
     margin: 0 auto;
-    height: 90vh; /* Reduced from 100vh for breathing room */
-    /* max-height: 100vh; */
-    gap: 30px;
-    padding: 10px 2%;
-    overflow: hidden; /* Keeps the dashboard look */
-    /* box-sizing: border-box; */
+    height: 100vh; /* Locked to screen height */
+    gap: 25px;
+    padding: 15px;
+    box-sizing: border-box;
+    overflow: hidden; /* Kills the main page side-scroll bar */
 }
 
-/* 2.1 LEFT SIDE (Hero, Description, and Product Row) */
+/* LEFT COLUMN STACK */
 .main-display-area {
-    flex: 1;
-    display: flex; /* Back to flex for vertical stacking */
+    flex: 2.5; /* Takes more space than sidebars */
+    display: flex;
     flex-direction: column;
+    min-width: 0;
     height: 100%;
-    min-width: 0; 
-    /* overflow: hidden; */
-    /* width: 100% !important;*/
 }
 
-/* 3. Hero Section */
+/* 1. HERO: Locked to be the largest element */
 .hero-display {
-    width: 100%;
-    height: 480px; /* Polished height */ 
+    flex: 0 0 55%; /* Hero always takes 55% of the vertical space */
     background: #fff;
     border-radius: 12px;
     border: 1px solid #eee;
@@ -53,161 +33,113 @@ body {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    margin-bottom: 10px; /* the latest polishe requires this to be 20px I kept it as 10px */
+    margin-bottom: 15px;
 }
 
 #heroImage {
-    width: 100%;
-    height: 100%;
-    max-width: 100%;
-    max-height: 100px;
+    max-width: 95%;
+    max-height: 95%;
     object-fit: contain;
-    /* display: block; */
-    margin: 0 auto;
 }
 
-/* 4. Description Area - THE SQUEEZE FIX */
-.info-horizontal-bar { 
-    margin-top: 20px;
-    background: #fff;
-    min-height: 100px;
-    flex: 0 0 auto; /* Prevents it from collapsing */
-    min-width: 0;
-    display: block !important;
-    flex-direction: column;/*
-    gap: 5px;
-    padding: 0 10px;
-    width 100%;
-    margin-bottom: 20px;
+/* 2 & 3. INFO BOX: Elegant & Wrapped */
+.info-horizontal-bar {
+    flex: 0 0 auto;
+    max-height: 180px; /* Prevents it from getting bigger than Hero */
+    overflow-y: auto;
+    margin-bottom: 10px;
+    padding-right: 10px;
 }
 
-#pShortName { color: #888; font-size: 0.85rem; margin-bottom: 2px; }
+.row-title { 
+    font-family: "Times New Roman", Times, serif; 
+    font-size: 0.85rem; 
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
 
-#pFullName { color: #888; font-size: 0.85rem; margin-top: 0; margin-bottom: 8px; /* font-weight: 100; */
- }
-
-.info-horizontal-bar h2,
-.info-horizontal-bar h3,
-.info-horizontal-bar p {
+#pShortName, #pFullName, #pDesc {
+    font-weight: 400 !important; /* Removes bolding */
     width: 100%;
-    margin: 2px 0;
-    white-space: normal;
     word-wrap: break-word;
+    white-space: normal;
 }
 
-.description-text {
-    width: 100% !important; /* FIXED: Was 80px, causing the squeeze */
-    max-height: 80px;
-    overflow-y: auto;
-    line-height: 1.4;
-    text-align: left; /* FIXED typo: lefyt */
-    color: #888;  /* #444; */
-    font-size: 0.85rem;
-}
+#pShortName { color: #888; font-size: 0.85rem; }
+#pFullName { font-size: 1.1rem; margin: 5px 0; color: #222; }
+.description-text { font-size: 0.85rem; color: #555; line-height: 1.4; }
 
-/* 5. Stats & Sidebars */
-.master-sidebar { 
-    display: flex;
-    flex-direction: row;
-    width: 240px; 
-    gap: 15px;
-    align-items: flex-start;
-    flex-shrink: 0;
-    padding-top: 10px;
-}
-
-.sidebar-action-col {
-    position: static !important;
-    width: 100px;
-    background: #f8f8f8;
-    padding: 12px;
-    border-radius: 8px;
-    flex-shrink: 0;
-}
-
-.cat-column {
-    position: relative !important;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    overflow-y: auto;
-    max-height: 110vh;
-}
-
-.cat-square {
-    width: 100px;
-    height: 100px;
-    background: #fff;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    cursor: pointer;
-    text-align: center;
-}
-
-.cat-square img { width: 100px; height: 100px; object-fit: contain; }
-
-.cat-square p { font-size: 0.7rem; margin-top: 5px; font-weight: bold;
-}
-
-/* 7. Product Row Container - ARROW FIX */
+/* 4. PRODUCT ROW & LOWER ARROWS */
 #productRowsContainer {
-    width: 100%;
-    margin-top: auto; /* Pushes row to the bottom of the main area */
-    padding: 10px 0;
-    padding-bottom: 20px;
-    overflow: visible !important; /* FIXED typo: overflw */
+    margin-top: auto;
     position: relative;
+    padding-bottom: 10px;
 }
 
-.row-wrapper {
-    position: relative;
-    padding: 0 40px; /* Room for red arrows */
-}
-
-.rel-row {
-    display: flex;
-    gap: 15px;
-    overflow-x: hidden;
-    scrollbar-width: none;
-    scroll-behavior: smooth;
-}
-
-.product-card {
-    flex: 0 0 130px;
-    height: 130px;
-    cursor: pointer;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.product-card img {
-    width: 100%;
-    height: 100%;
-    border-radius: 8px;
-    object-fit: cover;
-}
-
-/* 8. Navigation Arrows - VISIBILITY FIX */
 .arrow-btn {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 32px;
-    height: 32px;
+    bottom: 10px; /* Moved to lower bottom corners */
+    width: 30px;
+    height: 30px;
     background: #ff0000;
     color: white;
     border: none;
     border-radius: 50%;
-    cursor: pointer;
-    z-index: 10;
+    z-index: 20;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* font-weight: bold; */
-    opacity: 1 !important;
-    visibility: visible !important; /* FIXED typo: visible !importnt */
+    cursor: pointer;
+}
+.arrow-btn.l { left: -10px; }
+.arrow-btn.r { right: -10px; }
+
+/* 5. STATS: Aligned with bottom of Info Box */
+.master-sidebar {
+    width: 280px; /* Widened for data alignment */
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: flex-end; /* Slides Stats down to align with info bottom */
+    padding-bottom: 140px; /* Adjust this to match your Info box bottom */
 }
 
-.arrow-btn.l { left: 0px; }
-.arrow-btn.r { right: 0px; }
+.sidebar-action-col {
+    width: 150px;
+    background: #fdfdfd;
+    padding: 12px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+}
+
+.tight-stats p {
+    display: flex;
+    justify-content: space-between; /* Aligns Title and Data on same line */
+    font-size: 0.75rem;
+    margin: 5px 0;
+}
+
+.buy-now { background: #ff0000 !important; color: #fff !important; margin-bottom: 5px; }
+.go-back { background: #000000 !important; color: #fff !important; }
+
+/* 6. CATEGORY SCROLL LOGIC */
+.cat-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 580px; /* Height of approx 5 cards */
+    overflow-y: auto;
+    scrollbar-width: none; /* Hides scrollbar for clean look */
+}
+.cat-column::-webkit-scrollbar { display: none; } /* Hides scrollbar for Chrome/Safari */
+
+.cat-square {
+    flex: 0 0 100px; /* Fixed height for 5-card logic */
+    width: 100px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    text-align: center;
+    background: #fff;
+}
