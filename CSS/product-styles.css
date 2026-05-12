@@ -1,6 +1,18 @@
 ﻿/* =============================================================
    AFFILIXS PRODUCT VIEW - REFINED DASHBOARD
    ============================================================= */
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* 1. Header Nav Fix */
+.header-nav .nav-item,
+.header-nav a {
+    color: #ffffff !important;
+    text-decoration: none;
+}
 
 .product-main-layout {
     display: flex;
@@ -45,7 +57,7 @@
 /* 2 & 3. INFO BOX: Elegant & Wrapped */
 .info-horizontal-bar {
     flex: 0 0 auto;
-    max-height: 180px; /* Prevents it from getting bigger than Hero */
+    max-height: 150px; /* changed from 180 Prevents it from getting bigger than Hero */
     overflow-y: auto;
     margin-bottom: 10px;
     padding-right: 10px;
@@ -67,9 +79,9 @@
     white-space: normal;
 }
 
-#pShortName { color: #888; font-size: 0.85rem; }
-#pFullName { font-size: 1.1rem; margin: 5px 0; color: #222; }
-.description-text { font-size: 0.85rem; color: #555; line-height: 1.4; }
+#pShortName { color: #888; font-size: 0.75rem; }
+#pFullName { color: #888; font-size: 0.75rem; margin: 5px 0; } /* color: #222; } */
+.description-text { color: #888; font-size: 0.75rem; line-height: 1.2; } /* color: #555; */
 
 /* 4. PRODUCT ROW & LOWER ARROWS */
 #productRowsContainer {
@@ -108,7 +120,7 @@
 
 .sidebar-action-col {
     width: 150px;
-    background: #fdfdfd;
+    background: #f8f8f8;
     padding: 12px;
     border: 1px solid #eee;
     border-radius: 8px;
