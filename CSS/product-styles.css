@@ -81,9 +81,9 @@ body {
     margin-bottom: 20px;
 }
 
-#pShortName { color: #888; font-size: 1rem; margin-bottom: 2px; }
+#pShortName { color: #888; font-size: 0.85rem; margin-bottom: 2px; }
 
-#pFullName { color: #888; font-size: 1rem; margin-top: 0; margin-bottom: 8px; /* font-weight: 100; */
+#pFullName { color: #888; font-size: 0.85rem; margin-top: 0; margin-bottom: 8px; /* font-weight: 100; */
  }
 
 .info-horizontal-bar h2,
@@ -101,7 +101,7 @@ body {
     overflow-y: auto;
     line-height: 1.4;
     text-align: left; /* FIXED typo: lefyt */
-    color: #444;
+    color: #888;  /* #444; */
     font-size: 0.85rem;
 }
 
@@ -129,14 +129,14 @@ body {
     position: relative !important;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
     overflow-y: auto;
-    max-height: 100vh;
+    max-height: 110vh;
 }
 
 .cat-square {
-    width: 95px;
-    height: 95px;
+    width: 100px;
+    height: 100px;
     background: #fff;
     border: 1px solid #eee;
     border-radius: 10px;
@@ -145,7 +145,7 @@ body {
     text-align: center;
 }
 
-.cat-square img { width: 90px; height: 90px; object-fit: contain; }
+.cat-square img { width: 100px; height: 100px; object-fit: contain; }
 
 .cat-square p { font-size: 0.7rem; margin-top: 5px; font-weight: bold;
 }
