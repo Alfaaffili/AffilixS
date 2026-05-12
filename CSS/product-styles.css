@@ -81,9 +81,9 @@ body {
     margin-bottom: 20px;
 }
 
-#pShortName { color: #888; font-size: 0.9rem; margin-bottom: 2px; }
+#pShortName { color: #888; font-size: 1rem; margin-bottom: 2px; }
 
-#pFullName { color: #888; font-size: 0.9rem; margin-top: 0; margin-bottom: 8px; /* font-weight: 100; */
+#pFullName { color: #888; font-size: 1rem; margin-top: 0; margin-bottom: 8px; /* font-weight: 100; */
  }
 
 .info-horizontal-bar h2,
