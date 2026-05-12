@@ -79,8 +79,8 @@ body {
     white-space: normal;
 }
 
-#pShortName { color: #888; font-size: 0.75rem; }
-#pFullName { color: #888; font-size: 0.75rem; margin: 5px 0; } /* color: #222; } */
+#pShortName { color: #888; font-size: 0.75rem; line-height: 1.2; }
+#pFullName { color: #888; font-size: 0.75rem; line-height: 1.2; margin: 5px 0; } /* color: #222; } */
 .description-text { color: #888; font-size: 0.75rem; line-height: 1.2; } /* color: #555; */
 
 /* 4. PRODUCT ROW & LOWER ARROWS */
