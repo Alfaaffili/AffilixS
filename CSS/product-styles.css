@@ -63,28 +63,26 @@ body {
     /* padding-right: 10px; */
 /* } */
 
-.row-title { 
-    /* font-family: "Times New Roman", Times, serif; */
-    /* font-family: "Comic Sans MS", Comic, Cursive; */ 
-    font-family: "Courier New", Consolas, Monospace;
-    font-size: 0.85rem; 
-    font-weight: bold;
-    color: #333;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-}
+/* .row-title { */ 
+    /* font-family: "Courier New", Consolas, Monospace; */
+    /* font-size: 0.85rem; */
+    /* font-weight: bold; */
+    /* color: #333; */
+    /* text-transform: uppercase; */
+    /* letter-spacing: 1px; */
+    /* margin-bottom: 8px; */
+/* } */
 
-#pShortName, #pFullName, #pDesc {
+/* #pShortName, #pFullName, #pDesc { */
     /* font-weight: 800 !important; === Removes bolding */
-    width: 100%;
-    word-wrap: break-word;
-    white-space: normal;
-}
+    /* width: 100%; */
+    /* word-wrap: break-word; */
+    /* white-space: normal; */
+/* } */
 
-#pShortName { color: #888; font-size: 0.75rem; line-height: 1.2; font-weight: 800; }
-#pFullName  { color: #888; font-size: 0.75rem; line-height: 1.2; margin: 5px 0; font-weight: 800; } /* color: #222; */
-.description-text { color: #555; font-size: 0.75rem; line-height: 1.2; font-weight: 800; } /* color: #888; */
+/* #pShortName { color: #888; font-size: 0.75rem; line-height: 1.2; font-weight: 800; } */
+/* #pFullName  { color: #888; font-size: 0.75rem; line-height: 1.2; margin: 5px 0; font-weight: 800; } === color: #222; */
+/* .description-text { color: #555; font-size: 0.75rem; line-height: 1.2; font-weight: 800; } === color: #888; */
 
 /* 4. PRODUCT ROW & LOWER ARROWS */
 #productRowsContainer {
