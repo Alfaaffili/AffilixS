@@ -57,14 +57,15 @@ body {
 /* 2 & 3. INFO BOX: Elegant & Wrapped */
 .info-horizontal-bar {
     flex: 0 0 auto;
-    max-height: 150px; /* changed from 180 Prevents it from getting bigger than Hero */
+    max-height: 130px; /* changed from 180 Prevents it from getting bigger than Hero */
     overflow-y: auto;
     margin-bottom: 10px;
     padding-right: 10px;
 }
 
 .row-title { 
-    font-family: "Times New Roman", Times, serif; 
+    /* font-family: "Times New Roman", Times, serif; */
+    font-family: "Comic Sans MS", Comic, Cursive; 
     font-size: 0.85rem; 
     color: #333;
     text-transform: uppercase;
@@ -73,15 +74,15 @@ body {
 }
 
 #pShortName, #pFullName, #pDesc {
-    font-weight: 400 !important; /* Removes bolding */
+    font-weight: 500 !important; /* Removes bolding */
     width: 100%;
     word-wrap: break-word;
     white-space: normal;
 }
 
-#pShortName { color: #888; font-size: 0.75rem; line-height: 1.2; font-weight: 500; }
-#pFullName  { color: #888; font-size: 0.75rem; line-height: 1.2; margin: 5px 0; color: #222; font-weight: 500; }
-.description-text { color: #555; font-size: 0.75rem; line-height: 1.2; font-weight: 500; } /* color: #888; */
+#pShortName { color: #888; font-size: 0.75rem; line-height: 1.2; font-weight: 600; }
+#pFullName  { color: #888; font-size: 0.75rem; line-height: 1.2; margin: 5px 0; color: #222; font-weight: 600; }
+.description-text { color: #555; font-size: 0.75rem; line-height: 1.2; font-weight: 600; } /* color: #888; */
 
 /* 4. PRODUCT ROW & LOWER ARROWS */
 #productRowsContainer {
@@ -92,7 +93,7 @@ body {
 
 .arrow-btn {
     position: absolute;
-    bottom: 10px; /* Moved to lower bottom corners */
+    bottom: 6px; /* Moved to lower bottom corners */
     width: 30px;
     height: 30px;
     background: #ff0000;
@@ -110,7 +111,7 @@ body {
 
 /* 5. STATS: Aligned with bottom of Info Box */
 .master-sidebar {
-    width: 280px; /* Widened for data alignment */
+    width: 200px; /* I changed it from 280px Widened for data alignment */
     display: flex;
     flex-direction: row;
     gap: 15px;
@@ -141,7 +142,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    max-height: 580px; /* Height of approx 5 cards */
+    max-height: 600px; /* Height of approx 5 cards */
     overflow-y: auto;
     scrollbar-width: none; /* Hides scrollbar for clean look */
 }
