@@ -79,9 +79,9 @@ body {
     white-space: normal;
 }
 
-#pShortName { color: #888; font-size: 0.75rem; line-height: 1.2; }
-#pFullName { color: #888; font-size: 0.75rem; line-height: 1.2; margin: 5px 0; } /* color: #222; } */
-.description-text { color: #555; font-size: 0.75rem; line-height: 1.2; } /* color: #888; */
+#pShortName { color: #888; font-size: 0.75rem; line-height: 1.2; font-weight: 500; }
+#pFullName  { color: #888; font-size: 0.75rem; line-height: 1.2; margin: 5px 0; color: #222; font-weight: 500; }
+.description-text { color: #555; font-size: 0.75rem; line-height: 1.2; font-weight: 500; } /* color: #888; */
 
 /* 4. PRODUCT ROW & LOWER ARROWS */
 #productRowsContainer {
@@ -133,7 +133,7 @@ body {
     margin: 5px 0;
 }
 
-.buy-now { background: #ff0000 !important; color: #fff !important; margin-bottom: 5px; }
+.buy-now { background: #ff0000 !important; color: #fff !important; } /* margin-bottom: 5px; } */
 .go-back { background: #000000 !important; color: #fff !important; }
 
 /* 6. CATEGORY SCROLL LOGIC */
@@ -156,8 +156,8 @@ body {
     background: #fff;
 }
 
-.cat-square img { width: 100px; height: 100px; object-fit: contain; }
+.cat-square img { width: 90px; height: 90px; object-fit: contain; }
 
-/* .cat-square p { font-size: 0.7rem; margin-top: 5px; font-weight: bold; */
+.cat-square p { font-size: 0.7rem; margin-top: 5px; font-weight: bold; font-family: "Times New Roman", Times, serif;
 }
 
