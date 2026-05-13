@@ -111,7 +111,7 @@ body {
 
 /* 5. STATS: Aligned with bottom of Info Box */
 .master-sidebar {
-    width: 200px; /* I changed it from 280px Widened for data alignment */
+    width: 280px; /* I changed it from 280px Widened for data alignment */
     display: flex;
     flex-direction: row;
     gap: 15px;
@@ -142,14 +142,14 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    max-height: 300px; /* Height of approx 5 cards */
+    max-height: 580px; /* Height of approx 5 cards */
     overflow-y: auto;
     scrollbar-width: none; /* Hides scrollbar for clean look */
 }
 .cat-column::-webkit-scrollbar { display: none; } /* Hides scrollbar for Chrome/Safari */
 
 .cat-square {
-    flex: 0 0 100px; /* Fixed height for 5-card logic */
+    flex: 0 0 300px; /* Fixed height for 5-card logic */
     width: 100px;
     border: 1px solid #eee;
     border-radius: 8px;
