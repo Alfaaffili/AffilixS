@@ -82,7 +82,7 @@ body {
 }
 
 #pShortName { color: #888; font-size: 0.75rem; line-height: 1.2; font-weight: 800; }
-#pFullName  { color: #888; font-size: 0.75rem; line-height: 1.2; margin: 5px 0; color: #222; font-weight: 800; }
+#pFullName  { color: #888; font-size: 0.75rem; line-height: 1.2; margin: 5px 0; font-weight: 800; } /* color: #222; */
 .description-text { color: #555; font-size: 0.75rem; line-height: 1.2; font-weight: 800; } /* color: #888; */
 
 /* 4. PRODUCT ROW & LOWER ARROWS */
@@ -135,15 +135,15 @@ body {
     margin: 5px 0;
 }
 
-.buy-now { background: #ff0000 !important; color: #fff !important; } /* margin-bottom: 5px; } */
-.go-back { background: #000000 !important; color: #fff !important; }
+.buy-now { background: #ff0000 !important; color: #fff !important; font-size: 0.95rem; margin-bottom: 5px; }
+.go-back { background: #000000 !important; color: #fff !important; font-size: 0.95rem; }
 
 /* 6. CATEGORY SCROLL LOGIC */
 .cat-column {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    max-height: 800px; /* Height of approx 5 cards */
+    max-height: 300px; /* Height of approx 5 cards */
     overflow-y: auto;
     scrollbar-width: none; /* Hides scrollbar for clean look */
 }
