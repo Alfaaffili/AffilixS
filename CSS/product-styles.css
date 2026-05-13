@@ -81,7 +81,7 @@ body {
 
 #pShortName { color: #888; font-size: 0.75rem; line-height: 1.2; }
 #pFullName { color: #888; font-size: 0.75rem; line-height: 1.2; margin: 5px 0; } /* color: #222; } */
-.description-text { color: #888; font-size: 0.75rem; line-height: 1.2; } /* color: #555; */
+.description-text { color: #555; font-size: 0.75rem; line-height: 1.2; } /* color: #888; */
 
 /* 4. PRODUCT ROW & LOWER ARROWS */
 #productRowsContainer {
@@ -155,3 +155,9 @@ body {
     text-align: center;
     background: #fff;
 }
+
+.cat-square img { width: 100px; height: 100px; object-fit: contain; }
+
+/* .cat-square p { font-size: 0.7rem; margin-top: 5px; font-weight: bold; */
+}
+
