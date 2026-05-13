@@ -55,13 +55,13 @@ body {
 }
 
 /* 2 & 3. INFO BOX: Elegant & Wrapped */
-.info-horizontal-bar {
-    flex: 0 0 70px; /* it was 0 0 auto */
-    max-height: 120px; /* changed from 180 Prevents it from getting bigger than Hero */
-    overflow-y: auto;
-    margin-bottom: 10px;
-    padding-right: 10px;
-}
+/* .info-horizontal-bar { */
+    /* flex: 0 0 70px; === it was 0 0 auto */
+    /* max-height: 120px; === changed from 180 Prevents it from getting bigger than Hero */
+    /* overflow-y: auto; */
+    /* margin-bottom: 10px; */
+    /* padding-right: 10px; */
+/* } */
 
 .row-title { 
     /* font-family: "Times New Roman", Times, serif; */
