@@ -125,18 +125,25 @@ body {
   width: 280px;
    font-size: 0.75rem;
     background: #f8f8f8;
-   padding: 50px 50px 50px 50px;
-  border: 10px solid #eee;
+    /* padding-INLINE-END: 12PX; */
+    /* padding-INLINE-START: 12PX; */
+    /* padding-BLOCK-START: 140PX; */
+    /* padding-BLOCK-END: 60PX; */
+  /* border: 10px solid #eee; */
     border-radius: 8px;
-    max-height: 50px;
+   max-height: 200px;
 }
 
-/* .tight-stats p { */
-/*    display: flex; */
-/*    justify-content: space-between; === Aligns Title and Data on same line */
-/*    font-size: 0.75rem; */
-/*    margin: 5px 0; */
-/* } */
+.tight-stats p {
+    display: flex;
+    padding-INLINE-END: 12PX;
+    padding-INLINE-START: 12PX;
+    padding-BLOCK-START: 140PX;
+    padding-BLOCK-END: 60PX;
+    justify-content: space-between; /* Aligns Title and Data on same line */
+    font-size: 0.75rem;
+    /* margin: 5px 0; */
+}
 
 .buy-now { color: #fff !important; font-size: 0.30rem; } /* padding-bottom: 10px; background: #ff0000 !important; margin-bottom: 500px; */
 .go-back { color: #fff !important; font-size: 0.30rem; } /* background: #000000 !important; padding-bottom: 500px; */
