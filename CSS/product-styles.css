@@ -117,25 +117,27 @@ body {
     gap: 15px;
     align-items: flex-end; /* Slides Stats down to align with info bottom */
     padding-bottom: 140px; /* Adjust this to match your Info box bottom */
+    max-height: 50px;
 }
 
-.sidebar-action-col {
-    width: 150px;
-    background: #f8f8f8;
-    padding: 12px;
-    border: 1px solid #eee;
-    border-radius: 8px;
-}
+/* .sidebar-action-col { */
+/*    width: 150px; */
+/*    background: #f8f8f8; */
+/*    padding: 12px; */
+/*    border: 1px solid #eee; */
+/*    border-radius: 8px; */
+/*    max-height: 50px; */
+/* } */
 
-.tight-stats p {
-    display: flex;
-    justify-content: space-between; /* Aligns Title and Data on same line */
-    font-size: 0.75rem;
-    margin: 5px 0;
-}
+/* .tight-stats p { */
+/*    display: flex; */
+/*    justify-content: space-between; === Aligns Title and Data on same line */
+/*    font-size: 0.75rem; */
+/*    margin: 5px 0; */
+/* } */
 
-.buy-now { background: #ff0000 !important; color: #fff !important; font-size: 0.95rem; margin-bottom: 5px; }
-.go-back { background: #000000 !important; color: #fff !important; font-size: 0.95rem; }
+/* .buy-now { background: #ff0000 !important; color: #fff !important; font-size: 0.95rem; margin-bottom: 5px; } */
+/* .go-back { background: #000000 !important; color: #fff !important; font-size: 0.95rem; } */
 
 /* 6. CATEGORY SCROLL LOGIC */
 .cat-column {
