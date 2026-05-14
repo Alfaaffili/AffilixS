@@ -136,8 +136,8 @@ body {
 /*    margin: 5px 0; */
 /* } */
 
-/* .buy-now { background: #ff0000 !important; color: #fff !important; font-size: 0.95rem; margin-bottom: 5px; } */
-/* .go-back { background: #000000 !important; color: #fff !important; font-size: 0.95rem; } */
+.buy-now { background: #ff0000 !important; color: #fff !important; font-size: 0.95rem; margin-bottom: 150px; }
+.go-back { background: #000000 !important; color: #fff !important; font-size: 0.95rem; }
 
 /* 6. CATEGORY SCROLL LOGIC */
 .cat-column {
