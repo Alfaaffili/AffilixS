@@ -136,8 +136,8 @@ body {
 /*    margin: 5px 0; */
 /* } */
 
-.buy-now { color: #fff !important; font-size: 0.10rem; margin-bottom: 500px; padding-bottom: 500px; } /* background: #ff0000 !important; */
-.go-back { color: #fff !important; font-size: 0.10rem; padding-bottom: 500px; } /* background: #000000 !important; */
+.buy-now { color: #fff !important; font-size: 0.10rem; padding-bottom: 500px; } /* background: #ff0000 !important; margin-bottom: 500px; */
+.go-back { color: #fff !important; font-size: 0.10rem; } /* background: #000000 !important; padding-bottom: 500px; */
 
 /* 6. CATEGORY SCROLL LOGIC */
 .cat-column {
