@@ -120,14 +120,14 @@ body {
     max-height: 50px;
 }
 
-/* .sidebar-action-col { */
-/*    width: 150px; */
-/*    background: #f8f8f8; */
-/*    padding: 12px; */
-/*    border: 1px solid #eee; */
-/*    border-radius: 8px; */
-/*    max-height: 50px; */
-/* } */
+.sidebar-action-col {
+    width: 150px;
+    background: #f8f8f8;
+    padding: 12px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    max-height: 50px;
+}
 
 /* .tight-stats p { */
 /*    display: flex; */
